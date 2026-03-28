@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Security Whitepaper | Heliox OS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-on-surface": "#303034",
+                        "secondary": "#dfb7ff",
+                        "surface-container-lowest": "#0e0e12",
+                        "on-secondary-fixed": "#2d004f",
+                        "outline": "#859397",
+                        "primary-fixed-dim": "#00daf7",
+                        "tertiary-fixed-dim": "#f8be28",
+                        "on-primary": "#00363e",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-variant": "#353439",
+                        "on-secondary-fixed-variant": "#6b00b0",
+                        "surface-bright": "#39393d",
+                        "on-primary-fixed-variant": "#004e5a",
+                        "on-error": "#690005",
+                        "outline-variant": "#3b494c",
+                        "on-tertiary": "#402d00",
+                        "on-tertiary-container": "#6f5200",
+                        "on-secondary-container": "#f7e6ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#a3eeff",
+                        "secondary-fixed": "#f1daff",
+                        "tertiary-fixed": "#ffdf9e",
+                        "background": "#050508",
+                        "surface-container-low": "#1b1b1f",
+                        "on-primary-fixed": "#001f25",
+                        "on-background": "#e5e1e7",
+                        "on-surface-variant": "#bac9cd",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "surface-dim": "#131317",
+                        "surface-tint": "#00daf7",
+                        "surface-container": "#1f1f23",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e1e7",
+                        "surface-container-highest": "#353439",
+                        "secondary-fixed-dim": "#dfb7ff",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#4b007e",
+                        "surface-container-high": "#2a292e",
+                        "inverse-primary": "#006877",
+                        "secondary-container": "#9d05ff",
+                        "on-primary-container": "#00606e",
+                        "primary-container": "#00e1ff",
+                        "surface": "#131317",
+                        "inverse-surface": "#e5e1e7",
+                        "primary": "#bcf2ff",
+                        "tertiary-container": "#ffc42f",
+                        "tertiary": "#ffe6b9"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="font-body text-on-background selection:bg-primary-container selection:text-on-primary-container bg-[#050508] min-h-screen flex flex-col">
+    <!-- Light Leaks Decor -->
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none"></div>
+    
+    <!-- TopNavBar -->
+    <nav class="fixed w-full z-50 py-6 px-6 lg:px-12 bg-transparent text-white">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-bold text-[#bcf2ff] flex items-center gap-2 font-['Space_Grotesk'] tracking-tight hover:opacity-80 transition-opacity">
+                <span class="material-symbols-outlined text-[#00e1ff]" style="font-variation-settings: 'FILL' 1;">memory</span>
+                Heliox OS
+            </a>
+            <a href="index.html" class="flex items-center gap-2 text-sm uppercase tracking-widest font-['Space_Grotesk'] text-white/70 hover:text-white transition-colors">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to Home
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Content Section -->
+    <main class="flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full relative z-10">
+        <div class="glass-panel ghost-border p-8 md:p-14 rounded-3xl relative overflow-hidden bg-surface-container-highest/30 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,225,255,0.05)] border border-white/5">
+            <!-- Background glow -->
+            <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
+            
+            <h1 class="text-5xl md:text-6xl font-headline font-bold text-white mb-4 tracking-tight drop-shadow-lg relative z-10">Security Whitepaper</h1>
+            <p class="text-primary font-mono text-sm tracking-widest uppercase mb-12 relative z-10 opacity-80 border-b border-white/10 pb-6">Version: 1.0 — March 2026</p>
+            
+            <div class="space-y-10 text-on-surface-variant text-lg leading-relaxed font-light relative z-10">
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-white">1. Introduction</h2>
+                    <p>Heliox OS is built to be the highly advanced, deeply integrated AI system control layer for your edge device, granting autonomous agents unprecedented access to system modules. Because of this power, rigorous security architecture is inherently critical.</p>
+                </section>
+                
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-secondary">2. Cryptographic Vault Storage</h2>
+                    <p>All sensitive credentials—including API keys for cloud frontier models and third-party web driver tokens—are held entirely locally inside the Heliox Secret Vault. The Vault leverages robust <strong class="text-secondary">AES-256 encryption</strong> by default. Unlocking these credentials happens dynamically only during an active execution loop, utilizing encrypted memory buffer pools to strictly prevent key-spillage.</p>
+                </section>
+                
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-primary">3. Agent Execution Sandboxing</h2>
+                    <p>Intelligent system agents present unique risks concerning code execution. Heliox OS implements a strict boundary sandboxing framework:</p>
+                    <ul class="list-disc pl-6 space-y-2 text-white/70">
+                        <li><strong>Approval Protocols:</strong> Destructive commands, root privilege elevations, or network configuration changes automatically intercept execution to require user supervision.</li>
+                        <li><strong>Strict Scopes:</strong> Agents are spawned with granular permissions (e.g. <code>permissions=["sys_control", "vision"]</code>). Attempting to operate outside of granted cognitive capabilities instantly terminates the child agent process.</li>
+                        <li><strong>Safe File Modifications:</strong> Local OS changes are performed in isolated, tracked virtual trees prior to atomic commits, allowing for rapid roll-back in cases of agent hallucination.</li>
+                    </ul>
+                </section>
+                
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-white">4. API Communication Security</h2>
+                    <p>If the user opts into Hybrid Mode, all communications relayed from Heliox OS to frontier providers like Google Gemini or Anthropic Claude are secured via strict TLS 1.3 protocol standards. We ensure zero intermediary servers exist—your hardware communicates directly with the foundational AI models.</p>
+                </section>
+                
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-white">5. Independent Auditing</h2>
+                    <p>Heliox OS is intentionally developed in the open-source light. We rely on cryptographic implementations from the standard Python 3.10+ security suites to prevent custom-crypto vulnerabilities. You are heavily encouraged to audit the underlying agent scripts and execution policies found on our <a href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank" class="text-primary hover:text-white transition-colors underline decoration-primary/50 underline-offset-4">GitHub Repository</a>.</p>
+                </section>
+
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-white">6. Reporting Vulnerabilities</h2>
+                    <p>If you have discovered a vulnerability related to the agent's privilege escalation or execution sandboxing, please report it privately before creating a public issue. Email us at: <button onclick="navigator.clipboard.writeText('vyomkulshrestha2004@gmail.com'); const t = this; const o = t.innerText; t.innerText = 'Copied!'; setTimeout(() => t.innerText = o, 2000);" class="text-secondary hover:text-white transition-colors underline decoration-secondary/50 font-mono">vyo***@gmail.com</button>.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-[#0e0e12] w-full py-12 border-t border-[#353439]/20 mt-auto">
+        <div class="flex flex-col justify-center items-center px-12 max-w-7xl mx-auto gap-4">
+            <div class="text-lg font-black text-[#00e1ff] font-['Space_Grotesk'] tracking-widest">
+                HELIOX OS
+            </div>
+            <div class="text-white/40 font-['Space_Grotesk'] text-[10px] uppercase tracking-widest">
+                &copy; 2026 Heliox OS. The Sentient Interface.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

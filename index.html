@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Heliox OS | The Sentient Interface</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-on-surface": "#303034",
+                        "secondary": "#dfb7ff",
+                        "surface-container-lowest": "#0e0e12",
+                        "on-secondary-fixed": "#2d004f",
+                        "outline": "#859397",
+                        "primary-fixed-dim": "#00daf7",
+                        "tertiary-fixed-dim": "#f8be28",
+                        "on-primary": "#00363e",
+                        "on-tertiary-fixed": "#261a00",
+                        "surface-variant": "#353439",
+                        "on-secondary-fixed-variant": "#6b00b0",
+                        "surface-bright": "#39393d",
+                        "on-primary-fixed-variant": "#004e5a",
+                        "on-error": "#690005",
+                        "outline-variant": "#3b494c",
+                        "on-tertiary": "#402d00",
+                        "on-tertiary-container": "#6f5200",
+                        "on-secondary-container": "#f7e6ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#a3eeff",
+                        "secondary-fixed": "#f1daff",
+                        "tertiary-fixed": "#ffdf9e",
+                        "background": "#050508",
+                        "surface-container-low": "#1b1b1f",
+                        "on-primary-fixed": "#001f25",
+                        "on-background": "#e5e1e7",
+                        "on-surface-variant": "#bac9cd",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "surface-dim": "#131317",
+                        "surface-tint": "#00daf7",
+                        "surface-container": "#1f1f23",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e1e7",
+                        "surface-container-highest": "#353439",
+                        "secondary-fixed-dim": "#dfb7ff",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#4b007e",
+                        "surface-container-high": "#2a292e",
+                        "inverse-primary": "#006877",
+                        "secondary-container": "#9d05ff",
+                        "on-primary-container": "#00606e",
+                        "primary-container": "#00e1ff",
+                        "surface": "#131317",
+                        "inverse-surface": "#e5e1e7",
+                        "primary": "#bcf2ff",
+                        "tertiary-container": "#ffc42f",
+                        "tertiary": "#ffe6b9"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="font-body text-on-background selection:bg-primary-container selection:text-on-primary-container">
+    <!-- Light Leaks Decor -->
+    <div
+        class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px] pointer-events-none">
+    </div>
+    <div
+        class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none">
+    </div>
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-[#050508]/70 backdrop-blur-xl border-b border-[#353439]/20 shadow-[0_0_20px_rgba(0,225,255,0.05)]">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <div
+                class="text-2xl font-bold text-[#bcf2ff] flex items-center gap-2 font-['Space_Grotesk'] tracking-tight">
+                <span class="material-symbols-outlined text-[#00e1ff]"
+                    style="font-variation-settings: 'FILL' 1;">memory</span>
+                Heliox OS
+            </div>
+            <div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] text-sm uppercase tracking-widest">
+                <a class="text-white/70 hover:text-white transition-colors" href="#features">Features</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#architecture">Architecture</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#about">About</a>
+                <a class="text-white/70 hover:text-white transition-colors" href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto space-y-32">
+        <!-- Hero Section -->
+        <section class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-label tracking-widest uppercase">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    JARVIS Mode Now Available
+                </div>
+                <h1 class="text-6xl md:text-7xl font-headline font-bold text-white leading-tight">
+                    The Open-Source <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">AI System
+                        Control Agent</span>
+                </h1>
+                <p class="text-on-surface-variant text-lg max-w-xl leading-relaxed">
+                    Heliox OS bridges the gap between human intent and machine execution through high-fidelity neural
+                    processing and seamless system orchestration.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button id="download-btn-1"
+                        class="bg-primary-container text-on-primary-fixed px-8 py-4 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 transition-all">
+                        Download Heliox OS
+                    </button>
+                    <a href="#features"
+                        class="glass-panel ghost-border px-8 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 transition-all flex items-center justify-center">
+                        Explore Features
+                    </a>
+                </div>
+                <!-- Hero Stats -->
+                <div class="grid grid-cols-3 gap-4 pt-8">
+                    <div class="glass-panel ghost-border p-4 rounded-lg">
+                        <div class="text-primary font-headline text-2xl font-bold">50+</div>
+                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Action Types
+                        </div>
+                    </div>
+                    <div class="glass-panel ghost-border p-4 rounded-lg">
+                        <div class="text-secondary font-headline text-2xl font-bold">30+</div>
+                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Hand Gestures
+                        </div>
+                    </div>
+                    <div class="glass-panel ghost-border p-4 rounded-lg">
+                        <div class="text-tertiary font-headline text-2xl font-bold">Tier 5</div>
+                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Security</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hero Visual: Arc Reactor HUD -->
+            <div class="relative flex justify-center items-center">
+                <div class="absolute w-[400px] h-[400px] rounded-full bg-primary/5 blur-[80px]"></div>
+                <div class="relative w-80 h-80 flex items-center justify-center">
+                    <div class="absolute inset-0 arc-reactor-ring animate-[spin_10s_linear_infinite]"></div>
+                    <div
+                        class="absolute inset-4 arc-reactor-ring border-secondary/40 animate-[spin_15s_linear_infinite_reverse]">
+                    </div>
+                    <div
+                        class="absolute inset-12 arc-reactor-ring border-primary/20 animate-[spin_20s_linear_infinite]">
+                    </div>
+                    <div class="w-32 h-32 rounded-full glass-panel ghost-border flex items-center justify-center relative group">
+                        <!-- Glowing Plasma Core -->
+                        <div class="absolute w-20 h-20 bg-gradient-to-tr from-primary via-secondary to-primary/50 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+                        
+                        <!-- Spinning Data Rings -->
+                        <div class="absolute w-28 h-28 rounded-full border border-white/5 border-t-primary/60 border-b-secondary/60 animate-[spin_4s_linear_infinite]"></div>
+                        <div class="absolute w-24 h-24 rounded-full border border-white/5 border-l-secondary/80 border-r-primary/80 animate-[spin_3s_linear_infinite_reverse]"></div>
+                        
+                        <!-- Central Quantum Node -->
+                        <div class="relative z-10 w-16 h-16 bg-surface-container-highest/80 backdrop-blur-md rounded-full border border-primary/30 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,225,255,0.4)] group-hover:scale-110 transition-transform duration-500">
+                            <span class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">
+                                psychology
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- HUD Cards -->
+                <div
+                    class="absolute -top-10 -right-4 glass-panel ghost-border p-6 rounded-xl w-64 space-y-4 shadow-2xl">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] font-label text-on-surface-variant tracking-tighter uppercase">System
+                            Monitor</span>
+                        <div class="flex gap-1">
+                            <div class="w-1.5 h-1.5 rounded-full bg-red-500/50"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-green-500/50"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] uppercase font-label"><span>CPU
+                                    Load</span><span class="text-primary">42%</span></div>
+                            <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary w-[42%]"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] uppercase font-label"><span>AI Core</span><span
+                                    class="text-primary">89%</span></div>
+                            <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary w-[89%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Features Grid -->
+        <section id="features" class="space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl font-headline font-bold text-white">Intuitive Command. Infinite Power.</h2>
+                <p class="text-on-surface-variant">Control your entire digital ecosystem with zero friction.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div
+                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined text-primary"
+                            style="font-variation-settings: 'FILL' 1;">mic</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-white">Voice &amp; Speech</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Advanced NLP layer with context retention
+                        and multi-language support for complex commands.</p>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                        <span class="material-symbols-outlined text-secondary"
+                            style="font-variation-settings: 'FILL' 1;">front_hand</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-white">Hand Gestures</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Vision-based interaction system allowing
+                        spatial control of windows and system settings.</p>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined text-primary"
+                            style="font-variation-settings: 'FILL' 1;">hub</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-white">Orchestrator</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Seamlessly coordinate multiple AI agents
+                        to perform complex multi-step workflows across apps.</p>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                        <span class="material-symbols-outlined text-secondary"
+                            style="font-variation-settings: 'FILL' 1;">sync</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-white">ReAct Loop</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Self-correcting execution loop that
+                        monitors outcomes and adjusts actions in real-time.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Architecture Section -->
+        <section id="architecture" class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1 relative">
+                <div class="glass-panel ghost-border rounded-xl p-8 aspect-square flex items-center justify-center">
+                    <div class="grid grid-cols-3 gap-8 relative">
+                        <!-- Simplified Network Graph -->
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_20px_#00e1ff]">
+                            <span class="material-symbols-outlined text-on-primary">settings</span>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center z-10 shadow-[0_0_20px_#9d05ff]">
+                            <span class="material-symbols-outlined text-on-secondary">psychology</span>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_20px_#00e1ff]">
+                            <span class="material-symbols-outlined text-on-primary">bolt</span>
+                        </div>
+                        <div class="col-span-3 flex justify-center py-4">
+                            <div
+                                class="w-20 h-20 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center animate-pulse">
+                                <span class="material-symbols-outlined text-on-background">database</span>
+                            </div>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center z-10 shadow-[0_0_20px_#9d05ff]">
+                            <span class="material-symbols-outlined text-on-secondary">shield</span>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_20px_#00e1ff]">
+                            <span class="material-symbols-outlined text-on-primary">terminal</span>
+                        </div>
+                        <div
+                            class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center z-10 shadow-[0_0_20px_#9d05ff]">
+                            <span class="material-symbols-outlined text-on-secondary">router</span>
+                        </div>
+                    </div>
+                    <!-- Connection Lines (SVG) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <line stroke="white" stroke-width="1" x1="20%" x2="50%" y1="20%" y2="50%"></line>
+                        <line stroke="white" stroke-width="1" x1="50%" x2="50%" y1="20%" y2="50%"></line>
+                        <line stroke="white" stroke-width="1" x1="80%" x2="50%" y1="20%" y2="50%"></line>
+                        <line stroke="white" stroke-width="1" x1="20%" x2="50%" y1="80%" y2="50%"></line>
+                        <line stroke="white" stroke-width="1" x1="50%" x2="50%" y1="80%" y2="50%"></line>
+                        <line stroke="white" stroke-width="1" x1="80%" x2="50%" y1="80%" y2="50%"></line>
+                    </svg>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 space-y-8">
+                <h2 class="text-4xl font-headline font-bold text-white">Modular Cognitive Architecture</h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4 group">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline">
+                            01</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Gateway Hub</h4>
+                            <p class="text-sm text-on-surface-variant">Central endpoint for multi-modal signal intake
+                                (audio, visual, textual).</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 group">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline">
+                            02</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Planner</h4>
+                            <p class="text-sm text-on-surface-variant">Hierarchical task decomposition system that
+                                generates execution roadmaps.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 group">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline">
+                            03</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Orchestrator</h4>
+                            <p class="text-sm text-on-surface-variant">Dynamically assigns sub-tasks to specialized
+                                sub-agents.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 group">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline">
+                            04</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Execution</h4>
+                            <p class="text-sm text-on-surface-variant">Sandboxed environment for API calls, shell
+                                commands, and system writes.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 group">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline">
+                            05</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Verification</h4>
+                            <p class="text-sm text-on-surface-variant">Final state validation using vision and
+                                system-logs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Code Snippet Section -->
+        <section id="security" class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <h2 class="text-4xl font-headline font-bold text-white leading-tight">Built for Privacy &amp; Flexibility
+                </h2>
+                <p class="text-on-surface-variant text-lg">
+                    Heliox OS offers the ultimate flexibility. Run entirely on local hardware for total privacy, or seamlessly connect to frontier cloud models like Anthropic and Gemini for complex capabilities.
+                </p>
+                <div class="flex items-center gap-6">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-headline font-bold text-primary">Hybrid</span>
+                        <span class="text-[10px] uppercase font-label text-on-surface-variant">Local &amp; Cloud LLMs</span>
+                    </div>
+                    <div class="h-10 w-px bg-outline-variant"></div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-headline font-bold text-secondary">AES-256</span>
+                        <span class="text-[10px] uppercase font-label text-on-surface-variant">Vault Encryption</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel ghost-border rounded-xl overflow-hidden shadow-2xl">
+                <div class="bg-surface-container-highest px-4 py-3 flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/30"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/30"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/30"></div>
+                    </div>
+                    <span class="text-[10px] font-label text-on-surface-variant">heliox_agent_spawn.py</span>
+                </div>
+                <div class="p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">1</span>
+                        <span class="text-secondary">import</span> <span class="text-white">heliox</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">2</span>
+                        <span class="text-secondary">from</span> <span class="text-white">heliox.core</span> <span
+                            class="text-secondary">import</span> <span class="text-white">Agent</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">3</span>
+                        <span> </span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">4</span>
+                        <span class="text-primary-fixed-dim"># Initialize the Sentient Control Layer</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">5</span>
+                        <span class="text-white">agent = Agent(name=<span class="text-primary">"Heliox-Alpha"</span>,
+                            mode=<span class="text-primary">"Autonomous"</span>)</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">6</span>
+                        <span class="text-white">agent.spawn_agent(permissions=[<span
+                                class="text-primary">"sys_control"</span>, <span
+                                class="text-primary">"vision"</span>])</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">7</span>
+                        <span> </span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">8</span>
+                        <span class="text-white">agent.execute_loop(prompt=<span class="text-primary">"Organize my
+                                workspace"</span>)</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-outline-variant select-none">9</span>
+                        <span class="text-primary-fixed-dim">&gt;&gt; Status: Agent Active. Syncing cognitive
+                            nodes...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Me Section -->
+        <section id="about" class="grid lg:grid-cols-12 gap-12 items-center glass-panel ghost-border p-8 md:p-12 rounded-2xl relative overflow-hidden">
+            <!-- Background glow -->
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="lg:col-span-8 space-y-6 relative z-10">
+                <div class="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-secondary/20 bg-secondary/5 text-secondary text-xs font-label tracking-widest uppercase mb-2">
+                    Creator Profile
+                </div>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white leading-tight">About Me</h2>
+                
+                <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed font-light">
+                    <p>
+                        <strong class="text-white font-medium">Hi, I'm Vyom Kulshrestha,</strong> a pre-final year Computer Science student at VIT, passionate about building next-generation AI systems and intelligent developer experiences.
+                    </p>
+                    <p>
+                        I'm currently building Heliox OS &mdash; a futuristic AI-powered operating system interface designed to combine autonomous agents, voice interaction, multimodal intelligence, and system-level automation into a seamless computing experience.
+                    </p>
+                    <p>
+                        My goal is to push this project beyond a traditional software demo and evolve it into a research-grade AI assistant ecosystem that feels like a real-world Jarvis-inspired system.
+                    </p>
+                    <p>
+                        Whether you're a developer, open-source contributor, recruiter, or someone excited about the future of human-computer interaction, I'd love to connect and hear your thoughts.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="https://www.linkedin.com/in/vyomkulshrestha" target="_blank"
+                        class="bg-surface-container-high border border-outline-variant px-8 py-4 font-bold text-white rounded-lg hover:bg-secondary/10 hover:border-secondary/50 transition-all flex items-center justify-center gap-3 group shadow-lg">
+                        <span class="text-secondary group-hover:scale-105 transition-transform">Let's Connect</span>
+                        <span class="text-sm opacity-60 font-mono tracking-tighter">&rarr; LinkedIn</span>
+                    </a>
+                    <button onclick="navigator.clipboard.writeText('vyomkulshrestha2004@gmail.com'); const textSpan = this.querySelector('.email-text'); const origText = textSpan.innerHTML; textSpan.innerHTML = '&amp;rarr; Copied to clipboard!'; setTimeout(() => textSpan.innerHTML = origText, 2000);"
+                        class="bg-surface-container-high border border-outline-variant px-8 py-4 font-bold text-white rounded-lg hover:bg-primary/10 hover:border-primary/50 transition-all flex items-center justify-center gap-3 group shadow-lg">
+                        <span class="text-primary group-hover:scale-105 transition-transform">Feedback &amp; Queries</span>
+                        <span class="text-sm opacity-60 font-mono tracking-tighter email-text">&rarr; vyo***@gmail.com</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Visual Element -->
+            <div class="lg:col-span-4 relative flex justify-center items-center z-10 hidden md:flex">
+                <div class="w-64 h-64 rounded-full border-2 border-secondary/20 shadow-[0_0_50px_rgba(223,183,255,0.1)] flex items-center justify-center relative overflow-hidden">
+                    <span class="material-symbols-outlined text-secondary opacity-80" style="font-size: 100px; font-variation-settings: 'FILL' 1;">
+                        badge
+                    </span>
+                    <div class="absolute inset-0 rounded-full border border-secondary animate-[spin_8s_linear_infinite] opacity-30 border-r-transparent border-t-transparent"></div>
+                    <div class="absolute -inset-4 rounded-full border border-secondary/30 animate-[spin_12s_linear_infinite_reverse] border-l-transparent border-b-transparent"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer CTA -->
+        <section id="contact"
+            class="relative overflow-hidden rounded-2xl p-1 bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30">
+            <div
+                class="bg-background rounded-2xl px-12 py-20 flex flex-col items-center text-center space-y-8 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-primary/5 blur-[100px] pointer-events-none"></div>
+                <h2 class="text-5xl font-headline font-bold text-white max-w-2xl">Ready to supercharge your OS?</h2>
+                <p class="text-on-surface-variant text-lg">Join the thousands of developers building the next generation
+                    of computing.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button id="download-btn-2"
+                        class="bg-primary-container text-on-primary-fixed px-10 py-4 font-bold rounded-lg shadow-[0_0_25px_rgba(0,225,255,0.4)] hover:scale-105 transition-all">
+                        Download Now
+                    </button>
+                    <a id="discord-btn" href="https://discord.gg/EcEtkBfXU" target="_blank"
+                        class="glass-panel ghost-border px-10 py-4 font-bold text-white rounded-lg hover:bg-white/5 transition-all flex items-center justify-center">
+                        Join Discord
+                    </a>
+                    <a id="contribute-btn" href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank"
+                        class="glass-panel ghost-border px-10 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 transition-all flex items-center justify-center">
+                        Contribute on GitHub
+                    </a>
+                    <a href="https://www.youtube.com/@HelioxOS" target="_blank"
+                        class="glass-panel border border-red-500/30 px-10 py-4 font-bold text-red-400 rounded-lg hover:bg-red-500/10 transition-all flex items-center justify-center gap-2 group">
+                        <span class="material-symbols-outlined group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                        Visit YouTube
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-[#0e0e12] w-full py-12 border-t border-[#353439]/20">
+        <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+            <div class="text-lg font-black text-[#00e1ff] font-['Space_Grotesk'] tracking-widest">
+                HELIOX OS
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 font-['Space_Grotesk'] text-sm uppercase tracking-widest">
+                <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
+                    href="https://github.com/VyomKulshrestha/Heliox-OS#readme" target="_blank">Documentation</a>
+                <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
+                    href="privacy.html">Privacy Policy</a>
+                <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
+                    href="whitepaper.html">Security Whitepaper</a>
+                <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
+                    href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank">Github</a>
+            </div>
+            <div class="text-white/40 font-['Space_Grotesk'] text-[10px] uppercase tracking-widest">
+                &copy; 2026 Heliox OS. The Sentient Interface.
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
