@@ -128,8 +128,7 @@
                         Control Agent</span>
                 </h1>
                 <p class="text-on-surface-variant text-lg max-w-xl leading-relaxed">
-                    Heliox OS bridges the gap between human intent and machine execution through high-fidelity neural
-                    processing and seamless system orchestration.
+                    A Python-based AI agent that controls your desktop via voice commands, hand gestures, and autonomous task execution &mdash; running locally on your hardware with optional cloud LLM support.
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <button id="download-btn-1"
@@ -143,19 +142,20 @@
                 </div>
                 <!-- Hero Stats -->
                 <div class="grid grid-cols-3 gap-4 pt-8">
-                    <div class="glass-panel ghost-border p-4 rounded-lg">
+                    <div class="glass-panel ghost-border p-4 rounded-lg relative group">
                         <div class="text-primary font-headline text-2xl font-bold">50+</div>
-                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Action Types
-                        </div>
+                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Action Types</div>
+                        <div class="text-[9px] text-white/30 font-mono mt-1">as of v0.4</div>
                     </div>
-                    <div class="glass-panel ghost-border p-4 rounded-lg">
+                    <div class="glass-panel ghost-border p-4 rounded-lg relative group">
                         <div class="text-secondary font-headline text-2xl font-bold">30+</div>
-                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Hand Gestures
-                        </div>
+                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Hand Gestures</div>
+                        <div class="text-[9px] text-white/30 font-mono mt-1">as of v0.4</div>
                     </div>
-                    <div class="glass-panel ghost-border p-4 rounded-lg">
+                    <div class="glass-panel ghost-border p-4 rounded-lg relative group">
                         <div class="text-tertiary font-headline text-2xl font-bold">Tier 5</div>
                         <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Security</div>
+                        <div class="text-[9px] text-white/30 font-mono mt-1">local-first</div>
                     </div>
                 </div>
             </div>
@@ -513,24 +513,24 @@
                 class="bg-background rounded-2xl px-12 py-20 flex flex-col items-center text-center space-y-8 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-full bg-primary/5 blur-[100px] pointer-events-none"></div>
                 <h2 class="text-5xl font-headline font-bold text-white max-w-2xl">Ready to supercharge your OS?</h2>
-                <p class="text-on-surface-variant text-lg">Join the thousands of developers building the next generation
-                    of computing.</p>
+                <p class="text-on-surface-variant text-lg">An open-source project built solo, growing with every contributor. Be part of what comes next.</p>
                 <div class="flex flex-wrap justify-center gap-4">
                     <button id="download-btn-2"
                         class="bg-primary-container text-on-primary-fixed px-10 py-4 font-bold rounded-lg shadow-[0_0_25px_rgba(0,225,255,0.4)] hover:scale-105 transition-all">
-                        Download Now
+                        Download Heliox OS
                     </button>
                     <a id="discord-btn" href="https://discord.gg/EcEtkBfXU" target="_blank"
                         class="glass-panel ghost-border px-10 py-4 font-bold text-white rounded-lg hover:bg-white/5 transition-all flex items-center justify-center">
                         Join Discord
                     </a>
                     <a id="contribute-btn" href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank"
-                        class="glass-panel ghost-border px-10 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 transition-all flex items-center justify-center">
+                        class="glass-panel border border-primary/30 px-10 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 shadow-[0_0_15px_rgba(0,225,255,0.15)] hover:shadow-[0_0_25px_rgba(0,225,255,0.3)] transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">code</span>
                         Contribute on GitHub
                     </a>
                     <a href="https://www.youtube.com/@HelioxOS" target="_blank"
-                        class="glass-panel border border-red-500/30 px-10 py-4 font-bold text-red-400 rounded-lg hover:bg-red-500/10 transition-all flex items-center justify-center gap-2 group">
-                        <span class="material-symbols-outlined group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                        class="glass-panel ghost-border px-10 py-4 font-bold text-white/70 rounded-lg hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">play_circle</span>
                         Visit YouTube
                     </a>
                 </div>
