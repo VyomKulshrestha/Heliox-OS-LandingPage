@@ -497,12 +497,14 @@
             
             <!-- Visual Element -->
             <div class="lg:col-span-4 relative flex justify-center items-center z-10 hidden md:flex">
-                <div class="w-64 h-64 rounded-full border-2 border-secondary/20 shadow-[0_0_50px_rgba(223,183,255,0.1)] flex items-center justify-center relative overflow-hidden">
-                    <span class="material-symbols-outlined text-secondary opacity-80" style="font-size: 100px; font-variation-settings: 'FILL' 1;">
-                        badge
-                    </span>
-                    <div class="absolute inset-0 rounded-full border border-secondary animate-[spin_8s_linear_infinite] opacity-30 border-r-transparent border-t-transparent"></div>
-                    <div class="absolute -inset-4 rounded-full border border-secondary/30 animate-[spin_12s_linear_infinite_reverse] border-l-transparent border-b-transparent"></div>
+                <div class="relative">
+                    <!-- Outer animated rings -->
+                    <div class="absolute -inset-6 rounded-full border border-secondary/20 animate-[spin_12s_linear_infinite_reverse] border-l-transparent border-b-transparent"></div>
+                    <div class="absolute -inset-3 rounded-full border border-primary/20 animate-[spin_8s_linear_infinite] border-r-transparent border-t-transparent"></div>
+                    <!-- Photo container -->
+                    <div class="w-64 h-64 rounded-full p-1 bg-gradient-to-br from-primary via-secondary/50 to-primary/30 shadow-[0_0_50px_rgba(0,225,255,0.15),0_0_80px_rgba(223,183,255,0.1)]">
+                        <img src="image.png" alt="Vyom Kulshrestha" class="w-full h-full rounded-full object-cover object-top grayscale-[20%] hover:grayscale-0 transition-all duration-700" />
+                    </div>
                 </div>
             </div>
         </section>
