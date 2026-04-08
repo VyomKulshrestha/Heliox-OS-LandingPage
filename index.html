@@ -232,23 +232,99 @@
         </section>
         <!-- Neuro-Adaptive Banner (TRIBE v2) -->
         <section class="relative overflow-hidden rounded-2xl p-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-primary/40 shadow-[0_0_40px_rgba(157,5,255,0.2)]">
-            <div class="bg-surface-container-low rounded-2xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 blur-[80px] pointer-events-none"></div>
-                <div class="flex-1 space-y-4 relative z-10">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/30 bg-secondary/10 text-secondary text-xs font-label tracking-widest uppercase">
-                        <span class="material-symbols-outlined text-[14px]">psychology</span> v0.5.1 Integration
+            <div class="bg-surface-container-low rounded-2xl px-6 py-10 md:px-10 lg:px-12 relative overflow-hidden space-y-10">
+                <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/10 blur-[100px] pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                    <div class="flex-1 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/50 bg-secondary/10 text-secondary text-xs font-label tracking-widest uppercase shadow-[0_0_15px_rgba(223,183,255,0.2)]">
+                            <span class="material-symbols-outlined text-[14px]">psychology</span> v0.6.1 Integration
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-headline font-bold text-white">Revolutionary TRIBE v2 Features</h3>
+                        <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl leading-relaxed">
+                            Heliox OS pushes the boundaries with <strong class="text-secondary">7 revolutionary biologically-inspired AI features</strong> powered by Meta's TRIBE v2 neural model.
+                        </p>
                     </div>
-                    <h3 class="text-3xl font-headline font-bold text-white">Meta TRIBE v2 Cognitive Engine</h3>
-                    <p class="text-on-surface-variant text-lg">
-                        Heliox OS is now fully neuro-adaptive. It tracks your <strong>brain load</strong> and <strong>saliency</strong> in real-time, pacing text-to-speech, gating destructive actions during high stress, and encoding your cognitive footprint into its subconscious persona.
-                    </p>
+                    <div class="relative z-10 shrink-0">
+                         <div class="glass-panel ghost-border p-4 rounded-xl flex items-center gap-4 bg-surface-container-highest/80 backdrop-blur-xl shrink-0 shadow-lg border-secondary/20">
+                            <div class="animate-pulse bg-red-500/20 text-red-400 font-mono text-sm px-3 py-1 rounded border border-red-500/30">Brain Load: 84%</div>
+                            <span class="text-white/30 material-symbols-outlined">arrow_right_alt</span>
+                            <div class="bg-secondary/20 text-secondary font-mono text-sm px-3 py-1 rounded border border-secondary/40">Cognitive Offload Active</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="relative z-10">
-                    <div class="glass-panel ghost-border p-4 rounded-xl flex items-center gap-4 bg-surface-container-highest/80 backdrop-blur-xl shrink-0">
-                        <div class="animate-pulse bg-red-500/20 text-red-400 font-mono text-sm px-3 py-1 rounded">Brain Load: 84%</div>
-                        <span class="text-white/30">&rarr;</span>
-                        <div class="bg-primary/20 text-primary font-mono text-sm px-3 py-1 rounded border border-primary/30">Action Shield Engaged</div>
+
+                <!-- Features Grid for TRIBE v2 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-10">
+                    
+                    <!-- Feature 1 -->
+                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">1. Adaptive Biometric Learning Loop</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Track physiological patterns over weeks to create personalized cognitive fingerprints that predict optimal interaction times.</p>
+                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
+<pre><code>from pilot.cognitive.biometric_loop import BiometricLearningLoop
+loop = BiometricLearningLoop(user_id="user")
+loop.record_cognitive_sample(attention=0.7, stress=0.3, load=0.5)</code></pre>
+                        </div>
                     </div>
+
+                    <!-- Feature 2 -->
+                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">2. Ambient Intelligence Mode</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Instead of reactive commands, Heliox proactively suggests actions. Example: <em>"You've been on this task for 2 hours with increasing stress — want a break?"</em></p>
+                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
+<pre><code>from pilot.cognitive.ambient_intelligence import AmbientIntelligenceEngine
+ambient = AmbientIntelligenceEngine(biometric_loop)
+await ambient.update_cognitive_state(attention=0.8, stress=0.6)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">3. Multi-Modal Neural Bridge</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Integrate webcam eye-tracking, audio tone analysis, and keyboard/mouse dynamics to build a unified neural workspace.</p>
+                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
+<pre><code>from pilot.cognitive.neural_bridge import NeuralBridge
+bridge = NeuralBridge()
+bridge.record_mouse_move(x, y)
+workspace = bridge.compute_workspace()</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">4. Cognitive Offloading</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">When load > 80%, automatically surface "memory anchors" allowing Heliox to absorb the cognitive burden of complex workflows.</p>
+                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
+<pre><code>offloader = CognitiveOffloader()
+offloader.update_load(0.85)
+surface = offloader.get_offload_surface()
+print(surface["anchors"])</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Features 5, 6, & 7 Combined -->
+                    <div class="lg:col-span-2 p-6 rounded-xl bg-gradient-to-br from-surface/50 to-secondary/5 border border-white/5 hover:border-secondary/30 transition-all space-y-4">
+                        <h4 class="text-2xl font-bold text-white text-secondary mb-2">Unified Cognitive APIs &amp; Handoff</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed max-w-3xl">
+                            Heliox integrates <strong class="text-primary">Evolving Personas</strong>, <strong class="text-primary">Cross-Device Cognitive Handoff</strong>, and a <strong class="text-primary">Quantum-Ready Architecture</strong>. All cognitive states flow through a single, unified pipeline that falls back to heuristic models seamlessly.
+                        </p>
+                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-secondary/80 border border-white/5 mt-4">
+<pre><code>from pilot.cognitive.hub import CognitiveHub
+
+hub = CognitiveHub()
+state = await hub.analyze("user is coding")
+
+# Unified Cognitive output based on live TRIBE v2 Neural Predictors
+print(f"Attention: {state.attention}, Stress: {state.stress}")
+print(f"Optimal: {state.optimal_interaction}")
+print(f"Overloaded: {state.is_overloaded}")
+
+# Swap underlying neural models instantly without breaking workflows
+pipeline.set_active_model("gpt_neuro")</code></pre>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
