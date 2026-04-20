@@ -240,9 +240,9 @@
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/50 bg-secondary/10 text-secondary text-xs font-label tracking-widest uppercase shadow-[0_0_15px_rgba(223,183,255,0.2)]">
                             <span class="material-symbols-outlined text-[14px]">psychology</span> v0.7.1 Integration
                         </div>
-                        <h3 class="text-4xl md:text-5xl font-headline font-bold text-white">Revolutionary TRIBE v2 Features</h3>
+                        <h3 class="text-4xl md:text-5xl font-headline font-bold text-white">JARVIS Autonomy (v0.7.1)</h3>
                         <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl leading-relaxed">
-                            Heliox OS pushes the boundaries with <strong class="text-secondary">7 revolutionary biologically-inspired AI features</strong> powered by Meta's TRIBE v2 neural model.
+                            Heliox OS evolves from reactive command execution to an <strong class="text-secondary">invisible, always-on proactive intelligence</strong>. The neural models now run completely autonomously in the background.
                         </p>
                     </div>
                     <div class="relative z-10 shrink-0">
@@ -259,69 +259,62 @@
                     
                     <!-- Feature 1 -->
                     <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">1. Adaptive Biometric Learning Loop</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Track physiological patterns over weeks to create personalized cognitive fingerprints that predict optimal interaction times.</p>
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">1. Always-On Screen Awareness</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Runs completely in the background via the new <code>ScreenVisionAgent</code>, tracking what you see every few seconds and feeding real-time context to the TRIBE v2 cognitive engine.</p>
                         <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>from pilot.cognitive.biometric_loop import BiometricLearningLoop
-loop = BiometricLearningLoop(user_id="user")
-loop.record_cognitive_sample(attention=0.7, stress=0.3, load=0.5)</code></pre>
+<pre><code>from pilot.agents.screen import ScreenVisionAgent
+vision = ScreenVisionAgent(interval=3.0)
+vision.start_daemon(background=True)</code></pre>
                         </div>
                     </div>
 
                     <!-- Feature 2 -->
                     <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">2. Ambient Intelligence Mode</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Instead of reactive commands, Heliox proactively suggests actions. Example: <em>"You've been on this task for 2 hours with increasing stress — want a break?"</em></p>
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">2. Proactive Suggestion Engine</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Instead of waiting for you to ask, the engine detects bottlenecks and workflow friction, firing proactive suggestions right into your UI based on live OCR.</p>
                         <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>from pilot.cognitive.ambient_intelligence import AmbientIntelligenceEngine
-ambient = AmbientIntelligenceEngine(biometric_loop)
-await ambient.update_cognitive_state(attention=0.8, stress=0.6)</code></pre>
+<pre><code>from pilot.cognitive.proactive import SuggestionEngine
+engine = SuggestionEngine(tribe_core)
+await engine.analyze_context_and_suggest()</code></pre>
                         </div>
                     </div>
 
                     <!-- Feature 3 -->
                     <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">3. Multi-Modal Neural Bridge</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Integrate webcam eye-tracking, audio tone analysis, and keyboard/mouse dynamics to build a unified neural workspace.</p>
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">3. Non-Blocking Tokenizer Pipeline</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">The PyTorch architecture and tokenizers are thread-optimized so multi-model proactive inference never freezes your operating system event loops.</p>
                         <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>from pilot.cognitive.neural_bridge import NeuralBridge
-bridge = NeuralBridge()
-bridge.record_mouse_move(x, y)
-workspace = bridge.compute_workspace()</code></pre>
+<pre><code>from transformers import AutoTokenizer
+# Pre-caches inside asynchronous executor
+await loop.run_in_executor(None, AutoTokenizer.from_pretrained)</code></pre>
                         </div>
                     </div>
 
                     <!-- Feature 4 -->
                     <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">4. Cognitive Offloading</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">When load > 80%, automatically surface "memory anchors" allowing Heliox to absorb the cognitive burden of complex workflows.</p>
+                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">4. Autonomous Background Tasks</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Delegate an entire multi-step automation process. Heliox spins up a headless environment and reports back to the UI securely upon final execution.</p>
                         <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>offloader = CognitiveOffloader()
-offloader.update_load(0.85)
-surface = offloader.get_offload_surface()
-print(surface["anchors"])</code></pre>
+<pre><code>task_id = executor.spawn_headless(job)
+progress = get_status(task_id)
+print(f"[JARVIS] Task complete: {progress}")</code></pre>
                         </div>
                     </div>
 
-                    <!-- Features 5, 6, & 7 Combined -->
+                    <!-- Total Runtime Engine -->
                     <div class="lg:col-span-2 p-6 rounded-xl bg-gradient-to-br from-surface/50 to-secondary/5 border border-white/5 hover:border-secondary/30 transition-all space-y-4">
-                        <h4 class="text-2xl font-bold text-white text-secondary mb-2">Unified Cognitive APIs &amp; Handoff</h4>
+                        <h4 class="text-2xl font-bold text-white text-secondary mb-2">Invisible Ambient Processing</h4>
                         <p class="text-sm text-on-surface-variant leading-relaxed max-w-3xl">
-                            Heliox integrates <strong class="text-primary">Evolving Personas</strong>, <strong class="text-primary">Cross-Device Cognitive Handoff</strong>, and a <strong class="text-primary">Quantum-Ready Architecture</strong>. All cognitive states flow through a single, unified pipeline that falls back to heuristic models seamlessly.
+                            By decoupling the user interface from the cognitive orchestrator, <strong class="text-primary">JARVIS Autonomy</strong> executes perfectly as an invisible backend service. The system gracefully degrades to heuristics if local neural models encounter constraint limits.
                         </p>
                         <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-secondary/80 border border-white/5 mt-4">
-<pre><code>from pilot.cognitive.hub import CognitiveHub
+<pre><code># Start the pilot server completely decoupled
+server = PilotServer()
+server.start()
 
-hub = CognitiveHub()
-state = await hub.analyze("user is coding")
-
-# Unified Cognitive output based on live TRIBE v2 Neural Predictors
-print(f"Attention: {state.attention}, Stress: {state.stress}")
-print(f"Optimal: {state.optimal_interaction}")
-print(f"Overloaded: {state.is_overloaded}")
-
-# Swap underlying neural models instantly without breaking workflows
-pipeline.set_active_model("gpt_neuro")</code></pre>
+# Neural predictions flow constantly in the background
+logger.info("Always-On Screen awareness daemon active...")
+logger.info("[PASS] Screen Vision Stats")</code></pre>
                         </div>
                     </div>
 
