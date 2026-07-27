@@ -1,44 +1,230 @@
-/* Custom styles and animations */
+/* ═══════════════════════════════════════════════════════════
+   Heliox OS — Landing Page Stylesheet (v0.9.0)
+   ═══════════════════════════════════════════════════════════ */
 
+/* ── Base & Background ───────────────────────────────────── */
 body {
     background-color: #050508;
     background-image: radial-gradient(circle at 2px 2px, rgba(59, 73, 76, 0.15) 1px, transparent 0);
     background-size: 40px 40px;
 }
 
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0e0e12; }
+::-webkit-scrollbar-thumb { background: rgba(0, 225, 255, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 225, 255, 0.45); }
+html { scrollbar-color: rgba(0, 225, 255, 0.25) #0e0e12; scrollbar-width: thin; }
+
+/* ── Glassmorphism Utilities ─────────────────────────────── */
 .glass-panel {
     backdrop-filter: blur(20px) saturate(180%);
     background: rgba(19, 19, 23, 0.7);
 }
-
+.ghost-border {
+    border: 1px solid rgba(59, 73, 76, 0.2);
+}
 .neon-glow-primary {
     box-shadow: 0 0 20px rgba(0, 225, 255, 0.15);
 }
 
-.ghost-border {
-    border: 1px solid rgba(59, 73, 76, 0.2);
-}
-
+/* ── Arc Reactor ─────────────────────────────────────────── */
 .arc-reactor-ring {
     border: 2px solid transparent;
     border-top-color: #00e1ff;
     border-radius: 50%;
 }
 
-/* Scroll reveal classes */
+/* ── Scroll Reveal ───────────────────────────────────────── */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
-
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
+/* ── Navbar ──────────────────────────────────────────────── */
 .navbar-scrolled {
     background: rgba(5, 5, 8, 0.95) !important;
     border-bottom: 1px solid rgba(0, 225, 255, 0.2) !important;
     box-shadow: 0 4px 30px rgba(0, 225, 255, 0.1) !important;
+}
+
+/* ── Floating Animation ──────────────────────────────────── */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delay-1 { animation: float 6s ease-in-out 1s infinite; }
+.animate-float-delay-2 { animation: float 6s ease-in-out 2s infinite; }
+
+/* ── Gradient Shift ──────────────────────────────────────── */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* ── Pulse Glow ──────────────────────────────────────────── */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(0, 225, 255, 0.15); }
+    50% { box-shadow: 0 0 30px rgba(0, 225, 255, 0.35), 0 0 60px rgba(0, 225, 255, 0.1); }
+}
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* ── Shimmer ─────────────────────────────────────────────── */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.shimmer-line {
+    background: linear-gradient(90deg, transparent 0%, rgba(0,225,255,0.08) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ── Rotating Border ─────────────────────────────────────── */
+@keyframes rotate-border {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ── Agent Node ──────────────────────────────────────────── */
+.agent-node {
+    position: relative;
+    transition: all 0.3s ease;
+}
+.agent-node::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(from 0deg, transparent, rgba(0, 225, 255, 0.3), transparent, rgba(157, 5, 255, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    animation: rotate-border 4s linear infinite;
+}
+.agent-node:hover::before {
+    opacity: 1;
+}
+.agent-node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 225, 255, 0.15);
+}
+
+/* ── Action Catalog Badge ────────────────────────────────── */
+.action-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-family: 'Space Grotesk', monospace;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(59, 73, 76, 0.25);
+    background: rgba(19, 19, 23, 0.6);
+    color: rgba(229, 225, 231, 0.7);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+.action-badge:hover {
+    border-color: rgba(0, 225, 255, 0.4);
+    color: #bcf2ff;
+    background: rgba(0, 225, 255, 0.08);
+    box-shadow: 0 0 12px rgba(0, 225, 255, 0.1);
+}
+
+/* ── Install Platform Tabs ───────────────────────────────── */
+.platform-tab {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(59, 73, 76, 0.2);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+}
+.platform-tab:hover {
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(59, 73, 76, 0.4);
+}
+.platform-tab.active {
+    background: rgba(0, 225, 255, 0.1);
+    border-color: rgba(0, 225, 255, 0.4);
+    color: #bcf2ff;
+    box-shadow: 0 0 15px rgba(0, 225, 255, 0.15);
+}
+.platform-content { display: none; }
+.platform-content.active { display: block; }
+
+/* ── Plugin Card ─────────────────────────────────────────── */
+.plugin-card {
+    background: rgba(19, 19, 23, 0.6);
+    border: 1px solid rgba(59, 73, 76, 0.2);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+.plugin-card:hover {
+    border-color: rgba(157, 5, 255, 0.4);
+    box-shadow: 0 4px 20px rgba(157, 5, 255, 0.1);
+    transform: translateY(-4px);
+}
+
+/* ── Cognitive Pulse ─────────────────────────────────────── */
+@keyframes cog-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+.cog-pulse { animation: cog-pulse 2.5s ease-in-out infinite; }
+
+/* ── Section Divider ─────────────────────────────────────── */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0,225,255,0.15) 30%, rgba(157,5,255,0.15) 70%, transparent 100%);
+}
+
+/* ── Mobile Menu ─────────────────────────────────────────── */
+.mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mobile-menu.open {
+    max-height: 500px;
+}
+
+/* ── Counter Animation ───────────────────────────────────── */
+.count-up {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* ── Security Feature Row ────────────────────────────────── */
+.security-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(59, 73, 76, 0.1);
+    transition: all 0.2s ease;
+}
+.security-feature:last-child { border-bottom: none; }
+.security-feature:hover {
+    padding-left: 0.5rem;
 }

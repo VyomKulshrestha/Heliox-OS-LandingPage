@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Heliox OS | The Sentient Interface</title>
+    <title>Heliox OS | AI System Control Agent — Voice, Gestures & Autonomous Tasks</title>
+    <meta name="description" content="Heliox OS is an open-source, privacy-first AI system control agent. Control your entire computer with natural language, voice, hand gestures, and autonomous task execution." />
+    <meta name="keywords" content="Heliox OS, AI agent, voice control, hand gestures, system automation, open source, JARVIS, privacy-first" />
+    <meta property="og:title" content="Heliox OS | The Sentient Interface" />
+    <meta property="og:description" content="Control your entire computer with natural language, voice, and hand gestures. Open-source, privacy-first AI system control agent." />
+    <meta property="og:type" content="website" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -73,7 +70,8 @@
                     fontFamily: {
                         "headline": ["Space Grotesk"],
                         "body": ["Inter"],
-                        "label": ["Space Grotesk"]
+                        "label": ["Space Grotesk"],
+                        "mono": ["JetBrains Mono", "monospace"]
                     },
                     borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
                 },
@@ -85,126 +83,123 @@
 
 <body class="font-body text-on-background selection:bg-primary-container selection:text-on-primary-container">
     <!-- Light Leaks Decor -->
-    <div
-        class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px] pointer-events-none">
-    </div>
-    <div
-        class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none">
-    </div>
-    <!-- TopNavBar -->
-    <nav
-        class="fixed top-0 w-full z-50 bg-[#050508]/70 backdrop-blur-xl border-b border-[#353439]/20 shadow-[0_0_20px_rgba(0,225,255,0.05)]">
-        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-            <div
-                class="text-2xl font-bold text-[#bcf2ff] flex items-center gap-2 font-['Space_Grotesk'] tracking-tight">
-                <span class="material-symbols-outlined text-[#00e1ff]"
-                    style="font-variation-settings: 'FILL' 1;">memory</span>
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- ═══════════════ NAVBAR ═══════════════ -->
+    <nav class="fixed top-0 w-full z-50 bg-[#050508]/70 backdrop-blur-xl border-b border-[#353439]/20 shadow-[0_0_20px_rgba(0,225,255,0.05)]">
+        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+            <div class="text-2xl font-bold text-[#bcf2ff] flex items-center gap-2 font-headline tracking-tight">
+                <span class="material-symbols-outlined text-[#00e1ff]" style="font-variation-settings: 'FILL' 1;">memory</span>
                 Heliox OS
             </div>
-            <div class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] text-sm uppercase tracking-widest">
-                <a class="text-white/70 hover:text-white transition-colors" href="#features">Features</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#architecture">Architecture</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#about">About</a>
-                <a class="text-white/70 hover:text-white transition-colors" href="#contact">Contact</a>
+            <div class="hidden lg:flex items-center gap-6 font-headline text-[11px] uppercase tracking-[0.2em]">
+                <a class="text-white/60 hover:text-white transition-colors" href="#features">Features</a>
+                <a class="text-white/60 hover:text-white transition-colors" href="#jarvis">JARVIS</a>
+                <a class="text-white/60 hover:text-white transition-colors" href="#cognitive">Cognitive</a>
+                <a class="text-white/60 hover:text-white transition-colors" href="#architecture">Architecture</a>
+                <a class="text-white/60 hover:text-white transition-colors" href="#security">Security</a>
+                <a class="text-white/60 hover:text-white transition-colors" href="#install">Install</a>
+                <a class="text-white/60 hover:text-white transition-colors" href="#about">About</a>
+                <a href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank"
+                   class="ml-2 bg-primary-container/10 border border-primary/30 text-primary px-4 py-2 rounded-lg hover:bg-primary/15 transition-all text-[11px] tracking-[0.15em]">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1" style="font-variation-settings: 'FILL' 1;">code</span>
+                    GitHub
+                </a>
+            </div>
+            <!-- Mobile hamburger -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white/70 hover:text-white transition-colors" aria-label="Toggle navigation menu">
+                <span class="material-symbols-outlined text-[28px]">menu</span>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden bg-surface-container-low/95 backdrop-blur-xl border-t border-[#353439]/20">
+            <div class="flex flex-col px-6 py-4 gap-3 font-headline text-sm uppercase tracking-widest">
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#features">Features</a>
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#jarvis">JARVIS</a>
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#cognitive">Cognitive</a>
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#architecture">Architecture</a>
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#security">Security</a>
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#install">Install</a>
+                <a class="text-white/60 hover:text-white py-2 transition-colors" href="#about">About</a>
+                <a href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank"
+                   class="text-primary hover:text-primary-container py-2 transition-colors">GitHub →</a>
             </div>
         </div>
     </nav>
+
     <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto space-y-32">
-        <!-- Hero Section -->
+
+        <!-- ═══════════════ HERO ═══════════════ -->
         <section class="grid lg:grid-cols-2 gap-16 items-center">
             <div class="space-y-8">
-                <div
-                    class="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-label tracking-widest uppercase">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-label tracking-widest uppercase">
                     <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    JARVIS Autonomy (v0.7.1) Live
+                    JARVIS Autonomy v0.9.0 Live
                 </div>
-                <h1 class="text-6xl md:text-7xl font-headline font-bold text-white leading-tight">
+                <h1 class="text-5xl sm:text-6xl md:text-7xl font-headline font-bold text-white leading-[1.1]">
                     The Open-Source <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">AI System
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#00daf7] to-secondary animate-gradient">AI System
                         Control Agent</span>
                 </h1>
                 <p class="text-on-surface-variant text-lg max-w-xl leading-relaxed">
-                    A Python-based AI agent that controls your desktop via voice commands, hand gestures, and autonomous
-                    task execution &mdash; running locally on your hardware with optional cloud LLM support.
+                    Control your entire computer with natural language, voice, and hand gestures. An open-source, privacy-first AI agent that plans, executes, and verifies complex multi-step tasks &mdash; running locally on your hardware.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <button id="download-btn-1"
-                        class="bg-primary-container text-on-primary-fixed px-8 py-4 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 transition-all">
-                        Download Heliox OS
-                    </button>
+                    <a href="#install"
+                        class="bg-primary-container text-on-primary-fixed px-8 py-4 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 hover:shadow-[0_0_35px_rgba(0,225,255,0.35)] transition-all inline-flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
+                        Download v0.9.0
+                    </a>
                     <a href="#features"
                         class="glass-panel ghost-border px-8 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 transition-all flex items-center justify-center">
                         Explore Features
                     </a>
                 </div>
                 <!-- Hero Stats -->
-                <div class="grid grid-cols-3 gap-4 pt-8">
-                    <div class="glass-panel ghost-border p-4 rounded-lg relative group">
-                        <div class="text-primary font-headline text-2xl font-bold">50+</div>
-                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Action Types
-                        </div>
-                        <div class="text-[9px] text-white/30 font-mono mt-1">as of v0.4</div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6">
+                    <div class="glass-panel ghost-border p-4 rounded-lg text-center animate-pulse-glow">
+                        <div class="text-primary font-headline text-2xl font-bold count-up" data-target="146">0</div>
+                        <div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-label">Actions</div>
                     </div>
-                    <div class="glass-panel ghost-border p-4 rounded-lg relative group">
-                        <div class="text-secondary font-headline text-2xl font-bold">30+</div>
-                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Hand Gestures
-                        </div>
-                        <div class="text-[9px] text-white/30 font-mono mt-1">as of v0.4</div>
+                    <div class="glass-panel ghost-border p-4 rounded-lg text-center">
+                        <div class="text-secondary font-headline text-2xl font-bold count-up" data-target="30" data-suffix="+">0</div>
+                        <div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-label">Gestures</div>
                     </div>
-                    <div class="glass-panel ghost-border p-4 rounded-lg relative group">
-                        <div class="text-tertiary font-headline text-2xl font-bold">Tier 5</div>
-                        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">Security</div>
-                        <div class="text-[9px] text-white/30 font-mono mt-1">local-first</div>
+                    <div class="glass-panel ghost-border p-4 rounded-lg text-center">
+                        <div class="text-tertiary font-headline text-2xl font-bold count-up" data-target="10">0</div>
+                        <div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-label">Agents</div>
+                    </div>
+                    <div class="glass-panel ghost-border p-4 rounded-lg text-center">
+                        <div class="text-primary font-headline text-2xl font-bold">Tier 5</div>
+                        <div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-label">Security</div>
                     </div>
                 </div>
             </div>
             <!-- Hero Visual: Arc Reactor HUD -->
             <div class="relative flex justify-center items-center">
                 <div class="absolute w-[400px] h-[400px] rounded-full bg-primary/5 blur-[80px]"></div>
-                <div class="relative w-80 h-80 flex items-center justify-center">
+                <div class="relative w-72 h-72 md:w-80 md:h-80 flex items-center justify-center">
                     <div class="absolute inset-0 arc-reactor-ring animate-[spin_10s_linear_infinite]"></div>
-                    <div
-                        class="absolute inset-4 arc-reactor-ring border-secondary/40 animate-[spin_15s_linear_infinite_reverse]">
-                    </div>
-                    <div
-                        class="absolute inset-12 arc-reactor-ring border-primary/20 animate-[spin_20s_linear_infinite]">
-                    </div>
-                    <div
-                        class="w-32 h-32 rounded-full glass-panel ghost-border flex items-center justify-center relative group">
-                        <!-- Glowing Plasma Core -->
-                        <div
-                            class="absolute w-20 h-20 bg-gradient-to-tr from-primary via-secondary to-primary/50 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 animate-pulse">
-                        </div>
-
-                        <!-- Spinning Data Rings -->
-                        <div
-                            class="absolute w-28 h-28 rounded-full border border-white/5 border-t-primary/60 border-b-secondary/60 animate-[spin_4s_linear_infinite]">
-                        </div>
-                        <div
-                            class="absolute w-24 h-24 rounded-full border border-white/5 border-l-secondary/80 border-r-primary/80 animate-[spin_3s_linear_infinite_reverse]">
-                        </div>
-
-                        <!-- Central Quantum Node -->
-                        <div
-                            class="relative z-10 w-16 h-16 bg-surface-container-highest/80 backdrop-blur-md rounded-full border border-primary/30 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,225,255,0.4)] group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-4xl"
-                                style="font-variation-settings: 'FILL' 1;">
-                                psychology
-                            </span>
+                    <div class="absolute inset-4 arc-reactor-ring border-secondary/40 animate-[spin_15s_linear_infinite_reverse]"></div>
+                    <div class="absolute inset-12 arc-reactor-ring border-primary/20 animate-[spin_20s_linear_infinite]"></div>
+                    <div class="w-32 h-32 rounded-full glass-panel ghost-border flex items-center justify-center relative group">
+                        <div class="absolute w-20 h-20 bg-gradient-to-tr from-primary via-secondary to-primary/50 rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+                        <div class="absolute w-28 h-28 rounded-full border border-white/5 border-t-primary/60 border-b-secondary/60 animate-[spin_4s_linear_infinite]"></div>
+                        <div class="absolute w-24 h-24 rounded-full border border-white/5 border-l-secondary/80 border-r-primary/80 animate-[spin_3s_linear_infinite_reverse]"></div>
+                        <div class="relative z-10 w-16 h-16 bg-surface-container-highest/80 backdrop-blur-md rounded-full border border-primary/30 flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,225,255,0.4)] group-hover:scale-110 transition-transform duration-500">
+                            <span class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-4xl"
+                                style="font-variation-settings: 'FILL' 1;">psychology</span>
                         </div>
                     </div>
                 </div>
-                <!-- HUD Cards -->
-                <div
-                    class="absolute -top-10 -right-4 glass-panel ghost-border p-6 rounded-xl w-64 space-y-4 shadow-2xl">
+                <!-- Floating HUD Card -->
+                <div class="absolute -top-6 -right-2 md:-top-10 md:-right-4 glass-panel ghost-border p-5 rounded-xl w-56 md:w-64 space-y-4 shadow-2xl animate-float">
                     <div class="flex justify-between items-center">
-                        <span class="text-[10px] font-label text-on-surface-variant tracking-tighter uppercase">System
-                            Monitor</span>
+                        <span class="text-[10px] font-label text-on-surface-variant tracking-tighter uppercase">System Monitor</span>
                         <div class="flex gap-1">
                             <div class="w-1.5 h-1.5 rounded-full bg-red-500/50"></div>
                             <div class="w-1.5 h-1.5 rounded-full bg-yellow-500/50"></div>
@@ -213,296 +208,759 @@
                     </div>
                     <div class="space-y-3">
                         <div class="space-y-1">
-                            <div class="flex justify-between text-[10px] uppercase font-label"><span>CPU
-                                    Load</span><span class="text-primary">42%</span></div>
+                            <div class="flex justify-between text-[10px] uppercase font-label"><span>Cognitive Load</span><span class="text-primary">42%</span></div>
                             <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
                                 <div class="h-full bg-gradient-to-r from-primary to-secondary w-[42%]"></div>
                             </div>
                         </div>
                         <div class="space-y-1">
-                            <div class="flex justify-between text-[10px] uppercase font-label"><span>AI Core</span><span
-                                    class="text-primary">89%</span></div>
+                            <div class="flex justify-between text-[10px] uppercase font-label"><span>AI Core</span><span class="text-primary">89%</span></div>
                             <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
                                 <div class="h-full bg-gradient-to-r from-primary to-secondary w-[89%]"></div>
                             </div>
                         </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[10px] uppercase font-label"><span>Agents Active</span><span class="text-secondary">10/10</span></div>
+                            <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-secondary to-primary w-full"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Neuro-Adaptive Banner (TRIBE v2) -->
-        <section class="relative overflow-hidden rounded-2xl p-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-primary/40 shadow-[0_0_40px_rgba(157,5,255,0.2)]">
-            <div class="bg-surface-container-low rounded-2xl px-6 py-10 md:px-10 lg:px-12 relative overflow-hidden space-y-10">
-                <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/10 blur-[100px] pointer-events-none"></div>
-                
-                <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-                    <div class="flex-1 space-y-4">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/50 bg-secondary/10 text-secondary text-xs font-label tracking-widest uppercase shadow-[0_0_15px_rgba(223,183,255,0.2)]">
-                            <span class="material-symbols-outlined text-[14px]">psychology</span> v0.7.1 Integration
-                        </div>
-                        <h3 class="text-4xl md:text-5xl font-headline font-bold text-white">JARVIS Autonomy (v0.7.1)</h3>
-                        <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl leading-relaxed">
-                            Heliox OS evolves from reactive command execution to an <strong class="text-secondary">invisible, always-on proactive intelligence</strong>. The neural models now run completely autonomously in the background.
-                        </p>
-                    </div>
-                    <div class="relative z-10 shrink-0">
-                         <div class="glass-panel ghost-border p-4 rounded-xl flex items-center gap-4 bg-surface-container-highest/80 backdrop-blur-xl shrink-0 shadow-lg border-secondary/20">
-                            <div class="animate-pulse bg-red-500/20 text-red-400 font-mono text-sm px-3 py-1 rounded border border-red-500/30">Brain Load: 84%</div>
-                            <span class="text-white/30 material-symbols-outlined">arrow_right_alt</span>
-                            <div class="bg-secondary/20 text-secondary font-mono text-sm px-3 py-1 rounded border border-secondary/40">Cognitive Offload Active</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Features Grid for TRIBE v2 -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-10">
-                    
-                    <!-- Feature 1 -->
-                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">1. Always-On Screen Awareness</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Runs completely in the background via the new <code>ScreenVisionAgent</code>, tracking what you see every few seconds and feeding real-time context to the TRIBE v2 cognitive engine.</p>
-                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>from pilot.agents.screen import ScreenVisionAgent
-vision = ScreenVisionAgent(interval=3.0)
-vision.start_daemon(background=True)</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Feature 2 -->
-                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">2. Proactive Suggestion Engine</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Instead of waiting for you to ask, the engine detects bottlenecks and workflow friction, firing proactive suggestions right into your UI based on live OCR.</p>
-                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>from pilot.cognitive.proactive import SuggestionEngine
-engine = SuggestionEngine(tribe_core)
-await engine.analyze_context_and_suggest()</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">3. Non-Blocking Tokenizer Pipeline</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">The PyTorch architecture and tokenizers are thread-optimized so multi-model proactive inference never freezes your operating system event loops.</p>
-                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>from transformers import AutoTokenizer
-# Pre-caches inside asynchronous executor
-await loop.run_in_executor(None, AutoTokenizer.from_pretrained)</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Feature 4 -->
-                    <div class="p-6 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-4 group">
-                        <h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">4. Autonomous Background Tasks</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Delegate an entire multi-step automation process. Heliox spins up a headless environment and reports back to the UI securely upon final execution.</p>
-                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-primary/80 border border-white/5">
-<pre><code>task_id = executor.spawn_headless(job)
-progress = get_status(task_id)
-print(f"[JARVIS] Task complete: {progress}")</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Total Runtime Engine -->
-                    <div class="lg:col-span-2 p-6 rounded-xl bg-gradient-to-br from-surface/50 to-secondary/5 border border-white/5 hover:border-secondary/30 transition-all space-y-4">
-                        <h4 class="text-2xl font-bold text-white text-secondary mb-2">Invisible Ambient Processing</h4>
-                        <p class="text-sm text-on-surface-variant leading-relaxed max-w-3xl">
-                            By decoupling the user interface from the cognitive orchestrator, <strong class="text-primary">JARVIS Autonomy</strong> executes perfectly as an invisible backend service. The system gracefully degrades to heuristics if local neural models encounter constraint limits.
-                        </p>
-                        <div class="bg-[#0a0a0d] p-4 rounded-lg font-mono text-[11px] md:text-xs overflow-x-auto text-secondary/80 border border-white/5 mt-4">
-<pre><code># Start the pilot server completely decoupled
-server = PilotServer()
-server.start()
-
-# Neural predictions flow constantly in the background
-logger.info("Always-On Screen awareness daemon active...")
-logger.info("[PASS] Screen Vision Stats")</code></pre>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Grid -->
+        <!-- ═══════════════ FEATURES GRID ═══════════════ -->
         <section id="features" class="space-y-12">
             <div class="text-center space-y-4">
-                <h2 class="text-4xl font-headline font-bold text-white">Intuitive Command. Infinite Power.</h2>
-                <p class="text-on-surface-variant">Control your entire digital ecosystem with zero friction.</p>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Intuitive Command. Infinite Power.</h2>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">Control your entire digital ecosystem with zero friction through four core modalities.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Card 1 -->
-                <div
-                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
-                    <div
-                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <span class="material-symbols-outlined text-primary"
-                            style="font-variation-settings: 'FILL' 1;">mic</span>
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-5 hover:translate-y-[-8px] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">mic</span>
                     </div>
-                    <h3 class="text-xl font-headline font-bold text-white">Voice &amp; Speech</h3>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">Advanced NLP layer with context retention
-                        and multi-language support for complex commands.</p>
+                    <h3 class="text-xl font-headline font-bold text-white">Voice & Speech</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">"Hey Heliox" ambient wake-word with VAD-based endpoints, barge-in support, and real-time push-free dispatch for frictionless execution.</p>
                 </div>
                 <!-- Card 2 -->
-                <div
-                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
-                    <div
-                        class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                        <span class="material-symbols-outlined text-secondary"
-                            style="font-variation-settings: 'FILL' 1;">front_hand</span>
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-5 hover:translate-y-[-8px] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">front_hand</span>
                     </div>
-                    <h3 class="text-xl font-headline font-bold text-white">Hand Gestures</h3>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">Vision-based interaction system allowing
-                        spatial control of windows and system settings.</p>
+                    <h3 class="text-xl font-headline font-bold text-white">30+ Hand Gestures</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Static poses (Palm, Pinch) and motion gestures (Two-Finger Swipe) with kinematic smoothing, 3D world-model, and optional gaze tracking fusion.</p>
                 </div>
                 <!-- Card 3 -->
-                <div
-                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
-                    <div
-                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <span class="material-symbols-outlined text-primary"
-                            style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-5 hover:translate-y-[-8px] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">visibility</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-white">Always-On Awareness</h3>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">Continuous contextual bridging of your screen and environment directly into the LLM logic.</p>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Continuous computer-vision loop taking screenshots every 3s, detecting active apps, and maintaining a rolling context buffer fed into the LLM planner.</p>
                 </div>
                 <!-- Card 4 -->
-                <div
-                    class="glass-panel ghost-border p-8 rounded-lg space-y-6 hover:translate-y-[-8px] transition-transform group">
-                    <div
-                        class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                        <span class="material-symbols-outlined text-secondary"
-                            style="font-variation-settings: 'FILL' 1;">bolt</span>
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-5 hover:translate-y-[-8px] transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bolt</span>
                     </div>
-                    <h3 class="text-xl font-headline font-bold text-white">Autonomous Background Jobs</h3>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">Spawn multi-step, fire-and-forget tasks that resolve silently entirely independent of the main UI.</p>
+                    <h3 class="text-xl font-headline font-bold text-white">Autonomous Jobs</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Fire-and-forget background tasks that decompose, execute, and verify completely independent of the UI or main event loop.</p>
                 </div>
             </div>
         </section>
-        <!-- Architecture Section -->
-        <section id="architecture" class="grid lg:grid-cols-2 gap-16 items-center">
-            <div class="order-2 lg:order-1 relative">
-                <div class="glass-panel ghost-border rounded-xl p-8 aspect-square flex items-center justify-center">
-                    <div class="grid grid-cols-3 gap-8 relative">
-                        <!-- Simplified Network Graph -->
-                        <div
-                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_20px_#00e1ff]">
-                            <span class="material-symbols-outlined text-on-primary">settings</span>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ JARVIS AUTONOMY v0.9.0 ═══════════════ -->
+        <section id="jarvis" class="relative overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-primary/40 via-secondary/40 to-primary/40 shadow-[0_0_40px_rgba(157,5,255,0.15)]">
+            <div class="bg-surface-container-low rounded-2xl px-6 py-10 md:px-10 lg:px-12 relative overflow-hidden space-y-10">
+                <div class="absolute top-0 right-0 w-80 h-80 bg-secondary/10 blur-[100px] pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+                    <div class="flex-1 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/50 bg-secondary/10 text-secondary text-xs font-label tracking-widest uppercase shadow-[0_0_15px_rgba(223,183,255,0.2)]">
+                            <span class="material-symbols-outlined text-[14px]">psychology</span> v0.9.0 — ReAct Multi-Agent
                         </div>
-                        <div
-                            class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center z-10 shadow-[0_0_20px_#9d05ff]">
-                            <span class="material-symbols-outlined text-on-secondary">psychology</span>
-                        </div>
-                        <div
-                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_20px_#00e1ff]">
-                            <span class="material-symbols-outlined text-on-primary">bolt</span>
-                        </div>
-                        <div class="col-span-3 flex justify-center py-4">
-                            <div
-                                class="w-20 h-20 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center animate-pulse">
-                                <span class="material-symbols-outlined text-on-background">database</span>
-                            </div>
-                        </div>
-                        <div
-                            class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center z-10 shadow-[0_0_20px_#9d05ff]">
-                            <span class="material-symbols-outlined text-on-secondary">shield</span>
-                        </div>
-                        <div
-                            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center z-10 shadow-[0_0_20px_#00e1ff]">
-                            <span class="material-symbols-outlined text-on-primary">terminal</span>
-                        </div>
-                        <div
-                            class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center z-10 shadow-[0_0_20px_#9d05ff]">
-                            <span class="material-symbols-outlined text-on-secondary">router</span>
+                        <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">JARVIS Autonomy</h2>
+                        <p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                            Heliox OS combines reactive commands with opt-in <strong class="text-secondary">proactive and background capabilities</strong> — all running through the same permission and verification pipeline.
+                        </p>
+                    </div>
+                    <div class="relative z-10 shrink-0">
+                        <div class="glass-panel ghost-border p-4 rounded-xl flex items-center gap-3 bg-surface-container-highest/80 backdrop-blur-xl shadow-lg border-secondary/20">
+                            <div class="animate-pulse bg-red-500/20 text-red-400 font-mono text-xs px-3 py-1 rounded border border-red-500/30">Brain Load: 84%</div>
+                            <span class="text-white/30 material-symbols-outlined text-sm">arrow_right_alt</span>
+                            <div class="bg-secondary/20 text-secondary font-mono text-xs px-3 py-1 rounded border border-secondary/40">Cognitive Offload</div>
                         </div>
                     </div>
-                    <!-- Connection Lines (SVG) -->
-                    <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <line stroke="white" stroke-width="1" x1="20%" x2="50%" y1="20%" y2="50%"></line>
-                        <line stroke="white" stroke-width="1" x1="50%" x2="50%" y1="20%" y2="50%"></line>
-                        <line stroke="white" stroke-width="1" x1="80%" x2="50%" y1="20%" y2="50%"></line>
-                        <line stroke="white" stroke-width="1" x1="20%" x2="50%" y1="80%" y2="50%"></line>
-                        <line stroke="white" stroke-width="1" x1="50%" x2="50%" y1="80%" y2="50%"></line>
-                        <line stroke="white" stroke-width="1" x1="80%" x2="50%" y1="80%" y2="50%"></line>
-                    </svg>
                 </div>
-            </div>
-            <div class="order-1 lg:order-2 space-y-8">
-                <h2 class="text-4xl font-headline font-bold text-white">Modular Cognitive Architecture</h2>
-                <div class="space-y-6">
-                    <div class="flex gap-4 group">
-                        <div
-                            class="flex-shrink-0 w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline">
-                            01</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-white mb-1">Gateway Hub</h4>
-                            <p class="text-sm text-on-surface-variant">Central endpoint for multi-modal signal intake
-                                (audio, visual, textual).</p>
+
+                <!-- 8 JARVIS Capabilities -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
+                    <!-- 1 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">🧠</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Proactive Suggestion Engine</h4>
                         </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Learns your daily workflows and pattern-matches screen context to silently surface action suggestions — like offering to summarize a long thread or launch an IDE when browsing issues.</p>
                     </div>
-                    <div class="flex gap-4 group">
-                        <div
-                            class="flex-shrink-0 w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline">
-                            02</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-white mb-1">Planner</h4>
-                            <p class="text-sm text-on-surface-variant">Hierarchical task decomposition system that
-                                generates execution roadmaps.</p>
+                    <!-- 2 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">⚡</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Fire-and-Forget Jobs</h4>
                         </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Spawn complex multi-step background tasks that decompose, execute, and verify completely independent of the UI or main event loop.</p>
                     </div>
-                    <div class="flex gap-4 group">
-                        <div
-                            class="flex-shrink-0 w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline">
-                            03</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-white mb-1">Orchestrator</h4>
-                            <p class="text-sm text-on-surface-variant">Dynamically assigns sub-tasks to specialized
-                                sub-agents.</p>
+                    <!-- 3 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">👁️</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Always-On Screen Awareness</h4>
                         </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Auto-bootstrapped computer vision tracks your contextual state cross-platform, natively bridging exactly what you see into the LLM planner.</p>
                     </div>
-                    <div class="flex gap-4 group">
-                        <div
-                            class="flex-shrink-0 w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline">
-                            04</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-white mb-1">Execution</h4>
-                            <p class="text-sm text-on-surface-variant">Sandboxed environment for API calls, shell
-                                commands, and system writes.</p>
+                    <!-- 4 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">🎤</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Continuous Voice Listener</h4>
                         </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">"Hey Heliox" ambient wake-word with VAD-based speech endpoints and barge-in — start talking and Heliox stops mid-sentence to listen.</p>
                     </div>
-                    <div class="flex gap-4 group">
-                        <div
-                            class="flex-shrink-0 w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline">
-                            05</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-white mb-1">Verification</h4>
-                            <p class="text-sm text-on-surface-variant">Final state validation using vision and
-                                system-logs.</p>
+                    <!-- 5 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">🤚</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">30+ Hand Gestures & Air Drawing</h4>
                         </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Static poses (Palm, Pinch) and motion gestures (Two-Finger Swipe) with kinematic smoothing. Opt-in 3D world-model via MediaPipe HandLandmarker and coarse gaze-tracking fusion.</p>
+                    </div>
+                    <!-- 6 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">🖱️</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Gesture Cursor Control</h4>
+                        </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Point to move the real OS cursor, pinch to click — opt in via Settings. Open palm always exits instantly. Off by default for safety.</p>
+                    </div>
+                    <!-- 7 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">🎯</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Adaptive Calibration</h4>
+                        </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">On-device continual-learning loop personalizes pinch/thumb thresholds and wake-word matching from implicit signals — no retraining, bounded, resettable.</p>
+                    </div>
+                    <!-- 8 -->
+                    <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-lg">🌀</span>
+                            <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Arc Reactor UI & Ambient HUD</h4>
+                        </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Animated, immersive Tauri overlays responding contextually to system actions with real-time visual feedback and status indicators.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Code Snippet Section -->
-        <section id="security" class="grid lg:grid-cols-2 gap-16 items-center">
-            <div class="space-y-8">
-                <h2 class="text-4xl font-headline font-bold text-white leading-tight">Built for Privacy &amp;
-                    Flexibility
-                </h2>
-                <p class="text-on-surface-variant text-lg">
-                    Heliox OS offers the ultimate flexibility. Run entirely on local hardware for total privacy, or
-                    seamlessly connect to frontier cloud models like Anthropic and Gemini for complex capabilities.
-                </p>
-                <div class="flex items-center gap-6">
-                    <div class="flex flex-col">
-                        <span class="text-2xl font-headline font-bold text-primary">Hybrid</span>
-                        <span class="text-[10px] uppercase font-label text-on-surface-variant">Local &amp; Cloud
-                            LLMs</span>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ COGNITIVE ENGINE ═══════════════ -->
+        <section id="cognitive" class="space-y-12">
+            <div class="text-center space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-label tracking-widest uppercase mx-auto">
+                    <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">neurology</span> Zero-Dependency · On-Device
+                </div>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Cognitive Engine</h2>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">A lightweight, dependency-free engine estimating attention, stress, and cognitive load from local interaction-history heuristics. Zero external models, no network, no license restrictions.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- 1 -->
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+                        </div>
+                        <h4 class="font-bold text-white group-hover:text-primary transition-colors">Cognitive HUD</h4>
                     </div>
-                    <div class="h-10 w-px bg-outline-variant"></div>
-                    <div class="flex flex-col">
-                        <span class="text-2xl font-headline font-bold text-secondary">AES-256</span>
-                        <span class="text-[10px] uppercase font-label text-on-surface-variant">Vault Encryption</span>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Real-time attention/stress/load estimates mapped onto the Svelte UI.</p>
+                </div>
+                <!-- 2 -->
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-secondary/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+                        </div>
+                        <h4 class="font-bold text-white group-hover:text-secondary transition-colors">Dynamic TTS Pacing</h4>
                     </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">JARVIS automatically slows voice generation during high cognitive-load tasks.</p>
+                </div>
+                <!-- 3 -->
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-red-500/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-red-400 text-[18px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+                        </div>
+                        <h4 class="font-bold text-white group-hover:text-red-400 transition-colors">Stress-Aware Gate</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">High-risk actions evaluate cognitive stress first. If distracted, a 10-second auditory confirmation gate holds.</p>
+                </div>
+                <!-- 4 -->
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
+                        </div>
+                        <h4 class="font-bold text-white group-hover:text-primary transition-colors">Persona Fingerprint</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Subconscious background loop learns cognitive engagement patterns and encodes them to <code class="text-primary/70">persona.md</code>.</p>
+                </div>
+                <!-- 5 -->
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-secondary/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">notifications</span>
+                        </div>
+                        <h4 class="font-bold text-white group-hover:text-secondary transition-colors">Smart Notifications</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Notification pipeline buffers trivial alerts until a low-load resting state is detected.</p>
+                </div>
+                <!-- 6 -->
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-tertiary/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">speed</span>
+                        </div>
+                        <h4 class="font-bold text-white group-hover:text-tertiary transition-colors">ReAct Cost Estimator</h4>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Tasks predict aggregate cognitive demand. If executing risks exceeding mental bandwidth, JARVIS pauses.</p>
+                </div>
+                <!-- 7 (full width) -->
+                <div class="md:col-span-2 lg:col-span-3 glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all shimmer-line">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center cog-pulse">
+                            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        </div>
+                        <h4 class="font-bold text-white">JARVIS Intent Classifier</h4>
+                        <span class="text-[10px] text-primary/60 uppercase font-label tracking-widest ml-auto">Fully Integrated</span>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Native intent fusion classifying spoken commands against current workload intensity for context-aware execution routing.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ ARCHITECTURE ═══════════════ -->
+        <section id="architecture" class="space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Modular Cognitive Architecture</h2>
+                <p class="text-on-surface-variant max-w-3xl mx-auto">A true agentic system running a continuous ReAct loop with a modular multi-agent orchestrator — not a simple command runner.</p>
+            </div>
+            <!-- 7-Step Pipeline -->
+            <div class="grid grid-cols-1 md:grid-cols-7 gap-3">
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-primary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline mx-auto">01</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Gateway Hub</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">LLM evaluates persistent memory context before reasoning</p>
+                </div>
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-secondary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline mx-auto">02</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Planner</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Converts natural language into structured multi-step action plan</p>
+                </div>
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-primary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline mx-auto">03</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Orchestrator</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Routes each action to specialist roles with source-scoped policy</p>
+                </div>
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-secondary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline mx-auto">04</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Specialists</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Ten domain experts execute through native OS APIs</p>
+                </div>
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-primary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline mx-auto">05</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Verifier</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Post-execution verification confirms action success</p>
+                </div>
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-secondary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline mx-auto">06</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-secondary transition-colors">Reflector</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Self-improvement engine learns from successes and failures</p>
+                </div>
+                <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-primary/40 transition-all group">
+                    <div class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline mx-auto">07</div>
+                    <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Security</h4>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Five-tier permission system with confirmation gates & rollback</p>
+                </div>
+            </div>
+
+            <!-- 10 Specialist Agents -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-headline font-bold text-white text-center">10 Specialist Agents</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">System</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">code</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Code</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">language</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Web</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Monitor</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">mail</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Communication</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">laptop</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">SSH</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">rss_feed</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">RSS</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Calendar</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">search</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Forensics</div>
+                    </div>
+                    <div class="agent-node glass-panel ghost-border p-4 rounded-xl text-center space-y-2">
+                        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">manage_search</span>
+                        <div class="text-xs font-label text-white font-bold uppercase tracking-wider">Semantic</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Runtime Subsystems -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+                        <h4 class="font-bold text-white text-sm">Task Decomposition</h4>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Complex goals auto-broken into dependency-aware subtask trees with parallel execution paths.</p>
+                </div>
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">science</span>
+                        <h4 class="font-bold text-white text-sm">Simulation Sandbox</h4>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Pre-execution impact reports for dangerous commands showing risk level, affected files, and reversibility.</p>
+                </div>
+                <div class="glass-panel ghost-border p-6 rounded-xl space-y-3">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                        <h4 class="font-bold text-white text-sm">Self-Improving Prompts</h4>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Successful reasoning chains stored and reused with keyword-indexed templates and success/failure rates.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ ACTION CATALOG ═══════════════ -->
+        <section id="actions" class="space-y-10">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white"><span class="count-up" data-target="146">0</span> Action Types</h2>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">The planner schema declares 146 action types across 15 categories. Availability depends on OS, dependencies, credentials, and security policy.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- File Operations -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[16px]">folder</span> File Operations
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">file_read</span><span class="action-badge">file_write</span><span class="action-badge">file_delete</span><span class="action-badge">file_move</span><span class="action-badge">file_copy</span><span class="action-badge">file_list</span><span class="action-badge">file_search</span><span class="action-badge">directory_summary</span><span class="action-badge">file_permissions</span>
+                    </div>
+                </div>
+                <!-- Process Management -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">memory</span> Process Management
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">process_list</span><span class="action-badge">process_kill</span><span class="action-badge">process_info</span>
+                    </div>
+                </div>
+                <!-- Shell & Code -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[16px]">terminal</span> Shell & Code
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">shell_command</span><span class="action-badge">shell_script</span><span class="action-badge">code_execute</span>
+                    </div>
+                </div>
+                <!-- Browser & Web -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">language</span> Browser & Web
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">browser_navigate</span><span class="action-badge">browser_extract</span><span class="action-badge">browser_extract_table</span><span class="action-badge">browser_extract_links</span>
+                    </div>
+                </div>
+                <!-- Screen & Vision -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[16px]">screenshot_monitor</span> Screen & Vision
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">screenshot</span><span class="action-badge">screen_ocr</span><span class="action-badge">screen_analyze</span>
+                    </div>
+                </div>
+                <!-- Package Management -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">inventory_2</span> Package Management
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">package_install</span><span class="action-badge">package_remove</span><span class="action-badge">package_update</span><span class="action-badge">package_search</span>
+                    </div>
+                </div>
+                <!-- System Info -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[16px]">info</span> System Info
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">system_info</span><span class="action-badge">cpu_usage</span><span class="action-badge">memory_usage</span><span class="action-badge">disk_usage</span><span class="action-badge">network_info</span><span class="action-badge">battery_info</span>
+                    </div>
+                </div>
+                <!-- Window Management -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-[16px]">web_asset</span> Window Management
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">window_list</span><span class="action-badge">window_focus</span><span class="action-badge">window_close</span><span class="action-badge">window_minimize</span><span class="action-badge">window_maximize</span>
+                    </div>
+                </div>
+                <!-- Power, Audio, Display, Network, Clipboard, etc. -->
+                <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
+                    <h4 class="text-sm font-bold text-white font-label uppercase tracking-wider flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[16px]">settings</span> Power · Audio · Network
+                    </h4>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="action-badge">volume_set</span><span class="action-badge">brightness_set</span><span class="action-badge">power_shutdown</span><span class="action-badge">power_restart</span><span class="action-badge">wifi_connect</span><span class="action-badge">clipboard_write</span><span class="action-badge">schedule_create</span><span class="action-badge">env_set</span><span class="action-badge">notify</span><span class="action-badge">open_url</span><span class="action-badge">download_file</span>
+                        <span class="text-[10px] text-white/30 font-mono ml-1">+ more</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ PLUGIN ECOSYSTEM ═══════════════ -->
+        <section id="plugins" class="space-y-10">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Plugin Ecosystem</h2>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">Two extension paths: auto-discovered local plugins with Ed25519 signature verification, and a reviewed GitHub marketplace with CI-enforced moderation.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="plugin-card group">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-blue-400 text-xl">cloud</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">weather</h4>
+                            <span class="text-[10px] text-on-surface-variant uppercase font-label tracking-wider">Marketplace</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Get real-time weather data for any location via voice or text commands.</p>
+                </div>
+                <div class="plugin-card group">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-green-400 text-xl">music_note</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">spotify-control</h4>
+                            <span class="text-[10px] text-on-surface-variant uppercase font-label tracking-wider">Marketplace</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Control Spotify playback, search tracks, and manage playlists via gestures or voice.</p>
+                </div>
+                <div class="plugin-card group">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-orange-400 text-xl">home</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">home-assistant</h4>
+                            <span class="text-[10px] text-on-surface-variant uppercase font-label tracking-wider">Marketplace</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">Bridge your smart home devices into the Heliox agent for unified automation.</p>
+                </div>
+            </div>
+            <div class="glass-panel ghost-border p-6 rounded-xl">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary text-2xl mt-1" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-white">Ed25519 Signature Verification</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Every plugin is signed. Unsigned, untrusted, or tampered packages are rejected before their manifest or code is loaded. Planner-triggered plugin actions route through the normal permission system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ SECURITY ═══════════════ -->
+        <section id="security" class="space-y-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div class="space-y-8">
+                    <h2 class="text-4xl md:text-5xl font-headline font-bold text-white leading-tight">Built for Privacy & Security</h2>
+                    <p class="text-on-surface-variant text-lg leading-relaxed">
+                        Run entirely on local hardware for total privacy, or seamlessly connect to frontier cloud models. All AI outputs pass through structured schema validation before execution.
+                    </p>
+                    <div class="flex items-center gap-6 flex-wrap">
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-headline font-bold text-primary">Hybrid</span>
+                            <span class="text-[10px] uppercase font-label text-on-surface-variant">Local & Cloud LLMs</span>
+                        </div>
+                        <div class="h-10 w-px bg-outline-variant"></div>
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-headline font-bold text-secondary">AES-256</span>
+                            <span class="text-[10px] uppercase font-label text-on-surface-variant">Vault Encryption</span>
+                        </div>
+                        <div class="h-10 w-px bg-outline-variant"></div>
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-headline font-bold text-tertiary">HMAC</span>
+                            <span class="text-[10px] uppercase font-label text-on-surface-variant">Audit Chain</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-0">
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">shield</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Five-Tier Permission System</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Read-only through root-level with confirmation gates and per-action granular approve/deny.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">science</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Simulation Sandbox</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Pre-execution impact reports for dangerous commands with risk assessment and reversibility tracking.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">LLM Safety Critic</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Secondary LLM independently reviews Tier 3-4 plans before the confirmation gate fires.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">model_training</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Learned Risk World Model</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Bundled MLP predicts action impact from training samples. Can interrupt but never remove rule-based warnings.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">history</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Snapshot Rollback</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Btrfs/Timeshift on Linux, Windows Restore Points. If backend unavailable, destructive action doesn't run.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Pocket TTS (Open-Source Voice)</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Free, CPU-only local speech model — no API key, no cost. Falls back to platform TTS if not installed.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">stop_circle</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Mid-Flight Cancellation</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">Stop button genuinely kills in-flight subprocess (<code class="text-primary/60">proc.kill()</code>) instead of only stopping the next action.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">key</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Encrypted Key Storage</h4>
+                            <p class="text-xs text-on-surface-variant mt-1">API keys stored via platform keyring (GNOME Keyring / Windows Credential Manager). Never logged or sent to local LLMs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ INSTALLATION ═══════════════ -->
+        <section id="install" class="space-y-10">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Get Started</h2>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">Download the compiled desktop app or build from source for development.</p>
+            </div>
+
+            <!-- Platform Tabs -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="platform-tab active" data-platform="windows">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1">laptop_windows</span> Windows
+                </button>
+                <button class="platform-tab" data-platform="macos">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1">laptop_mac</span> macOS
+                </button>
+                <button class="platform-tab" data-platform="linux">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1">computer</span> Linux
+                </button>
+                <button class="platform-tab" data-platform="source">
+                    <span class="material-symbols-outlined text-[14px] align-middle mr-1">code</span> From Source
+                </button>
+            </div>
+
+            <!-- Windows -->
+            <div class="platform-content active" id="platform-windows">
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-6 max-w-2xl mx-auto">
+                    <h3 class="text-xl font-headline font-bold text-white">Windows</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">1.</span>
+                            <p class="text-sm text-on-surface-variant">Download <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.9.0_x64-setup.exe</code> or the <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">.msi</code> from Releases.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">2.</span>
+                            <p class="text-sm text-on-surface-variant">Install and open Heliox OS.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">3.</span>
+                            <p class="text-sm text-on-surface-variant">Enter your API key (Gemini, OpenAI, Claude, Meta) in the Settings tab.</p>
+                        </div>
+                    </div>
+                    <a href="https://github.com/VyomKulshrestha/Heliox-OS/releases" target="_blank"
+                       class="inline-flex items-center gap-2 bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 transition-all">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
+                        Download for Windows
+                    </a>
+                </div>
+            </div>
+
+            <!-- macOS -->
+            <div class="platform-content" id="platform-macos">
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-6 max-w-2xl mx-auto">
+                    <h3 class="text-xl font-headline font-bold text-white">macOS</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">1.</span>
+                            <p class="text-sm text-on-surface-variant">Download for Apple Silicon: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.9.0_aarch64.dmg</code></p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">2.</span>
+                            <p class="text-sm text-on-surface-variant">Download for Intel: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.9.0_x64.dmg</code></p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">3.</span>
+                            <p class="text-sm text-on-surface-variant">Mount, drag to Applications, and configure your API key in Settings.</p>
+                        </div>
+                    </div>
+                    <a href="https://github.com/VyomKulshrestha/Heliox-OS/releases" target="_blank"
+                       class="inline-flex items-center gap-2 bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 transition-all">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
+                        Download for macOS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Linux -->
+            <div class="platform-content" id="platform-linux">
+                <div class="glass-panel ghost-border p-8 rounded-xl space-y-6 max-w-2xl mx-auto">
+                    <h3 class="text-xl font-headline font-bold text-white">Linux</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">1.</span>
+                            <p class="text-sm text-on-surface-variant">Choose your format: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">.AppImage</code>, <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">.deb</code>, or <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">.rpm</code></p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">2.</span>
+                            <p class="text-sm text-on-surface-variant">Install and run. Requires Python 3.11+.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-primary font-headline font-bold text-sm mt-0.5">3.</span>
+                            <p class="text-sm text-on-surface-variant">Configure API key in Settings. First launch may need time for env initialization.</p>
+                        </div>
+                    </div>
+                    <a href="https://github.com/VyomKulshrestha/Heliox-OS/releases" target="_blank"
+                       class="inline-flex items-center gap-2 bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 transition-all">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
+                        Download for Linux
+                    </a>
+                </div>
+            </div>
+
+            <!-- From Source -->
+            <div class="platform-content" id="platform-source">
+                <div class="glass-panel ghost-border rounded-xl overflow-hidden max-w-2xl mx-auto">
+                    <div class="bg-surface-container-highest px-4 py-3 flex items-center justify-between">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/30"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/30"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/30"></div>
+                        </div>
+                        <span class="text-[10px] font-label text-on-surface-variant">terminal</span>
+                    </div>
+                    <div class="p-6 font-mono text-sm leading-loose">
+                        <div class="text-on-surface-variant/50"># Clone and install daemon</div>
+                        <div class="text-primary">git clone https://github.com/VyomKulshrestha/Heliox-OS.git</div>
+                        <div class="text-primary">cd Heliox-OS/daemon</div>
+                        <div class="text-primary">pip install -e ".[all,dev]"</div>
+                        <div class="text-white mt-4"></div>
+                        <div class="text-on-surface-variant/50"># Run the daemon</div>
+                        <div class="text-primary">python -m pilot.server</div>
+                        <div class="text-white mt-4"></div>
+                        <div class="text-on-surface-variant/50"># Run the frontend (separate terminal)</div>
+                        <div class="text-primary">cd tauri-app/ui && npm ci && npm run dev</div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-xs text-on-surface-variant/50">Requires Python 3.11+. The desktop app starts the local daemon automatically. Browser-only UI development requires a manually started daemon.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ CODE SNIPPET ═══════════════ -->
+        <section class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h2 class="text-3xl font-headline font-bold text-white">Try It</h2>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Natural language commands for anything on your system — from simple queries to complex multi-step automations.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="action-badge">"Show me my system info"</span>
+                    <span class="action-badge">"Kill the process using the most CPU"</span>
+                    <span class="action-badge">"Install Firefox"</span>
+                    <span class="action-badge">"Set my volume to 50%"</span>
+                    <span class="action-badge">"Create a Python project with tests"</span>
+                    <span class="action-badge">"Go to Wikipedia and summarize AI"</span>
+                    <span class="action-badge">"Monitor CPU above 80%"</span>
+                    <span class="action-badge">"List all .py files on Desktop"</span>
                 </div>
             </div>
             <div class="glass-panel ghost-border rounded-xl overflow-hidden shadow-2xl">
@@ -512,88 +970,74 @@ logger.info("[PASS] Screen Vision Stats")</code></pre>
                         <div class="w-3 h-3 rounded-full bg-yellow-500/30"></div>
                         <div class="w-3 h-3 rounded-full bg-green-500/30"></div>
                     </div>
-                    <span class="text-[10px] font-label text-on-surface-variant">heliox_agent_spawn.py</span>
+                    <span class="text-[10px] font-label text-on-surface-variant">heliox_agent.py</span>
                 </div>
-                <div class="p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+                <div class="p-6 font-mono text-sm leading-relaxed overflow-x-auto" id="terminal-code">
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">1</span>
                         <span class="text-secondary">import</span> <span class="text-white">heliox</span>
                     </div>
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">2</span>
-                        <span class="text-secondary">from</span> <span class="text-white">heliox.core</span> <span
-                            class="text-secondary">import</span> <span class="text-white">Agent</span>
+                        <span class="text-secondary">from</span> <span class="text-white">heliox.core</span> <span class="text-secondary">import</span> <span class="text-white">Agent</span>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-outline-variant select-none">3</span>
-                        <span> </span>
+                        <span class="text-outline-variant select-none">3</span><span></span>
                     </div>
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">4</span>
-                        <span class="text-primary-fixed-dim"># Initialize the Sentient Control Layer</span>
+                        <span class="text-primary-fixed-dim"># Initialize with 10 specialist agents</span>
                     </div>
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">5</span>
-                        <span class="text-white">agent = Agent(name=<span class="text-primary">"Heliox-Alpha"</span>,
-                            mode=<span class="text-primary">"Autonomous"</span>)</span>
+                        <span class="text-white">agent = Agent(name=<span class="text-primary">"Heliox-Alpha"</span>, mode=<span class="text-primary">"Autonomous"</span>)</span>
                     </div>
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">6</span>
-                        <span class="text-white">agent.spawn_agent(permissions=[<span
-                                class="text-primary">"sys_control"</span>, <span
-                                class="text-primary">"vision"</span>])</span>
+                        <span class="text-white">agent.spawn_agent(permissions=[<span class="text-primary">"sys_control"</span>, <span class="text-primary">"vision"</span>])</span>
                     </div>
                     <div class="flex gap-4">
-                        <span class="text-outline-variant select-none">7</span>
-                        <span> </span>
+                        <span class="text-outline-variant select-none">7</span><span></span>
                     </div>
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">8</span>
-                        <span class="text-white">agent.execute_loop(prompt=<span class="text-primary">"Organize my
-                                workspace"</span>)</span>
+                        <span class="text-white">agent.execute_loop(prompt=<span class="text-primary">"Organize my workspace"</span>)</span>
                     </div>
                     <div class="flex gap-4">
                         <span class="text-outline-variant select-none">9</span>
-                        <span class="text-primary-fixed-dim">&gt;&gt; Status: Agent Active. Syncing cognitive
-                            nodes...</span>
+                        <span class="text-primary-fixed-dim">&gt;&gt; Status: Agent Active. 10 specialists online.</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Me Section -->
+        <div class="section-divider"></div>
+
+        <!-- ═══════════════ ABOUT ME ═══════════════ -->
         <section id="about"
             class="grid lg:grid-cols-12 gap-12 items-center glass-panel ghost-border p-8 md:p-12 rounded-2xl relative overflow-hidden">
-            <!-- Background glow -->
-            <div
-                class="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none">
-            </div>
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
 
             <div class="lg:col-span-8 space-y-6 relative z-10">
-                <div
-                    class="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-secondary/20 bg-secondary/5 text-secondary text-xs font-label tracking-widest uppercase mb-2">
+                <div class="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-secondary/20 bg-secondary/5 text-secondary text-xs font-label tracking-widest uppercase mb-2">
                     Creator Profile
                 </div>
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-white leading-tight">About Me</h2>
 
-                <div class="space-y-6 text-on-surface-variant text-lg leading-relaxed font-light">
+                <div class="space-y-5 text-on-surface-variant text-lg leading-relaxed font-light">
                     <p>
                         <strong class="text-white font-medium">Hi, I'm Vyom Kulshrestha,</strong> a pre-final year
                         Computer Science student at VIT, passionate about building next-generation AI systems and
                         intelligent developer experiences.
                     </p>
                     <p>
-                        I'm currently building Heliox OS &mdash; a futuristic AI-powered operating system interface
+                        I'm building Heliox OS &mdash; a futuristic AI-powered operating system interface
                         designed to combine autonomous agents, voice interaction, multimodal intelligence, and
                         system-level automation into a seamless computing experience.
                     </p>
                     <p>
-                        My goal is to push this project beyond a traditional software demo and evolve it into a
-                        research-grade AI assistant ecosystem that feels like a real-world Jarvis-inspired system.
-                    </p>
-                    <p>
                         Whether you're a developer, open-source contributor, recruiter, or someone excited about the
-                        future of human-computer interaction, I'd love to connect and hear your thoughts.
+                        future of human-computer interaction, I'd love to connect.
                     </p>
                 </div>
 
@@ -604,7 +1048,7 @@ logger.info("[PASS] Screen Vision Stats")</code></pre>
                         <span class="text-sm opacity-60 font-mono tracking-tighter">&rarr; LinkedIn</span>
                     </a>
                     <button
-                        onclick="navigator.clipboard.writeText('vyomkulshrestha2004@gmail.com'); const textSpan = this.querySelector('.email-text'); const origText = textSpan.innerHTML; textSpan.innerHTML = '&amp;rarr; Copied to clipboard!'; setTimeout(() => textSpan.innerHTML = origText, 2000);"
+                        onclick="navigator.clipboard.writeText('vyomkulshrestha2004@gmail.com'); const textSpan = this.querySelector('.email-text'); const origText = textSpan.innerHTML; textSpan.innerHTML = '&rarr; Copied to clipboard!'; setTimeout(() => textSpan.innerHTML = origText, 2000);"
                         class="bg-surface-container-high border border-outline-variant px-8 py-4 font-bold text-white rounded-lg hover:bg-primary/10 hover:border-primary/50 transition-all flex items-center justify-center gap-3 group shadow-lg">
                         <span class="text-primary group-hover:scale-105 transition-transform">Feedback &amp;
                             Queries</span>
@@ -617,63 +1061,55 @@ logger.info("[PASS] Screen Vision Stats")</code></pre>
             <!-- Visual Element -->
             <div class="lg:col-span-4 relative flex justify-center items-center z-10 hidden md:flex">
                 <div class="relative">
-                    <!-- Outer animated rings -->
-                    <div
-                        class="absolute -inset-6 rounded-full border border-secondary/20 animate-[spin_12s_linear_infinite_reverse] border-l-transparent border-b-transparent">
-                    </div>
-                    <div
-                        class="absolute -inset-3 rounded-full border border-primary/20 animate-[spin_8s_linear_infinite] border-r-transparent border-t-transparent">
-                    </div>
-                    <!-- Photo container -->
-                    <div
-                        class="w-64 h-64 rounded-full p-1 bg-gradient-to-br from-primary via-secondary/50 to-primary/30 shadow-[0_0_50px_rgba(0,225,255,0.15),0_0_80px_rgba(223,183,255,0.1)]">
+                    <div class="absolute -inset-6 rounded-full border border-secondary/20 animate-[spin_12s_linear_infinite_reverse] border-l-transparent border-b-transparent"></div>
+                    <div class="absolute -inset-3 rounded-full border border-primary/20 animate-[spin_8s_linear_infinite] border-r-transparent border-t-transparent"></div>
+                    <div class="w-64 h-64 rounded-full p-1 bg-gradient-to-br from-primary via-secondary/50 to-primary/30 shadow-[0_0_50px_rgba(0,225,255,0.15),0_0_80px_rgba(223,183,255,0.1)]">
                         <img src="image.png" alt="Vyom Kulshrestha"
                             class="w-full h-full rounded-full object-cover object-top grayscale-[20%] hover:grayscale-0 transition-all duration-700" />
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Footer CTA -->
+
+        <!-- ═══════════════ FOOTER CTA ═══════════════ -->
         <section id="contact"
-            class="relative overflow-hidden rounded-2xl p-1 bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30">
-            <div
-                class="bg-background rounded-2xl px-12 py-20 flex flex-col items-center text-center space-y-8 relative overflow-hidden">
+            class="relative overflow-hidden rounded-2xl p-[1px] bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30">
+            <div class="bg-background rounded-2xl px-8 md:px-12 py-20 flex flex-col items-center text-center space-y-8 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-full bg-primary/5 blur-[100px] pointer-events-none"></div>
-                <h2 class="text-5xl font-headline font-bold text-white max-w-2xl">Ready to supercharge your OS?</h2>
-                <p class="text-on-surface-variant text-lg">An open-source project built solo, growing with every
-                    contributor. Be part of what comes next.</p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button id="download-btn-2"
-                        class="bg-primary-container text-on-primary-fixed px-10 py-4 font-bold rounded-lg shadow-[0_0_25px_rgba(0,225,255,0.4)] hover:scale-105 transition-all">
-                        Download Heliox OS
-                    </button>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white max-w-2xl relative z-10">Ready to supercharge your OS?</h2>
+                <p class="text-on-surface-variant text-lg relative z-10">An open-source project built solo, growing with every contributor. Be part of what comes next.</p>
+                <div class="flex flex-wrap justify-center gap-4 relative z-10">
+                    <a href="https://github.com/VyomKulshrestha/Heliox-OS/releases" target="_blank" id="download-btn-2"
+                        class="bg-primary-container text-on-primary-fixed px-10 py-4 font-bold rounded-lg shadow-[0_0_25px_rgba(0,225,255,0.4)] hover:scale-105 transition-all inline-flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
+                        Download v0.9.0
+                    </a>
                     <a id="discord-btn" href="https://discord.gg/EcEtkBfXU" target="_blank"
                         class="glass-panel ghost-border px-10 py-4 font-bold text-white rounded-lg hover:bg-white/5 transition-all flex items-center justify-center">
                         Join Discord
                     </a>
                     <a id="contribute-btn" href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank"
                         class="glass-panel border border-primary/30 px-10 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 shadow-[0_0_15px_rgba(0,225,255,0.15)] hover:shadow-[0_0_25px_rgba(0,225,255,0.3)] transition-all flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-sm"
-                            style="font-variation-settings: 'FILL' 1;">code</span>
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">code</span>
                         Contribute on GitHub
                     </a>
                     <a href="https://www.youtube.com/@HelioxOS" target="_blank"
                         class="glass-panel ghost-border px-10 py-4 font-bold text-white/70 rounded-lg hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-sm"
-                            style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">play_circle</span>
                         Visit YouTube
                     </a>
                 </div>
             </div>
         </section>
     </main>
+
     <!-- Footer -->
     <footer class="bg-[#0e0e12] w-full py-12 border-t border-[#353439]/20">
-        <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
-            <div class="text-lg font-black text-[#00e1ff] font-['Space_Grotesk'] tracking-widest">
+        <div class="flex flex-col md:flex-row justify-between items-center px-8 md:px-12 max-w-7xl mx-auto gap-8">
+            <div class="text-lg font-black text-[#00e1ff] font-headline tracking-widest">
                 HELIOX OS
             </div>
-            <div class="flex flex-wrap justify-center gap-8 font-['Space_Grotesk'] text-sm uppercase tracking-widest">
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8 font-headline text-[11px] uppercase tracking-widest">
                 <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
                     href="https://github.com/VyomKulshrestha/Heliox-OS#readme" target="_blank">Documentation</a>
                 <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
@@ -681,10 +1117,10 @@ logger.info("[PASS] Screen Vision Stats")</code></pre>
                 <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
                     href="whitepaper.html">Security Whitepaper</a>
                 <a class="text-white/40 hover:text-[#dfb7ff] transition-transform hover:translate-y-[-2px]"
-                    href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank">Github</a>
+                    href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank">GitHub</a>
             </div>
-            <div class="text-white/40 font-['Space_Grotesk'] text-[10px] uppercase tracking-widest">
-                &copy; 2026 Heliox OS. The Sentient Interface.
+            <div class="text-white/40 font-headline text-[10px] uppercase tracking-widest">
+                &copy; 2026 Heliox OS. v0.9.0
             </div>
         </div>
     </footer>

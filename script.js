@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ---- Navbar Scroll Effect ----
+    // ── Navbar Scroll Effect ──
     const navbar = document.querySelector('nav');
     
     window.addEventListener('scroll', () => {
@@ -10,7 +10,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ---- Smooth Scroll for Anchor Links ----
+    // ── Mobile Menu Toggle ──
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = mobileMenuBtn?.querySelector('.material-symbols-outlined');
+    
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            if (menuIcon) {
+                menuIcon.textContent = mobileMenu.classList.contains('open') ? 'close' : 'menu';
+            }
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                if (menuIcon) menuIcon.textContent = 'menu';
+            });
+        });
+    }
+
+    // ── Smooth Scroll for Anchor Links ──
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -27,17 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ---- Scroll Reveal Animation ----
-    const sections = document.querySelectorAll('section, h1, h2, h3, h4, p, .group');
-    sections.forEach(section => {
-        section.classList.add('reveal');
+    // ── Scroll Reveal Animation ──
+    const revealTargets = document.querySelectorAll('section, .glass-panel, .agent-node, .plugin-card, .security-feature');
+    revealTargets.forEach(el => {
+        el.classList.add('reveal');
     });
 
     const revealElements = document.querySelectorAll('.reveal');
     
     const revealOnScroll = () => {
         const windowHeight = window.innerHeight;
-        const revealPoint = 100;
+        const revealPoint = 80;
         
         revealElements.forEach(element => {
             const revealTop = element.getBoundingClientRect().top;
@@ -49,45 +71,86 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Trigger once on load
+    revealOnScroll();
 
-    // ---- Button Routing ----
-    const repoUrl = 'https://github.com/VyomKulshrestha/Heliox-OS';
-    
-    // Select all buttons by ID or text content
-    const dlBtn1 = document.getElementById('download-btn-1');
-    const dlBtn2 = document.getElementById('download-btn-2');
-    const discordBtn = document.getElementById('discord-btn');
+    // ── Animated Counters ──
+    const counters = document.querySelectorAll('.count-up');
+    let countersAnimated = false;
 
-    // Also the Repository button in navbar
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(btn => {
-        const text = btn.textContent.toLowerCase();
-        
-        // Handle "Repository" or "Download" buttons that should link to Github
-        if (text.includes('repository') || btn === dlBtn1 || btn === dlBtn2) {
-            btn.addEventListener('click', () => {
-                // Flash effect before redirecting
-                const originalBoxShadow = btn.style.boxShadow;
-                btn.style.boxShadow = "0 0 50px rgba(0, 225, 255, 1)";
-                setTimeout(() => {
-                    window.open(repoUrl, '_blank');
-                    btn.style.boxShadow = originalBoxShadow;
-                }, 300);
-            });
-        }
+    const animateCounters = () => {
+        if (countersAnimated) return;
+
+        counters.forEach(counter => {
+            const rect = counter.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                countersAnimated = true;
+                const target = parseInt(counter.getAttribute('data-target'));
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const duration = 2000;
+                const start = performance.now();
+
+                const updateCounter = (currentTime) => {
+                    const elapsed = currentTime - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Ease out cubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(eased * target);
+                    
+                    counter.textContent = current + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + suffix;
+                    }
+                };
+
+                requestAnimationFrame(updateCounter);
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateCounters);
+    animateCounters();
+
+    // ── Platform Tabs (Installation Section) ──
+    const platformTabs = document.querySelectorAll('.platform-tab');
+    const platformContents = document.querySelectorAll('.platform-content');
+
+    platformTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const platform = tab.getAttribute('data-platform');
+
+            // Deactivate all
+            platformTabs.forEach(t => t.classList.remove('active'));
+            platformContents.forEach(c => c.classList.remove('active'));
+
+            // Activate selected
+            tab.classList.add('active');
+            const content = document.getElementById(`platform-${platform}`);
+            if (content) {
+                content.classList.add('active');
+                // Add a subtle entry animation
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(10px)';
+                requestAnimationFrame(() => {
+                    content.style.transition = 'all 0.4s ease';
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                });
+            }
+        });
     });
 
-
-
-    // ---- Terminal Typing Effect ----
-    const terminalLines = document.querySelectorAll('.overflow-x-auto > div');
-    if (terminalLines.length > 0) {
+    // ── Terminal Typing Effect ──
+    const terminalCode = document.getElementById('terminal-code');
+    if (terminalCode) {
+        const terminalLines = terminalCode.querySelectorAll(':scope > div');
         terminalLines.forEach(line => line.style.opacity = '0');
         
-        // Use IntersectionObserver to start terminal effect when visible
         const terminalObserver = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting) {
+            if (entries[0].isIntersecting) {
                 terminalLines.forEach((line, index) => {
                     setTimeout(() => {
                         line.style.opacity = '1';
@@ -97,13 +160,23 @@ document.addEventListener('DOMContentLoaded', () => {
                             { opacity: 0.5, offset: 0.2 },
                             { opacity: 1 }
                         ], { duration: 300 });
-                    }, 500 + (index * 400));
+                    }, 300 + (index * 350));
                 });
-                // Unobserve after running once
                 terminalObserver.disconnect();
             }
         });
         
-        terminalObserver.observe(terminalLines[0].parentElement);
+        terminalObserver.observe(terminalCode);
     }
+
+    // ── Action Badge Hover Ripple ──
+    document.querySelectorAll('.action-badge').forEach(badge => {
+        badge.addEventListener('mouseenter', () => {
+            badge.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.08)' },
+                { transform: 'scale(1)' }
+            ], { duration: 300, easing: 'ease-out' });
+        });
+    });
 });
