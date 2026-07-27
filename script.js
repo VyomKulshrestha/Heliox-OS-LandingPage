@@ -114,6 +114,64 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', animateCounters);
     animateCounters();
 
+    // Persistent background lightning: one three-strike cycle per scroll distance.
+    const globalStormEffects = document.getElementById('global-storm-effects');
+    if (globalStormEffects && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const updateGlobalStorm = () => {
+            const cycleDistance = 900;
+            const progress = (window.scrollY % cycleDistance) / cycleDistance;
+            globalStormEffects.style.setProperty('--storm-cycle-progress', progress.toFixed(3));
+        };
+
+        window.addEventListener('scroll', updateGlobalStorm, { passive: true });
+        updateGlobalStorm();
+    }
+
+    // Storm Awakening Scene: scroll-scrubbed reveal with pointer parallax.
+    const awakeningScene = document.getElementById('awakening-scene');
+    if (awakeningScene) {
+        const stormTrack = awakeningScene.closest('.storm-scroll-track');
+        const stormStatus = document.getElementById('storm-scroll-status');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!reducedMotion && stormTrack) {
+            const updateAwakeningProgress = () => {
+                const trackTop = stormTrack.getBoundingClientRect().top + window.scrollY;
+                const animationDistance = Math.max(stormTrack.offsetHeight - window.innerHeight, 1);
+                const progress = Math.max(0, Math.min(1, (window.scrollY - trackTop) / animationDistance));
+                awakeningScene.style.setProperty('--scroll-progress', progress.toFixed(3));
+
+                if (stormStatus) {
+                    stormStatus.textContent = progress < 0.14 ? 'Scroll to call the agents'
+                        : progress < 0.4 ? 'First strike: perimeter agent online'
+                        : progress < 0.68 ? 'Second strike: core agent online'
+                        : progress < 0.94 ? 'Final strike: system awakening'
+                        : 'All agents online';
+                }
+            };
+
+            awakeningScene.classList.add('is-scroll-driven');
+            window.addEventListener('scroll', updateAwakeningProgress, { passive: true });
+            window.addEventListener('resize', updateAwakeningProgress);
+            updateAwakeningProgress();
+        }
+
+        if (!reducedMotion) {
+        awakeningScene.addEventListener('pointermove', (event) => {
+            const bounds = awakeningScene.getBoundingClientRect();
+            const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 12;
+            const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 12;
+            awakeningScene.style.setProperty('--pointer-x', x.toFixed(2) + 'px');
+            awakeningScene.style.setProperty('--pointer-y', y.toFixed(2) + 'px');
+        });
+
+        awakeningScene.addEventListener('pointerleave', () => {
+            awakeningScene.style.setProperty('--pointer-x', '0px');
+            awakeningScene.style.setProperty('--pointer-y', '0px');
+        });
+        }
+    }
+
     // ── Platform Tabs (Installation Section) ──
     const platformTabs = document.querySelectorAll('.platform-tab');
     const platformContents = document.querySelectorAll('.platform-content');
