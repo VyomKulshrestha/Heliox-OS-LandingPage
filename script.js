@@ -75,44 +75,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Animated Counters ──
     const counters = document.querySelectorAll('.count-up');
-    let countersAnimated = false;
+    const counterFrames = new WeakMap();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const animateCounters = () => {
-        if (countersAnimated) return;
+    const resetCounter = (counter) => {
+        const animationFrame = counterFrames.get(counter);
+        if (animationFrame) cancelAnimationFrame(animationFrame);
 
-        counters.forEach(counter => {
-            const rect = counter.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                countersAnimated = true;
-                const target = parseInt(counter.getAttribute('data-target'));
-                const suffix = counter.getAttribute('data-suffix') || '';
-                const duration = 2000;
-                const start = performance.now();
-
-                const updateCounter = (currentTime) => {
-                    const elapsed = currentTime - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    // Ease out cubic
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    const current = Math.floor(eased * target);
-                    
-                    counter.textContent = current + suffix;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target + suffix;
-                    }
-                };
-
-                requestAnimationFrame(updateCounter);
-            }
-        });
+        const suffix = counter.getAttribute('data-suffix') || '';
+        counter.textContent = '0' + suffix;
     };
 
-    window.addEventListener('scroll', animateCounters);
-    animateCounters();
+    const animateCounter = (counter) => {
+        const target = Number(counter.getAttribute('data-target'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+
+        if (prefersReducedMotion) {
+            counter.textContent = target + suffix;
+            return;
+        }
+
+        resetCounter(counter);
+        const duration = 1600;
+        const start = performance.now();
+
+        const updateCounter = (currentTime) => {
+            const progress = Math.min((currentTime - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = Math.floor(eased * target) + suffix;
+
+            if (progress < 1) {
+                counterFrames.set(counter, requestAnimationFrame(updateCounter));
+            } else {
+                counter.textContent = target + suffix;
+                counterFrames.delete(counter);
+            }
+        };
+
+        counterFrames.set(counter, requestAnimationFrame(updateCounter));
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const counter = entry.target;
+
+            if (entry.isIntersecting) {
+                if (counter.dataset.counterVisible !== 'true') {
+                    counter.dataset.counterVisible = 'true';
+                    animateCounter(counter);
+                }
+            } else {
+                counter.dataset.counterVisible = 'false';
+                resetCounter(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach((counter) => {
+        resetCounter(counter);
+        counterObserver.observe(counter);
+    });
 
     // Persistent background lightning: one three-strike cycle per scroll distance.
     const globalStormEffects = document.getElementById('global-storm-effects');
