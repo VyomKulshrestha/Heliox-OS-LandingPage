@@ -1755,6 +1755,15 @@ body.scroll-world-active > nav {
 @media (max-height: 720px) and (min-width: 901px) {
     .heliox-scroll-world.is-mounted .hworld-copy {
         top: 5.5rem;
+        scale: 0.91;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy--left {
+        transform-origin: top left;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy--right {
+        transform-origin: top right;
     }
 
     .heliox-scroll-world.is-mounted .hworld-copy h2,
