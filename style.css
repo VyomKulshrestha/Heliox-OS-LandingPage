@@ -443,7 +443,9 @@ main, footer { position: relative; z-index: 1; }
 .heliox-scroll-fallback__shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(1, 5, 9, 0.92), rgba(1, 5, 9, 0.2) 62%, rgba(1, 5, 9, 0.54));
+    background:
+        radial-gradient(ellipse 19% 25% at 93% 87%, rgba(1, 5, 9, 0.99) 0%, rgba(1, 5, 9, 0.96) 42%, rgba(1, 5, 9, 0.72) 58%, rgba(1, 5, 9, 0.28) 74%, transparent 100%),
+        linear-gradient(90deg, rgba(1, 5, 9, 0.92), rgba(1, 5, 9, 0.2) 62%, rgba(1, 5, 9, 0.54));
 }
 
 .heliox-scroll-fallback__copy {
@@ -536,6 +538,7 @@ main, footer { position: relative; z-index: 1; }
     z-index: 80;
     inset: 0;
     background:
+        radial-gradient(ellipse 19% 25% at 93% 87%, rgba(1, 5, 9, 0.99) 0%, rgba(1, 5, 9, 0.96) 42%, rgba(1, 5, 9, 0.72) 58%, rgba(1, 5, 9, 0.28) 74%, transparent 100%),
         linear-gradient(90deg, rgba(0, 4, 8, 0.76) 0%, rgba(0, 4, 8, 0.24) 43%, transparent 68%),
         linear-gradient(180deg, rgba(0, 3, 7, 0.62), transparent 28%, transparent 68%, rgba(0, 3, 7, 0.76)),
         radial-gradient(circle at 52% 44%, transparent 44%, rgba(0, 2, 5, 0.38) 100%);
@@ -1231,6 +1234,7 @@ body.scroll-world-active > nav {
 .heliox-scroll-world.is-mounted .hworld-vignette {
     z-index: 82;
     background:
+        radial-gradient(ellipse 19% 25% at 93% 87%, rgba(1, 5, 9, 0.99) 0%, rgba(1, 5, 9, 0.96) 42%, rgba(1, 5, 9, 0.72) 58%, rgba(1, 5, 9, 0.28) 74%, transparent 100%),
         linear-gradient(90deg, rgba(2, 5, 7, 0.8) 0%, rgba(2, 5, 7, 0.34) 22%, transparent 42%, transparent 70%, rgba(2, 5, 7, 0.24) 88%, rgba(2, 5, 7, 0.52) 100%),
         linear-gradient(180deg, rgba(1, 4, 7, 0.62), transparent 20%, transparent 76%, rgba(1, 4, 7, 0.72)),
         radial-gradient(circle at 52% 43%, transparent 48%, rgba(1, 3, 5, 0.24) 100%);
