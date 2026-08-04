@@ -89,6 +89,7 @@
         const scrollHint = createElement('div', 'hworld-scroll-hint');
         const track = createElement('div', 'hworld-track');
         const scenes = [];
+        const mediaPool = new Map();
         let viewportHeight = window.innerHeight;
         let rootTop = 0;
         let activeIndex = -1;
@@ -127,7 +128,64 @@
         sections.forEach((section, index) => {
             const scene = createElement('article', 'hworld-scene');
             const poster = createElement('img', 'hworld-poster');
-            const video = createElement('video', 'hworld-video');
+            let media = mediaPool.get(section.clip);
+            if (!media) {
+                const pooledVideo = createElement('video', 'hworld-video');
+                pooledVideo.muted = true;
+                pooledVideo.playsInline = true;
+                pooledVideo.preload = 'metadata';
+                pooledVideo.setAttribute('muted', '');
+                pooledVideo.setAttribute('playsinline', '');
+                media = {
+                    video: pooledVideo,
+                    clip: section.clip,
+                    scenes: [],
+                    sourceReady: false,
+                    metadataReady: false,
+                    frameReady: false,
+                    playPromise: null
+                };
+                media.setSource = () => {
+                    if (media.sourceReady || reducedMotion || !media.clip) return;
+                    media.sourceReady = true;
+                    pooledVideo.preload = 'auto';
+                    pooledVideo.src = mediaUrl(media.clip);
+                    pooledVideo.load();
+                };
+                media.clearSource = () => {
+                    if (!media.sourceReady) return;
+                    pooledVideo.pause();
+                    pooledVideo.removeAttribute('src');
+                    pooledVideo.load();
+                    media.sourceReady = false;
+                    media.metadataReady = false;
+                    media.frameReady = false;
+                    syncMediaPresentation(media);
+                };
+                pooledVideo.addEventListener('loadedmetadata', () => {
+                    media.metadataReady = true;
+                    try {
+                        pooledVideo.currentTime = Math.min(0.01, Math.max(pooledVideo.duration - 0.01, 0.01));
+                    } catch (error) {
+                        media.frameReady = false;
+                    }
+                    syncMediaPresentation(media);
+                });
+                pooledVideo.addEventListener('seeked', () => {
+                    media.frameReady = true;
+                    syncMediaPresentation(media);
+                });
+                pooledVideo.addEventListener('loadeddata', () => {
+                    media.frameReady = true;
+                    syncMediaPresentation(media);
+                });
+                pooledVideo.addEventListener('error', () => {
+                    media.frameReady = false;
+                    syncMediaPresentation(media);
+                });
+                mediaPool.set(section.clip, media);
+            }
+            const video = media.video;
             const hold = section.hold ? createElement('img', 'hworld-hold') : null;
             const copy = createElement('section', `hworld-copy hworld-copy--${section.align || (index % 2 ? 'right' : 'left')}`);
             const posterUrl = mediaUrl(section.still);
@@ -147,12 +205,6 @@
             poster.alt = '';
             poster.decoding = 'async';
             poster.loading = 'eager';
-
-            video.muted = true;
-            video.playsInline = true;
-            video.preload = 'metadata';
-            video.setAttribute('muted', '');
-            video.setAttribute('playsinline', '');
 
             if (hold) {
                 hold.src = mediaUrl(section.hold.still);
@@ -187,36 +239,9 @@
                 poster.removeAttribute('src');
                 poster.dataset.sourceReady = 'false';
             };
-            const setVideoSource = () => {
-                if (scene.dataset.sourceReady === 'true' || reducedMotion || !section.clip) return;
-                scene.dataset.sourceReady = 'true';
-                video.preload = 'auto';
-                video.src = mediaUrl(section.clip);
-                video.load();
-            };
-            const clearVideoSource = () => {
-                if (scene.dataset.sourceReady !== 'true') return;
-                video.pause();
-                video.removeAttribute('src');
-                video.load();
-                scene.dataset.sourceReady = 'false';
-                scene.classList.remove('has-video', 'has-metadata');
-            };
-
-            video.addEventListener('loadedmetadata', () => {
-                scene.classList.add('has-metadata');
-                try {
-                    const clipStart = section.clipStart || 0;
-                    video.currentTime = Math.min(clipStart + 0.01, Math.max(video.duration - 0.01, 0.01));
-                } catch (error) {
-                    scene.classList.remove('has-video');
-                }
-            });
-            video.addEventListener('seeked', () => scene.classList.add('has-video'));
-            video.addEventListener('loadeddata', () => scene.classList.add('has-video'));
-            video.addEventListener('error', () => scene.classList.remove('has-video'));
-
-            scene.append(poster, video);
+            media.scenes.push(scene);
+            scene.appendChild(poster);
+            if (!video.parentElement) scene.appendChild(video);
             if (hold) scene.appendChild(hold);
             stage.appendChild(scene);
             copyLayer.appendChild(copy);
@@ -224,6 +249,7 @@
                 element: scene,
                 poster,
                 video,
+                media,
                 hold,
                 holdConfig: section.hold || null,
                 copy,
@@ -235,13 +261,10 @@
                 clipDuration: section.clipDuration || null,
                 opacity: 0,
                 lastSeekAt: -Infinity,
-                playPromise: null,
                 counterActive: false,
                 counterStart: null,
                 setPosterSource,
-                clearPosterSource,
-                setVideoSource,
-                clearVideoSource
+                clearPosterSource
             });
             (section.anchors || []).forEach((anchor) => {
                 document.querySelectorAll(`a[href="${anchor}"]`).forEach((link) => {
@@ -372,6 +395,7 @@
             if (nearestSection !== activeIndex) {
                 activeIndex = nearestSection;
                 root.style.setProperty('--hworld-accent', sections[activeIndex].accent);
+                attachActiveVideo();
                 syncMediaSources();
             }
 
@@ -383,54 +407,53 @@
             if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
                 lastVideoTick = now;
                 const scrolling = now < scrollActiveUntil;
-                scenes.forEach((scene, index) => {
-                    const video = scene.video;
-                    if (index !== activeIndex || !video.duration || scene.opacity < 0.02) {
-                        if (!video.paused) video.pause();
-                        return;
+                const scene = scenes[activeIndex];
+                if (!scene) {
+                    window.requestAnimationFrame(animateVideos);
+                    return;
+                }
+                mediaPool.forEach((media) => {
+                    if (media !== scene.media && !media.video.paused) media.video.pause();
+                });
+                const video = scene.video;
+                if (!video.duration || scene.opacity < 0.02) {
+                    if (!video.paused) video.pause();
+                    window.requestAnimationFrame(animateVideos);
+                    return;
+                }
+
+                const clipDuration = scene.clipDuration || video.duration;
+                const targetTime = clamp(
+                    scene.clipStart + clamp(scene.target, 0.002, 0.995) * clipDuration,
+                    0.002,
+                    Math.max(video.duration - 0.002, 0.002)
+                );
+                const timeDelta = targetTime - video.currentTime;
+
+                if (!scrolling) {
+                    if (!video.paused) video.pause();
+                    video.playbackRate = 1;
+                    if (!video.seeking && Math.abs(timeDelta) > 0.045 && now - scene.lastSeekAt >= 180) {
+                        seekVideo(scene, targetTime, now, true);
                     }
-
-                    const clipDuration = scene.clipDuration || video.duration;
-                    const targetTime = clamp(
-                        scene.clipStart + clamp(scene.target, 0.002, 0.995) * clipDuration,
-                        0.002,
-                        Math.max(video.duration - 0.002, 0.002)
-                    );
-                    const timeDelta = targetTime - video.currentTime;
-
-                    if (!scrolling) {
-                        if (!video.paused) video.pause();
-                        video.playbackRate = 1;
-                        if (!video.seeking && Math.abs(timeDelta) > 0.045 && now - scene.lastSeekAt >= 180) {
-                            seekVideo(scene, targetTime, now, true);
-                        }
-                        return;
+                } else if (scrollDirection < 0) {
+                    if (!video.paused) video.pause();
+                    video.playbackRate = 1;
+                    if (!video.seeking && Math.abs(timeDelta) > 0.06 && now - scene.lastSeekAt >= 100) {
+                        seekVideo(scene, targetTime, now, false);
                     }
-
-                    if (scrollDirection < 0) {
-                        if (!video.paused) video.pause();
-                        video.playbackRate = 1;
-                        if (!video.seeking && Math.abs(timeDelta) > 0.06 && now - scene.lastSeekAt >= 100) {
-                            seekVideo(scene, targetTime, now, false);
-                        }
-                        return;
-                    }
-
-                    if (video.seeking) return;
+                } else if (!video.seeking) {
                     if (timeDelta > 1.1 && now - scene.lastSeekAt >= 220) {
                         if (!video.paused) video.pause();
                         seekVideo(scene, Math.max(0.002, targetTime - 0.28), now, false);
-                        return;
-                    }
-
-                    if (timeDelta > 0.035) {
+                    } else if (timeDelta > 0.035) {
                         video.playbackRate = clamp(0.7 + timeDelta * 1.85, 0.7, 4);
                         playVideo(scene);
                     } else {
                         if (!video.paused) video.pause();
                         video.playbackRate = 1;
                     }
-                });
+                }
             }
             window.requestAnimationFrame(animateVideos);
         }
@@ -448,25 +471,46 @@
 
         function playVideo(scene) {
             const video = scene.video;
-            if (!video.paused || scene.playPromise) return;
+            if (!video.paused || scene.media.playPromise) return;
             const playResult = video.play();
             if (!playResult?.then) return;
-            scene.playPromise = playResult
+            scene.media.playPromise = playResult
                 .catch(() => {})
-                .finally(() => { scene.playPromise = null; });
+                .finally(() => { scene.media.playPromise = null; });
+        }
+
+        function syncMediaPresentation(media) {
+            const activeScene = scenes[activeIndex];
+            media.scenes.forEach((element) => {
+                element.classList.toggle('has-metadata', media.metadataReady);
+                element.classList.toggle('has-video', media.frameReady && activeScene?.element === element);
+            });
+        }
+
+        function attachActiveVideo() {
+            const scene = scenes[activeIndex];
+            if (!scene) return;
+            if (scene.video.parentElement !== scene.element) {
+                scene.element.insertBefore(scene.video, scene.hold || null);
+            }
+            mediaPool.forEach(syncMediaPresentation);
         }
 
         function syncMediaSources() {
+            const desiredMedia = new Set();
             scenes.forEach((scene, index) => {
                 const directionalDistance = (index - activeIndex) * scrollDirection;
                 const shouldLoad = !document.hidden && (index === activeIndex || (directionalDistance > 0 && directionalDistance <= 2));
                 if (shouldLoad) {
                     scene.setPosterSource();
-                    scene.setVideoSource();
+                    desiredMedia.add(scene.media);
                 } else {
                     scene.clearPosterSource();
-                    scene.clearVideoSource();
                 }
+            });
+            mediaPool.forEach((media) => {
+                if (desiredMedia.has(media)) media.setSource();
+                else media.clearSource();
             });
         }
 
@@ -500,12 +544,12 @@
         window.addEventListener('load', layout);
         window.addEventListener('pointerdown', primeVideos, { once: true, passive: true });
         window.addEventListener('touchstart', primeVideos, { once: true, passive: true });
-        window.addEventListener('pagehide', () => scenes.forEach((scene) => {
-            scene.clearPosterSource();
-            scene.clearVideoSource();
-        }));
+        window.addEventListener('pagehide', () => {
+            scenes.forEach((scene) => scene.clearPosterSource());
+            mediaPool.forEach((media) => media.clearSource());
+        });
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden) scenes.forEach((scene) => scene.video.pause());
+            if (document.hidden) mediaPool.forEach((media) => media.video.pause());
             lastObservedScrollY = window.scrollY;
             scrollActiveUntil = 0;
             syncMediaSources();
