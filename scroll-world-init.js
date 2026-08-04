@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const world = document.getElementById('scroll-world');
 
     window.mountScrollWorld(world, {
-        mediaVersion: '17',
+        mediaVersion: '18',
         sceneScroll: 1.58,
         crossfade: 0.08,
         sections: [
