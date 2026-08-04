@@ -190,6 +190,7 @@
             const setVideoSource = () => {
                 if (scene.dataset.sourceReady === 'true' || reducedMotion || !section.clip) return;
                 scene.dataset.sourceReady = 'true';
+                video.preload = 'auto';
                 video.src = mediaUrl(section.clip);
                 video.load();
             };
