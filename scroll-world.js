@@ -95,9 +95,6 @@
         let scrollTicking = false;
         let primed = false;
         let lastVideoTick = 0;
-        let lastObservedScrollY = window.scrollY;
-        let scrollDirection = 1;
-        let scrollActiveUntil = 0;
 
         root.innerHTML = '';
         root.classList.add('is-mounted');
@@ -190,7 +187,6 @@
             const setVideoSource = () => {
                 if (scene.dataset.sourceReady === 'true' || reducedMotion || !section.clip) return;
                 scene.dataset.sourceReady = 'true';
-                video.preload = 'auto';
                 video.src = mediaUrl(section.clip);
                 video.load();
             };
@@ -230,9 +226,8 @@
                 start,
                 end,
                 target: 0,
+                current: 0,
                 opacity: 0,
-                lastSeekAt: -Infinity,
-                playPromise: null,
                 counterActive: false,
                 counterStart: null,
                 setPosterSource,
@@ -379,79 +374,25 @@
             scenes.forEach((scene) => updateCounters(scene, now));
             if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
                 lastVideoTick = now;
-                const scrolling = now < scrollActiveUntil;
-                scenes.forEach((scene, index) => {
-                    const video = scene.video;
-                    if (index !== activeIndex || !video.duration || scene.opacity < 0.02) {
-                        if (!video.paused) video.pause();
-                        return;
-                    }
-
-                    const targetTime = clamp(scene.target, 0.002, 0.995) * video.duration;
-                    const timeDelta = targetTime - video.currentTime;
-
-                    if (!scrolling) {
-                        if (!video.paused) video.pause();
-                        video.playbackRate = 1;
-                        if (!video.seeking && Math.abs(timeDelta) > 0.045 && now - scene.lastSeekAt >= 180) {
-                            seekVideo(scene, targetTime, now, true);
+                scenes.forEach((scene) => {
+                    if (!scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
+                    scene.current += (scene.target - scene.current) * 0.5;
+                    const targetTime = clamp(scene.current, 0.002, 0.995) * scene.video.duration;
+                    if (Math.abs(scene.video.currentTime - targetTime) > 0.018) {
+                        try {
+                            scene.video.currentTime = targetTime;
+                        } catch (error) {
+                            scene.element.classList.remove('has-video');
                         }
-                        return;
-                    }
-
-                    if (scrollDirection < 0) {
-                        if (!video.paused) video.pause();
-                        video.playbackRate = 1;
-                        if (!video.seeking && Math.abs(timeDelta) > 0.06 && now - scene.lastSeekAt >= 100) {
-                            seekVideo(scene, targetTime, now, false);
-                        }
-                        return;
-                    }
-
-                    if (video.seeking) return;
-                    if (timeDelta > 1.1 && now - scene.lastSeekAt >= 220) {
-                        if (!video.paused) video.pause();
-                        seekVideo(scene, Math.max(0.002, targetTime - 0.28), now, false);
-                        return;
-                    }
-
-                    if (timeDelta > 0.035) {
-                        video.playbackRate = clamp(0.7 + timeDelta * 1.85, 0.7, 4);
-                        playVideo(scene);
-                    } else {
-                        if (!video.paused) video.pause();
-                        video.playbackRate = 1;
                     }
                 });
             }
             window.requestAnimationFrame(animateVideos);
         }
 
-        function seekVideo(scene, targetTime, now, exact) {
-            const video = scene.video;
-            scene.lastSeekAt = now;
-            try {
-                if (!exact && typeof video.fastSeek === 'function') video.fastSeek(targetTime);
-                else video.currentTime = targetTime;
-            } catch (error) {
-                scene.element.classList.remove('has-video');
-            }
-        }
-
-        function playVideo(scene) {
-            const video = scene.video;
-            if (!video.paused || scene.playPromise) return;
-            const playResult = video.play();
-            if (!playResult?.then) return;
-            scene.playPromise = playResult
-                .catch(() => {})
-                .finally(() => { scene.playPromise = null; });
-        }
-
         function syncMediaSources() {
             scenes.forEach((scene, index) => {
-                const directionalDistance = (index - activeIndex) * scrollDirection;
-                const shouldLoad = !document.hidden && (index === activeIndex || (directionalDistance > 0 && directionalDistance <= 2));
+                const shouldLoad = !document.hidden && Math.abs(index - activeIndex) <= 1;
                 if (shouldLoad) {
                     scene.setPosterSource();
                     scene.setVideoSource();
@@ -465,24 +406,14 @@
         function primeVideos() {
             if (primed || reducedMotion) return;
             primed = true;
-            const scene = scenes[activeIndex];
-            if (!scene?.video.src) return;
-            const promise = scene.video.play();
-            if (promise?.then) promise.then(() => scene.video.pause()).catch(() => {});
+            scenes.forEach((scene) => {
+                if (!scene.video.src) return;
+                const promise = scene.video.play();
+                if (promise?.then) promise.then(() => scene.video.pause()).catch(() => {});
+            });
         }
 
         window.addEventListener('scroll', () => {
-            const nextScrollY = window.scrollY;
-            const scrollDelta = nextScrollY - lastObservedScrollY;
-            if (Math.abs(scrollDelta) > 0.5) {
-                const nextDirection = Math.sign(scrollDelta);
-                if (nextDirection !== scrollDirection) {
-                    scrollDirection = nextDirection;
-                    syncMediaSources();
-                }
-            }
-            lastObservedScrollY = nextScrollY;
-            scrollActiveUntil = performance.now() + 160;
             if (!scrollTicking) {
                 scrollTicking = true;
                 window.requestAnimationFrame(updateFromScroll);
@@ -497,9 +428,7 @@
             scene.clearVideoSource();
         }));
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden) scenes.forEach((scene) => scene.video.pause());
-            lastObservedScrollY = window.scrollY;
-            scrollActiveUntil = 0;
+            if (!document.hidden) scenes.forEach((scene) => { scene.current = scene.target; });
             syncMediaSources();
         });
 
