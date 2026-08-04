@@ -265,6 +265,11 @@
         }
 
         function copyOpacity(index, localProgress, sceneOpacity) {
+            const section = sections[index];
+            if (Number.isFinite(section.copyStart)) {
+                const fadeDuration = section.copyFadeIn || 0.16;
+                return sceneOpacity * smooth((localProgress - section.copyStart) / fadeDuration);
+            }
             if (index === 0) return sceneOpacity * (1 - smooth((localProgress - 0.68) / 0.24));
             if (index === scenes.length - 1) return sceneOpacity * smooth((localProgress - 0.03) / 0.22);
             const fadeIn = smooth((localProgress - 0.035) / 0.18);

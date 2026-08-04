@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 still: 'assets/scroll-world/posters/clip-05-start.webp',
                 clip: 'assets/scroll-world/clip-05.mp4',
                 scroll: 2.15,
+                copyStart: 0.62,
+                copyFadeIn: 0.14,
                 profile: {
                     portrait: 'image.png',
                     name: 'Vyom Kulshrestha',
