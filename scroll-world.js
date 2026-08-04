@@ -92,7 +92,6 @@
         let viewportHeight = window.innerHeight;
         let rootTop = 0;
         let activeIndex = -1;
-        let navigationDirection = 1;
         let scrollTicking = false;
         let primed = false;
         let lastVideoTick = 0;
@@ -120,17 +119,6 @@
             particle.style.setProperty('--duration', `${13 + (particleIndex % 11)}s`);
             atmosphere.appendChild(particle);
         }
-
-        const posterWarmers = new Set();
-        sections.forEach((section) => {
-            const warmer = new Image();
-            const releaseWarmer = () => posterWarmers.delete(warmer);
-            posterWarmers.add(warmer);
-            warmer.decoding = 'async';
-            warmer.addEventListener('load', releaseWarmer, { once: true });
-            warmer.addEventListener('error', releaseWarmer, { once: true });
-            warmer.src = mediaUrl(section.still);
-        });
 
         let runningOffset = 0;
         sections.forEach((section, index) => {
@@ -288,24 +276,6 @@
             return sceneOpacity * Math.min(fadeIn, fadeOut);
         }
 
-        function renderCopy(scene, index, progress) {
-            const contentOpacity = copyOpacity(index, progress, scene.opacity);
-            scene.copy.classList.toggle('is-renderable', contentOpacity > 0.002);
-            scene.copy.style.opacity = contentOpacity.toFixed(3);
-            scene.copy.style.transform = `translate3d(0, ${(0.5 - progress) * 28}px, 0) scale(${(0.985 + contentOpacity * 0.015).toFixed(3)})`;
-            scene.copy.style.pointerEvents = contentOpacity > 0.55 ? 'auto' : 'none';
-            scene.copy.style.setProperty('--local-progress', progress.toFixed(3));
-            scene.copy.setAttribute('aria-hidden', contentOpacity > 0.12 ? 'false' : 'true');
-            const counterVisible = contentOpacity > 0.12;
-            if (counterVisible && !scene.counterActive) {
-                scene.counterActive = true;
-                scene.counterStart = performance.now();
-            } else if (!counterVisible) {
-                scene.counterActive = false;
-                scene.counterStart = null;
-            }
-        }
-
         function updateCounters(scene, now) {
             if (!scene.counterActive) return;
 
@@ -379,14 +349,24 @@
                 scene.element.style.zIndex = String(30 + Math.round(sceneOpacity * 20));
                 scene.poster.style.transform = `scale(${(1.025 + localProgress * 0.065).toFixed(3)})`;
 
-                const copyProgress = reducedMotion
-                    ? mediaProgress
-                    : (scene.video.duration ? clamp(scene.video.currentTime / scene.video.duration) : 0);
-                renderCopy(scene, index, copyProgress);
+                const contentOpacity = copyOpacity(index, localProgress, sceneOpacity);
+                scene.copy.classList.toggle('is-renderable', contentOpacity > 0.002);
+                scene.copy.style.opacity = contentOpacity.toFixed(3);
+                scene.copy.style.transform = `translate3d(0, ${(0.5 - localProgress) * 28}px, 0) scale(${(0.985 + contentOpacity * 0.015).toFixed(3)})`;
+                scene.copy.style.pointerEvents = contentOpacity > 0.55 ? 'auto' : 'none';
+                scene.copy.style.setProperty('--local-progress', localProgress.toFixed(3));
+                scene.copy.setAttribute('aria-hidden', contentOpacity > 0.12 ? 'false' : 'true');
+                const counterVisible = contentOpacity > 0.12;
+                if (counterVisible && !scene.counterActive) {
+                    scene.counterActive = true;
+                    scene.counterStart = performance.now();
+                } else if (!counterVisible) {
+                    scene.counterActive = false;
+                    scene.counterStart = null;
+                }
             });
 
             if (nearestSection !== activeIndex) {
-                navigationDirection = activeIndex < 0 || nearestSection >= activeIndex ? 1 : -1;
                 activeIndex = nearestSection;
                 root.style.setProperty('--hworld-accent', sections[activeIndex].accent);
                 syncMediaSources();
@@ -399,9 +379,8 @@
             scenes.forEach((scene) => updateCounters(scene, now));
             if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
                 lastVideoTick = now;
-                scenes.forEach((scene, index) => {
+                scenes.forEach((scene) => {
                     if (!scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
-                    renderCopy(scene, index, clamp(scene.video.currentTime / scene.video.duration));
                     scene.current += (scene.target - scene.current) * 0.5;
                     const targetTime = clamp(scene.current, 0.002, 0.995) * scene.video.duration;
                     if (Math.abs(scene.video.currentTime - targetTime) > 0.018) {
@@ -418,51 +397,15 @@
 
         function syncMediaSources() {
             scenes.forEach((scene, index) => {
-                if (document.hidden || Math.abs(index - activeIndex) > 1) {
+                const shouldLoad = !document.hidden && Math.abs(index - activeIndex) <= 1;
+                if (shouldLoad) {
+                    scene.setPosterSource();
+                    scene.setVideoSource();
+                } else {
                     scene.clearPosterSource();
                     scene.clearVideoSource();
                 }
             });
-
-            if (document.hidden) return;
-
-            const activeScene = scenes[activeIndex];
-            const leadingScene = scenes[activeIndex + navigationDirection];
-            const trailingScene = scenes[activeIndex - navigationDirection];
-
-            const queueSceneMedia = (scene, index, preload) => {
-                if (!scene) return;
-                scene.video.preload = preload;
-                scene.setPosterSource();
-
-                const startVideo = () => {
-                    scene.poster.removeEventListener('load', startVideo);
-                    scene.poster.removeEventListener('error', startVideo);
-                    scene.poster.dataset.videoQueued = 'false';
-                    if (document.hidden || Math.abs(index - activeIndex) > 1) return;
-                    scene.setVideoSource();
-                };
-
-                if (scene.poster.complete && scene.poster.naturalWidth) {
-                    startVideo();
-                } else if (scene.poster.dataset.videoQueued !== 'true') {
-                    scene.poster.dataset.videoQueued = 'true';
-                    scene.poster.addEventListener('load', startVideo);
-                    scene.poster.addEventListener('error', startVideo);
-                }
-            };
-
-            if (activeScene) {
-                queueSceneMedia(activeScene, activeIndex, 'auto');
-            }
-
-            if (leadingScene) {
-                queueSceneMedia(leadingScene, activeIndex + navigationDirection, 'auto');
-            }
-
-            if (trailingScene) {
-                trailingScene.setPosterSource();
-            }
         }
 
         function primeVideos() {
