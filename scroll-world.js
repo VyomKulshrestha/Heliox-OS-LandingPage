@@ -444,10 +444,7 @@
                         seekVideo(scene, targetTime, now, false);
                     }
                 } else if (!video.seeking) {
-                    if (timeDelta > 1.1 && now - scene.lastSeekAt >= 220) {
-                        if (!video.paused) video.pause();
-                        seekVideo(scene, Math.max(0.002, targetTime - 0.28), now, false);
-                    } else if (timeDelta > 0.035) {
+                    if (timeDelta > 0.035) {
                         video.playbackRate = clamp(0.7 + timeDelta * 1.85, 0.7, 4);
                         playVideo(scene);
                     } else {
