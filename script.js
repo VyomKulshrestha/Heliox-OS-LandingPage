@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const worldActive = document.body.classList.contains('scroll-world-active');
+    const cinematicMain = document.querySelector('body > main');
+    if (!worldActive && cinematicMain) {
+        cinematicMain.classList.add('cinematic-content');
+
+        const chapters = Array.from(cinematicMain.querySelectorAll(':scope > section')).filter((section) => {
+            return !section.classList.contains('hero-section') && section.id !== 'about';
+        });
+
+        const chapterActs = [
+            { start: 0, end: 3, label: '01 / INTERACTION + INTELLIGENCE' },
+            { start: 4, end: 6, label: '02 / EXECUTION + TRUST' },
+            { start: 7, end: 9, label: '03 / BUILD + JOIN' }
+        ];
+
+        chapters.forEach((section, index) => {
+            const heading = section.querySelector('h2');
+            const act = chapterActs.find((candidate) => index >= candidate.start && index <= candidate.end);
+            section.dataset.cinematicIndex = String(index + 1).padStart(2, '0');
+            section.dataset.cinematicLabel = heading?.textContent.trim() || 'Live Execution';
+            section.dataset.cinematicAct = act?.label || 'HELIOX SYSTEM';
+            section.classList.toggle('cinematic-act-start', act?.start === index);
+        });
+    }
     // ── Navbar Scroll Effect ──
     const navbar = document.querySelector('nav');
     
@@ -36,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            if (href === '#') return;
+            if (href === '#' || this.dataset.worldNavigation === 'true') return;
             
             e.preventDefault();
             const target = document.querySelector(href);
@@ -50,28 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ── Scroll Reveal Animation ──
-    const revealTargets = document.querySelectorAll('main section, .glass-panel, .agent-node, .plugin-card, .security-feature');
-    revealTargets.forEach(el => {
-        el.classList.add('reveal');
-    });
+    if (worldActive) return;
 
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        const revealPoint = 80;
-        
-        revealElements.forEach(element => {
-            const revealTop = element.getBoundingClientRect().top;
-            
-            if (revealTop < windowHeight - revealPoint) {
-                element.classList.add('active');
-            }
+    const cinematicChapters = document.querySelectorAll('.cinematic-content > section[data-cinematic-index]');
+    const chapterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add('chapter-active');
         });
-    };
-    
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+    }, { threshold: 0.14 });
+
+    cinematicChapters.forEach((chapter) => chapterObserver.observe(chapter));
 
     // ── Animated Counters ──
     const counters = document.querySelectorAll('.count-up');

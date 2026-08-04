@@ -414,7 +414,7 @@ main, footer { position: relative; z-index: 1; }
     width: 100vw;
     min-height: 100vh;
     margin-left: calc(50% - 50vw);
-    overflow: clip;
+    overflow: visible;
     background: #02070b;
     color: #f4fbff;
 }
@@ -668,6 +668,77 @@ main, footer { position: relative; z-index: 1; }
     margin-top: 1.25rem;
 }
 
+.hworld-copy--about {
+    top: clamp(5.5rem, 14vh, 8rem);
+    left: max(2rem, calc((100vw - 72rem) / 2));
+    width: min(72rem, calc(100vw - 4rem));
+    padding: clamp(1.8rem, 3vw, 3rem);
+    border: 1px solid rgba(131, 235, 255, 0.24);
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, rgba(2, 12, 18, 0.9), rgba(5, 12, 22, 0.72));
+    box-shadow: 0 2rem 7rem rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px) saturate(135%);
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto;
+    column-gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+}
+
+.hworld-copy--about h2 {
+    grid-column: 2;
+    margin-top: 0.6rem;
+    font-size: clamp(3rem, 4.6vw, 5.2rem);
+}
+
+.hworld-copy--about p {
+    grid-column: 2;
+    margin-top: 0.8rem;
+    max-width: 42rem;
+}
+
+.hworld-copy--about > .hworld-copy__eyebrow,
+.hworld-copy--about > .hworld-copy__actions {
+    grid-column: 2;
+}
+
+.hworld-about__profile {
+    grid-column: 1;
+    grid-row: 1 / 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+    text-align: center;
+}
+
+.hworld-about__profile img {
+    width: 10rem;
+    height: 10rem;
+    border: 1px solid color-mix(in srgb, var(--scene-accent) 65%, transparent);
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    box-shadow: 0 0 32px color-mix(in srgb, var(--scene-accent) 30%, transparent);
+}
+
+.hworld-about__profile span {
+    display: grid;
+    gap: 0.35rem;
+    color: #f3fdff;
+    font: 600 0.82rem/1 'Space Grotesk', sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hworld-about__profile small {
+    color: rgba(218, 241, 247, 0.55);
+    font: 500 0.6rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
+}
+
 .hworld-copy p {
     max-width: 34rem;
     margin: 1.4rem 0 0;
@@ -888,17 +959,57 @@ main, footer { position: relative; z-index: 1; }
     animation: hworld-scroll-dot 1.6s ease-in-out infinite;
 }
 
-.heliox-scroll-world.is-past .hworld-stage,
-.heliox-scroll-world.is-past .hworld-copy-layer,
-.heliox-scroll-world.is-past .hworld-route,
-.heliox-scroll-world.is-past .hworld-progress,
-.heliox-scroll-world.is-past .hworld-signal,
-.heliox-scroll-world.is-past .hworld-scroll-hint {
+.heliox-scroll-world.is-content .hworld-copy-layer,
+.heliox-scroll-world.is-content .hworld-route,
+.heliox-scroll-world.is-content .hworld-progress,
+.heliox-scroll-world.is-content .hworld-signal,
+.heliox-scroll-world.is-content .hworld-scroll-hint {
     visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+body > main {
+    position: relative;
+    z-index: 20;
+    display: block !important;
+    background: linear-gradient(180deg, rgba(2, 7, 11, 0.32), rgba(2, 7, 11, 0.62) 48%, rgba(2, 7, 11, 0.76));
+}
+
+body > footer {
+    position: relative;
+    z-index: 20;
+    display: block !important;
+    background: rgba(2, 7, 11, 0.78) !important;
+    backdrop-filter: blur(16px);
 }
 
 .hero-section {
+    display: block !important;
+    width: 100%;
+    min-height: auto;
+    margin-left: 0;
+    padding-top: 7rem;
+}
+
+.hero-section .hero-copy {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(47rem, 100%);
+}
+
+.hero-section .storm-scroll-track {
     display: none !important;
+}
+
+body > main #about {
+    display: none !important;
+}
+
+.heliox-scroll-world.is-about .hworld-lightning {
+    opacity: 0 !important;
+    animation-play-state: paused;
 }
 
 @keyframes hworld-aurora-drift {
@@ -962,6 +1073,38 @@ main, footer { position: relative; z-index: 1; }
         text-align: left;
     }
 
+    .hworld-copy--about {
+        top: 5rem;
+        right: 1rem;
+        bottom: auto;
+        left: 1rem;
+        width: auto;
+        max-height: calc(100svh - 6rem);
+        padding: 1.35rem;
+        display: block;
+        overflow: auto;
+    }
+
+    .hworld-copy--about h2 {
+        font-size: clamp(2.5rem, 10vw, 3.8rem);
+    }
+
+    .hworld-about__profile img {
+        width: 3.6rem;
+        height: 3.6rem;
+    }
+
+    .hworld-about__profile {
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+
+    .hworld-copy--about p:nth-of-type(n + 2) {
+        display: block;
+    }
+
     .hworld-copy h2 {
         max-width: 12ch;
         font-size: clamp(2.65rem, 11vw, 4.6rem);
@@ -997,6 +1140,631 @@ main, footer { position: relative; z-index: 1; }
     }
 }
 
+/* Cinematic scroll-world v2: one continuous website, not a prelude to card grids. */
+body.scroll-world-active {
+    overflow-x: hidden;
+    background: #030607;
+}
+
+body.scroll-world-active > main,
+body.scroll-world-active > footer {
+    display: none !important;
+}
+
+body.scroll-world-active > nav {
+    z-index: 90;
+    border-bottom-color: rgba(125, 235, 255, 0.1) !important;
+    background: linear-gradient(180deg, rgba(2, 6, 9, 0.78), rgba(2, 6, 9, 0.08)) !important;
+    backdrop-filter: blur(16px) saturate(130%);
+}
+
+.heliox-scroll-world.is-mounted {
+    --hworld-accent: #6deeff;
+    position: relative;
+    z-index: 8;
+    width: 100vw;
+    min-height: 100svh;
+    margin-left: calc(50% - 50vw);
+    overflow: visible;
+    isolation: isolate;
+    background: #030607;
+    color: #f4fbff;
+}
+
+.heliox-scroll-world.is-mounted .hworld-stage,
+.heliox-scroll-world.is-mounted .hworld-copy-layer,
+.heliox-scroll-world.is-mounted .hworld-route,
+.heliox-scroll-world.is-mounted .hworld-progress,
+.heliox-scroll-world.is-mounted .hworld-live-signal,
+.heliox-scroll-world.is-mounted .hworld-scroll-hint {
+    position: fixed;
+}
+
+.heliox-scroll-world.is-mounted .hworld-stage {
+    z-index: 10;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: #030607;
+}
+
+.heliox-scroll-world.is-mounted .hworld-scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: #030607;
+    will-change: opacity;
+}
+
+.heliox-scroll-world.is-mounted .hworld-video,
+.heliox-scroll-world.is-mounted .hworld-poster {
+    position: absolute;
+    inset: -1%;
+    width: 102%;
+    height: 102%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(1.08) contrast(1.05) brightness(0.84);
+}
+
+.heliox-scroll-world.is-mounted .hworld-poster {
+    opacity: 1;
+    transition: opacity 280ms ease;
+    will-change: transform, opacity;
+}
+
+.heliox-scroll-world.is-mounted .hworld-video {
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 220ms linear;
+}
+
+.heliox-scroll-world.is-mounted .hworld-scene.has-video .hworld-video {
+    opacity: 1;
+}
+
+.heliox-scroll-world.is-mounted .hworld-scene.has-video .hworld-poster {
+    opacity: 0;
+}
+
+.heliox-scroll-world.is-mounted .hworld-vignette {
+    z-index: 82;
+    background:
+        linear-gradient(90deg, rgba(2, 5, 7, 0.8) 0%, rgba(2, 5, 7, 0.34) 22%, transparent 42%, transparent 70%, rgba(2, 5, 7, 0.24) 88%, rgba(2, 5, 7, 0.52) 100%),
+        linear-gradient(180deg, rgba(1, 4, 7, 0.62), transparent 20%, transparent 76%, rgba(1, 4, 7, 0.72)),
+        radial-gradient(circle at 52% 43%, transparent 48%, rgba(1, 3, 5, 0.24) 100%);
+}
+
+.heliox-scroll-world.is-mounted .hworld-atmosphere {
+    z-index: 74;
+    inset: -8%;
+    mix-blend-mode: screen;
+}
+
+.heliox-scroll-world.is-mounted .hworld-aurora {
+    opacity: 0.34;
+    animation-duration: 16s;
+}
+
+.hworld-energy-arc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(78vw, 72rem);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--hworld-accent) 17%, transparent);
+    border-radius: 50%;
+    opacity: 0.3;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        inset 0 0 5rem color-mix(in srgb, var(--hworld-accent) 7%, transparent),
+        0 0 8rem color-mix(in srgb, var(--hworld-accent) 7%, transparent);
+    animation: hworld-energy-orbit 24s linear infinite;
+}
+
+.hworld-energy-arc::before,
+.hworld-energy-arc::after {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    border: 1px dashed color-mix(in srgb, #c6a5ff 19%, transparent);
+    border-radius: 50%;
+}
+
+.hworld-energy-arc::after {
+    inset: 23%;
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--hworld-accent) 13%, transparent);
+}
+
+.heliox-scroll-world.is-mounted .hworld-lightning {
+    right: 5%;
+    width: 25rem;
+    opacity: 0;
+    animation-duration: 7.8s;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy-layer {
+    z-index: 28;
+    inset: 0;
+    pointer-events: none;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy {
+    top: clamp(6.5rem, 15vh, 9.5rem);
+    width: min(32rem, 35vw);
+    opacity: 1;
+    text-align: left;
+    will-change: opacity, transform;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy--left {
+    left: max(1.6rem, calc((100vw - 86rem) / 2));
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy--right {
+    right: max(3.8rem, calc((100vw - 86rem) / 2));
+}
+
+.hworld-copy__frame {
+    position: relative;
+    padding: 0.4rem 0 0.4rem clamp(1.2rem, 2.2vw, 2rem);
+}
+
+.hworld-copy__frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--scene-accent) 18%, color-mix(in srgb, var(--scene-accent) 22%, transparent) 78%, transparent);
+    box-shadow: 0 0 1.6rem color-mix(in srgb, var(--scene-accent) 42%, transparent);
+}
+
+.hworld-copy__frame::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -2rem -3rem;
+    background: radial-gradient(ellipse at 24% 42%, rgba(2, 7, 10, 0.64), rgba(2, 7, 10, 0.28) 45%, transparent 74%);
+    filter: blur(18px);
+    pointer-events: none;
+}
+
+.hworld-copy__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy__index,
+.heliox-scroll-world.is-mounted .hworld-copy__eyebrow {
+    display: inline-block;
+    margin: 0;
+    font: 600 0.65rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy__index {
+    color: rgba(221, 244, 250, 0.42);
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy__eyebrow {
+    color: var(--scene-accent);
+    text-shadow: 0 0 1.5rem color-mix(in srgb, var(--scene-accent) 70%, transparent);
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy h2 {
+    max-width: 13ch;
+    margin: 0.82rem 0 0;
+    color: #f7fbfd;
+    font: 650 clamp(2.4rem, 4vw, 4.65rem)/0.9 'Space Grotesk', sans-serif;
+    letter-spacing: -0.067em;
+    text-wrap: balance;
+    text-shadow: 0 0 3rem rgba(0, 3, 6, 0.9);
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy.is-hero h2 {
+    max-width: 12ch;
+    font-size: clamp(2.8rem, 4.8vw, 5.35rem);
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy.is-finale h2 {
+    max-width: 11ch;
+}
+
+.hworld-copy__lede {
+    max-width: 30rem;
+    margin: 0.9rem 0 0;
+    color: rgba(229, 241, 245, 0.76);
+    font-size: clamp(0.82rem, 0.9vw, 0.96rem);
+    line-height: 1.5;
+    text-shadow: 0 2px 1.2rem #020506;
+}
+
+.hworld-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 1rem 0 0;
+    padding: 0.65rem 0;
+    border-top: 1px solid rgba(214, 243, 249, 0.13);
+    border-bottom: 1px solid rgba(214, 243, 249, 0.13);
+}
+
+.hworld-metrics > div {
+    min-width: 6rem;
+    padding: 0.1rem 0.75rem 0.1rem 0;
+}
+
+.hworld-metrics dt {
+    color: #f3fdff;
+    font: 700 clamp(1.1rem, 1.45vw, 1.45rem)/1 'Space Grotesk', sans-serif;
+    letter-spacing: -0.04em;
+}
+
+.hworld-metrics dd {
+    margin: 0.38rem 0 0;
+    color: color-mix(in srgb, var(--scene-accent) 74%, #d9f7ff);
+    font: 600 0.55rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.hworld-manifest {
+    display: grid;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hworld-manifest li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: start;
+    padding: 0.52rem 0;
+    border-top: 1px solid rgba(218, 244, 249, 0.12);
+    background: transparent;
+    backdrop-filter: none;
+}
+
+.hworld-manifest li:last-child {
+    border-bottom: 1px solid rgba(218, 244, 249, 0.12);
+}
+
+.hworld-manifest li > span {
+    padding-top: 0.12rem;
+    color: var(--scene-accent);
+    font: 600 0.58rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
+}
+
+.hworld-manifest b {
+    display: block;
+    color: rgba(246, 252, 253, 0.94);
+    font: 650 0.77rem/1.15 'Space Grotesk', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.hworld-manifest p {
+    margin: 0.3rem 0 0;
+    color: rgba(220, 237, 241, 0.62);
+    font-size: 0.69rem;
+    line-height: 1.38;
+}
+
+.hworld-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.hworld-profile img {
+    width: 4.8rem;
+    height: 4.8rem;
+    border: 1px solid color-mix(in srgb, var(--scene-accent) 62%, transparent);
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    box-shadow: 0 0 2.4rem color-mix(in srgb, var(--scene-accent) 28%, transparent);
+}
+
+.hworld-profile span {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.hworld-profile b {
+    color: #f7fdff;
+    font: 650 0.95rem/1 'Space Grotesk', sans-serif;
+}
+
+.hworld-profile small {
+    color: var(--scene-accent);
+    font: 600 0.58rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy__actions {
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-copy__actions a {
+    padding: 0.72rem 0.9rem;
+    border-radius: 0.15rem;
+    font-size: 0.58rem;
+}
+
+.hworld-footer {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(218, 244, 249, 0.14);
+}
+
+.hworld-footer > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hworld-footer a,
+.hworld-footer small {
+    color: rgba(226, 244, 248, 0.52);
+    font: 600 0.54rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.hworld-footer a:hover {
+    color: var(--scene-accent);
+}
+
+.hworld-live-signal {
+    z-index: 40;
+    top: 5.3rem;
+    left: max(1.5rem, calc((100vw - 86rem) / 2));
+    display: grid;
+    grid-template-columns: 1rem auto;
+    gap: 0.24rem 0.65rem;
+    align-items: center;
+    color: rgba(221, 242, 247, 0.52);
+    font: 600 0.55rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.hworld-live-signal > span {
+    grid-row: 1 / 3;
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 50%;
+    background: var(--hworld-accent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--hworld-accent) 45%, transparent);
+    animation: hworld-signal-pulse 1.8s ease-out infinite;
+}
+
+.hworld-live-signal b {
+    color: #effcff;
+    font-weight: 700;
+}
+
+.hworld-live-signal small {
+    font-size: 0.48rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-route {
+    z-index: 42;
+    right: 1.3rem;
+    gap: 0.52rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-route::before {
+    top: 0.5rem;
+    bottom: 0.5rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-route__button {
+    min-height: 1.2rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-route__button span {
+    font-size: 0.53rem;
+}
+
+.heliox-scroll-world.is-mounted .hworld-route__button i {
+    width: 6px;
+    height: 6px;
+}
+
+.heliox-scroll-world.is-mounted .hworld-progress {
+    z-index: 95;
+}
+
+@keyframes hworld-energy-orbit {
+    from { transform: translate(-50%, -50%) rotate(0deg) scale(0.96); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.03); }
+    to { transform: translate(-50%, -50%) rotate(360deg) scale(0.96); }
+}
+
+@media (max-width: 900px) {
+    .heliox-scroll-world.is-mounted .hworld-video,
+    .heliox-scroll-world.is-mounted .hworld-poster {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-vignette {
+        background:
+            linear-gradient(180deg, rgba(1, 4, 7, 0.42), transparent 22%, rgba(1, 4, 7, 0.08) 55%, rgba(1, 4, 7, 0.9) 82%),
+            radial-gradient(circle at 50% 35%, transparent 45%, rgba(1, 3, 5, 0.22) 100%);
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy,
+    .heliox-scroll-world.is-mounted .hworld-copy--left,
+    .heliox-scroll-world.is-mounted .hworld-copy--right {
+        top: auto;
+        right: auto;
+        bottom: 3.4rem;
+        left: 1rem;
+        width: min(30rem, calc(100vw - 2rem));
+    }
+
+    .hworld-copy__frame {
+        padding-left: 1rem;
+    }
+
+    .hworld-copy__frame::after {
+        inset: -2rem -1rem;
+        background: linear-gradient(180deg, transparent, rgba(2, 7, 10, 0.88) 18%, rgba(2, 7, 10, 0.95));
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy h2,
+    .heliox-scroll-world.is-mounted .hworld-copy.is-hero h2 {
+        max-width: 15ch;
+        font-size: clamp(2rem, 6.2vw, 3.1rem);
+    }
+
+    .hworld-copy__lede {
+        max-width: 38rem;
+        display: -webkit-box;
+        overflow: hidden;
+        font-size: 0.8rem;
+        line-height: 1.42;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .hworld-manifest {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 1rem;
+    }
+
+    .hworld-manifest li {
+        grid-template-columns: 1.6rem minmax(0, 1fr);
+        gap: 0.5rem;
+        padding: 0.55rem 0;
+    }
+
+    .hworld-manifest p {
+        display: none;
+    }
+
+    .hworld-profile {
+        margin-bottom: 0.8rem;
+    }
+
+    .hworld-profile img {
+        width: 3.6rem;
+        height: 3.6rem;
+    }
+
+    .hworld-live-signal {
+        top: 4.8rem;
+        left: 1rem;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-route {
+        display: none;
+    }
+
+    .hworld-energy-arc {
+        width: 120vw;
+    }
+}
+
+@media (max-width: 560px) {
+    .heliox-scroll-world.is-mounted .hworld-copy {
+        bottom: 2.7rem;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy h2,
+    .heliox-scroll-world.is-mounted .hworld-copy.is-hero h2 {
+        font-size: clamp(1.95rem, 8.2vw, 2.8rem);
+    }
+
+    .hworld-copy__lede {
+        line-height: 1.45;
+    }
+
+    .hworld-manifest {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .hworld-manifest p {
+        display: none;
+    }
+
+    .hworld-metrics > div {
+        min-width: 5.7rem;
+    }
+
+    .hworld-profile img {
+        width: 3.8rem;
+        height: 3.8rem;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy__actions a {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.56rem;
+    }
+
+    .hworld-footer > div {
+        gap: 0.65rem;
+    }
+}
+
+@media (max-height: 720px) and (min-width: 901px) {
+    .heliox-scroll-world.is-mounted .hworld-copy {
+        top: 5.5rem;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-copy h2,
+    .heliox-scroll-world.is-mounted .hworld-copy.is-hero h2 {
+        font-size: clamp(2.7rem, 4.8vw, 4.8rem);
+    }
+
+    .hworld-copy__lede {
+        font-size: 0.88rem;
+    }
+
+    .hworld-manifest li {
+        padding: 0.48rem 0;
+    }
+
+    .hworld-manifest p {
+        font-size: 0.68rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hworld-energy-arc,
+    .heliox-scroll-world.is-mounted .hworld-aurora,
+    .heliox-scroll-world.is-mounted .hworld-scan,
+    .heliox-scroll-world.is-mounted .hworld-lightning,
+    .heliox-scroll-world.is-mounted .hworld-particle {
+        animation: none !important;
+    }
+
+    .heliox-scroll-world.is-mounted .hworld-video {
+        display: none;
+    }
+}
+
 @media (max-width: 540px) {
     .hworld-copy p {
         display: none;
@@ -1028,5 +1796,487 @@ main, footer { position: relative; z-index: 1; }
 
     .hworld-video {
         display: none;
+    }
+}
+
+/* Cinematic content chapters: the generated cloud world remains the living canvas. */
+body > main.cinematic-content {
+    position: relative;
+    z-index: 20;
+    display: block !important;
+    width: 100%;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: clip;
+    background: transparent;
+    isolation: isolate;
+}
+
+body > main.cinematic-content::before {
+    content: '';
+    position: fixed;
+    z-index: 1;
+    top: -30vh;
+    left: -18vw;
+    width: 24vw;
+    height: 160vh;
+    opacity: 0.24;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(96, 231, 255, 0.26), rgba(183, 133, 255, 0.14), transparent);
+    filter: blur(42px);
+    transform: skewX(-12deg);
+    animation: cinematic-beam-crossing 18s ease-in-out infinite alternate;
+}
+
+.cinematic-content > .section-divider,
+.cinematic-content > .hero-section,
+.cinematic-content > #about {
+    display: none !important;
+}
+
+.cinematic-content > section[data-cinematic-index] {
+    --chapter-accent: #68eaff;
+    position: relative;
+    z-index: 2;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100svh;
+    margin: 0 !important;
+    padding: clamp(7rem, 12vh, 11rem) max(5vw, calc((100vw - 86rem) / 2)) clamp(6rem, 10vh, 9rem) !important;
+    overflow: hidden;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background:
+        linear-gradient(90deg, rgba(2, 7, 11, 0.94) 0%, rgba(2, 7, 11, 0.72) 34%, rgba(2, 7, 11, 0.34) 64%, rgba(2, 7, 11, 0.68) 100%),
+        linear-gradient(180deg, rgba(2, 7, 11, 0.28), rgba(2, 7, 11, 0.68));
+}
+
+.cinematic-content > section[data-cinematic-index]:nth-of-type(3n + 1) {
+    --chapter-accent: #ba91ff;
+    background:
+        linear-gradient(270deg, rgba(3, 6, 12, 0.94) 0%, rgba(3, 6, 12, 0.69) 37%, rgba(3, 6, 12, 0.28) 70%, rgba(3, 6, 12, 0.72) 100%),
+        radial-gradient(circle at 16% 50%, rgba(169, 116, 255, 0.16), transparent 39%);
+}
+
+.cinematic-content > section[data-cinematic-index]:nth-of-type(3n + 2) {
+    --chapter-accent: #82f5da;
+    background:
+        linear-gradient(90deg, rgba(1, 10, 13, 0.93), rgba(1, 10, 13, 0.56) 47%, rgba(1, 10, 13, 0.3) 72%, rgba(1, 10, 13, 0.75)),
+        radial-gradient(circle at 76% 44%, rgba(58, 255, 208, 0.12), transparent 34%);
+}
+
+.cinematic-content > section[data-cinematic-index]::before {
+    content: attr(data-cinematic-index);
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    right: -0.03em;
+    color: color-mix(in srgb, var(--chapter-accent) 10%, transparent);
+    font: 700 clamp(15rem, 36vw, 38rem)/0.68 'Space Grotesk', sans-serif;
+    letter-spacing: -0.11em;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.cinematic-content > section[data-cinematic-index]::after {
+    content: 'HELIOX SYSTEM / ' attr(data-cinematic-label);
+    position: absolute;
+    z-index: 3;
+    top: 6.6rem;
+    left: max(5vw, calc((100vw - 86rem) / 2));
+    color: var(--chapter-accent);
+    font: 600 0.64rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.cinematic-content > section[data-cinematic-index] > * {
+    position: relative;
+    z-index: 2;
+}
+
+.cinematic-content > section[data-cinematic-index].chapter-active > * {
+    animation: cinematic-chapter-enter 1.1s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+}
+
+.cinematic-content > section[data-cinematic-index] h2 {
+    max-width: 12ch;
+    margin-right: auto;
+    margin-left: 0;
+    color: #f5fbff !important;
+    font-size: clamp(3.4rem, 7vw, 8rem) !important;
+    font-weight: 600 !important;
+    line-height: 0.88 !important;
+    letter-spacing: -0.065em !important;
+    text-align: left !important;
+    text-wrap: balance;
+    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.7);
+}
+
+.cinematic-content > section[data-cinematic-index] h2 .count-up {
+    color: var(--chapter-accent);
+}
+
+.cinematic-content > section[data-cinematic-index] > div:first-child,
+.cinematic-content > section[data-cinematic-index] > div:first-child > div:first-child {
+    text-align: left;
+}
+
+.cinematic-content > section[data-cinematic-index] p {
+    color: rgba(223, 239, 245, 0.72) !important;
+}
+
+.cinematic-content > section[data-cinematic-index] > div:first-child p,
+.cinematic-content > section[data-cinematic-index] > div:first-child > div:first-child p {
+    max-width: 47rem;
+    margin-right: auto;
+    margin-left: 0;
+    font-size: clamp(1rem, 1.35vw, 1.22rem);
+    line-height: 1.7;
+}
+
+.cinematic-content .glass-panel,
+.cinematic-content .plugin-card,
+.cinematic-content .security-feature,
+.cinematic-content #jarvis > div > div:nth-child(n + 2) > div {
+    border: 0 !important;
+    border-top: 1px solid color-mix(in srgb, var(--chapter-accent) 36%, transparent) !important;
+    border-radius: 0 !important;
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--chapter-accent) 9%, transparent), rgba(2, 8, 12, 0.36) 55%, rgba(2, 8, 12, 0.14)) !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(14px);
+}
+
+.cinematic-content .glass-panel:hover,
+.cinematic-content .plugin-card:hover,
+.cinematic-content .security-feature:hover,
+.cinematic-content #jarvis > div > div:nth-child(n + 2) > div:hover {
+    border-top-color: var(--chapter-accent) !important;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--chapter-accent) 16%, transparent), rgba(2, 8, 12, 0.45)) !important;
+    transform: translateY(-4px);
+}
+
+.cinematic-content #features > div:last-child {
+    gap: 0 !important;
+    border-bottom: 1px solid rgba(170, 235, 247, 0.12);
+}
+
+.cinematic-content #features > div:last-child > div {
+    min-height: 20rem;
+    padding: clamp(1.5rem, 2.8vw, 2.8rem) !important;
+    border-left: 1px solid rgba(170, 235, 247, 0.12) !important;
+}
+
+.cinematic-content #features > div:last-child > div:first-child {
+    border-left: 0 !important;
+}
+
+.cinematic-content #jarvis {
+    background: linear-gradient(90deg, rgba(3, 7, 13, 0.9), rgba(3, 7, 13, 0.42) 68%, rgba(3, 7, 13, 0.74)) !important;
+}
+
+.cinematic-content #jarvis > div,
+.cinematic-content #contact > div {
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+
+.cinematic-content #jarvis > div > div:first-child {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(190, 145, 255, 0.22);
+}
+
+.cinematic-content #architecture > .grid,
+.cinematic-content #actions > .grid,
+.cinematic-content #cognitive > .grid,
+.cinematic-content #plugins > .grid {
+    gap: 1px !important;
+    background: color-mix(in srgb, var(--chapter-accent) 18%, transparent);
+}
+
+.cinematic-content #architecture > .grid > *,
+.cinematic-content #actions > .grid > *,
+.cinematic-content #cognitive > .grid > *,
+.cinematic-content #plugins > .grid > * {
+    margin: 0 !important;
+    background-color: rgba(2, 8, 12, 0.78) !important;
+}
+
+.cinematic-content #security > .grid {
+    align-items: center;
+}
+
+.cinematic-content #security .security-feature {
+    margin: 0;
+    padding: 1.2rem 0.35rem !important;
+}
+
+.cinematic-content #install .platform-tab {
+    border-radius: 999px;
+    background: rgba(1, 9, 13, 0.52);
+    backdrop-filter: blur(12px);
+}
+
+.cinematic-content #install .platform-content .glass-panel {
+    max-width: 54rem;
+    background: rgba(2, 8, 12, 0.62) !important;
+}
+
+.cinematic-content > section[data-cinematic-index]:not([id]) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.85fr) minmax(28rem, 1.15fr);
+    align-items: center;
+}
+
+.cinematic-content > section[data-cinematic-index]:not([id]) h2 {
+    font-size: clamp(4rem, 8vw, 8.8rem) !important;
+}
+
+.cinematic-content #contact {
+    min-height: 90svh;
+    text-align: left;
+}
+
+.cinematic-content #contact > div {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.cinematic-content #contact h2 {
+    max-width: 9ch;
+}
+
+.cinematic-content #contact > div > div:last-child {
+    justify-content: flex-start;
+}
+
+body > footer {
+    position: relative;
+    z-index: 20;
+    border-top: 1px solid rgba(105, 232, 255, 0.2) !important;
+    background: rgba(1, 7, 10, 0.72) !important;
+    backdrop-filter: blur(22px);
+}
+
+@keyframes cinematic-chapter-enter {
+    from { transform: translateY(6vh) scale(0.97); filter: blur(18px) brightness(1.3); }
+    52% { filter: blur(6px) brightness(1.12); }
+    to { transform: none; filter: blur(0) brightness(1); }
+}
+
+@keyframes cinematic-beam-crossing {
+    0% { transform: translate3d(-10vw, 0, 0) skewX(-12deg); opacity: 0.12; }
+    55% { opacity: 0.32; }
+    100% { transform: translate3d(138vw, 0, 0) skewX(-12deg); opacity: 0.16; }
+}
+
+@media (max-width: 900px) {
+    .cinematic-content > section[data-cinematic-index] {
+        min-height: auto;
+        padding: 8rem 1.25rem 6rem !important;
+    }
+
+    .cinematic-content > section[data-cinematic-index]::after {
+        top: 6rem;
+        left: 1.25rem;
+        max-width: calc(100% - 2.5rem);
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .cinematic-content > section[data-cinematic-index]::before {
+        top: 9rem;
+        right: -0.08em;
+        font-size: 18rem;
+        transform: none;
+    }
+
+    .cinematic-content > section[data-cinematic-index] h2 {
+        font-size: clamp(3rem, 14vw, 5.6rem) !important;
+    }
+
+    .cinematic-content > section[data-cinematic-index]:not([id]) {
+        display: grid !important;
+        grid-template-columns: 1fr;
+    }
+
+    .cinematic-content #features > div:last-child > div {
+        min-height: auto;
+        border-left: 0 !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body > main.cinematic-content::before,
+    .cinematic-content > section[data-cinematic-index].chapter-active > * {
+        animation: none !important;
+    }
+}
+
+/* Post-film system map: one continuous editorial surface, never a stack of cards. */
+body > main.cinematic-content {
+    background:
+        linear-gradient(180deg, rgba(1, 7, 10, 0.28), rgba(1, 7, 10, 0.66) 35%, rgba(1, 7, 10, 0.82)),
+        repeating-linear-gradient(90deg, transparent 0, transparent calc(25vw - 1px), rgba(112, 226, 244, 0.045) 25vw);
+}
+
+.cinematic-content > section[data-cinematic-index] {
+    min-height: auto;
+    padding-top: clamp(5rem, 9vw, 9rem) !important;
+    padding-bottom: clamp(5rem, 9vw, 9rem) !important;
+    background: linear-gradient(90deg, rgba(1, 7, 10, 0.82), rgba(1, 7, 10, 0.46) 58%, rgba(1, 7, 10, 0.68)) !important;
+}
+
+.cinematic-content > section[data-cinematic-index]:not(.cinematic-act-start) {
+    padding-top: clamp(2.5rem, 5vw, 5rem) !important;
+}
+
+.cinematic-content > section[data-cinematic-index].cinematic-act-start {
+    min-height: 92svh;
+    border-top: 1px solid color-mix(in srgb, var(--chapter-accent) 32%, transparent) !important;
+}
+
+.cinematic-content > section[data-cinematic-index]::after {
+    content: attr(data-cinematic-act);
+}
+
+.cinematic-content > section[data-cinematic-index]:not(.cinematic-act-start)::before,
+.cinematic-content > section[data-cinematic-index]:not(.cinematic-act-start)::after {
+    display: none;
+}
+
+.cinematic-content > section[data-cinematic-index] h2 {
+    max-width: 15ch;
+    font-size: clamp(2.8rem, 5.6vw, 6.8rem) !important;
+}
+
+.cinematic-content > section[data-cinematic-index]:not(.cinematic-act-start) h2 {
+    font-size: clamp(2.5rem, 4.2vw, 5rem) !important;
+}
+
+.cinematic-content .glass-panel,
+.cinematic-content .plugin-card,
+.cinematic-content .security-feature,
+.cinematic-content #jarvis > div > div:nth-child(n + 2) > div,
+.cinematic-content #architecture > .grid > *,
+.cinematic-content #actions > .grid > *,
+.cinematic-content #cognitive > .grid > *,
+.cinematic-content #plugins > .grid > * {
+    border: 0 !important;
+    border-top: 1px solid rgba(170, 235, 247, 0.18) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
+}
+
+.cinematic-content .glass-panel:hover,
+.cinematic-content .plugin-card:hover,
+.cinematic-content .security-feature:hover,
+.cinematic-content #jarvis > div > div:nth-child(n + 2) > div:hover,
+.cinematic-content #architecture > .grid > *:hover,
+.cinematic-content #actions > .grid > *:hover,
+.cinematic-content #cognitive > .grid > *:hover,
+.cinematic-content #plugins > .grid > *:hover {
+    border-top-color: var(--chapter-accent) !important;
+    background: color-mix(in srgb, var(--chapter-accent) 5%, transparent) !important;
+    transform: none;
+}
+
+.cinematic-content #features > div:last-child {
+    display: block !important;
+    border: 0;
+}
+
+.cinematic-content #features > div:last-child > div {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.42fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: 0;
+    padding: clamp(1.5rem, 3vw, 2.8rem) 0 !important;
+    border-left: 0 !important;
+}
+
+.cinematic-content #features > div:last-child > div > div {
+    width: 3.25rem;
+    height: 3.25rem;
+    grid-row: 1 / 3;
+    border-radius: 50%;
+    background: transparent !important;
+    border: 1px solid color-mix(in srgb, var(--chapter-accent) 48%, transparent);
+}
+
+.cinematic-content #features > div:last-child h3 {
+    font-size: clamp(1.45rem, 2.3vw, 2.5rem);
+}
+
+.cinematic-content #features > div:last-child p {
+    max-width: 48rem;
+    font-size: 0.98rem;
+}
+
+.cinematic-content #jarvis > div > div:nth-child(3),
+.cinematic-content #cognitive > .grid,
+.cinematic-content #actions > .grid,
+.cinematic-content #plugins > .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 2.5rem !important;
+    background: transparent !important;
+}
+
+.cinematic-content #architecture > .grid {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(8rem, 1fr)) !important;
+    gap: 0 !important;
+    overflow-x: auto;
+    background: transparent !important;
+    scrollbar-width: thin;
+}
+
+.cinematic-content #architecture > .grid > * {
+    min-height: 12rem;
+    padding: 1.5rem 1rem !important;
+    border-left: 1px solid rgba(170, 235, 247, 0.12) !important;
+}
+
+.cinematic-content #security .security-feature {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.cinematic-content #install .platform-content .glass-panel,
+.cinematic-content > section[data-cinematic-index]:not([id]) .glass-panel {
+    background: rgba(1, 7, 10, 0.46) !important;
+    backdrop-filter: blur(14px);
+}
+
+.cinematic-content #contact {
+    min-height: 82svh;
+    border-top: 1px solid rgba(105, 232, 255, 0.22) !important;
+}
+
+@media (max-width: 900px) {
+    .cinematic-content > section[data-cinematic-index].cinematic-act-start {
+        min-height: auto;
+    }
+
+    .cinematic-content #features > div:last-child > div {
+        grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
+
+    .cinematic-content #jarvis > div > div:nth-child(3),
+    .cinematic-content #cognitive > .grid,
+    .cinematic-content #actions > .grid,
+    .cinematic-content #plugins > .grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
     }
 }
