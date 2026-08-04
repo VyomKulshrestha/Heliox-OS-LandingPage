@@ -538,7 +538,7 @@
                 }
             }
             lastObservedScrollY = nextScrollY;
-            scrollActiveUntil = performance.now() + 160;
+            scrollActiveUntil = performance.now() + 650;
             if (!scrollTicking) {
                 scrollTicking = true;
                 window.requestAnimationFrame(updateFromScroll);
