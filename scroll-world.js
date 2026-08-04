@@ -145,10 +145,11 @@
                     frameReady: false,
                     playPromise: null
                 };
-                media.setSource = () => {
-                    if (media.sourceReady || reducedMotion || !media.clip) return;
+                media.setSource = (preload = 'auto') => {
+                    if (reducedMotion || !media.clip) return;
+                    pooledVideo.preload = preload;
+                    if (media.sourceReady) return;
                     media.sourceReady = true;
-                    pooledVideo.preload = 'auto';
                     pooledVideo.src = mediaUrl(media.clip);
                     pooledVideo.load();
                 };
@@ -497,20 +498,26 @@
         }
 
         function syncMediaSources() {
-            const desiredMedia = new Set();
+            const desiredMedia = new Map();
             scenes.forEach((scene, index) => {
                 const directionalDistance = (index - activeIndex) * scrollDirection;
                 const shouldLoad = !document.hidden && (index === activeIndex || (directionalDistance > 0 && directionalDistance <= 2));
                 if (shouldLoad) {
                     scene.setPosterSource();
-                    desiredMedia.add(scene.media);
+                    const preload = index === activeIndex ? 'auto' : 'metadata';
+                    if (!desiredMedia.has(scene.media) || preload === 'auto') desiredMedia.set(scene.media, preload);
                 } else {
                     scene.clearPosterSource();
                 }
             });
             mediaPool.forEach((media) => {
-                if (desiredMedia.has(media)) media.setSource();
-                else media.clearSource();
+                if (!desiredMedia.has(media)) media.clearSource();
+            });
+            desiredMedia.forEach((preload, media) => {
+                if (preload === 'metadata') media.setSource(preload);
+            });
+            desiredMedia.forEach((preload, media) => {
+                if (preload === 'auto') media.setSource(preload);
             });
         }
 
