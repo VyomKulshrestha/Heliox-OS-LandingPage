@@ -1201,7 +1201,8 @@ body.scroll-world-active > nav {
 }
 
 .heliox-scroll-world.is-mounted .hworld-video,
-.heliox-scroll-world.is-mounted .hworld-poster {
+.heliox-scroll-world.is-mounted .hworld-poster,
+.heliox-scroll-world.is-mounted .hworld-hold {
     position: absolute;
     inset: -1%;
     width: 102%;
@@ -1221,6 +1222,12 @@ body.scroll-world-active > nav {
     z-index: 1;
     opacity: 0;
     transition: opacity 220ms linear;
+}
+
+.heliox-scroll-world.is-mounted .hworld-hold {
+    z-index: 2;
+    opacity: 0;
+    will-change: opacity;
 }
 
 .heliox-scroll-world.is-mounted .hworld-scene.has-video .hworld-video {
@@ -1604,7 +1611,8 @@ body.scroll-world-active > nav {
 
 @media (max-width: 900px) {
     .heliox-scroll-world.is-mounted .hworld-video,
-    .heliox-scroll-world.is-mounted .hworld-poster {
+    .heliox-scroll-world.is-mounted .hworld-poster,
+    .heliox-scroll-world.is-mounted .hworld-hold {
         inset: 0;
         width: 100%;
         height: 100%;

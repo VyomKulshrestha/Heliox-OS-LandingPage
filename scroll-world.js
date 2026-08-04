@@ -124,6 +124,7 @@
             const scene = createElement('article', 'hworld-scene');
             const poster = createElement('img', 'hworld-poster');
             const video = createElement('video', 'hworld-video');
+            const hold = section.hold ? createElement('img', 'hworld-hold') : null;
             const copy = createElement('section', `hworld-copy hworld-copy--${section.align || (index % 2 ? 'right' : 'left')}`);
             const start = runningOffset;
             const end = start + sectionWeights[index];
@@ -149,6 +150,13 @@
             video.poster = section.still;
             video.setAttribute('muted', '');
             video.setAttribute('playsinline', '');
+
+            if (hold) {
+                hold.src = mediaUrl(section.hold.still);
+                hold.alt = '';
+                hold.decoding = 'async';
+                hold.loading = index < 2 ? 'eager' : 'lazy';
+            }
 
             copy.innerHTML = `
                 <div class="hworld-copy__frame">
@@ -202,12 +210,15 @@
             video.addEventListener('error', () => scene.classList.remove('has-video'));
 
             scene.append(poster, video);
+            if (hold) scene.appendChild(hold);
             stage.appendChild(scene);
             copyLayer.appendChild(copy);
             scenes.push({
                 element: scene,
                 poster,
                 video,
+                hold,
+                holdConfig: section.hold || null,
                 copy,
                 counters,
                 start,
@@ -287,7 +298,27 @@
                 if (worldPosition >= scene.start) nearestSection = index;
                 if (distanceFromScene < 1.25 || index === 0) scene.setVideoSource();
 
-                scene.target = localProgress;
+                let mediaProgress = localProgress;
+                if (scene.holdConfig) {
+                    const holdStart = scene.holdConfig.scrollStart ?? 0.36;
+                    const holdEnd = scene.holdConfig.scrollEnd ?? 0.56;
+                    const holdTime = scene.holdConfig.time ?? 0.5;
+                    const holdFade = Math.min(0.045, (holdEnd - holdStart) * 0.25);
+
+                    if (localProgress < holdStart) {
+                        mediaProgress = holdStart > 0 ? (localProgress / holdStart) * holdTime : holdTime;
+                    } else if (localProgress <= holdEnd) {
+                        mediaProgress = holdTime;
+                    } else {
+                        mediaProgress = holdTime + ((localProgress - holdEnd) / (1 - holdEnd)) * (1 - holdTime);
+                    }
+
+                    const holdIn = smooth((localProgress - holdStart) / holdFade);
+                    const holdOut = 1 - smooth((localProgress - (holdEnd - holdFade)) / holdFade);
+                    scene.hold.style.opacity = (sceneOpacity * Math.min(holdIn, holdOut)).toFixed(3);
+                }
+
+                scene.target = mediaProgress;
                 scene.opacity = sceneOpacity;
                 scene.element.style.opacity = sceneOpacity.toFixed(3);
                 scene.element.style.zIndex = String(30 + Math.round(sceneOpacity * 20));

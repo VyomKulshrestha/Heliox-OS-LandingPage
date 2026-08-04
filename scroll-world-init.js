@@ -16,7 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 accent: '#6deeff',
                 align: 'left',
                 still: 'assets/scroll-world/posters/clip-01-start.webp',
-                clip: 'assets/scroll-world/clip-01.mp4',
+                clip: 'assets/scroll-world/enhanced/clip-01-ai-1440p.mp4',
+                hold: {
+                    still: 'assets/scroll-world/enhanced/clip-01-hold-4k.webp',
+                    time: 0.504,
+                    scrollStart: 0.34,
+                    scrollEnd: 0.58
+                },
                 scroll: 1.9,
                 metrics: [
                     { target: 156, label: 'action types' },
