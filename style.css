@@ -1200,6 +1200,18 @@ body.scroll-world-active > nav {
     will-change: opacity;
 }
 
+.heliox-scroll-world.is-mounted .hworld-scene:not(.is-renderable),
+.heliox-scroll-world.is-mounted .hworld-copy:not(.is-renderable) {
+    display: none;
+}
+
+.heliox-scroll-world.is-mounted .hworld-scene:not(.is-renderable),
+.heliox-scroll-world.is-mounted .hworld-scene:not(.is-renderable) .hworld-video,
+.heliox-scroll-world.is-mounted .hworld-scene:not(.is-renderable) .hworld-poster,
+.heliox-scroll-world.is-mounted .hworld-copy:not(.is-renderable) {
+    will-change: auto;
+}
+
 .heliox-scroll-world.is-mounted .hworld-video,
 .heliox-scroll-world.is-mounted .hworld-poster,
 .heliox-scroll-world.is-mounted .hworld-hold {

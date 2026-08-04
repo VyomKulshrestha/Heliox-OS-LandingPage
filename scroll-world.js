@@ -127,6 +127,7 @@
             const video = createElement('video', 'hworld-video');
             const hold = section.hold ? createElement('img', 'hworld-hold') : null;
             const copy = createElement('section', `hworld-copy hworld-copy--${section.align || (index % 2 ? 'right' : 'left')}`);
+            const posterUrl = mediaUrl(section.still);
             const start = runningOffset;
             const end = start + sectionWeights[index];
 
@@ -140,15 +141,13 @@
             if (index === 0) copy.classList.add('is-hero');
             if (index === sections.length - 1) copy.classList.add('is-finale');
 
-            poster.src = mediaUrl(section.still);
             poster.alt = '';
             poster.decoding = 'async';
-            poster.loading = index < 2 ? 'eager' : 'lazy';
+            poster.loading = 'eager';
 
             video.muted = true;
             video.playsInline = true;
             video.preload = 'metadata';
-            video.poster = section.still;
             video.setAttribute('muted', '');
             video.setAttribute('playsinline', '');
 
@@ -175,6 +174,16 @@
             `;
 
             const counters = Array.from(copy.querySelectorAll('[data-target]'));
+            const setPosterSource = () => {
+                if (poster.dataset.sourceReady === 'true') return;
+                poster.dataset.sourceReady = 'true';
+                poster.src = posterUrl;
+            };
+            const clearPosterSource = () => {
+                if (poster.dataset.sourceReady !== 'true') return;
+                poster.removeAttribute('src');
+                poster.dataset.sourceReady = 'false';
+            };
             const setVideoSource = () => {
                 if (scene.dataset.sourceReady === 'true' || reducedMotion || !section.clip) return;
                 scene.dataset.sourceReady = 'true';
@@ -221,6 +230,8 @@
                 opacity: 0,
                 counterActive: false,
                 counterStart: null,
+                setPosterSource,
+                clearPosterSource,
                 setVideoSource,
                 clearVideoSource
             });
@@ -291,6 +302,23 @@
                 const fadeIn = index === 0 ? 1 : smooth((worldPosition - (scene.start - fadeWidth)) / (fadeWidth * 2));
                 const fadeOut = index === scenes.length - 1 ? 1 : smooth(((scene.end + fadeWidth) - worldPosition) / (fadeWidth * 2));
                 const sceneOpacity = clamp(Math.min(fadeIn, fadeOut));
+                const sceneVisible = sceneOpacity > 0.001;
+
+                scene.element.classList.toggle('is-renderable', sceneVisible);
+                scene.element.classList.toggle('is-active', sceneOpacity > 0.55);
+                scene.opacity = sceneVisible ? sceneOpacity : 0;
+                if (!sceneVisible) {
+                    scene.element.style.opacity = '0';
+                    scene.copy.classList.remove('is-renderable');
+                    scene.copy.style.opacity = '0';
+                    scene.copy.style.pointerEvents = 'none';
+                    scene.copy.setAttribute('aria-hidden', 'true');
+                    scene.counterActive = false;
+                    scene.counterStart = null;
+                    if (scene.hold) scene.hold.style.opacity = '0';
+                    return;
+                }
+
                 let mediaProgress = localProgress;
                 if (scene.holdConfig) {
                     const holdStart = scene.holdConfig.scrollStart ?? 0.36;
@@ -312,13 +340,12 @@
                 }
 
                 scene.target = mediaProgress;
-                scene.opacity = sceneOpacity;
                 scene.element.style.opacity = sceneOpacity.toFixed(3);
                 scene.element.style.zIndex = String(30 + Math.round(sceneOpacity * 20));
-                scene.element.classList.toggle('is-active', sceneOpacity > 0.55);
                 scene.poster.style.transform = `scale(${(1.025 + localProgress * 0.065).toFixed(3)})`;
 
                 const contentOpacity = copyOpacity(index, localProgress, sceneOpacity);
+                scene.copy.classList.toggle('is-renderable', contentOpacity > 0.002);
                 scene.copy.style.opacity = contentOpacity.toFixed(3);
                 scene.copy.style.transform = `translate3d(0, ${(0.5 - localProgress) * 28}px, 0) scale(${(0.985 + contentOpacity * 0.015).toFixed(3)})`;
                 scene.copy.style.pointerEvents = contentOpacity > 0.55 ? 'auto' : 'none';
@@ -337,7 +364,7 @@
             if (nearestSection !== activeIndex) {
                 activeIndex = nearestSection;
                 root.style.setProperty('--hworld-accent', sections[activeIndex].accent);
-                syncVideoSources();
+                syncMediaSources();
             }
 
             scrollTicking = false;
@@ -363,12 +390,14 @@
             window.requestAnimationFrame(animateVideos);
         }
 
-        function syncVideoSources() {
+        function syncMediaSources() {
             scenes.forEach((scene, index) => {
                 const shouldLoad = !document.hidden && Math.abs(index - activeIndex) <= 1;
                 if (shouldLoad) {
+                    scene.setPosterSource();
                     scene.setVideoSource();
                 } else {
+                    scene.clearPosterSource();
                     scene.clearVideoSource();
                 }
             });
@@ -394,10 +423,13 @@
         window.addEventListener('load', layout);
         window.addEventListener('pointerdown', primeVideos, { once: true, passive: true });
         window.addEventListener('touchstart', primeVideos, { once: true, passive: true });
-        window.addEventListener('pagehide', () => scenes.forEach((scene) => scene.clearVideoSource()));
+        window.addEventListener('pagehide', () => scenes.forEach((scene) => {
+            scene.clearPosterSource();
+            scene.clearVideoSource();
+        }));
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) scenes.forEach((scene) => { scene.current = scene.target; });
-            syncVideoSources();
+            syncMediaSources();
         });
 
         layout();
