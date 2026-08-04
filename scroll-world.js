@@ -121,6 +121,17 @@
             atmosphere.appendChild(particle);
         }
 
+        const posterWarmers = new Set();
+        sections.forEach((section) => {
+            const warmer = new Image();
+            const releaseWarmer = () => posterWarmers.delete(warmer);
+            posterWarmers.add(warmer);
+            warmer.decoding = 'async';
+            warmer.addEventListener('load', releaseWarmer, { once: true });
+            warmer.addEventListener('error', releaseWarmer, { once: true });
+            warmer.src = mediaUrl(section.still);
+        });
+
         let runningOffset = 0;
         sections.forEach((section, index) => {
             const scene = createElement('article', 'hworld-scene');
