@@ -92,6 +92,7 @@
         let viewportHeight = window.innerHeight;
         let rootTop = 0;
         let activeIndex = -1;
+        let navigationDirection = 1;
         let scrollTicking = false;
         let primed = false;
         let lastVideoTick = 0;
@@ -362,6 +363,7 @@
             });
 
             if (nearestSection !== activeIndex) {
+                navigationDirection = activeIndex < 0 || nearestSection >= activeIndex ? 1 : -1;
                 activeIndex = nearestSection;
                 root.style.setProperty('--hworld-accent', sections[activeIndex].accent);
                 syncMediaSources();
@@ -392,15 +394,33 @@
 
         function syncMediaSources() {
             scenes.forEach((scene, index) => {
-                const shouldLoad = !document.hidden && Math.abs(index - activeIndex) <= 1;
-                if (shouldLoad) {
-                    scene.setPosterSource();
-                    scene.setVideoSource();
-                } else {
+                if (document.hidden || Math.abs(index - activeIndex) > 1) {
                     scene.clearPosterSource();
                     scene.clearVideoSource();
                 }
             });
+
+            if (document.hidden) return;
+
+            const activeScene = scenes[activeIndex];
+            const leadingScene = scenes[activeIndex + navigationDirection];
+            const trailingScene = scenes[activeIndex - navigationDirection];
+
+            if (activeScene) {
+                activeScene.video.preload = 'auto';
+                activeScene.setPosterSource();
+                activeScene.setVideoSource();
+            }
+
+            if (leadingScene) {
+                leadingScene.video.preload = 'auto';
+                leadingScene.setPosterSource();
+                leadingScene.setVideoSource();
+            }
+
+            if (trailingScene) {
+                trailingScene.setPosterSource();
+            }
         }
 
         function primeVideos() {
