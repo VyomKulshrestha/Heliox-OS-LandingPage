@@ -449,8 +449,8 @@
 
         function syncMediaSources() {
             scenes.forEach((scene, index) => {
-                const preloadIndex = activeIndex + scrollDirection;
-                const shouldLoad = !document.hidden && (index === activeIndex || index === preloadIndex);
+                const directionalDistance = (index - activeIndex) * scrollDirection;
+                const shouldLoad = !document.hidden && (index === activeIndex || (directionalDistance > 0 && directionalDistance <= 2));
                 if (shouldLoad) {
                     scene.setPosterSource();
                     scene.setVideoSource();
@@ -464,11 +464,10 @@
         function primeVideos() {
             if (primed || reducedMotion) return;
             primed = true;
-            scenes.forEach((scene) => {
-                if (!scene.video.src) return;
-                const promise = scene.video.play();
-                if (promise?.then) promise.then(() => scene.video.pause()).catch(() => {});
-            });
+            const scene = scenes[activeIndex];
+            if (!scene?.video.src) return;
+            const promise = scene.video.play();
+            if (promise?.then) promise.then(() => scene.video.pause()).catch(() => {});
         }
 
         window.addEventListener('scroll', () => {
