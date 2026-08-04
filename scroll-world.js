@@ -419,16 +419,34 @@
             const leadingScene = scenes[activeIndex + navigationDirection];
             const trailingScene = scenes[activeIndex - navigationDirection];
 
+            const queueSceneMedia = (scene, index, preload) => {
+                if (!scene) return;
+                scene.video.preload = preload;
+                scene.setPosterSource();
+
+                const startVideo = () => {
+                    scene.poster.removeEventListener('load', startVideo);
+                    scene.poster.removeEventListener('error', startVideo);
+                    scene.poster.dataset.videoQueued = 'false';
+                    if (document.hidden || Math.abs(index - activeIndex) > 1) return;
+                    scene.setVideoSource();
+                };
+
+                if (scene.poster.complete && scene.poster.naturalWidth) {
+                    startVideo();
+                } else if (scene.poster.dataset.videoQueued !== 'true') {
+                    scene.poster.dataset.videoQueued = 'true';
+                    scene.poster.addEventListener('load', startVideo);
+                    scene.poster.addEventListener('error', startVideo);
+                }
+            };
+
             if (activeScene) {
-                activeScene.video.preload = 'auto';
-                activeScene.setPosterSource();
-                activeScene.setVideoSource();
+                queueSceneMedia(activeScene, activeIndex, 'auto');
             }
 
             if (leadingScene) {
-                leadingScene.video.preload = 'auto';
-                leadingScene.setPosterSource();
-                leadingScene.setVideoSource();
+                queueSceneMedia(leadingScene, activeIndex + navigationDirection, 'auto');
             }
 
             if (trailingScene) {
