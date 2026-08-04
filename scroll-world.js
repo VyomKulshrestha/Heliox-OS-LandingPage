@@ -206,7 +206,8 @@
             video.addEventListener('loadedmetadata', () => {
                 scene.classList.add('has-metadata');
                 try {
-                    video.currentTime = Math.min(0.01, video.duration || 0.01);
+                    const clipStart = section.clipStart || 0;
+                    video.currentTime = Math.min(clipStart + 0.01, Math.max(video.duration - 0.01, 0.01));
                 } catch (error) {
                     scene.classList.remove('has-video');
                 }
@@ -230,6 +231,8 @@
                 start,
                 end,
                 target: 0,
+                clipStart: section.clipStart || 0,
+                clipDuration: section.clipDuration || null,
                 opacity: 0,
                 lastSeekAt: -Infinity,
                 playPromise: null,
@@ -387,7 +390,12 @@
                         return;
                     }
 
-                    const targetTime = clamp(scene.target, 0.002, 0.995) * video.duration;
+                    const clipDuration = scene.clipDuration || video.duration;
+                    const targetTime = clamp(
+                        scene.clipStart + clamp(scene.target, 0.002, 0.995) * clipDuration,
+                        0.002,
+                        Math.max(video.duration - 0.002, 0.002)
+                    );
                     const timeDelta = targetTime - video.currentTime;
 
                     if (!scrolling) {
