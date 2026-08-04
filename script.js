@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ── Scroll Reveal Animation ──
-    const revealTargets = document.querySelectorAll('section, .glass-panel, .agent-node, .plugin-card, .security-feature');
+    const revealTargets = document.querySelectorAll('main section, .glass-panel, .agent-node, .plugin-card, .security-feature');
     revealTargets.forEach(el => {
         el.classList.add('reveal');
     });
