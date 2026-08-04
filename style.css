@@ -1424,8 +1424,8 @@ body.scroll-world-active > nav {
 .hworld-manifest li {
     position: relative;
     display: grid;
-    grid-template-columns: 2.2rem minmax(0, 1fr);
-    gap: 0.8rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
     align-items: start;
     padding: 0.52rem 0;
     border-top: 1px solid rgba(218, 244, 249, 0.12);
@@ -1654,8 +1654,8 @@ body.scroll-world-active > nav {
     }
 
     .hworld-manifest li {
-        grid-template-columns: 1.6rem minmax(0, 1fr);
-        gap: 0.5rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
         padding: 0.55rem 0;
     }
 

@@ -38,9 +38,8 @@
     function signalsMarkup(signals) {
         if (!signals?.length) return '';
 
-        return `<ol class="hworld-manifest">${signals.map((signal, index) => `
+        return `<ol class="hworld-manifest">${signals.map((signal) => `
             <li>
-                <span>${String(index + 1).padStart(2, '0')}</span>
                 <div><b>${signal.title}</b><p>${signal.body}</p></div>
             </li>
         `).join('')}</ol>`;
@@ -71,6 +70,10 @@
 
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const sections = config.sections;
+        const mediaUrl = (url) => {
+            if (!url || !config.mediaVersion) return url;
+            return `${url}${url.includes('?') ? '&' : '?'}v=${config.mediaVersion}`;
+        };
         const sectionWeights = sections.map((section) => section.scroll || config.sceneScroll || 1.55);
         const totalWeight = sectionWeights.reduce((total, weight) => total + weight, 0);
         const stage = createElement('div', 'hworld-stage');
@@ -81,16 +84,11 @@
         const lightning = createElement('div', 'hworld-lightning');
         const energyArc = createElement('div', 'hworld-energy-arc');
         const copyLayer = createElement('div', 'hworld-copy-layer');
-        const route = createElement('nav', 'hworld-route');
         const progress = createElement('div', 'hworld-progress');
         const progressFill = createElement('span');
         const scrollHint = createElement('div', 'hworld-scroll-hint');
         const track = createElement('div', 'hworld-track');
-        const signal = createElement('div', 'hworld-live-signal');
-        const signalLabel = createElement('b');
-        const signalMeta = createElement('small');
         const scenes = [];
-        const routeButtons = [];
         let viewportHeight = window.innerHeight;
         let rootTop = 0;
         let activeIndex = -1;
@@ -111,10 +109,6 @@
 
         progress.appendChild(progressFill);
         scrollHint.innerHTML = '<span>Scroll to direct the world</span><i></i>';
-        signal.className = 'hworld-live-signal';
-        signal.innerHTML = '<span></span>';
-        signal.append(signalLabel, signalMeta);
-
         atmosphere.append(aurora, scan, lightning, energyArc);
         for (let particleIndex = 0; particleIndex < 34; particleIndex += 1) {
             const particle = createElement('i', 'hworld-particle');
@@ -131,7 +125,6 @@
             const poster = createElement('img', 'hworld-poster');
             const video = createElement('video', 'hworld-video');
             const copy = createElement('section', `hworld-copy hworld-copy--${section.align || (index % 2 ? 'right' : 'left')}`);
-            const routeButton = createElement('button', 'hworld-route__button');
             const start = runningOffset;
             const end = start + sectionWeights[index];
 
@@ -145,7 +138,7 @@
             if (index === 0) copy.classList.add('is-hero');
             if (index === sections.length - 1) copy.classList.add('is-finale');
 
-            poster.src = section.still;
+            poster.src = mediaUrl(section.still);
             poster.alt = '';
             poster.decoding = 'async';
             poster.loading = index < 2 ? 'eager' : 'lazy';
@@ -178,7 +171,7 @@
                 scene.dataset.sourceReady = 'true';
 
                 const useDirectSource = () => {
-                    video.src = section.clip;
+                    video.src = mediaUrl(section.clip);
                     video.load();
                 };
 
@@ -187,7 +180,7 @@
                     return;
                 }
 
-                fetch(section.clip)
+                fetch(mediaUrl(section.clip))
                     .then((response) => response.ok ? response.blob() : Promise.reject(new Error('clip unavailable')))
                     .then((blob) => {
                         video.src = URL.createObjectURL(blob);
@@ -208,15 +201,9 @@
             video.addEventListener('loadeddata', () => scene.classList.add('has-video'), { once: true });
             video.addEventListener('error', () => scene.classList.remove('has-video'));
 
-            routeButton.type = 'button';
-            routeButton.setAttribute('aria-label', `Go to ${section.label}`);
-            routeButton.innerHTML = `<span>${section.label}</span><i></i>`;
-            routeButton.addEventListener('click', () => jumpTo(index));
-
             scene.append(poster, video);
             stage.appendChild(scene);
             copyLayer.appendChild(copy);
-            route.appendChild(routeButton);
             scenes.push({
                 element: scene,
                 poster,
@@ -232,8 +219,6 @@
                 counterStart: null,
                 setVideoSource
             });
-            routeButtons.push(routeButton);
-
             (section.anchors || []).forEach((anchor) => {
                 document.querySelectorAll(`a[href="${anchor}"]`).forEach((link) => {
                     link.dataset.worldNavigation = 'true';
@@ -246,7 +231,7 @@
         });
 
         stage.append(atmosphere, vignette);
-        root.append(stage, copyLayer, route, progress, signal, scrollHint, track);
+        root.append(stage, copyLayer, progress, scrollHint, track);
 
         function jumpTo(index) {
             const scene = scenes[index];
@@ -327,10 +312,7 @@
 
             if (nearestSection !== activeIndex) {
                 activeIndex = nearestSection;
-                routeButtons.forEach((button, index) => button.classList.toggle('is-active', index === activeIndex));
                 root.style.setProperty('--hworld-accent', sections[activeIndex].accent);
-                signalLabel.textContent = sections[activeIndex].label;
-                signalMeta.textContent = 'LIVE WORLD';
             }
 
             scrollTicking = false;
