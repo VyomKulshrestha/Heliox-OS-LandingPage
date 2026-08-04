@@ -94,6 +94,7 @@
         let activeIndex = -1;
         let scrollTicking = false;
         let primed = false;
+        let lastVideoTick = 0;
 
         root.innerHTML = '';
         root.classList.add('is-mounted');
@@ -146,7 +147,7 @@
 
             video.muted = true;
             video.playsInline = true;
-            video.preload = index < 2 ? 'auto' : 'metadata';
+            video.preload = 'metadata';
             video.poster = section.still;
             video.setAttribute('muted', '');
             video.setAttribute('playsinline', '');
@@ -177,24 +178,16 @@
             const setVideoSource = () => {
                 if (scene.dataset.sourceReady === 'true' || reducedMotion || !section.clip) return;
                 scene.dataset.sourceReady = 'true';
-
-                const useDirectSource = () => {
-                    video.src = mediaUrl(section.clip);
-                    video.load();
-                };
-
-                if (window.location.protocol === 'file:') {
-                    useDirectSource();
-                    return;
-                }
-
-                fetch(mediaUrl(section.clip))
-                    .then((response) => response.ok ? response.blob() : Promise.reject(new Error('clip unavailable')))
-                    .then((blob) => {
-                        video.src = URL.createObjectURL(blob);
-                        video.load();
-                    })
-                    .catch(useDirectSource);
+                video.src = mediaUrl(section.clip);
+                video.load();
+            };
+            const clearVideoSource = () => {
+                if (scene.dataset.sourceReady !== 'true') return;
+                video.pause();
+                video.removeAttribute('src');
+                video.load();
+                scene.dataset.sourceReady = 'false';
+                scene.classList.remove('has-video', 'has-metadata');
             };
 
             video.addEventListener('loadedmetadata', () => {
@@ -205,8 +198,8 @@
                     scene.classList.remove('has-video');
                 }
             });
-            video.addEventListener('seeked', () => scene.classList.add('has-video'), { once: true });
-            video.addEventListener('loadeddata', () => scene.classList.add('has-video'), { once: true });
+            video.addEventListener('seeked', () => scene.classList.add('has-video'));
+            video.addEventListener('loadeddata', () => scene.classList.add('has-video'));
             video.addEventListener('error', () => scene.classList.remove('has-video'));
 
             scene.append(poster, video);
@@ -228,7 +221,8 @@
                 opacity: 0,
                 counterActive: false,
                 counterStart: null,
-                setVideoSource
+                setVideoSource,
+                clearVideoSource
             });
             (section.anchors || []).forEach((anchor) => {
                 document.querySelectorAll(`a[href="${anchor}"]`).forEach((link) => {
@@ -284,6 +278,10 @@
             const fadeWidth = config.crossfade || 0.09;
             let nearestSection = 0;
 
+            scenes.forEach((scene, index) => {
+                if (worldPosition >= scene.start) nearestSection = index;
+            });
+
             progressFill.style.transform = `scaleX(${clamp(worldPosition / totalWeight).toFixed(4)})`;
             scrollHint.style.opacity = `${clamp(1 - Math.max(localY, 0) / (viewportHeight * 0.7)).toFixed(3)}`;
             atmosphere.style.transform = `translate3d(0, ${Math.max(localY, 0) * -0.012}px, 0)`;
@@ -293,11 +291,6 @@
                 const fadeIn = index === 0 ? 1 : smooth((worldPosition - (scene.start - fadeWidth)) / (fadeWidth * 2));
                 const fadeOut = index === scenes.length - 1 ? 1 : smooth(((scene.end + fadeWidth) - worldPosition) / (fadeWidth * 2));
                 const sceneOpacity = clamp(Math.min(fadeIn, fadeOut));
-                const distanceFromScene = Math.min(Math.abs(worldPosition - scene.start), Math.abs(worldPosition - scene.end));
-
-                if (worldPosition >= scene.start) nearestSection = index;
-                if (distanceFromScene < 1.25 || index === 0) scene.setVideoSource();
-
                 let mediaProgress = localProgress;
                 if (scene.holdConfig) {
                     const holdStart = scene.holdConfig.scrollStart ?? 0.36;
@@ -344,6 +337,7 @@
             if (nearestSection !== activeIndex) {
                 activeIndex = nearestSection;
                 root.style.setProperty('--hworld-accent', sections[activeIndex].accent);
+                syncVideoSources();
             }
 
             scrollTicking = false;
@@ -351,10 +345,11 @@
 
         function animateVideos(now) {
             scenes.forEach((scene) => updateCounters(scene, now));
-            if (!reducedMotion) {
+            if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
+                lastVideoTick = now;
                 scenes.forEach((scene) => {
                     if (!scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
-                    scene.current += (scene.target - scene.current) * 0.3;
+                    scene.current += (scene.target - scene.current) * 0.5;
                     const targetTime = clamp(scene.current, 0.002, 0.995) * scene.video.duration;
                     if (Math.abs(scene.video.currentTime - targetTime) > 0.018) {
                         try {
@@ -366,6 +361,17 @@
                 });
             }
             window.requestAnimationFrame(animateVideos);
+        }
+
+        function syncVideoSources() {
+            scenes.forEach((scene, index) => {
+                const shouldLoad = !document.hidden && Math.abs(index - activeIndex) <= 1;
+                if (shouldLoad) {
+                    scene.setVideoSource();
+                } else {
+                    scene.clearVideoSource();
+                }
+            });
         }
 
         function primeVideos() {
@@ -388,8 +394,12 @@
         window.addEventListener('load', layout);
         window.addEventListener('pointerdown', primeVideos, { once: true, passive: true });
         window.addEventListener('touchstart', primeVideos, { once: true, passive: true });
+        window.addEventListener('pagehide', () => scenes.forEach((scene) => scene.clearVideoSource()));
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) scenes.forEach((scene) => { scene.current = scene.target; });
+            syncVideoSources();
+        });
 
-        scenes[0].setVideoSource();
         layout();
         updateFromScroll();
         window.requestAnimationFrame(animateVideos);
