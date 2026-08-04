@@ -277,6 +277,24 @@
             return sceneOpacity * Math.min(fadeIn, fadeOut);
         }
 
+        function renderCopy(scene, index, progress) {
+            const contentOpacity = copyOpacity(index, progress, scene.opacity);
+            scene.copy.classList.toggle('is-renderable', contentOpacity > 0.002);
+            scene.copy.style.opacity = contentOpacity.toFixed(3);
+            scene.copy.style.transform = `translate3d(0, ${(0.5 - progress) * 28}px, 0) scale(${(0.985 + contentOpacity * 0.015).toFixed(3)})`;
+            scene.copy.style.pointerEvents = contentOpacity > 0.55 ? 'auto' : 'none';
+            scene.copy.style.setProperty('--local-progress', progress.toFixed(3));
+            scene.copy.setAttribute('aria-hidden', contentOpacity > 0.12 ? 'false' : 'true');
+            const counterVisible = contentOpacity > 0.12;
+            if (counterVisible && !scene.counterActive) {
+                scene.counterActive = true;
+                scene.counterStart = performance.now();
+            } else if (!counterVisible) {
+                scene.counterActive = false;
+                scene.counterStart = null;
+            }
+        }
+
         function updateCounters(scene, now) {
             if (!scene.counterActive) return;
 
@@ -350,21 +368,10 @@
                 scene.element.style.zIndex = String(30 + Math.round(sceneOpacity * 20));
                 scene.poster.style.transform = `scale(${(1.025 + localProgress * 0.065).toFixed(3)})`;
 
-                const contentOpacity = copyOpacity(index, localProgress, sceneOpacity);
-                scene.copy.classList.toggle('is-renderable', contentOpacity > 0.002);
-                scene.copy.style.opacity = contentOpacity.toFixed(3);
-                scene.copy.style.transform = `translate3d(0, ${(0.5 - localProgress) * 28}px, 0) scale(${(0.985 + contentOpacity * 0.015).toFixed(3)})`;
-                scene.copy.style.pointerEvents = contentOpacity > 0.55 ? 'auto' : 'none';
-                scene.copy.style.setProperty('--local-progress', localProgress.toFixed(3));
-                scene.copy.setAttribute('aria-hidden', contentOpacity > 0.12 ? 'false' : 'true');
-                const counterVisible = contentOpacity > 0.12;
-                if (counterVisible && !scene.counterActive) {
-                    scene.counterActive = true;
-                    scene.counterStart = performance.now();
-                } else if (!counterVisible) {
-                    scene.counterActive = false;
-                    scene.counterStart = null;
-                }
+                const copyProgress = reducedMotion
+                    ? mediaProgress
+                    : (scene.video.duration ? clamp(scene.video.currentTime / scene.video.duration) : 0);
+                renderCopy(scene, index, copyProgress);
             });
 
             if (nearestSection !== activeIndex) {
@@ -381,8 +388,9 @@
             scenes.forEach((scene) => updateCounters(scene, now));
             if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
                 lastVideoTick = now;
-                scenes.forEach((scene) => {
+                scenes.forEach((scene, index) => {
                     if (!scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
+                    renderCopy(scene, index, clamp(scene.video.currentTime / scene.video.duration));
                     scene.current += (scene.target - scene.current) * 0.5;
                     const targetTime = clamp(scene.current, 0.002, 0.995) * scene.video.duration;
                     if (Math.abs(scene.video.currentTime - targetTime) > 0.018) {
