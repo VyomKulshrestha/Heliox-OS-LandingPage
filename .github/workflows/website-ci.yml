@@ -25,6 +25,7 @@ jobs:
       - run: npm run test:content-negotiation
       - run: npm run test:mcp
       - run: python -m unittest scripts/test_visibility_audit.py
+      - run: python -m unittest scripts/test_submit_indexnow.py
       - name: Validate discovery and content contracts
         shell: bash
         run: |
