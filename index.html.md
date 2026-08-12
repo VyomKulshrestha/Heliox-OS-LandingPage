@@ -1,0 +1,58 @@
+# Heliox OS
+
+Heliox OS is an open-source desktop agent that translates user requests into structured plans, executes supported computer actions, and verifies their results. It is an application that runs on Windows, macOS, and Linux; it is not an operating-system kernel.
+
+## Current release
+
+- Version: 0.10.1
+- License: MIT
+- Source: https://github.com/VyomKulshrestha/Heliox-OS
+- Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
+- Runtime requirement: Python 3.11 or newer
+- Primary hardware-development platform: Windows 10/11
+- CI coverage: Windows, macOS, and Linux; physical camera, microphone, desktop-permission, gaze, gesture, and neural behavior still requires device-specific validation
+
+## What it does
+
+- Accepts typed natural language, continuous voice input, and opt-in hand gestures.
+- Plans and executes browser, file, application, process, package, Git, system, integration, and workflow actions.
+- Routes tasks across 21 specialist agents and 156 declared action types. Runtime availability depends on the operating system, installed dependencies, credentials, and active security policy.
+- Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
+- Supports local Ollama models and user-configured cloud providers including Gemini, OpenAI, Claude, and Meta.
+- Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
+
+## Safety model
+
+Heliox combines schema validation, a five-tier permission system, source-scoped authority, confirmation gates, critic review for risky plans, simulations, audit records, and snapshots where supported. Overrides can narrow authority but cannot widen the shipped source policy. Learned risk models can interrupt or add caution; they cannot grant permission or suppress deterministic warnings.
+
+Not every effect is reversible. Browser actions, external services, messages, purchases, process changes, and some operating-system actions can have consequences outside Heliox's rollback boundary. Users should review approval dialogs and keep backups.
+
+## Privacy and models
+
+The Python daemon, action execution, local logs, audit stores, preferences, and supported local models run on the user's machine. Heliox does not operate a central prompt or analytics service. When a cloud model or integration is configured, the context required for that task is sent directly to the selected external provider, whose privacy and retention terms apply.
+
+Credentials are stored in Windows Credential Manager, macOS Keychain, or a Secret Service-compatible Linux keyring. Credential operations fail closed if secure storage is unavailable.
+
+## Neural-input status
+
+The repository includes a software pipeline for BrainFlow synthetic data, recorded EEG playback, and a PhysioNet EEGBCI CSP/LDA benchmark. These results validate software integration with synthetic or recorded data only. They are not evidence of live brain control, human accuracy, medical utility, or clinical validation. Neural intents remain bounded and require separate non-neural arming and confirmation controls.
+
+## Installation
+
+Download an installer from the GitHub Releases page:
+
+- Windows: `.exe` or `.msi`
+- macOS Apple Silicon or Intel: `.dmg`
+- Linux: `.AppImage`, `.deb`, or `.rpm`
+
+Developers can clone the repository, install the Python daemon dependencies, start `python -m pilot.server`, and run the Svelte UI from `tauri-app/ui`.
+
+## Authoritative links
+
+- Product website: https://www.helioxos.dev/
+- README: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/README.md
+- Architecture: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md
+- Security policy: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md
+- Privacy policy: https://www.helioxos.dev/privacy.html.md
+- Security overview: https://www.helioxos.dev/whitepaper.html.md
+- FAQ: https://www.helioxos.dev/faq.md
