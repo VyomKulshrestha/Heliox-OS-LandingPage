@@ -12,13 +12,19 @@ PRODUCT = ROOT.parent / "cursor-os" / "pilot"
 
 def main() -> None:
     names = ("changelog.md", "releases.json", "releases.feed.json", "releases.xml")
-    for name in names:
-        if (ROOT / name).read_bytes() != (PRODUCT / name).read_bytes():
-            raise SystemExit(f"website {name} drifted from product-generated source")
+    if PRODUCT.is_dir():
+        for name in names:
+            if (ROOT / name).read_bytes() != (PRODUCT / name).read_bytes():
+                raise SystemExit(f"website {name} drifted from product-generated source")
     releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
     feed = json.loads((ROOT / "releases.feed.json").read_text(encoding="utf-8"))
-    if releases["current_version"] != "0.10.1" or len(releases["releases"]) != len(feed["items"]):
-        raise SystemExit("release feed version or item count drifted")
+    if releases["current_source_version"] != "0.10.1":
+        raise SystemExit("current source version drifted")
+    if releases["latest_published_version"] != "0.9.0":
+        raise SystemExit("latest published version drifted")
+    published = [item for item in releases["releases"] if item["status"] == "published"]
+    if len(published) != len(feed["items"]):
+        raise SystemExit("published release and feed item counts drifted")
     if len(ET.parse(ROOT / "releases.xml").findall("./channel/item")) != len(feed["items"]):
         raise SystemExit("RSS item count does not match JSON Feed")
     discovery = "\n".join(

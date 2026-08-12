@@ -2,7 +2,7 @@
 
 > Heliox OS is an MIT-licensed, local-first desktop agent for Windows, macOS, and Linux. It turns natural-language, voice, gesture, browser, and system requests into validated action plans with permission gates and post-execution verification.
 
-Current public release: 0.10.1. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. Local Ollama models are supported; users may instead configure external model providers, in which case task context is sent directly to the selected provider under that provider's terms. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
+Current source and draft release candidate: 0.10.1. Latest published installer release: 0.9.0. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. Local Ollama models are supported; users may instead configure external model providers, in which case task context is sent directly to the selected provider under that provider's terms. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
 
 ## Product
 

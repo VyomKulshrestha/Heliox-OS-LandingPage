@@ -2,9 +2,10 @@
 
 Heliox OS is an open-source desktop agent that translates user requests into structured plans, executes supported computer actions, and verifies their results. It is an application that runs on Windows, macOS, and Linux; it is not an operating-system kernel.
 
-## Current release
+## Version status
 
-- Version: 0.10.1
+- Current source and draft release candidate: 0.10.1
+- Latest published installer release: 0.9.0
 - License: MIT
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
 - Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
@@ -50,7 +51,7 @@ The repository includes a software pipeline for BrainFlow synthetic data, record
 
 ## Installation
 
-Download an installer from the GitHub Releases page:
+Download the 0.9.0 installer from the GitHub Releases page. The 0.10.1 artifacts remain a draft release candidate and are not public until the owner publishes that release:
 
 - Windows: `.exe` or `.msi`
 - macOS Apple Silicon or Intel: `.dmg`

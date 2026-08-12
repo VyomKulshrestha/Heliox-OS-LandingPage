@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'awakening',
                 label: 'Awakening',
                 anchors: ['#top'],
-                eyebrow: 'JARVIS AUTONOMY v0.10.1 / OPEN SOURCE',
+                eyebrow: 'SOURCE v0.10.1 RC / INSTALLERS v0.9.0',
                 title: 'Your computer becomes an intelligent world.',
                 body: 'Heliox is a privacy-first AI system control agent that plans, executes, and verifies complex work across your computer using natural language, voice, vision, and gesture.',
                 accent: '#6deeff',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { value: 'Tier 5', label: 'security' }
                 ],
                 cta: {
-                    primary: { label: 'Download v0.10.1', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases' },
+                    primary: { label: 'Download v0.9.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases' },
                     secondary: { label: 'Explore source', href: 'https://github.com/VyomKulshrestha/Heliox-OS' }
                 }
             },
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         { label: 'Security', href: 'whitepaper.html' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@HelioxOS' }
                     ],
-                    meta: '© 2026 HELIOX OS / v0.10.1'
+                    meta: '© 2026 HELIOX OS / SOURCE v0.10.1 RC / INSTALLERS v0.9.0'
                 }
             }
         ]

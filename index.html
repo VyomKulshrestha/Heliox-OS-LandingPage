@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://www.helioxos.dev/" />
     <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/index.html.md" title="Heliox OS overview in Markdown" />
     <link rel="describedby" href="https://www.helioxos.dev/llms.txt" type="text/plain" />
+    <link rel="describedby" href="https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/codemeta.json" type="application/ld+json" />
     <link rel="sitemap" type="application/xml" href="https://www.helioxos.dev/sitemap.xml" />
     <meta property="og:title" content="Heliox OS | The Sentient Interface" />
     <meta property="og:description" content="Control your entire computer with natural language, voice, and hand gestures. Open-source, privacy-first AI system control agent." />
@@ -34,7 +35,12 @@
           "url": "https://www.helioxos.dev/",
           "name": "Heliox OS",
           "description": "Official website for the open-source Heliox OS desktop agent.",
-          "inLanguage": "en"
+          "inLanguage": "en",
+          "sameAs": [
+            "https://github.com/VyomKulshrestha/Heliox-OS",
+            "https://www.youtube.com/@HelioxOS"
+          ],
+          "mainEntity": {"@id": "https://www.helioxos.dev/#software"}
         },
         {
           "@type": "SoftwareApplication",
@@ -44,13 +50,14 @@
           "url": "https://www.helioxos.dev/",
           "codeRepository": "https://github.com/VyomKulshrestha/Heliox-OS",
           "downloadUrl": "https://github.com/VyomKulshrestha/Heliox-OS/releases",
-          "softwareVersion": "0.10.1",
+          "softwareVersion": "0.9.0",
           "applicationCategory": "UtilitiesApplication",
           "applicationSubCategory": "AI desktop automation agent",
           "operatingSystem": "Windows 10/11, macOS, Linux",
           "softwareRequirements": "Python 3.11 or newer",
           "license": "https://opensource.org/license/mit",
           "isAccessibleForFree": true,
+          "sameAs": "https://github.com/VyomKulshrestha/Heliox-OS",
           "description": "An open-source, local-first desktop agent that plans, executes, and verifies natural-language, voice, gesture, browser, and system-automation tasks.",
           "featureList": [
             "Natural-language desktop automation",
@@ -234,7 +241,7 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    JARVIS Autonomy v0.10.1 Live
+                    Source v0.10.1 RC &middot; Installers v0.9.0
                 </div>
                 <h1 class="text-5xl sm:text-6xl md:text-7xl font-headline font-bold text-white leading-[1.1]">
                     The Open-Source <span
@@ -248,7 +255,7 @@
                     <a href="#install"
                         class="bg-primary-container text-on-primary-fixed px-8 py-4 font-bold rounded-lg shadow-[0_0_20px_rgba(0,225,255,0.2)] hover:scale-105 hover:shadow-[0_0_35px_rgba(0,225,255,0.35)] transition-all inline-flex items-center gap-2">
                         <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
-                        Download v0.10.1
+                        Download v0.9.0
                     </a>
                     <a href="#features"
                         class="glass-panel ghost-border px-8 py-4 font-bold text-primary rounded-lg hover:bg-primary/10 transition-all flex items-center justify-center">
@@ -1065,7 +1072,7 @@
                     <div class="space-y-3">
                         <div class="flex items-start gap-3">
                             <span class="text-primary font-headline font-bold text-sm mt-0.5">1.</span>
-                            <p class="text-sm text-on-surface-variant">Download <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.10.1_x64-setup.exe</code> or the <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">.msi</code> from Releases.</p>
+                            <p class="text-sm text-on-surface-variant">Download <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.9.0_x64-setup.exe</code> or the <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">.msi</code> from the latest published release.</p>
                         </div>
                         <div class="flex items-start gap-3">
                             <span class="text-primary font-headline font-bold text-sm mt-0.5">2.</span>
@@ -1091,11 +1098,11 @@
                     <div class="space-y-3">
                         <div class="flex items-start gap-3">
                             <span class="text-primary font-headline font-bold text-sm mt-0.5">1.</span>
-                            <p class="text-sm text-on-surface-variant">Download for Apple Silicon: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.10.1_aarch64.dmg</code></p>
+                            <p class="text-sm text-on-surface-variant">Download for Apple Silicon: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.9.0_aarch64.dmg</code></p>
                         </div>
                         <div class="flex items-start gap-3">
                             <span class="text-primary font-headline font-bold text-sm mt-0.5">2.</span>
-                            <p class="text-sm text-on-surface-variant">Download for Intel: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.10.1_x64.dmg</code></p>
+                            <p class="text-sm text-on-surface-variant">Download for Intel: <code class="text-primary/80 bg-primary/10 px-1.5 py-0.5 rounded text-xs">Heliox-OS_0.9.0_x64.dmg</code></p>
                         </div>
                         <div class="flex items-start gap-3">
                             <span class="text-primary font-headline font-bold text-sm mt-0.5">3.</span>
@@ -1328,7 +1335,7 @@
                     <a href="https://github.com/VyomKulshrestha/Heliox-OS/releases" target="_blank" id="download-btn-2"
                         class="bg-primary-container text-on-primary-fixed px-10 py-4 font-bold rounded-lg shadow-[0_0_25px_rgba(0,225,255,0.4)] hover:scale-105 transition-all inline-flex items-center gap-2">
                         <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">download</span>
-                        Download v0.10.1
+                        Download v0.9.0
                     </a>
                     <a id="discord-btn" href="https://discord.gg/EcEtkBfXU" target="_blank"
                         class="glass-panel ghost-border px-10 py-4 font-bold text-white rounded-lg hover:bg-white/5 transition-all flex items-center justify-center">
@@ -1374,7 +1381,7 @@
                     href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank">GitHub</a>
             </div>
             <div class="text-white/40 font-headline text-[10px] uppercase tracking-widest">
-                &copy; 2026 Heliox OS. v0.10.1
+                &copy; 2026 Heliox OS. source v0.10.1 RC &middot; installers v0.9.0
             </div>
         </div>
     </footer>
