@@ -21,6 +21,11 @@ def main() -> None:
         raise SystemExit("empty assistant sampling must remain explicitly pending")
     if sampling["capture_count"] != len(sampling["evaluations"]):
         raise SystemExit("assistant capture count drifted")
+    completed = sum(item["status"] == "completed" for item in sampling["evaluations"])
+    if sampling.get("completed_count", 0) != completed:
+        raise SystemExit("completed assistant count drifted")
+    if sampling.get("incomplete_count", 0) != sampling["capture_count"] - completed:
+        raise SystemExit("incomplete assistant count drifted")
     print(f"Validated {len(prompts)} visibility prompts and honest sampling status: {sampling['status']}.")
 
 

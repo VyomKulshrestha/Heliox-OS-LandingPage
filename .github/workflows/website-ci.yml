@@ -1,0 +1,39 @@
+name: Website CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: npm run test:content-negotiation
+      - run: npm run test:mcp
+      - run: python -m unittest scripts/test_visibility_audit.py
+      - name: Validate discovery and content contracts
+        shell: bash
+        run: |
+          python scripts/validate_agent_discovery.py
+          python scripts/validate_ai_content_policy.py
+          python scripts/validate_comparison_pages.py
+          python scripts/validate_content_negotiation.py
+          python scripts/validate_cost_page.py
+          python scripts/validate_release_feeds.py
+          python scripts/validate_site_metadata.py
+          python scripts/validate_use_case_pages.py
+          python scripts/validate_visibility_audit.py

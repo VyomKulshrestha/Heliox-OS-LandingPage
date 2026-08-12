@@ -4,12 +4,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTHORITATIVE = ("llms.txt", "capabilities.json", "proof.md", "cost.md", "releases.json")
+
+
+def normalize(text: str) -> str:
+    """Make punctuation and hyphenation irrelevant to simple term coverage."""
+    return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
 
 
 def load_jsonl(path: Path | None) -> list[dict]:
@@ -23,16 +29,28 @@ def load_jsonl(path: Path | None) -> list[dict]:
 
 
 def evaluate(prompt: dict, capture: dict) -> dict:
+    status = str(capture.get("status", "completed"))
+    if status != "completed":
+        return {
+            "assistant": capture["assistant"],
+            "prompt_id": prompt["id"],
+            "captured_at": capture.get("captured_at"),
+            "status": status,
+            "elapsed_seconds": capture.get("elapsed_seconds"),
+            "error": capture.get("error"),
+            "needs_human_review": True,
+        }
     response = str(capture.get("response", ""))
-    lower = response.lower()
-    expected = [term for term in prompt["expected"] if term.lower() in lower]
-    forbidden = [term for term in prompt["forbidden"] if term.lower() in lower]
+    normalized = normalize(response)
+    expected = [term for term in prompt["expected"] if normalize(term) in normalized]
+    forbidden = [term for term in prompt["forbidden"] if normalize(term) in normalized]
     citations = [str(url) for url in capture.get("citations", [])]
     heliox_citations = [url for url in citations if urlparse(url).netloc in {"www.helioxos.dev", "helioxos.dev", "github.com"}]
     return {
         "assistant": capture["assistant"],
         "prompt_id": prompt["id"],
         "captured_at": capture.get("captured_at"),
+        "status": "completed",
         "expected_term_coverage": round(len(expected) / max(len(prompt["expected"]), 1), 3),
         "expected_terms_found": expected,
         "forbidden_terms_found": forbidden,
@@ -53,12 +71,15 @@ def audit(captures: list[dict]) -> dict:
     evaluations = []
     for capture in captures:
         prompt = prompts.get(capture.get("prompt_id"))
-        if prompt is None or not capture.get("assistant") or not capture.get("response"):
+        if prompt is None or not capture.get("assistant"):
             raise SystemExit(f"invalid capture record: {capture}")
+        if capture.get("status", "completed") == "completed" and not capture.get("response"):
+            raise SystemExit(f"completed capture has no response: {capture}")
         evaluations.append(evaluate(prompt, capture))
     assistants = sorted({item["assistant"] for item in evaluations})
+    completed = [item for item in evaluations if item["status"] == "completed"]
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "audit_date": date.today().isoformat(),
         "prompt_count": len(prompts),
         "source_readiness": {"passed": all(item["exists"] and item["bytes"] > 0 for item in source_checks), "checks": source_checks},
@@ -66,6 +87,8 @@ def audit(captures: list[dict]) -> dict:
             "status": "evaluated" if evaluations else "pending-real-responses",
             "assistants": assistants,
             "capture_count": len(evaluations),
+            "completed_count": len(completed),
+            "incomplete_count": len(evaluations) - len(completed),
             "evaluations": evaluations,
         },
         "interpretation": "Keyword scoring is a triage signal, not a factual judgment. Every flagged or high-impact answer requires human review.",
