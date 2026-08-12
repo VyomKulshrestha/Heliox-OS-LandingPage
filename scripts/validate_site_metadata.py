@@ -14,6 +14,11 @@ def main() -> None:
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     if '<link rel="canonical" href="https://www.helioxos.dev/"' not in html:
         raise SystemExit("canonical homepage link is missing")
+    verification = re.search(
+        r'<meta name="google-site-verification" content="([^"]+)"\s*/?>', html
+    )
+    if not verification or len(verification.group(1)) < 20:
+        raise SystemExit("Google Search Console verification metadata is missing")
     match = re.search(
         r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>',
         html,
