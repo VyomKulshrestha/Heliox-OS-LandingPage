@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Heliox OS | AI System Control Agent — Voice, Gestures & Autonomous Tasks</title>
-    <meta name="description" content="Heliox OS is an open-source, privacy-first AI system control agent. Control your entire computer with natural language, voice, hand gestures, and autonomous task execution." />
+    <meta name="description" content="Heliox OS is an open-source desktop automation agent with typed actions, approval gates, reproducible latency and routing benchmarks, voice, gesture, and browser control." />
     <meta name="keywords" content="Heliox OS, AI agent, voice control, hand gestures, system automation, open source, JARVIS, privacy-first" />
     <meta name="application-name" content="Heliox OS" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -16,7 +16,7 @@
     <link rel="describedby" href="https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/codemeta.json" type="application/ld+json" />
     <link rel="sitemap" type="application/xml" href="https://www.helioxos.dev/sitemap.xml" />
     <meta property="og:title" content="Heliox OS | The Sentient Interface" />
-    <meta property="og:description" content="Control your entire computer with natural language, voice, and hand gestures. Open-source, privacy-first AI system control agent." />
+    <meta property="og:description" content="Open-source desktop automation with typed actions, approval gates, reproducible software benchmarks, and bounded multimodal control." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.helioxos.dev/" />
     <meta property="og:site_name" content="Heliox OS" />
@@ -80,80 +80,25 @@
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
             "url": "https://github.com/VyomKulshrestha/Heliox-OS/releases"
+          },
+          "subjectOf": {
+            "@type": "Dataset",
+            "name": "Heliox OS reproducible software benchmark evidence",
+            "url": "https://www.helioxos.dev/proof.html",
+            "distribution": {
+              "@type": "DataDownload",
+              "encodingFormat": "application/json",
+              "contentUrl": "https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-13.json"
+            }
           }
         }
       ]
     }
     </script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="assets/tailwind.generated.css?v=1" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "inverse-on-surface": "#303034",
-                        "secondary": "#dfb7ff",
-                        "surface-container-lowest": "#0e0e12",
-                        "on-secondary-fixed": "#2d004f",
-                        "outline": "#859397",
-                        "primary-fixed-dim": "#00daf7",
-                        "tertiary-fixed-dim": "#f8be28",
-                        "on-primary": "#00363e",
-                        "on-tertiary-fixed": "#261a00",
-                        "surface-variant": "#353439",
-                        "on-secondary-fixed-variant": "#6b00b0",
-                        "surface-bright": "#39393d",
-                        "on-primary-fixed-variant": "#004e5a",
-                        "on-error": "#690005",
-                        "outline-variant": "#3b494c",
-                        "on-tertiary": "#402d00",
-                        "on-tertiary-container": "#6f5200",
-                        "on-secondary-container": "#f7e6ff",
-                        "error": "#ffb4ab",
-                        "primary-fixed": "#a3eeff",
-                        "secondary-fixed": "#f1daff",
-                        "tertiary-fixed": "#ffdf9e",
-                        "background": "#050508",
-                        "surface-container-low": "#1b1b1f",
-                        "on-primary-fixed": "#001f25",
-                        "on-background": "#e5e1e7",
-                        "on-surface-variant": "#bac9cd",
-                        "on-tertiary-fixed-variant": "#5b4300",
-                        "surface-dim": "#131317",
-                        "surface-tint": "#00daf7",
-                        "surface-container": "#1f1f23",
-                        "error-container": "#93000a",
-                        "on-surface": "#e5e1e7",
-                        "surface-container-highest": "#353439",
-                        "secondary-fixed-dim": "#dfb7ff",
-                        "on-error-container": "#ffdad6",
-                        "on-secondary": "#4b007e",
-                        "surface-container-high": "#2a292e",
-                        "inverse-primary": "#006877",
-                        "secondary-container": "#9d05ff",
-                        "on-primary-container": "#00606e",
-                        "primary-container": "#00e1ff",
-                        "surface": "#131317",
-                        "inverse-surface": "#e5e1e7",
-                        "primary": "#bcf2ff",
-                        "tertiary-container": "#ffc42f",
-                        "tertiary": "#ffe6b9"
-                    },
-                    fontFamily: {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Inter"],
-                        "label": ["Space Grotesk"],
-                        "mono": ["JetBrains Mono", "monospace"]
-                    },
-                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
-                },
-            },
-        }
-    </script>
-    <link rel="stylesheet" href="style.css?v=19" />
+    <link rel="stylesheet" href="style.css?v=20" />
 </head>
 
 <body class="font-body text-on-background selection:bg-primary-container selection:text-on-primary-container">
@@ -1058,7 +1003,7 @@
                     Public release &middot; v0.11.1
                 </div>
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Adaptive Multimodal Companion</h2>
-                <p class="text-on-surface-variant text-lg leading-relaxed max-w-3xl">The largest Heliox release yet: coordinated always-on voice, bounded adaptive learning, 21 specialists, 156 action types, reliable gaze and 3D gestures, guarded neural-research workflows, and more truthful desktop execution.</p>
+                <p class="text-on-surface-variant text-lg leading-relaxed max-w-3xl">The largest Heliox release yet: coordinated always-on voice, bounded adaptive learning, 21 specialists, 156 action types, opt-in gaze and 3D gesture paths, guarded neural-research workflows, and more truthful desktop execution.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <article class="glass-panel ghost-border rounded-xl p-6"><span class="material-symbols-outlined text-primary">record_voice_over</span><h3 class="text-lg font-bold text-white mt-4">Continuous companion loop</h3><p class="text-sm text-on-surface-variant mt-2">Listening, barge-in, actions, suggestions, risk interruption, and spoken follow-up remain coordinated.</p></article>
@@ -1069,8 +1014,28 @@
                 <article class="glass-panel ghost-border rounded-xl p-6"><span class="material-symbols-outlined text-primary">verified</span><h3 class="text-lg font-bold text-white mt-4">Truthful execution</h3><p class="text-sm text-on-surface-variant mt-2">Application resolution, browser targeting, approvals, cancellation, result reporting, and first-run setup are more deterministic.</p></article>
             </div>
             <div class="glass-panel ghost-border rounded-xl p-6 md:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                <div><p class="text-xs font-mono text-primary tracking-widest uppercase">Verified release snapshot</p><p class="text-white mt-2">1,642 Python tests · 179 frontend tests · 24 visual scenarios · 12 Rust tests · 0 high-severity npm vulnerabilities</p><p class="text-xs text-on-surface-variant mt-2">Physical microphone, camera, gaze, gesture, and neural accuracy remains device-dependent.</p></div>
+                <div><p class="text-xs font-mono text-primary tracking-widest uppercase">Current main software validation</p><p class="text-white mt-2">1,653 Python tests passed · 179 frontend tests passed · cross-platform visual and Rust checks passed · 0 high-severity npm vulnerabilities</p><p class="text-xs text-on-surface-variant mt-2">Physical microphone, camera, gaze, gesture, audible TTS, and live-EEG accuracy remains device-dependent.</p></div>
                 <div class="flex flex-wrap gap-3 shrink-0"><a href="https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.1" target="_blank" class="bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg hover:scale-105 transition-all">Download v0.11.1</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.1.md" target="_blank" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Release notes</a></div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="benchmarks" class="space-y-10 scroll-mt-28">
+            <div class="max-w-4xl space-y-4">
+                <p class="text-primary font-mono text-xs tracking-[0.22em] uppercase">Measured software evidence · 13 August 2026</p>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Benchmarks with boundaries.</h2>
+                <p class="text-on-surface-variant text-lg leading-relaxed">The public evidence bundle records distributions, regression controls, raw data, reproduction commands, and known exclusions. These are software-path measurements on one Windows host—not universal device, provider, network, or human-accuracy claims.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">28.640 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 30.490 ms p95 and zero model calls.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-secondary font-mono text-xs uppercase tracking-widest">Intent controls</p><p class="text-3xl font-headline font-bold text-white mt-4">59 / 59</p><p class="text-sm text-on-surface-variant mt-2">A fixed deterministic routing regression set, not population-level language accuracy.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">65 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 16.296 ms maximum gap.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-tertiary font-mono text-xs uppercase tracking-widest">Learned risk</p><p class="text-3xl font-headline font-bold text-white mt-4">36k / 5.4k</p><p class="text-sm text-on-surface-variant mt-2">Training and temporal-validation samples for a bounded disk/process predictor; deterministic policy remains authoritative.</p></article>
+            </div>
+            <div class="glass-panel ghost-border rounded-xl p-6 md:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div><p class="text-white font-bold">What these numbers exclude</p><p class="text-sm text-on-surface-variant mt-2 max-w-3xl">Model-provider and network latency, browser page loads, UI rendering, microphone capture, audible TTS, camera, gesture, gaze, live EEG, and human accuracy all require separate evidence.</p></div>
+                <div class="flex flex-wrap gap-3 shrink-0"><a href="proof.html" class="bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg hover:scale-105 transition-all">Read methodology</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-13.json" target="_blank" rel="noopener noreferrer" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Inspect raw JSON</a></div>
             </div>
         </section>
 

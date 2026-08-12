@@ -22,6 +22,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: npm ci
+      - name: Verify compiled production CSS
+        shell: bash
+        run: |
+          npm run build:css
+          git diff --exit-code -- assets/tailwind.generated.css
       - run: npm run test:content-negotiation
       - run: npm run test:mcp
       - run: python -m unittest scripts/test_visibility_audit.py

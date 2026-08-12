@@ -3,10 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.cjs -i assets/tailwind.input.css -o assets/tailwind.generated.css --minify",
     "test:content-negotiation": "node --test scripts/test_content_negotiation.mjs",
     "test:mcp": "node scripts/test_docs_mcp.mjs"
   },
   "dependencies": {
     "@vercel/functions": "3.9.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "0.5.10",
+    "tailwindcss": "3.4.17"
   }
 }

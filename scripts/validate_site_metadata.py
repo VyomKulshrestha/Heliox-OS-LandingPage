@@ -34,6 +34,29 @@ def main() -> None:
         raise SystemExit("canonical code repository drifted")
     if "Download v0.9.0" in html or "Heliox-OS_0.9.0_" in html:
         raise SystemExit("website still advertises the superseded installer")
+    if "cdn.tailwindcss.com" in html or "tailwind.config =" in html:
+        raise SystemExit("homepage must use compiled CSS instead of the Tailwind runtime CDN")
+    generated_css = ROOT / "assets" / "tailwind.generated.css"
+    if 'href="assets/tailwind.generated.css?v=1"' not in html or not generated_css.exists():
+        raise SystemExit("homepage compiled CSS asset is missing")
+    if generated_css.stat().st_size < 20_000:
+        raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
+    required_homepage_evidence = (
+        'id="benchmarks"',
+        "28.640 ms",
+        "30.490 ms p95",
+        "59 / 59",
+        "65 ticks",
+        "36k / 5.4k",
+        "software-benchmarks-2026-08-13.json",
+        "audible TTS",
+        "not population-level language accuracy",
+    )
+    for claim in required_homepage_evidence:
+        if claim not in html:
+            raise SystemExit(f"homepage is missing direct benchmark evidence: {claim}")
+    if software.get("subjectOf", {}).get("@type") != "Dataset":
+        raise SystemExit("structured software metadata does not expose benchmark evidence")
 
     expected_counters = {
         "156": "156",

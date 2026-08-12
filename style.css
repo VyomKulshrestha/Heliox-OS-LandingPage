@@ -411,9 +411,9 @@ main, footer { position: relative; z-index: 1; }
     --hworld-world-opacity: 1;
     position: relative;
     z-index: 8;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
-    margin-left: calc(50% - 50vw);
+    margin-left: 0;
     overflow: visible;
     background: #02070b;
     color: #f4fbff;
@@ -1165,9 +1165,9 @@ body.scroll-world-active > nav {
     --hworld-accent: #6deeff;
     position: relative;
     z-index: 8;
-    width: 100vw;
+    width: 100%;
     min-height: 100svh;
-    margin-left: calc(50% - 50vw);
+    margin-left: 0;
     overflow: visible;
     isolation: isolate;
     background: #030607;
