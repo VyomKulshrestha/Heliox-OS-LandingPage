@@ -11,6 +11,7 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 - [Frequently asked questions](https://www.helioxos.dev/faq.md): Direct answers about cost, supported platforms, privacy, models, autonomy, neural research, and safety.
 - [Releases](https://github.com/VyomKulshrestha/Heliox-OS/releases): Official installers and release notes.
 - [Source repository](https://github.com/VyomKulshrestha/Heliox-OS): MIT-licensed source and project documentation.
+- [Cost](https://www.helioxos.dev/cost.md): Free-core status, optional provider charges, model downloads, hardware needs, and hosted-service status.
 
 ## Trust and Safety
 
