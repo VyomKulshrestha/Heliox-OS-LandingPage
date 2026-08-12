@@ -23,6 +23,7 @@ EXPECTED = {
     "/heliox-vs-open-interpreter.html": "/heliox-vs-open-interpreter.md",
     "/heliox-vs-traditional-automation.html": "/heliox-vs-traditional-automation.md",
     "/cost.html": "/cost.md",
+    "/proof.html": "/proof.md",
 }
 
 

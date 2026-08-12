@@ -30,6 +30,35 @@ def main() -> None:
     if "Download v0.9.0" in html or "Heliox-OS_0.9.0_" in html:
         raise SystemExit("website still advertises the superseded installer")
 
+    expected_counters = {
+        "156": "156",
+        "30": "30+",
+        "21": "21",
+    }
+    for target, visible_value in expected_counters.items():
+        pattern = rf'data-target="{target}"(?:\s+data-suffix="\+")?[^>]*>{re.escape(visible_value)}<'
+        if not re.search(pattern, html):
+            raise SystemExit(
+                f"counter {target} must expose its real value without requiring JavaScript"
+            )
+    if re.search(r'class="[^"]*count-up[^"]*"[^>]*>0\+?<', html):
+        raise SystemExit("crawler-visible counters must not render as zero")
+    if "<!-- 10 Specialist Agents -->" in html:
+        raise SystemExit("stale specialist count remains in homepage source")
+    if 'href="proof.html"' not in html:
+        raise SystemExit("homepage does not expose the human-readable evidence center")
+
+    proof_html = (ROOT / "proof.html").read_text(encoding="utf-8")
+    required_proof_claims = (
+        '<link rel="canonical" href="https://www.helioxos.dev/proof.html">',
+        "11 independent post-condition verifiers",
+        "production certificate remains pending",
+        "recorded/synthetic EEG research",
+    )
+    for claim in required_proof_claims:
+        if claim not in proof_html:
+            raise SystemExit(f"evidence center is missing required claim: {claim}")
+
     releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
     if releases["latest_published_version"] != software["softwareVersion"]:
         raise SystemExit("structured data and release feed disagree")

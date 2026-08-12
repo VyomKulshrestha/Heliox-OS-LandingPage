@@ -18,6 +18,7 @@ export const MARKDOWN_ROUTES = new Map([
     "/heliox-vs-traditional-automation.md",
   ],
   ["/cost.html", "/cost.md"],
+  ["/proof.html", "/proof.md"],
 ]);
 
 export function acceptsMarkdown(acceptHeader = "") {
@@ -61,5 +62,6 @@ export const config = {
     "/heliox-vs-open-interpreter.html",
     "/heliox-vs-traditional-automation.html",
     "/cost.html",
+    "/proof.html",
   ],
 };

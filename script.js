@@ -90,12 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const counterFrames = new WeakMap();
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const resetCounter = (counter) => {
+    const cancelCounterAnimation = (counter) => {
         const animationFrame = counterFrames.get(counter);
         if (animationFrame) cancelAnimationFrame(animationFrame);
-
-        const suffix = counter.getAttribute('data-suffix') || '';
-        counter.textContent = '0' + suffix;
+        counterFrames.delete(counter);
     };
 
     const animateCounter = (counter) => {
@@ -107,7 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        resetCounter(counter);
+        cancelCounterAnimation(counter);
+        counter.textContent = '0' + suffix;
         const duration = 1600;
         const start = performance.now();
 
@@ -131,20 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach((entry) => {
             const counter = entry.target;
 
-            if (entry.isIntersecting) {
-                if (counter.dataset.counterVisible !== 'true') {
-                    counter.dataset.counterVisible = 'true';
-                    animateCounter(counter);
-                }
-            } else {
-                counter.dataset.counterVisible = 'false';
-                resetCounter(counter);
+            if (entry.isIntersecting && counter.dataset.counterAnimated !== 'true') {
+                counter.dataset.counterAnimated = 'true';
+                animateCounter(counter);
             }
         });
     }, { threshold: 0.5 });
 
     counters.forEach((counter) => {
-        resetCounter(counter);
         counterObserver.observe(counter);
     });
 
