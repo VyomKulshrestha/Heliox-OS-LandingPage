@@ -1,0 +1,68 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Heliox OS Public Metadata API",
+    "version": "1.0.0",
+    "description": "Read-only public metadata and documentation MCP. No endpoint controls a user's computer or local Heliox daemon."
+  },
+  "servers": [{ "url": "https://www.helioxos.dev" }],
+  "paths": {
+    "/capabilities.json": {
+      "get": {
+        "operationId": "getCapabilities",
+        "summary": "Get generated capability metadata",
+        "responses": {
+          "200": {
+            "description": "Capability catalog",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/releases.json": {
+      "get": {
+        "operationId": "getReleases",
+        "summary": "Get structured releases",
+        "responses": {
+          "200": {
+            "description": "Release catalog",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/api/mcp": {
+      "get": {
+        "operationId": "getMcpServerCard",
+        "summary": "Get the read-only MCP server card",
+        "responses": { "200": { "description": "MCP endpoint metadata" } }
+      },
+      "post": {
+        "operationId": "callDocumentationMcp",
+        "summary": "Send a JSON-RPC request to the read-only documentation MCP",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["jsonrpc", "method"],
+                "properties": {
+                  "jsonrpc": { "const": "2.0" },
+                  "id": {},
+                  "method": { "type": "string" },
+                  "params": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "JSON-RPC response" },
+          "202": { "description": "Notification accepted" },
+          "403": { "description": "Invalid browser Origin" }
+        }
+      }
+    }
+  }
+}

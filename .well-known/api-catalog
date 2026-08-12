@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "name": "Heliox OS public metadata APIs",
+  "description": "Unauthenticated read-only product metadata. No local desktop-control API is public.",
+  "openapi": "https://www.helioxos.dev/openapi.json",
+  "apis": [
+    { "name": "Capability catalog", "url": "https://www.helioxos.dev/capabilities.json", "media_type": "application/json" },
+    { "name": "Release catalog", "url": "https://www.helioxos.dev/releases.json", "media_type": "application/json" },
+    { "name": "Release JSON Feed", "url": "https://www.helioxos.dev/releases.feed.json", "media_type": "application/feed+json" },
+    { "name": "Release RSS", "url": "https://www.helioxos.dev/releases.xml", "media_type": "application/rss+xml" },
+    { "name": "Documentation MCP", "url": "https://www.helioxos.dev/api/mcp", "media_type": "application/json", "protocol": "MCP Streamable HTTP" }
+  ],
+  "safety": { "read_only": true, "credentials_required": false, "computer_control": false }
+}

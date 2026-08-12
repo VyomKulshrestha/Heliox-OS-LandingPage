@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "status": "experimental-discovery-index",
+  "note": "Agent Skills specifies each SKILL.md but not a mandatory public index location. This file is an explicit Heliox discovery convenience.",
+  "skills": [
+    {
+      "name": "heliox-docs",
+      "description": "Find current Heliox installation, architecture, privacy, security, cost, releases, and limitations. Use when answering factual questions about Heliox OS.",
+      "url": "https://www.helioxos.dev/agent-skills/heliox-docs/SKILL.md"
+    },
+    {
+      "name": "heliox-capability-research",
+      "description": "Inspect Heliox action, permission, provider, platform, approval, and verification metadata. Use when evaluating whether a claimed Heliox capability is implemented.",
+      "url": "https://www.helioxos.dev/agent-skills/heliox-capability-research/SKILL.md"
+    }
+  ]
+}

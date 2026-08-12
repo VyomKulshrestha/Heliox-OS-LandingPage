@@ -41,6 +41,10 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 - [Contributing](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/CONTRIBUTING.md): Development workflow and contribution requirements.
 - [Agent development](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/AGENT_DEVELOPMENT_GUIDE.md): Specialist-agent extension guide.
 - [IPC message formats](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/IPC_MESSAGE_FORMATS.md): UI-daemon protocol documentation.
+- [Read-only documentation MCP](https://www.helioxos.dev/.well-known/mcp.json): Public MCP discovery; it cannot reach a user's local daemon or control a computer.
+- [Public API catalog](https://www.helioxos.dev/.well-known/api-catalog): Read-only metadata APIs and media types.
+- [OpenAPI description](https://www.helioxos.dev/openapi.json): Public metadata and documentation MCP paths.
+- [Agent Skills index](https://www.helioxos.dev/.well-known/agent-skills/index.json): Experimental discovery index for two read-only research skills.
 
 ## Comparisons
 

@@ -1,0 +1,13 @@
+{
+  "schema_version": "2026-07-28",
+  "name": "heliox-docs",
+  "title": "Heliox OS Documentation",
+  "description": "Read-only public documentation, capability, safety, installation, and release lookup. This server cannot access a user's daemon or control a computer.",
+  "endpoint": "https://www.helioxos.dev/api/mcp",
+  "transport": "streamable-http",
+  "supported_protocol_versions": ["2026-07-28", "2025-11-25", "2025-06-18"],
+  "authentication": { "required": false },
+  "capabilities": { "tools": {} },
+  "safety": { "read_only": true, "local_daemon_exposed": false, "user_data_access": false },
+  "documentation": "https://www.helioxos.dev/llms.txt"
+}
