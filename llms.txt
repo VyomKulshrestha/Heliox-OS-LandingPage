@@ -14,6 +14,7 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 
 ## Trust and Safety
 
+- [Evidence and limitations](https://www.helioxos.dev/proof.md): Generated capability coverage, live CI links, measured local latency, hardware claim boundaries, known limitations, and representative closed regressions.
 - [Privacy policy](https://www.helioxos.dev/privacy.html.md): Local records, external providers, credentials, sensors, and telemetry boundaries.
 - [Security overview](https://www.helioxos.dev/whitepaper.html.md): Permission tiers, source-scoped authority, auditing, rollback, and known limits.
 - [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
