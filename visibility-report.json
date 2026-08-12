@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-08-12",
+  "prompt_count": 30,
+  "source_readiness": {
+    "passed": true,
+    "checks": [
+      {
+        "path": "llms.txt",
+        "exists": true,
+        "bytes": 6578
+      },
+      {
+        "path": "capabilities.json",
+        "exists": true,
+        "bytes": 185516
+      },
+      {
+        "path": "proof.md",
+        "exists": true,
+        "bytes": 9050
+      },
+      {
+        "path": "cost.md",
+        "exists": true,
+        "bytes": 1946
+      },
+      {
+        "path": "releases.json",
+        "exists": true,
+        "bytes": 3905
+      }
+    ]
+  },
+  "assistant_sampling": {
+    "status": "pending-real-responses",
+    "assistants": [],
+    "capture_count": 0,
+    "evaluations": []
+  },
+  "interpretation": "Keyword scoring is a triage signal, not a factual judgment. Every flagged or high-impact answer requires human review."
+}

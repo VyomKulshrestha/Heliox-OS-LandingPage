@@ -24,6 +24,8 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 - [Security overview](https://www.helioxos.dev/whitepaper.html.md): Permission tiers, source-scoped authority, auditing, rollback, and known limits.
 - [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
+- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Thirty recurring prompts, source checks, real-response capture format, and honest pending/evaluated status.
+- [Visibility report](https://www.helioxos.dev/visibility-report.json): Current source-readiness and assistant-sampling status.
 
 ## Use Cases
 

@@ -81,3 +81,5 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 - Privacy policy: https://www.helioxos.dev/privacy.html.md
 - Security overview: https://www.helioxos.dev/whitepaper.html.md
 - FAQ: https://www.helioxos.dev/faq.md
+- AI visibility methodology: https://www.helioxos.dev/ai-visibility.md
+- AI visibility report: https://www.helioxos.dev/visibility-report.json
