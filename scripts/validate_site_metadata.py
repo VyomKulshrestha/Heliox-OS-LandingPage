@@ -23,12 +23,12 @@ def main() -> None:
         raise SystemExit("JSON-LD graph is missing")
     graph = json.loads(match.group(1))["@graph"]
     software = next(item for item in graph if item["@type"] == "SoftwareApplication")
-    if software["softwareVersion"] != "0.9.0":
+    if software["softwareVersion"] != "0.11.0":
         raise SystemExit("structured data must describe the latest published installer")
     if software["codeRepository"] != "https://github.com/VyomKulshrestha/Heliox-OS":
         raise SystemExit("canonical code repository drifted")
-    if "Download v0.10.1" in html or "Heliox-OS_0.10.1_" in html:
-        raise SystemExit("website advertises draft installers as publicly downloadable")
+    if "Download v0.9.0" in html or "Heliox-OS_0.9.0_" in html:
+        raise SystemExit("website still advertises the superseded installer")
 
     releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
     if releases["latest_published_version"] != software["softwareVersion"]:

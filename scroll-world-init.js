@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'awakening',
                 label: 'Awakening',
                 anchors: ['#top'],
-                eyebrow: 'SOURCE v0.10.1 RC / INSTALLERS v0.9.0',
+                eyebrow: 'v0.11.0 / ADAPTIVE MULTIMODAL COMPANION',
                 title: 'Your computer becomes an intelligent world.',
                 body: 'Heliox is a privacy-first AI system control agent that plans, executes, and verifies complex work across your computer using natural language, voice, vision, and gesture.',
                 accent: '#6deeff',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { value: 'Tier 5', label: 'security' }
                 ],
                 cta: {
-                    primary: { label: 'Download v0.9.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases' },
+                    primary: { label: 'Download v0.11.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.0' },
                     secondary: { label: 'Explore source', href: 'https://github.com/VyomKulshrestha/Heliox-OS' }
                 }
             },
@@ -72,26 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]
             },
             {
-                id: 'architecture',
-                label: 'Architecture',
-                anchors: ['#architecture'],
-                eyebrow: 'THE AGENT FOUNDRY',
-                title: 'One objective. Twenty-one coordinated specialists.',
-                body: 'The gateway, planner, orchestrator, specialists, verifier, reflector, and security layer form a modular cognitive pipeline rather than a simple command runner.',
+                id: 'release',
+                label: 'v0.11 Release',
+                anchors: ['#release', '#architecture'],
+                eyebrow: 'HELIOX OS v0.11.0',
+                title: 'The adaptive companion release.',
+                body: 'v0.11 connects continuous companionship, bounded self-learning, multimodal control, neural research, and truthful execution into one release-ready system.',
                 accent: '#c4a4ff',
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
                 clip: 'assets/scroll-world/clip-04.mp4',
                 metrics: [
-                    { target: 7, label: 'pipeline stages' },
+                    { target: 156, label: 'verified actions' },
                     { target: 21, label: 'specialist agents' },
-                    { value: 'ReAct', label: 'execution loop' }
+                    { value: 'Local-first', label: 'adaptive memory' }
                 ],
                 signals: [
-                    { title: 'Task decomposition', body: 'Complex goals become parallel, dependency-aware work units.' },
-                    { title: 'Simulation sandbox', body: 'Risky operations can be previewed before touching the live system.' },
-                    { title: 'Verification + reflection', body: 'Every result is checked, then used to improve future planning prompts.' }
-                ]
+                    { title: 'Continuous companion loop', body: 'Hear, act, suggest, interrupt, and resume across voice and on-screen work.' },
+                    { title: 'Adaptive intelligence', body: 'Context, outcome memory, bounded learning, and world-model risk signals improve future plans.' },
+                    { title: 'Reliable multimodal control', body: 'Voice, gaze, gesture, browser, and application control share one verified execution path.' },
+                    { title: 'Neural research mode', body: 'Synthetic and recorded EEG pipelines stay clearly separated from unverified live brain control.' }
+                ],
+                cta: {
+                    primary: { label: 'Get v0.11.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.0' },
+                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.0.md' }
+                }
             },
             {
                 id: 'about',
@@ -229,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         { label: 'Security', href: 'whitepaper.html' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@HelioxOS' }
                     ],
-                    meta: '© 2026 HELIOX OS / SOURCE v0.10.1 RC / INSTALLERS v0.9.0'
+                    meta: '© 2026 HELIOX OS / v0.11.0'
                 }
             }
         ]

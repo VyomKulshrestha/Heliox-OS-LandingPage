@@ -8,12 +8,12 @@
       {
         "path": "llms.txt",
         "exists": true,
-        "bytes": 6832
+        "bytes": 6961
       },
       {
         "path": "capabilities.json",
         "exists": true,
-        "bytes": 185516
+        "bytes": 179332
       },
       {
         "path": "proof.md",
@@ -28,7 +28,7 @@
       {
         "path": "releases.json",
         "exists": true,
-        "bytes": 4191
+        "bytes": 6135
       }
     ]
   },

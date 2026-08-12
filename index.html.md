@@ -2,10 +2,9 @@
 
 Heliox OS is an open-source desktop agent that translates user requests into structured plans, executes supported computer actions, and verifies their results. It is an application that runs on Windows, macOS, and Linux; it is not an operating-system kernel.
 
-## Version status
+## Current release
 
-- Current source and draft release candidate: 0.10.1
-- Latest published installer release: 0.9.0
+- Version: 0.11.0
 - License: MIT
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
 - Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
@@ -22,6 +21,17 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 - Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
 - Supports local Ollama models and user-configured cloud providers including Gemini, OpenAI, Claude, and Meta.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
+
+## What's new in 0.11.0
+
+- Coordinated continuous voice, interruption, suggestions, browser control, and application control.
+- Bounded experience learning, temporal memory, strategy evolution, and optional JEPA-style prediction.
+- 21 executable specialists with provider coverage for all 156 declared action types.
+- Shared gaze, 3D gesture, and cursor control with temporal false-positive rejection.
+- Guarded BrainFlow synthetic and recorded EEGBCI research workflows without a live brain-control claim.
+- More truthful application launch, browser targeting, approval, cancellation, and final-result behavior.
+
+[Read the complete v0.11.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.0.md).
 
 ## Safety model
 
@@ -51,7 +61,7 @@ The repository includes a software pipeline for BrainFlow synthetic data, record
 
 ## Installation
 
-Download the 0.9.0 installer from the GitHub Releases page. The 0.10.1 artifacts remain a draft release candidate and are not public until the owner publishes that release:
+Download the 0.11.0 installer from the GitHub Releases page:
 
 - Windows: `.exe` or `.msi`
 - macOS Apple Silicon or Intel: `.dmg`
