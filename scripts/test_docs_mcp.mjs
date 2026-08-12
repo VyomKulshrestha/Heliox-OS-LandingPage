@@ -17,6 +17,7 @@ if (initialize.body.result.protocolVersion !== "2025-11-25") throw new Error("le
 const listed = await call("tools/list");
 if (listed.body.result.tools.length !== 5) throw new Error("wrong public tool count");
 if (listed.body.result.tools.some((tool) => /execute|control computer|credential/i.test(tool.name))) throw new Error("unsafe tool exposed");
+if (listed.body.result.tools.some((tool) => !tool.annotations?.readOnlyHint || tool.annotations?.destructiveHint)) throw new Error("MCP tool lacks enforced read-only hints");
 const searched = await call("tools/call", { name: "search_heliox_docs", arguments: { query: "neural" } });
 if (!searched.body.result.structuredContent.matches.some((match) => match.url.endsWith("neural-research.md"))) throw new Error("documentation search failed");
 const originalFetch = globalThis.fetch;

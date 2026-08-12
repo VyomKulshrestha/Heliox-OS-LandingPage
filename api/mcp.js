@@ -18,12 +18,14 @@ const DOCUMENTS = [
   ["Neural research", "/neural-research.md", "Synthetic and recorded EEG without a live brain-control claim."],
 ];
 
+const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true };
+
 const TOOLS = [
-  { name: "search_heliox_docs", description: "Search the public Heliox documentation index. Read-only; returns links and summaries, never desktop control.", inputSchema: { type: "object", properties: { query: { type: "string", minLength: 1 } }, required: ["query"], additionalProperties: false } },
-  { name: "list_capabilities", description: "List generated Heliox action capabilities, optionally filtered by text or permission tier.", inputSchema: { type: "object", properties: { query: { type: "string" }, permission_tier: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100, default: 25 } }, additionalProperties: false } },
-  { name: "get_action_safety", description: "Get permission, approval, platform, provider, and verification metadata for one exact action type.", inputSchema: { type: "object", properties: { action_type: { type: "string", minLength: 1 } }, required: ["action_type"], additionalProperties: false } },
-  { name: "get_latest_release", description: "Return the current public Heliox release record and release links.", inputSchema: { type: "object", properties: {}, additionalProperties: false } },
-  { name: "get_installation_steps", description: "Return installation documentation for a supported platform.", inputSchema: { type: "object", properties: { platform: { type: "string", enum: ["windows", "macos", "linux", "developer"] } }, required: ["platform"], additionalProperties: false } },
+  { name: "search_heliox_docs", description: "Search the public Heliox documentation index. Read-only; returns links and summaries, never desktop control.", inputSchema: { type: "object", properties: { query: { type: "string", minLength: 1 } }, required: ["query"], additionalProperties: false }, annotations: READ_ONLY },
+  { name: "list_capabilities", description: "List generated Heliox action capabilities, optionally filtered by text or permission tier.", inputSchema: { type: "object", properties: { query: { type: "string" }, permission_tier: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100, default: 25 } }, additionalProperties: false }, annotations: READ_ONLY },
+  { name: "get_action_safety", description: "Get permission, approval, platform, provider, and verification metadata for one exact action type.", inputSchema: { type: "object", properties: { action_type: { type: "string", minLength: 1 } }, required: ["action_type"], additionalProperties: false }, annotations: READ_ONLY },
+  { name: "get_latest_release", description: "Return the current public Heliox release record and release links.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations: READ_ONLY },
+  { name: "get_installation_steps", description: "Return installation documentation for a supported platform.", inputSchema: { type: "object", properties: { platform: { type: "string", enum: ["windows", "macos", "linux", "developer"] } }, required: ["platform"], additionalProperties: false }, annotations: READ_ONLY },
 ];
 
 const json = (value, status = 200) => new Response(JSON.stringify(value), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "access-control-allow-origin": SITE } });
