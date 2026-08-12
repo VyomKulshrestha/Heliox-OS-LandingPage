@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Browser and application control | Heliox OS</title>
+  <meta name="description" content="Heliox can open websites and installed applications, inspect supported browser interfaces, choose a likely target, act, and report what actually happened instead of declaring success after dispatch alone.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.helioxos.dev/browser-app-control.html">
+  <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/browser-app-control.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+  <link rel="stylesheet" href="content-page.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "From intent to visible action.", "description": "Heliox can open websites and installed applications, inspect supported browser interfaces, choose a likely target, act, and report what actually happened instead of declaring success after dispatch alone.", "url": "https://www.helioxos.dev/browser-app-control.html", "isPartOf": {"@type": "WebSite", "name": "Heliox OS", "url": "https://www.helioxos.dev/"}, "about": {"@type": "SoftwareApplication", "name": "Heliox OS", "operatingSystem": "Windows, macOS, Linux"}}</script>
+</head>
+<body>
+  <nav class="site-nav"><div class="shell nav-inner">
+    <a class="brand" href="/"><span>HELIOX</span> OS</a>
+    <div class="nav-links"><a href="/capabilities.json">Capabilities</a><a href="/proof.md">Evidence</a><a href="https://github.com/VyomKulshrestha/Heliox-OS">GitHub</a><a class="sponsor" href="https://github.com/sponsors/VyomKulshrestha">Sponsor</a></div>
+  </div></nav>
+  <main class="shell">
+    <div class="breadcrumb"><a href="/">Heliox OS</a> / Use cases / Browser and application control</div>
+    <header class="hero">
+      <div class="eyebrow">Browser and application control</div>
+      <h1>From intent to visible action.</h1>
+      <p class="lede">Heliox can open websites and installed applications, inspect supported browser interfaces, choose a likely target, act, and report what actually happened instead of declaring success after dispatch alone.</p>
+      <div class="truth-strip"><span>Browser + desktop actions</span><span>Target resolution</span><span>Postcondition checks</span></div>
+    </header>
+    <section class="grid" aria-label="Capability details">
+      <article class="card wide"><div class="status">Implemented with platform limits</div><h2>What Heliox does</h2><ul><li>Opens URLs, navigates pages, and performs supported element-level browser actions.</li><li>Resolves installed applications using platform-aware discovery rather than assuming an executable name.</li><li>Uses the active task and visible context to disambiguate commands such as ‘click Launch’.</li><li>Returns an explicit failure when the target is missing or the observed result does not match the plan.</li></ul></article>
+      <article class="card"><h2>Typical flow</h2><ol class="steps"><li>Describe the outcome, not an implementation detail.</li><li>Heliox selects a registered browser or application action.</li><li>Risky or consequential actions pause for approval.</li><li>A verifier or executor result determines the final status.</li></ol></article>
+      <article class="card"><h2>Safety boundary</h2><p>Sending messages, making purchases, changing accounts, and other external effects can be irreversible. Heliox keeps these actions inside permission and approval gates.</p></article>
+      <article class="card wide limit"><div class="status">Known limits</div><h2>Where this can fail</h2><p>Heliox does not understand every third-party interface. Dynamic pages, anti-bot controls, inaccessible elements, missing credentials, and unsupported applications can block execution.</p></article>
+    </section>
+    <section class="cta"><div><h2>Inspect the evidence</h2><p>Read generated coverage, measured latency, hardware boundaries, and known limitations.</p></div><a href="/proof.md">Open proof center</a></section>
+  </main>
+  <footer><div class="shell footer-inner"><span>Heliox OS · MIT licensed</span><span><a href="/browser-app-control.md">Markdown version</a> · <a href="/llms.txt">Agent index</a></span></div></footer>
+</body>
+</html>

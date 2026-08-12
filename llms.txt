@@ -20,6 +20,16 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 - [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
 
+## Use Cases
+
+- [Voice-controlled desktop automation](https://www.helioxos.dev/voice-control.md): Voice input, continuous listening, approvals, spoken status, and hardware limits.
+- [Browser and application control](https://www.helioxos.dev/browser-app-control.md): Target resolution, supported actions, verification, and failure boundaries.
+- [Accessibility and hands-free operation](https://www.helioxos.dev/accessibility-hands-free.md): Multiple input modes, stop paths, and the non-certified research boundary.
+- [Gesture and gaze control](https://www.helioxos.dev/gesture-gaze-control.md): On-device visual signals, temporal confirmation, calibration, and physical-camera limits.
+- [Autonomous workflows](https://www.helioxos.dev/autonomous-workflows.md): Durable jobs, bounded parallelism, interruptions, and supervision.
+- [Plugin marketplace](https://www.helioxos.dev/plugin-marketplace.md): Moderated submissions, file-integrity checks, capability declarations, and runtime limits.
+- [Recorded-EEG and neural research](https://www.helioxos.dev/neural-research.md): Synthetic and recorded-data validation without a live brain-control claim.
+
 ## Developers
 
 - [README](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/README.md): Setup, features, action catalog, testing, and troubleshooting.

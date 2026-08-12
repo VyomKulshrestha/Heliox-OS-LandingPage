@@ -37,6 +37,16 @@ Credentials are stored in Windows Credential Manager, macOS Keychain, or a Secre
 
 The repository includes a software pipeline for BrainFlow synthetic data, recorded EEG playback, and a PhysioNet EEGBCI CSP/LDA benchmark. These results validate software integration with synthetic or recorded data only. They are not evidence of live brain control, human accuracy, medical utility, or clinical validation. Neural intents remain bounded and require separate non-neural arming and confirmation controls.
 
+## Plain-language use cases
+
+- [Voice-controlled desktop automation](https://www.helioxos.dev/voice-control.md)
+- [Browser and application control](https://www.helioxos.dev/browser-app-control.md)
+- [Accessibility and hands-free operation](https://www.helioxos.dev/accessibility-hands-free.md)
+- [Gesture and gaze control](https://www.helioxos.dev/gesture-gaze-control.md)
+- [Autonomous workflows](https://www.helioxos.dev/autonomous-workflows.md)
+- [Plugin marketplace](https://www.helioxos.dev/plugin-marketplace.md)
+- [Recorded-EEG and neural research](https://www.helioxos.dev/neural-research.md)
+
 ## Installation
 
 Download an installer from the GitHub Releases page:

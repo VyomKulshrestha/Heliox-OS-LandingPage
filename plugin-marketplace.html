@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plugin marketplace | Heliox OS</title>
+  <meta name="description" content="Plugins add actions and integrations through declared manifests. The public marketplace is repository-governed so a submission can be reviewed, tested, and distributed without rebuilding the desktop application for every listing change.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.helioxos.dev/plugin-marketplace.html">
+  <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/plugin-marketplace.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+  <link rel="stylesheet" href="content-page.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Extend Heliox without hiding trust decisions.", "description": "Plugins add actions and integrations through declared manifests. The public marketplace is repository-governed so a submission can be reviewed, tested, and distributed without rebuilding the desktop application for every listing change.", "url": "https://www.helioxos.dev/plugin-marketplace.html", "isPartOf": {"@type": "WebSite", "name": "Heliox OS", "url": "https://www.helioxos.dev/"}, "about": {"@type": "SoftwareApplication", "name": "Heliox OS", "operatingSystem": "Windows, macOS, Linux"}}</script>
+</head>
+<body>
+  <nav class="site-nav"><div class="shell nav-inner">
+    <a class="brand" href="/"><span>HELIOX</span> OS</a>
+    <div class="nav-links"><a href="/capabilities.json">Capabilities</a><a href="/proof.md">Evidence</a><a href="https://github.com/VyomKulshrestha/Heliox-OS">GitHub</a><a class="sponsor" href="https://github.com/sponsors/VyomKulshrestha">Sponsor</a></div>
+  </div></nav>
+  <main class="shell">
+    <div class="breadcrumb"><a href="/">Heliox OS</a> / Use cases / Plugin marketplace</div>
+    <header class="hero">
+      <div class="eyebrow">Plugin marketplace</div>
+      <h1>Extend Heliox without hiding trust decisions.</h1>
+      <p class="lede">Plugins add actions and integrations through declared manifests. The public marketplace is repository-governed so a submission can be reviewed, tested, and distributed without rebuilding the desktop application for every listing change.</p>
+      <div class="truth-strip"><span>Manifest-declared capabilities</span><span>Hash verification</span><span>Repository moderation</span></div>
+    </header>
+    <section class="grid" aria-label="Capability details">
+      <article class="card wide"><div class="status">Implemented with moderated catalog</div><h2>What Heliox does</h2><ul><li>Lists approved marketplace packages from a versioned public catalog.</li><li>Verifies package files against approved SHA-256 metadata during installation.</li><li>Shows requested capabilities before the plugin becomes active.</li><li>Allows contributors to propose marketplace entries through a reviewed pull request.</li></ul></article>
+      <article class="card"><h2>Typical flow</h2><ol class="steps"><li>Author a plugin and its manifest.</li><li>Submit the package metadata through the marketplace contribution path.</li><li>Pass automated validation and maintainer review.</li><li>Users install the approved, integrity-checked package from the app.</li></ol></article>
+      <article class="card"><h2>Safety boundary</h2><p>Marketplace approval does not make arbitrary plugin code harmless. Plugins remain constrained by declared capabilities and Heliox&#x27;s runtime policy, and sensitive integrations still require user credentials.</p></article>
+      <article class="card wide limit"><div class="status">Known limits</div><h2>Where this can fail</h2><p>Platform dependencies, external API changes, revoked credentials, and plugin-specific bugs can prevent a listed integration from working. Availability is not a guarantee of every third-party service.</p></article>
+    </section>
+    <section class="cta"><div><h2>Inspect the evidence</h2><p>Read generated coverage, measured latency, hardware boundaries, and known limitations.</p></div><a href="/proof.md">Open proof center</a></section>
+  </main>
+  <footer><div class="shell footer-inner"><span>Heliox OS · MIT licensed</span><span><a href="/plugin-marketplace.md">Markdown version</a> · <a href="/llms.txt">Agent index</a></span></div></footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gesture and gaze control | Heliox OS</title>
+  <meta name="description" content="The camera pipeline derives hand gestures and a coarse gaze region on the user&#x27;s device. It combines temporal and spatial checks to reduce face-driven and single-frame false positives.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.helioxos.dev/gesture-gaze-control.html">
+  <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/gesture-gaze-control.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+  <link rel="stylesheet" href="content-page.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "On-device visual intent, bounded by safety.", "description": "The camera pipeline derives hand gestures and a coarse gaze region on the user's device. It combines temporal and spatial checks to reduce face-driven and single-frame false positives.", "url": "https://www.helioxos.dev/gesture-gaze-control.html", "isPartOf": {"@type": "WebSite", "name": "Heliox OS", "url": "https://www.helioxos.dev/"}, "about": {"@type": "SoftwareApplication", "name": "Heliox OS", "operatingSystem": "Windows, macOS, Linux"}}</script>
+</head>
+<body>
+  <nav class="site-nav"><div class="shell nav-inner">
+    <a class="brand" href="/"><span>HELIOX</span> OS</a>
+    <div class="nav-links"><a href="/capabilities.json">Capabilities</a><a href="/proof.md">Evidence</a><a href="https://github.com/VyomKulshrestha/Heliox-OS">GitHub</a><a class="sponsor" href="https://github.com/sponsors/VyomKulshrestha">Sponsor</a></div>
+  </div></nav>
+  <main class="shell">
+    <div class="breadcrumb"><a href="/">Heliox OS</a> / Use cases / Gesture and gaze control</div>
+    <header class="hero">
+      <div class="eyebrow">Gesture and gaze control</div>
+      <h1>On-device visual intent, bounded by safety.</h1>
+      <p class="lede">The camera pipeline derives hand gestures and a coarse gaze region on the user&#x27;s device. It combines temporal and spatial checks to reduce face-driven and single-frame false positives.</p>
+      <div class="truth-strip"><span>On-device inference</span><span>Temporal confirmation</span><span>Coarse gaze regions</span></div>
+    </header>
+    <section class="grid" aria-label="Capability details">
+      <article class="card wide"><div class="status">Implemented; calibration required</div><h2>What Heliox does</h2><ul><li>Tracks hand landmarks and uses depth-aware geometry for supported gesture labels.</li><li>Requires stable evidence across frames before emitting consequential gesture events.</li><li>Rejects candidates without a valid hand and applies face-exclusion checks.</li><li>Publishes only a coarse gaze label and confidence; camera frames are not sent to Heliox&#x27;s daemon.</li></ul></article>
+      <article class="card"><h2>Typical flow</h2><ol class="steps"><li>Start the camera and confirm the preview.</li><li>Allow the model to acquire a hand or face.</li><li>Hold a supported gesture long enough for temporal confirmation.</li><li>Use a non-camera control to stop or approve when required.</li></ol></article>
+      <article class="card"><h2>Safety boundary</h2><p>A gesture may respond to an already-pending approval only under the configured policy. Gaze remains a fusion signal and cannot authorize an action by itself.</p></article>
+      <article class="card wide limit"><div class="status">Known limits</div><h2>Where this can fail</h2><p>Lighting, camera placement, occlusion, skin visibility, motion blur, and model availability affect accuracy. Software tests do not prove performance on a user&#x27;s physical camera.</p></article>
+    </section>
+    <section class="cta"><div><h2>Inspect the evidence</h2><p>Read generated coverage, measured latency, hardware boundaries, and known limitations.</p></div><a href="/proof.md">Open proof center</a></section>
+  </main>
+  <footer><div class="shell footer-inner"><span>Heliox OS · MIT licensed</span><span><a href="/gesture-gaze-control.md">Markdown version</a> · <a href="/llms.txt">Agent index</a></span></div></footer>
+</body>
+</html>
