@@ -1,6 +1,6 @@
 # Heliox AI visibility audit
 
-Heliox maintains a public pack of 30 recurring questions in [`visibility-prompts.json`](https://www.helioxos.dev/visibility-prompts.json). The pack checks identity, price, privacy, capabilities, multimodal input, neural claims, safety, plugins, comparisons, releases, platforms, and limitations.
+Heliox maintains a public pack of 35 recurring questions in [`visibility-prompts.json`](https://www.helioxos.dev/visibility-prompts.json). The pack checks identity, price, privacy, capabilities, multimodal input, neural claims, safety, plugins, comparisons, releases, platforms, software benchmarks, and limitations.
 
 ## What runs automatically
 

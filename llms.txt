@@ -20,12 +20,12 @@ Current public release: 0.11.1. Heliox OS is an application-layer desktop agent,
 
 ## Trust and Safety
 
-- [Evidence and limitations](https://www.helioxos.dev/proof.md): Generated capability coverage, live CI links, measured local latency, hardware claim boundaries, known limitations, and representative closed regressions.
+- [Evidence and limitations](https://www.helioxos.dev/proof.md): Generated capability coverage, guarded latency distributions, local status actions, intent-routing controls, event-loop responsiveness, learned-risk validation, CI links, hardware boundaries, and closed regressions.
 - [Privacy policy](https://www.helioxos.dev/privacy.html.md): Local records, external providers, credentials, sensors, and telemetry boundaries.
 - [Security overview](https://www.helioxos.dev/whitepaper.html.md): Permission tiers, source-scoped authority, auditing, rollback, and known limits.
 - [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
-- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Thirty recurring prompts, source checks, real-response capture format, and honest pending/evaluated status.
+- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Thirty-five recurring prompts, including five benchmark-evidence checks, source validation, real-response capture format, and honest pending/evaluated status.
 - [Visibility report](https://www.helioxos.dev/visibility-report.json): Current source-readiness and assistant-sampling status.
 - [AI content-use policy](https://www.helioxos.dev/ai-content-policy.md): Search and grounding allowed, training declined, reference use preferred, and the separate MIT source-code boundary.
 

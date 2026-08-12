@@ -69,10 +69,31 @@ def main() -> None:
         "11 independent post-condition verifiers",
         "production certificate remains pending",
         "recorded/synthetic EEG research",
+        "59/59 regression cases",
+        "36,000 training and 5,400 temporal-validation samples",
+        "software-benchmarks-2026-08-13.json",
     )
     for claim in required_proof_claims:
         if claim not in proof_html:
             raise SystemExit(f"evidence center is missing required claim: {claim}")
+
+    proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
+    required_markdown_claims = (
+        "28.640",
+        "30.490",
+        "59/59",
+        "65 ticks",
+        "36,000",
+        "5,400",
+        "software-benchmarks-2026-08-13.json",
+        "Human microphone accuracy is not a release gate",
+        "audible quality and device output require a human check",
+        "Physical accuracy is not established across cameras",
+        "No live headset/human validation has established control accuracy",
+    )
+    for claim in required_markdown_claims:
+        if claim not in proof_markdown:
+            raise SystemExit(f"agent-readable proof is missing required claim: {claim}")
 
     releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
     if releases["latest_published_version"] != software["softwareVersion"]:

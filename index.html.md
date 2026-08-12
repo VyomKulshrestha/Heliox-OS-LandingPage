@@ -81,6 +81,14 @@ Heliox core and official installers are free under the MIT license. Local models
 
 Comparison pages are dated, link to first-party sources, and describe practical fit rather than declaring a universal winner.
 
+## Reproducible software evidence
+
+The 13 August 2026 evidence bundle reports a 28.640 ms median and 30.490 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. These measurements exclude model-provider, network, browser page-load, UI-rendering, microphone, camera, TTS, gesture, gaze, EEG, and human accuracy.
+
+- [Human-readable proof center](https://www.helioxos.dev/proof.html)
+- [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
+- [Raw software benchmark bundle](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-13.json)
+
 ## Authoritative links
 
 - Product website: https://www.helioxos.dev/
