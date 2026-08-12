@@ -26,6 +26,7 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
 - [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Thirty recurring prompts, source checks, real-response capture format, and honest pending/evaluated status.
 - [Visibility report](https://www.helioxos.dev/visibility-report.json): Current source-readiness and assistant-sampling status.
+- [AI content-use policy](https://www.helioxos.dev/ai-content-policy.md): Search and grounding allowed, training declined, reference use preferred, and the separate MIT source-code boundary.
 
 ## Use Cases
 

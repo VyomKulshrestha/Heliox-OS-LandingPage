@@ -18,6 +18,12 @@
   ],
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Signal", "value": "search=yes, ai-input=yes, ai-train=no, use=reference" }
+      ]
+    },
+    {
       "source": "/",
       "headers": [
         {

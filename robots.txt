@@ -1,4 +1,12 @@
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
 Allow: /
 
 Sitemap: https://www.helioxos.dev/sitemap.xml
+
+# Content-use policy for this website:
+# - search=yes: links and short excerpts may appear in search results.
+# - ai-input=yes: pages may be used for retrieval, grounding, and query-time answers.
+# - ai-train=no: website content should not be collected for model training or fine-tuning.
+# - use=reference: prefer citation, attribution, and limited excerpts over full reproduction.
+# These preferences apply to website content and do not change the MIT license of Heliox source code.
