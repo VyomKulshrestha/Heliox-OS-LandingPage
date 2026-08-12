@@ -47,6 +47,16 @@ def main() -> None:
         raise SystemExit("stale specialist count remains in homepage source")
     if 'href="proof.html"' not in html:
         raise SystemExit("homepage does not expose the human-readable evidence center")
+    comparison_pages = (
+        "heliox-vs-windows-copilot.html",
+        "heliox-vs-open-interpreter.html",
+        "heliox-vs-traditional-automation.html",
+    )
+    if 'id="comparisons"' not in html or 'href="#comparisons"' not in html:
+        raise SystemExit("homepage comparison pages are not directly navigable")
+    for comparison in comparison_pages:
+        if f'href="{comparison}"' not in html:
+            raise SystemExit(f"homepage does not link comparison page: {comparison}")
 
     proof_html = (ROOT / "proof.html").read_text(encoding="utf-8")
     required_proof_claims = (
