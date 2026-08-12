@@ -57,6 +57,14 @@ Download an installer from the GitHub Releases page:
 
 Developers can clone the repository, install the Python daemon dependencies, start `python -m pilot.server`, and run the Svelte UI from `tauri-app/ui`.
 
+## Honest comparisons
+
+- [Heliox OS vs Copilot on Windows](https://www.helioxos.dev/heliox-vs-windows-copilot.md)
+- [Heliox OS vs Open Interpreter](https://www.helioxos.dev/heliox-vs-open-interpreter.md)
+- [Heliox OS vs scripts, macros, and RPA](https://www.helioxos.dev/heliox-vs-traditional-automation.md)
+
+Comparison pages are dated, link to first-party sources, and describe practical fit rather than declaring a universal winner.
+
 ## Authoritative links
 
 - Product website: https://www.helioxos.dev/

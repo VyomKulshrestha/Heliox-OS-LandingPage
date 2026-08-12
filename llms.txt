@@ -37,6 +37,12 @@ Current public release: 0.10.1. Heliox OS is an application-layer desktop agent,
 - [Agent development](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/AGENT_DEVELOPMENT_GUIDE.md): Specialist-agent extension guide.
 - [IPC message formats](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/IPC_MESSAGE_FORMATS.md): UI-daemon protocol documentation.
 
+## Comparisons
+
+- [Heliox OS vs Copilot on Windows](https://www.helioxos.dev/heliox-vs-windows-copilot.md): Execution scope, platform, permissions, privacy path, and practical fit using Microsoft sources.
+- [Heliox OS vs Open Interpreter](https://www.helioxos.dev/heliox-vs-open-interpreter.md): Current agent focus, execution model, extensibility, interfaces, license, and practical fit using the current official repository.
+- [Heliox OS vs traditional automation](https://www.helioxos.dev/heliox-vs-traditional-automation.md): Language planning versus scripts, macros, and RPA, including where deterministic automation is better.
+
 ## Optional
 
 - [Sponsor Heliox](https://github.com/sponsors/VyomKulshrestha): Support ongoing open-source development.
