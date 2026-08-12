@@ -1,0 +1,8 @@
+{
+  "name": "heliox-os-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:mcp": "node scripts/test_docs_mcp.mjs"
+  }
+}
