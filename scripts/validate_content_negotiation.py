@@ -1,8 +1,9 @@
-"""Validate Vercel Accept-driven Markdown rewrites and cache separation."""
+"""Validate middleware-driven Markdown negotiation and cache separation."""
 
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,21 +28,23 @@ EXPECTED = {
 
 def main() -> None:
     config = json.loads((ROOT / "vercel.json").read_text(encoding="utf-8"))
-    rewrites = config.get("rewrites", [])
-    actual = {item["source"]: item for item in rewrites}
-    if set(actual) != set(EXPECTED):
-        raise SystemExit(f"negotiated route set drifted: {set(actual) ^ set(EXPECTED)}")
+    if config.get("rewrites"):
+        raise SystemExit("Markdown negotiation must run before filesystem routing")
+
+    middleware = (ROOT / "middleware.js").read_text(encoding="utf-8")
+    route_pattern = re.compile(r'\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,?\s*\]')
+    actual = dict(route_pattern.findall(middleware))
+    if actual != EXPECTED:
+        raise SystemExit(f"negotiated route map drifted: {actual.keys() ^ EXPECTED.keys()}")
     for source, destination in EXPECTED.items():
-        item = actual[source]
-        if item.get("destination") != destination:
-            raise SystemExit(f"wrong Markdown destination for {source}")
-        if item.get("has") != [
-            {"type": "header", "key": "accept", "value": ".*text/markdown.*"}
-        ]:
-            raise SystemExit(f"{source} does not require Accept: text/markdown")
         target = ROOT / destination.lstrip("/")
         if not target.is_file():
             raise SystemExit(f"missing Markdown representation: {target.name}")
+
+    if 'request.headers.get("accept")' not in middleware:
+        raise SystemExit("middleware does not inspect the Accept header")
+    if "return rewrite(url)" not in middleware:
+        raise SystemExit("middleware does not rewrite Markdown requests")
 
     header_rules = config.get("headers", [])
     root_headers = next(rule["headers"] for rule in header_rules if rule["source"] == "/")

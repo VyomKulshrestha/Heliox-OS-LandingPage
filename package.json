@@ -3,6 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:content-negotiation": "node --test scripts/test_content_negotiation.mjs",
     "test:mcp": "node scripts/test_docs_mcp.mjs"
+  },
+  "dependencies": {
+    "@vercel/functions": "3.9.3"
   }
 }
