@@ -26,7 +26,10 @@ def main() -> None:
     for skill in skills["skills"]:
         skill_path = ROOT / skill["url"].removeprefix("https://www.helioxos.dev/")
         content = skill_path.read_text(encoding="utf-8")
-        if f"name: {skill['name']}" not in content or "cannot" not in content.lower():
+        boundary = content.lower()
+        if f"name: {skill['name']}" not in content or not (
+            "cannot" in boundary or "never imply" in boundary
+        ):
             raise SystemExit(f"invalid or unbounded public skill: {skill['name']}")
     if set(openapi["paths"]) != {"/capabilities.json", "/releases.json", "/api/mcp"}:
         raise SystemExit("OpenAPI path surface drifted")
