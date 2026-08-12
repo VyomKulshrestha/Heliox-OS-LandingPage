@@ -11,6 +11,7 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 - Runtime requirement: Python 3.11 or newer
 - Primary hardware-development platform: Windows 10/11
 - CI coverage: Windows, macOS, and Linux; physical camera, microphone, desktop-permission, gaze, gesture, and neural behavior still requires device-specific validation
+- Release feeds: [changelog](https://www.helioxos.dev/changelog.md), [JSON](https://www.helioxos.dev/releases.json), [JSON Feed](https://www.helioxos.dev/releases.feed.json), [RSS](https://www.helioxos.dev/releases.xml)
 
 ## What it does
 
