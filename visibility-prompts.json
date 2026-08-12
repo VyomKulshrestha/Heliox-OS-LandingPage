@@ -30,7 +30,7 @@
     {"id":"compare-01","category":"comparison","prompt":"Compare Heliox OS with Copilot on Windows.","expected":["execution","windows","different"],"forbidden":["universal winner"]},
     {"id":"compare-02","category":"comparison","prompt":"Compare current Heliox OS with current Open Interpreter.","expected":["coding agent","desktop","apache"],"forbidden":["python-only"]},
     {"id":"compare-03","category":"comparison","prompt":"When should I use traditional automation instead of Heliox?","expected":["stable","deterministic","repeatability"],"forbidden":["heliox is always better"]},
-    {"id":"release-01","category":"release","prompt":"What is the latest published Heliox OS installer version?","expected":["0.11.0"],"forbidden":["0.9.0"]},
+    {"id":"release-01","category":"release","prompt":"What is the latest published Heliox OS installer version?","expected":["0.11.1"],"forbidden":["0.9.0"]},
     {"id":"platform-01","category":"platform","prompt":"Which operating systems does Heliox support?","expected":["windows","macos","linux"],"forbidden":[]},
     {"id":"limits-01","category":"limitations","prompt":"What are the most important current Heliox limitations?","expected":["hardware","platform","model"],"forbidden":["no limitations"]}
   ]

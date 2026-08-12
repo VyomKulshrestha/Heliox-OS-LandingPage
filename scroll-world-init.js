@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'awakening',
                 label: 'Awakening',
                 anchors: ['#top'],
-                eyebrow: 'v0.11.0 / ADAPTIVE MULTIMODAL COMPANION',
+                eyebrow: 'v0.11.1 / ADAPTIVE MULTIMODAL COMPANION',
                 title: 'Your computer becomes an intelligent world.',
                 body: 'Heliox is a privacy-first AI system control agent that plans, executes, and verifies complex work across your computer using natural language, voice, vision, and gesture.',
                 accent: '#6deeff',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { value: 'Tier 5', label: 'security' }
                 ],
                 cta: {
-                    primary: { label: 'Download v0.11.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.0' },
+                    primary: { label: 'Download v0.11.1', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.1' },
                     secondary: { label: 'Explore source', href: 'https://github.com/VyomKulshrestha/Heliox-OS' }
                 }
             },
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: 'release',
                 label: 'v0.11 Release',
                 anchors: ['#release', '#architecture'],
-                eyebrow: 'HELIOX OS v0.11.0',
+                eyebrow: 'HELIOX OS v0.11.1',
                 title: 'The adaptive companion release.',
                 body: 'v0.11 connects continuous companionship, bounded self-learning, multimodal control, neural research, and truthful execution into one release-ready system.',
                 accent: '#c4a4ff',
@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     { title: 'Neural research mode', body: 'Synthetic and recorded EEG pipelines stay clearly separated from unverified live brain control.' }
                 ],
                 cta: {
-                    primary: { label: 'Get v0.11.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.0' },
-                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.0.md' }
+                    primary: { label: 'Get v0.11.1', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.1' },
+                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.1.md' }
                 }
             },
             {
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         { label: 'Security', href: 'whitepaper.html' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@HelioxOS' }
                     ],
-                    meta: '© 2026 HELIOX OS / v0.11.0'
+                    meta: '© 2026 HELIOX OS / v0.11.1'
                 }
             }
         ]

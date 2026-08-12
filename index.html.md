@@ -4,7 +4,7 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 
 ## Current release
 
-- Version: 0.11.0
+- Version: 0.11.1
 - License: MIT
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
 - Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
@@ -22,7 +22,7 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 - Supports local Ollama models and user-configured cloud providers including Gemini, OpenAI, Claude, and Meta.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
 
-## What's new in 0.11.0
+## What's new in 0.11.1
 
 - Coordinated continuous voice, interruption, suggestions, browser control, and application control.
 - Bounded experience learning, temporal memory, strategy evolution, and optional JEPA-style prediction.
@@ -31,7 +31,7 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 - Guarded BrainFlow synthetic and recorded EEGBCI research workflows without a live brain-control claim.
 - More truthful application launch, browser targeting, approval, cancellation, and final-result behavior.
 
-[Read the complete v0.11.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.0.md).
+[Read the complete v0.11.1 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.1.md).
 
 ## Safety model
 
@@ -61,7 +61,7 @@ The repository includes a software pipeline for BrainFlow synthetic data, record
 
 ## Installation
 
-Download the 0.11.0 installer from the GitHub Releases page:
+Download the 0.11.1 installer from the GitHub Releases page:
 
 - Windows: `.exe` or `.msi`
 - macOS Apple Silicon or Intel: `.dmg`

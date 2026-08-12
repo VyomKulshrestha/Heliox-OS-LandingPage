@@ -28,47 +28,17 @@
       {
         "path": "releases.json",
         "exists": true,
-        "bytes": 6135
+        "bytes": 6750
       }
     ]
   },
   "assistant_sampling": {
-    "status": "evaluated",
-    "assistants": [
-      "ChatGPT",
-      "Gemini"
-    ],
-    "capture_count": 2,
-    "completed_count": 1,
-    "incomplete_count": 1,
-    "evaluations": [
-      {
-        "assistant": "Gemini",
-        "prompt_id": "identity-01",
-        "captured_at": "2026-08-12T21:15:00+05:30",
-        "status": "completed",
-        "expected_term_coverage": 1.0,
-        "expected_terms_found": [
-          "desktop",
-          "agent",
-          "open source"
-        ],
-        "forbidden_terms_found": [],
-        "citation_count": 2,
-        "heliox_citation_count": 2,
-        "competitors_shown": [],
-        "needs_human_review": false
-      },
-      {
-        "assistant": "ChatGPT",
-        "prompt_id": "identity-01",
-        "captured_at": "2026-08-12T21:13:00+05:30",
-        "status": "timed_out",
-        "elapsed_seconds": 110,
-        "error": "No completed source-grounded answer after a fresh-chat probe; the UI remained in repository search.",
-        "needs_human_review": true
-      }
-    ]
+    "status": "pending-real-responses",
+    "assistants": [],
+    "capture_count": 0,
+    "completed_count": 0,
+    "incomplete_count": 0,
+    "evaluations": []
   },
   "interpretation": "Keyword scoring is a triage signal, not a factual judgment. Every flagged or high-impact answer requires human review."
 }

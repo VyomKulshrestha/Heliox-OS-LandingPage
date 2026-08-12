@@ -23,7 +23,7 @@ def main() -> None:
         raise SystemExit("JSON-LD graph is missing")
     graph = json.loads(match.group(1))["@graph"]
     software = next(item for item in graph if item["@type"] == "SoftwareApplication")
-    if software["softwareVersion"] != "0.11.0":
+    if software["softwareVersion"] != "0.11.1":
         raise SystemExit("structured data must describe the latest published installer")
     if software["codeRepository"] != "https://github.com/VyomKulshrestha/Heliox-OS":
         raise SystemExit("canonical code repository drifted")
