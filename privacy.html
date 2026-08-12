@@ -100,41 +100,47 @@
             <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
             
             <h1 class="text-5xl md:text-6xl font-headline font-bold text-white mb-4 tracking-tight drop-shadow-lg relative z-10">Privacy Policy</h1>
-            <p class="text-primary font-mono text-sm tracking-widest uppercase mb-12 relative z-10 opacity-80 border-b border-white/10 pb-6">Effective Date: March 2026</p>
+            <p class="text-primary font-mono text-sm tracking-widest uppercase mb-12 relative z-10 opacity-80 border-b border-white/10 pb-6">Effective Date: August 12, 2026</p>
             
             <div class="space-y-10 text-on-surface-variant text-lg leading-relaxed font-light relative z-10">
                 <section class="space-y-4">
                     <h2 class="text-2xl font-headline font-bold text-white">1. Core Philosophy</h2>
-                    <p>At Heliox OS, privacy is not a feature—it is the foundational architecture. We believe that your sentient interface should operate entirely under your sovereign control. This Privacy Policy details how data is handled when you use the Heliox OS ecosystem.</p>
+                    <p>Heliox OS is a local-first, open-source desktop agent. This policy explains which data stays on the device, when an optional external provider can receive data, and which controls remain with the user.</p>
                 </section>
                 
                 <section class="space-y-4">
-                    <h2 class="text-2xl font-headline font-bold text-primary">2. Zero Cloud Dependency &amp; Local Execution</h2>
-                    <p>Heliox OS is fundamentally designed to run <strong>entirely on your edge device</strong>. By default, no personal data, system commands, or cognitive sync logs leave your hardware. All ambient AI processing, vision models, voice recognition, and system-level automations occur locally via your GPU/CPU, ensuring absolute cryptographic privacy.</p>
+                    <h2 class="text-2xl font-headline font-bold text-primary">2. Local-First Execution</h2>
+                    <p>The daemon, action execution, permission checks, audit records, settings, learned preferences, and supported local speech or vision components run on the user's device. Heliox does not operate a central prompt or telemetry service. Local execution does not by itself guarantee that every configured feature is offline: network actions, integrations, model downloads, and cloud model providers communicate with their respective external services when the user enables or invokes them.</p>
                 </section>
                 
                 <section class="space-y-4">
                     <h2 class="text-2xl font-headline font-bold text-secondary">3. Hybrid Cloud Mode (Optional)</h2>
-                    <p>We provide users the ability to explicitly opt-in to use frontier cloud models (such as Anthropic Claude, OpenAI, or Google Gemini) for highly complex logical processing. When Hybrid Mode is activated:</p>
+                    <p>Users can configure external model providers such as Anthropic Claude, OpenAI, Google Gemini, or Meta. When an external provider is selected:</p>
                     <ul class="list-disc pl-6 space-y-2 text-white/70">
-                        <li>API requests are routed directly from your machine to the respective provider.</li>
+                        <li>Prompts and the context needed for the requested task are sent directly from the device to that provider. Depending on the feature, context can include user instructions, extracted screen text, screenshots, files, or action results.</li>
                         <li>Heliox OS acts purely as a local interface client.</li>
                         <li>We do not intercept, store, log, or proxy your prompts or the responses through any central Heliox servers.</li>
+                        <li>The provider's own privacy, retention, account, and billing terms apply.</li>
                     </ul>
                 </section>
                 
                 <section class="space-y-4">
                     <h2 class="text-2xl font-headline font-bold text-white">4. Telemetry and Analytics</h2>
-                    <p>Our commitment to maximum transparency means absolutely <strong>zero hidden telemetry</strong>. We do not track your usage behavior, your terminal inputs, the active agents spawned, or system configurations. If automated crash reporting features are introduced in future releases, they will be strictly opt-in and fully anonymized.</p>
+                    <p>The current release contains no first-party analytics or automatic crash-reporting service. Local logs and audit databases are created so users can inspect execution and diagnose failures; they remain on the device unless the user exports or shares them. Operating systems, model providers, integrations, package registries, and downloaded dependencies can have separate logging or telemetry policies outside Heliox's control.</p>
+                </section>
+
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-white">5. Credentials, Sensors, and Local Records</h2>
+                    <p>API credentials are stored through the operating system credential service: Windows Credential Manager, macOS Keychain, or a Secret Service-compatible keyring on Linux. Heliox fails closed when secure credential storage is unavailable. Camera, microphone, gaze, gesture, screen-supervision, and neural-research features are opt-in and can create local runtime state or consented recordings as described by their controls. Users should review those controls before enabling an always-on sensor.</p>
                 </section>
                 
                 <section class="space-y-4">
-                    <h2 class="text-2xl font-headline font-bold text-white">5. Open Source Verifiability</h2>
+                    <h2 class="text-2xl font-headline font-bold text-white">6. Open Source Verifiability</h2>
                     <p>Because the core engine is open-source, you do not have to trust our words blindly. You can independently verify our data routing and privacy claims by reviewing the underlying Python code and execution nodes directly at our <a href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank" class="text-primary hover:text-white transition-colors underline decoration-primary/50 underline-offset-4">GitHub Repository</a>.</p>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl font-headline font-bold text-white">6. Contact Information</h2>
+                    <h2 class="text-2xl font-headline font-bold text-white">7. Contact Information</h2>
                     <p>For privacy-related inquiries, open-source feedback, or to discuss our cryptographic protocols, please reach out via email: <button onclick="navigator.clipboard.writeText('vyomkulshrestha2004@gmail.com'); const t = this; const o = t.innerText; t.innerText = 'Copied!'; setTimeout(() => t.innerText = o, 2000);" class="text-secondary hover:text-white transition-colors underline decoration-secondary/50 font-mono">vyo***@gmail.com</button>.</p>
                 </section>
             </div>
