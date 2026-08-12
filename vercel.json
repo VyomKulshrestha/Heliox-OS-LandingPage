@@ -1,5 +1,21 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/index.html.md" },
+    { "source": "/privacy.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/privacy.html.md" },
+    { "source": "/whitepaper.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/whitepaper.html.md" },
+    { "source": "/voice-control.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/voice-control.md" },
+    { "source": "/browser-app-control.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/browser-app-control.md" },
+    { "source": "/accessibility-hands-free.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/accessibility-hands-free.md" },
+    { "source": "/gesture-gaze-control.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/gesture-gaze-control.md" },
+    { "source": "/autonomous-workflows.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/autonomous-workflows.md" },
+    { "source": "/plugin-marketplace.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/plugin-marketplace.md" },
+    { "source": "/neural-research.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/neural-research.md" },
+    { "source": "/heliox-vs-windows-copilot.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/heliox-vs-windows-copilot.md" },
+    { "source": "/heliox-vs-open-interpreter.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/heliox-vs-open-interpreter.md" },
+    { "source": "/heliox-vs-traditional-automation.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/heliox-vs-traditional-automation.md" },
+    { "source": "/cost.html", "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }], "destination": "/cost.md" }
+  ],
   "headers": [
     {
       "source": "/",
@@ -7,6 +23,10 @@
         {
           "key": "Link",
           "value": "</index.html.md>; rel=\"alternate\"; type=\"text/markdown\", </llms.txt>; rel=\"describedby\""
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
         }
       ]
     },
@@ -25,6 +45,15 @@
         {
           "key": "Link",
           "value": "</whitepaper.html.md>; rel=\"alternate\"; type=\"text/markdown\", </llms.txt>; rel=\"describedby\""
+        }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept"
         }
       ]
     },
