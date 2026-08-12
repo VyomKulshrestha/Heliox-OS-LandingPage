@@ -50,6 +50,7 @@ Developers can clone the repository, install the Python daemon dependencies, sta
 ## Authoritative links
 
 - Product website: https://www.helioxos.dev/
+- Machine-readable capability catalog: https://www.helioxos.dev/capabilities.json
 - README: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/README.md
 - Architecture: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md
 - Security policy: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md
