@@ -254,4 +254,5 @@
         window.addEventListener(eventName, mountOnIntent, { once: true, passive: true });
     });
     window.addEventListener('scroll', mountOnIntent, { once: true, passive: true });
+    if (window.__helioxExploreRequested) mountOnIntent();
 })();

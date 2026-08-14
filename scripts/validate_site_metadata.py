@@ -67,6 +67,7 @@ def main() -> None:
         "url",
         "dateModified",
         "license",
+        "creator",
         "measurementTechnique",
         "variableMeasured",
         "distribution",
@@ -104,11 +105,18 @@ def main() -> None:
         raise SystemExit("homepage does not expose the human-readable evidence center")
 
     scroll_init = (ROOT / "scroll-world-init.js").read_text(encoding="utf-8")
+    scroll_bootstrap = (ROOT / "scroll-world-bootstrap.js").read_text(encoding="utf-8")
     if "document.addEventListener('DOMContentLoaded'" in scroll_init:
         raise SystemExit("cinematic hydration must not replace the server-rendered LCP on load")
     for event_name in ("wheel", "touchstart", "pointerdown", "keydown"):
         if f"'{event_name}'" not in scroll_init:
             raise SystemExit(f"cinematic hydration omits visitor intent event: {event_name}")
+        if f"'{event_name}'" not in scroll_bootstrap:
+            raise SystemExit(f"cinematic loader omits visitor intent event: {event_name}")
+    if 'src="scroll-world.js' in html or 'src="scroll-world-init.js' in html:
+        raise SystemExit("cinematic implementation scripts must not block first paint")
+    if 'src="scroll-world-bootstrap.js?v=1"' not in html:
+        raise SystemExit("intent-driven cinematic loader is missing")
     comparison_pages = (
         "heliox-vs-windows-copilot.html",
         "heliox-vs-open-interpreter.html",
