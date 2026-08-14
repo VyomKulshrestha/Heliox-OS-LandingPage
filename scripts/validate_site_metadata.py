@@ -43,12 +43,12 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "28.640 ms",
-        "30.490 ms p95",
+        "27.534 ms",
+        "29.100 ms p95",
         "59 / 59",
-        "65 ticks",
+        "66 ticks",
         "36k / 5.4k",
-        "software-benchmarks-2026-08-13.json",
+        "software-benchmarks-2026-08-14.json",
         "audible TTS",
         "not population-level language accuracy",
     )
@@ -59,7 +59,7 @@ def main() -> None:
         raise SystemExit("structured software metadata does not expose benchmark evidence")
 
     expected_counters = {
-        "156": "156",
+        "157": "157",
         "30": "30+",
         "21": "21",
     }
@@ -69,6 +69,14 @@ def main() -> None:
             raise SystemExit(
                 f"counter {target} must expose its real value without requiring JavaScript"
             )
+    capabilities = json.loads((ROOT / "capabilities.json").read_text(encoding="utf-8"))
+    if capabilities["summary"]["action_types"] != 157:
+        raise SystemExit("current-source capability catalog is stale")
+    if "separate 156-action release snapshot" not in html:
+        raise SystemExit("homepage does not distinguish current source from v0.11.1")
+    overview = (ROOT / "index.html.md").read_text(encoding="utf-8")
+    if "OpenRouter" not in overview or "DeepSeek" not in overview:
+        raise SystemExit("agent-readable overview omits current model-provider support")
     if re.search(r'class="[^"]*count-up[^"]*"[^>]*>0\+?<', html):
         raise SystemExit("crawler-visible counters must not render as zero")
     if "<!-- 10 Specialist Agents -->" in html:
@@ -94,21 +102,23 @@ def main() -> None:
         "recorded/synthetic EEG research",
         "59/59 regression cases",
         "36,000 training and 5,400 temporal-validation samples",
-        "software-benchmarks-2026-08-13.json",
+        "software-benchmarks-2026-08-14.json",
     )
     for claim in required_proof_claims:
         if claim not in proof_html:
             raise SystemExit(f"evidence center is missing required claim: {claim}")
+    if "157 declared actions" not in proof_html or "146 rely" not in proof_html:
+        raise SystemExit("human evidence center has stale current-source action evidence")
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "28.640",
-        "30.490",
+        "27.534",
+        "29.100",
         "59/59",
-        "65 ticks",
+        "66 ticks",
         "36,000",
         "5,400",
-        "software-benchmarks-2026-08-13.json",
+        "software-benchmarks-2026-08-14.json",
         "Human microphone accuracy is not a release gate",
         "audible quality and device output require a human check",
         "Physical accuracy is not established across cameras",

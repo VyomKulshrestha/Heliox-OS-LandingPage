@@ -20,7 +20,7 @@ Heliox OS core is **free and MIT-licensed**. Official installers do not require 
 | Synthetic/recorded EEG | None from Heliox | Computer resources and optional public dataset download |
 | Live EEG research | None from Heliox | Separately purchased compatible hardware and human calibration |
 
-Current third-party pricing: [OpenAI](https://openai.com/api/pricing/), [Anthropic](https://www.anthropic.com/pricing), and [Gemini](https://ai.google.dev/gemini-api/docs/pricing). Heliox does not control these prices.
+Current third-party pricing: [OpenAI](https://openai.com/api/pricing/), [Anthropic](https://www.anthropic.com/pricing), [Gemini](https://ai.google.dev/gemini-api/docs/pricing), and the [OpenRouter model catalog](https://openrouter.ai/models). Heliox does not control these prices or OpenRouter's model routing.
 
 ## Zero-software-cost path
 

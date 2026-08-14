@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 scroll: 1.9,
                 metrics: [
-                    { target: 156, label: 'action types' },
+                    { target: 157, label: 'action types on main' },
                     { target: 30, suffix: '+', label: 'gestures' },
                     { target: 21, label: 'specialist agents' },
                     { value: 'Tier 5', label: 'security' }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
                 clip: 'assets/scroll-world/clip-04.mp4',
                 metrics: [
-                    { target: 156, label: 'verified actions' },
+                    { target: 156, label: 'release action types' },
                     { target: 21, label: 'specialist agents' },
                     { value: 'Local-first', label: 'adaptive memory' }
                 ],
@@ -131,16 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 label: 'Actions',
                 anchors: ['#actions'],
                 eyebrow: 'THE ACTION LATTICE',
-                title: '156 actions become one command language.',
+                title: '157 actions become one command language.',
                 body: 'The planner schema spans the operating system, browser, code, packages, windows, Git, devices, schedules, and integrations with complete provider coverage.',
                 accent: '#67efff',
                 align: 'right',
                 still: 'assets/scroll-world/continuation/posters/clip-06-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-06.mp4',
                 metrics: [
-                    { target: 156, label: 'declared actions' },
+                    { target: 157, label: 'declared actions on main' },
                     { target: 17, label: 'capability groups' },
-                    { value: '156/156', label: 'provider coverage' }
+                    { value: '157/157', label: 'provider coverage on main' }
                 ],
                 signals: [
                     { title: 'Operate', body: 'Files, processes, shell, windows, packages, power, audio, display, network, and clipboard.' },

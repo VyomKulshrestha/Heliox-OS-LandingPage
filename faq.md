@@ -16,6 +16,10 @@ Heliox provides Windows, macOS, and Linux release targets. Windows 10/11 is the 
 
 It can use local Ollama models and local execution components for supported workflows. Cloud model providers, integrations, web browsing, downloads, and other network actions require connectivity and send the necessary request data to the selected service.
 
+## Can Heliox use DeepSeek through OpenRouter?
+
+Current `main` supports OpenRouter's OpenAI-compatible API and accepts an exact OpenRouter catalog model ID. That lets a user select a currently available DeepSeek model without Heliox hard-coding every catalog entry. Availability, routing, pricing, retention, and model behavior remain governed by OpenRouter and the selected model provider. This source-only support is not part of the published v0.11.1 installer.
+
 ## Does Heliox collect telemetry?
 
 The current release contains no first-party analytics or automatic crash-reporting service. It creates local logs and audit records for diagnosis and security. External providers and dependencies can have separate policies.

@@ -10,7 +10,7 @@ Local-first does not mean every configured feature is offline. Network actions, 
 
 ## External model providers
 
-Users can configure providers such as Anthropic Claude, OpenAI, Google Gemini, or Meta. Prompts and the context needed for a requested task are sent directly from the device to the selected provider. Depending on the feature, that context can include user instructions, extracted screen text, screenshots, files, or action results. Heliox does not proxy those requests through a Heliox-operated server. The provider's privacy, retention, account, and billing terms apply.
+Users can configure providers such as Anthropic Claude, OpenAI, Google Gemini, OpenRouter, or Meta. OpenRouter can route a request to the exact catalog model ID the user selects, including current DeepSeek IDs. Prompts and the context needed for a requested task are sent directly from the device to the selected provider. Depending on the feature, that context can include user instructions, extracted screen text, screenshots, files, or action results. Heliox does not proxy those requests through a Heliox-operated server. The provider's privacy, retention, account, routing, and billing terms apply.
 
 ## Telemetry and local records
 

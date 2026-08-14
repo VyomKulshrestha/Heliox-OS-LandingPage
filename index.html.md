@@ -17,9 +17,9 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 
 - Accepts typed natural language, continuous voice input, and opt-in hand gestures.
 - Plans and executes browser, file, application, process, package, Git, system, integration, and workflow actions.
-- Routes tasks across 21 specialist agents and 156 declared action types. Runtime availability depends on the operating system, installed dependencies, credentials, and active security policy.
+- Current `main` routes tasks across 21 specialist agents and 157 declared action types. The published v0.11.1 installer is a separate 156-action release snapshot. Runtime availability depends on the operating system, installed dependencies, credentials, and active security policy.
 - Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
-- Supports local Ollama models and user-configured cloud providers including Gemini, OpenAI, Claude, and Meta.
+- Current `main` supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
 
 ## What's new in 0.11.1
@@ -83,11 +83,11 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 13 August 2026 evidence bundle reports a 28.640 ms median and 30.490 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. These measurements exclude model-provider, network, browser page-load, UI-rendering, microphone, camera, TTS, gesture, gaze, EEG, and human accuracy.
+The 14 August 2026 evidence bundle reports a 27.534 ms median and 29.100 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. These measurements exclude model-provider, network, browser page-load, UI-rendering, microphone, camera, TTS, gesture, gaze, EEG, and human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
-- [Raw software benchmark bundle](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-13.json)
+- [Raw software benchmark bundle](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-14.json)
 
 ## Authoritative links
 

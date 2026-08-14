@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "audit_date": "2026-08-13",
+  "audit_date": "2026-08-14",
   "prompt_count": 35,
   "source_readiness": {
     "passed": true,
@@ -8,22 +8,22 @@
       {
         "path": "llms.txt",
         "exists": true,
-        "bytes": 6961
+        "bytes": 7363
       },
       {
         "path": "capabilities.json",
         "exists": true,
-        "bytes": 179332
+        "bytes": 180285
       },
       {
         "path": "proof.md",
         "exists": true,
-        "bytes": 9050
+        "bytes": 13101
       },
       {
         "path": "cost.md",
         "exists": true,
-        "bytes": 1946
+        "bytes": 2038
       },
       {
         "path": "releases.json",
