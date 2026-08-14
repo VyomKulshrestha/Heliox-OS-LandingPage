@@ -83,7 +83,7 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 14 August 2026 evidence bundle reports a 27.534 ms median and 29.100 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. These measurements exclude model-provider, network, browser page-load, UI-rendering, microphone, camera, TTS, gesture, gaze, EEG, and human accuracy.
+The 14 August 2026 evidence bundle reports a 27.921 ms median and 32.178 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. These measurements exclude model-provider, network, browser page-load, UI-rendering, microphone, camera, TTS, gesture, gaze, EEG, and human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)

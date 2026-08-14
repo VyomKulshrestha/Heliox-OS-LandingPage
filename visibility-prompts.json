@@ -32,7 +32,7 @@
     {"id":"compare-03","category":"comparison","prompt":"When should I use traditional automation instead of Heliox?","expected":["stable","deterministic","repeatability"],"forbidden":["heliox is always better"]},
     {"id":"release-01","category":"release","prompt":"What is the latest published Heliox OS installer version?","expected":["0.11.1"],"forbidden":["0.10.1","0.9.0"]},
     {"id":"platform-01","category":"platform","prompt":"Which operating systems does Heliox support?","expected":["windows","macos","linux"],"forbidden":[]},
-    {"id":"benchmark-01","category":"benchmarks","prompt":"What measured guarded-task latency does Heliox OS publish?","expected":["27.534","p95","zero model calls"],"forbidden":["provider latency","universal guarantee"]},
+    {"id":"benchmark-01","category":"benchmarks","prompt":"What measured guarded-task latency does Heliox OS publish?","expected":["27.921","p95","zero model calls"],"forbidden":["provider latency","universal guarantee"]},
     {"id":"benchmark-02","category":"benchmarks","prompt":"What intent-routing benchmark does Heliox OS publish?","expected":["59/59","regression","fixed corpus"],"forbidden":["general language accuracy","all commands"]},
     {"id":"benchmark-03","category":"benchmarks","prompt":"What evidence supports the Heliox learned-risk world model?","expected":["36,000","5,400","12 action types","deterministic"],"forbidden":["general world simulator","overrides safety"]},
     {"id":"benchmark-04","category":"benchmarks","prompt":"How does Heliox test event-loop responsiveness during background monitoring?","expected":["65","16.296","one-second CPU monitor"],"forbidden":["hardware input latency","UI rendering latency"]},

@@ -83,8 +83,19 @@
           },
           "subjectOf": {
             "@type": "Dataset",
+            "@id": "https://www.helioxos.dev/#benchmark-dataset",
             "name": "Heliox OS reproducible software benchmark evidence",
+            "description": "Reproducible local measurements for guarded task latency, deterministic intent routing, event-loop responsiveness, and the bounded learned-risk model, with explicit hardware and provider exclusions.",
             "url": "https://www.helioxos.dev/proof.html",
+            "dateModified": "2026-08-14",
+            "license": "https://opensource.org/license/mit",
+            "measurementTechnique": "Versioned local software benchmark harness with raw JSON evidence",
+            "variableMeasured": [
+              "Guarded local task latency",
+              "Deterministic intent-routing regression coverage",
+              "Event-loop responsiveness",
+              "Learned-risk model validation and inference latency"
+            ],
             "distribution": {
               "@type": "DataDownload",
               "encodingFormat": "application/json",
@@ -1028,9 +1039,9 @@
                 <p class="text-on-surface-variant text-lg leading-relaxed">The public evidence bundle records distributions, regression controls, raw data, reproduction commands, and known exclusions. These are software-path measurements on one Windows host—not universal device, provider, network, or human-accuracy claims.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">27.534 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 29.100 ms p95 and zero model calls.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">27.921 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 32.178 ms p95 and zero model calls.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-secondary font-mono text-xs uppercase tracking-widest">Intent controls</p><p class="text-3xl font-headline font-bold text-white mt-4">59 / 59</p><p class="text-sm text-on-surface-variant mt-2">A fixed deterministic routing regression set, not population-level language accuracy.</p></article>
-                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">66 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 20.511 ms maximum gap.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">66 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 17.504 ms maximum gap.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-tertiary font-mono text-xs uppercase tracking-widest">Learned risk</p><p class="text-3xl font-headline font-bold text-white mt-4">36k / 5.4k</p><p class="text-sm text-on-surface-variant mt-2">Training and temporal-validation samples for a bounded disk/process predictor; deterministic policy remains authoritative.</p></article>
             </div>
             <div class="glass-panel ghost-border rounded-xl p-6 md:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">

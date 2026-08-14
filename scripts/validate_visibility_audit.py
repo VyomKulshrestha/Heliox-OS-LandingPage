@@ -11,6 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     pack = json.loads((ROOT / "visibility-prompts.json").read_text(encoding="utf-8"))
     report = json.loads((ROOT / "visibility-report.json").read_text(encoding="utf-8"))
+    authority = report.get("authority", {})
+    if authority.get("current_release") != "0.11.1":
+        raise SystemExit("visibility report lacks the current release authority")
+    if authority.get("canonical_site") != "https://www.helioxos.dev/":
+        raise SystemExit("visibility report lacks the canonical website authority")
     prompts = pack["prompts"]
     if len(prompts) != 35 or len({item["id"] for item in prompts}) != 35:
         raise SystemExit("visibility prompt pack must contain 35 unique prompts")

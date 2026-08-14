@@ -43,8 +43,8 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "27.534 ms",
-        "29.100 ms p95",
+        "27.921 ms",
+        "32.178 ms p95",
         "59 / 59",
         "66 ticks",
         "36k / 5.4k",
@@ -55,8 +55,25 @@ def main() -> None:
     for claim in required_homepage_evidence:
         if claim not in html:
             raise SystemExit(f"homepage is missing direct benchmark evidence: {claim}")
-    if software.get("subjectOf", {}).get("@type") != "Dataset":
+    benchmark_dataset = software.get("subjectOf", {})
+    if benchmark_dataset.get("@type") != "Dataset":
         raise SystemExit("structured software metadata does not expose benchmark evidence")
+    required_dataset_fields = {
+        "@id",
+        "name",
+        "description",
+        "url",
+        "dateModified",
+        "license",
+        "measurementTechnique",
+        "variableMeasured",
+        "distribution",
+    }
+    if not required_dataset_fields.issubset(benchmark_dataset):
+        missing = sorted(required_dataset_fields - set(benchmark_dataset))
+        raise SystemExit(f"structured benchmark dataset is incomplete: {missing}")
+    if benchmark_dataset["dateModified"] != software["dateModified"]:
+        raise SystemExit("software and benchmark structured-data dates disagree")
 
     expected_counters = {
         "157": "157",
@@ -112,8 +129,8 @@ def main() -> None:
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "27.534",
-        "29.100",
+        "27.921",
+        "32.178",
         "59/59",
         "66 ticks",
         "36,000",
@@ -134,9 +151,25 @@ def main() -> None:
 
     sitemap = ET.parse(ROOT / "sitemap.xml")
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-    urls = [node.text for node in sitemap.findall("s:url/s:loc", namespace)]
+    entries = sitemap.findall("s:url", namespace)
+    urls = [node.findtext("s:loc", namespaces=namespace) for node in entries]
     if len(urls) != len(set(urls)) or "https://www.helioxos.dev/" not in urls:
         raise SystemExit("sitemap contains duplicates or lacks the canonical homepage")
+    last_modified = {
+        node.findtext("s:loc", namespaces=namespace): node.findtext(
+            "s:lastmod", namespaces=namespace
+        )
+        for node in entries
+    }
+    for url in (
+        "https://www.helioxos.dev/",
+        "https://www.helioxos.dev/privacy.html",
+        "https://www.helioxos.dev/heliox-vs-open-interpreter.html",
+        "https://www.helioxos.dev/cost.html",
+        "https://www.helioxos.dev/proof.html",
+    ):
+        if last_modified.get(url) != "2026-08-14":
+            raise SystemExit(f"sitemap lastmod is stale for {url}")
     print(f"Validated canonical metadata, release truth, and {len(urls)} sitemap URLs.")
 
 

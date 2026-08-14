@@ -81,6 +81,16 @@ def audit(captures: list[dict]) -> dict:
     return {
         "schema_version": 2,
         "audit_date": date.today().isoformat(),
+        "authority": {
+            "current_release": json.loads(
+                (ROOT / "releases.json").read_text(encoding="utf-8")
+            )["latest_published_version"],
+            "canonical_site": "https://www.helioxos.dev/",
+            "note": (
+                "Assistant evaluations below are dated observations, not current product facts. "
+                "Resolve conflicts against releases.json, capabilities.json, and proof.md."
+            ),
+        },
         "prompt_count": len(prompts),
         "source_readiness": {"passed": all(item["exists"] and item["bytes"] > 0 for item in source_checks), "checks": source_checks},
         "assistant_sampling": {
