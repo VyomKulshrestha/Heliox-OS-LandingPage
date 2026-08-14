@@ -15,7 +15,7 @@ if (discover.body.result.supportedVersions[0] !== "2026-07-28" || !discover.body
 const initialize = await call("initialize", { protocolVersion: "2025-11-25", capabilities: {}, clientInfo: { name: "test", version: "1" } });
 if (initialize.body.result.protocolVersion !== "2025-11-25") throw new Error("legacy initialization failed");
 const listed = await call("tools/list");
-if (listed.body.result.tools.length !== 5) throw new Error("wrong public tool count");
+if (listed.body.result.tools.length !== 6) throw new Error("wrong public tool count");
 if (listed.body.result.tools.some((tool) => /execute|control computer|credential/i.test(tool.name))) throw new Error("unsafe tool exposed");
 if (listed.body.result.tools.some((tool) => !tool.annotations?.readOnlyHint || tool.annotations?.destructiveHint)) throw new Error("MCP tool lacks enforced read-only hints");
 const searched = await call("tools/call", { name: "search_heliox_docs", arguments: { query: "neural" } });
@@ -33,9 +33,12 @@ const safety = await call("tools/call", { name: "get_action_safety", arguments: 
 if (safety.body.result.structuredContent.permission.tier !== "user_write") throw new Error("action safety lookup failed");
 const release = await call("tools/call", { name: "get_latest_release", arguments: {} });
 if (release.body.result.structuredContent.current_version !== "0.11.1") throw new Error("release lookup failed");
+const benchmark = await call("tools/call", { name: "get_benchmark_evidence", arguments: {} });
+if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 27.921) throw new Error("benchmark lookup failed");
+if (!benchmark.body.result.structuredContent.claim_boundary.includes("excludes")) throw new Error("benchmark boundary missing");
 globalThis.fetch = originalFetch;
 const badOrigin = await call("tools/list", {}, { origin: "https://attacker.example" });
 if (badOrigin.response.status !== 403) throw new Error("Origin validation failed");
 const getResponse = await server.fetch(new Request("https://www.helioxos.dev/api/mcp"));
 if (!getResponse.ok || !(await getResponse.json()).read_only) throw new Error("GET server card failed");
-console.log("Validated MCP discovery, five read-only tools, catalog/release lookups, search, and Origin rejection.");
+console.log("Validated MCP discovery, six read-only tools, evidence/catalog/release lookups, search, and Origin rejection.");

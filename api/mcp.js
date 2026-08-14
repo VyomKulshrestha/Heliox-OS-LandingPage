@@ -20,12 +20,24 @@ const DOCUMENTS = [
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true };
 
+const BENCHMARK_EVIDENCE = {
+  captured_on: "2026-08-14",
+  source_commit: "dc09070864c68d30a60d1fc4b22bb9944a958be8",
+  source: "https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-14.json",
+  proof: `${SITE}/proof.md`,
+  claim_boundary: "Local software evidence only; excludes provider, network, browser page-load, UI, microphone, camera, speaker, gaze, gesture, EEG, and human accuracy.",
+  guarded_local_request: { iterations: 100, median_ms: 27.921, p95_ms: 32.178, p99_ms: 39.104, model_calls: 0 },
+  deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.026 },
+  learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.028 },
+};
+
 const TOOLS = [
   { name: "search_heliox_docs", description: "Search the public Heliox documentation index. Read-only; returns links and summaries, never desktop control.", inputSchema: { type: "object", properties: { query: { type: "string", minLength: 1 } }, required: ["query"], additionalProperties: false }, annotations: READ_ONLY },
   { name: "list_capabilities", description: "List generated Heliox action capabilities, optionally filtered by text or permission tier.", inputSchema: { type: "object", properties: { query: { type: "string" }, permission_tier: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100, default: 25 } }, additionalProperties: false }, annotations: READ_ONLY },
   { name: "get_action_safety", description: "Get permission, approval, platform, provider, and verification metadata for one exact action type.", inputSchema: { type: "object", properties: { action_type: { type: "string", minLength: 1 } }, required: ["action_type"], additionalProperties: false }, annotations: READ_ONLY },
   { name: "get_latest_release", description: "Return the current public Heliox release record and release links.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations: READ_ONLY },
   { name: "get_installation_steps", description: "Return installation documentation for a supported platform.", inputSchema: { type: "object", properties: { platform: { type: "string", enum: ["windows", "macos", "linux", "developer"] } }, required: ["platform"], additionalProperties: false }, annotations: READ_ONLY },
+  { name: "get_benchmark_evidence", description: "Return the latest reproducible Heliox software benchmark snapshot with its claim boundary and raw source link.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations: READ_ONLY },
 ];
 
 const json = (value, status = 200) => new Response(JSON.stringify(value), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "access-control-allow-origin": SITE } });
@@ -81,6 +93,7 @@ async function callTool(request, name, args) {
     if (!artifacts[platform]) throw new Error("platform must be windows, macos, linux, or developer");
     return { platform, artifact: artifacts[platform], releases: "https://github.com/VyomKulshrestha/Heliox-OS/releases", instructions: `${SITE}/index.html.md#installation` };
   }
+  if (name === "get_benchmark_evidence") return BENCHMARK_EVIDENCE;
   throw new Error(`Unknown tool: ${name}`);
 }
 
