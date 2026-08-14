@@ -430,6 +430,39 @@ main, footer { position: relative; z-index: 1; }
     position: relative;
     min-height: 100vh;
     overflow: hidden;
+    isolation: isolate;
+    background: #02070b;
+}
+
+.heliox-scroll-fallback::before,
+.heliox-scroll-fallback::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.heliox-scroll-fallback::before {
+    inset: -35% -20%;
+    opacity: 0.3;
+    background:
+        radial-gradient(ellipse at 18% 22%, rgba(93, 233, 255, 0.42), transparent 34%),
+        radial-gradient(ellipse at 78% 46%, rgba(170, 102, 255, 0.3), transparent 38%);
+    filter: blur(65px);
+    mix-blend-mode: screen;
+    animation: hworld-aurora-drift 13s ease-in-out infinite alternate;
+}
+
+.heliox-scroll-fallback::after {
+    top: -25%;
+    bottom: -25%;
+    left: -18%;
+    width: 20%;
+    opacity: 0.14;
+    background: linear-gradient(90deg, transparent, rgba(165, 246, 255, 0.75), transparent);
+    filter: blur(16px);
+    transform: rotate(7deg);
+    animation: hworld-scan-pass 8.5s cubic-bezier(0.3, 0.02, 0.16, 1) infinite;
 }
 
 .heliox-scroll-fallback img {
@@ -442,6 +475,7 @@ main, footer { position: relative; z-index: 1; }
 
 .heliox-scroll-fallback__shade {
     position: absolute;
+    z-index: 2;
     inset: 0;
     background:
         radial-gradient(ellipse 19% 25% at 93% 87%, rgba(1, 5, 9, 0.99) 0%, rgba(1, 5, 9, 0.96) 42%, rgba(1, 5, 9, 0.72) 58%, rgba(1, 5, 9, 0.28) 74%, transparent 100%),
@@ -450,7 +484,7 @@ main, footer { position: relative; z-index: 1; }
 
 .heliox-scroll-fallback__copy {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     width: min(46rem, calc(100% - 3rem));
     padding: 28vh max(1.5rem, calc((100vw - 80rem) / 2)) 6rem;
 }

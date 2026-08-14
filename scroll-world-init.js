@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+(() => {
     const world = document.getElementById('scroll-world');
 
-    window.mountScrollWorld(world, {
+    const mount = () => window.mountScrollWorld(world, {
         mediaVersion: '17',
         sceneScroll: 1.58,
         crossfade: 0.08,
@@ -239,4 +239,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ]
     });
-});
+
+    let mounted = false;
+    const mountOnIntent = () => {
+        if (mounted) return;
+        mounted = true;
+        mount();
+    };
+
+    // Keep the server-rendered, animated hero as the fast first paint. The
+    // heavier video scrubber mounts only when a visitor indicates intent to
+    // explore, so content and LCP never depend on JavaScript or video metadata.
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach((eventName) => {
+        window.addEventListener(eventName, mountOnIntent, { once: true, passive: true });
+    });
+    window.addEventListener('scroll', mountOnIntent, { once: true, passive: true });
+})();

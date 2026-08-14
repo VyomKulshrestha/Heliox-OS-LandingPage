@@ -36,6 +36,8 @@ def main() -> None:
         raise SystemExit("website still advertises the superseded installer")
     if "cdn.tailwindcss.com" in html or "tailwind.config =" in html:
         raise SystemExit("homepage must use compiled CSS instead of the Tailwind runtime CDN")
+    if 'fetchpriority="high"' not in html:
+        raise SystemExit("above-fold cinematic poster must be prioritized")
     generated_css = ROOT / "assets" / "tailwind.generated.css"
     if 'href="assets/tailwind.generated.css?v=1"' not in html or not generated_css.exists():
         raise SystemExit("homepage compiled CSS asset is missing")
@@ -100,6 +102,13 @@ def main() -> None:
         raise SystemExit("stale specialist count remains in homepage source")
     if 'href="proof.html"' not in html:
         raise SystemExit("homepage does not expose the human-readable evidence center")
+
+    scroll_init = (ROOT / "scroll-world-init.js").read_text(encoding="utf-8")
+    if "document.addEventListener('DOMContentLoaded'" in scroll_init:
+        raise SystemExit("cinematic hydration must not replace the server-rendered LCP on load")
+    for event_name in ("wheel", "touchstart", "pointerdown", "keydown"):
+        if f"'{event_name}'" not in scroll_init:
+            raise SystemExit(f"cinematic hydration omits visitor intent event: {event_name}")
     comparison_pages = (
         "heliox-vs-windows-copilot.html",
         "heliox-vs-open-interpreter.html",
