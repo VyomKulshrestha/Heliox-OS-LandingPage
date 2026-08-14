@@ -7,12 +7,11 @@ body {
     background-color: #02060a;
     background-image:
         linear-gradient(rgba(2, 6, 10, 0.58), rgba(2, 6, 10, 0.68)),
-        radial-gradient(circle at 2px 2px, rgba(120, 215, 245, 0.12) 1px, transparent 0),
-        url('assets/heliox-storm-agents.png');
-    background-position: center, 0 0, center;
-    background-size: cover, 40px 40px, cover;
-    background-attachment: fixed, fixed, fixed;
-    background-repeat: no-repeat, repeat, no-repeat;
+        radial-gradient(circle at 2px 2px, rgba(120, 215, 245, 0.12) 1px, transparent 0);
+    background-position: center, 0 0;
+    background-size: cover, 40px 40px;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, repeat;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
