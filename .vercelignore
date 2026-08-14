@@ -1,0 +1,10 @@
+.git/
+.github/
+.pytest_cache/
+.vercel/
+__pycache__/
+node_modules/
+scripts/
+visibility-captures/
+desktop.ini
+*.pyc

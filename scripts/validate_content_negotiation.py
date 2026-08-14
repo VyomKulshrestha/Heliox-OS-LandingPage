@@ -31,6 +31,21 @@ def main() -> None:
     config = json.loads((ROOT / "vercel.json").read_text(encoding="utf-8"))
     if config.get("rewrites"):
         raise SystemExit("Markdown negotiation must run before filesystem routing")
+    redirects = config.get("redirects", [])
+    if not any(
+        item.get("source") == "/index.html"
+        and item.get("destination") == "/"
+        and item.get("permanent") is True
+        for item in redirects
+    ):
+        raise SystemExit("duplicate /index.html URL lacks a permanent canonical redirect")
+    if not any(
+        item.get("destination") == "https://www.helioxos.dev/:path*"
+        and item.get("permanent") is True
+        and {"type": "host", "value": "helioxos.dev"} in item.get("has", [])
+        for item in redirects
+    ):
+        raise SystemExit("apex host lacks a permanent redirect to the canonical www host")
 
     middleware = (ROOT / "middleware.js").read_text(encoding="utf-8")
     route_pattern = re.compile(r'\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,?\s*\]')
@@ -44,8 +59,12 @@ def main() -> None:
 
     if 'request.headers.get("accept")' not in middleware:
         raise SystemExit("middleware does not inspect the Accept header")
-    if "return rewrite(url)" not in middleware:
+    if "return rewrite(url, { headers: rewrittenHeaders })" not in middleware:
         raise SystemExit("middleware does not rewrite Markdown requests")
+    if 'headers.set("Link", link)' not in middleware:
+        raise SystemExit("Markdown representations lack HTTP canonical links")
+    if 'headers.set("X-Robots-Tag", "noindex, follow")' not in middleware:
+        raise SystemExit("Vercel deployment aliases are not excluded from indexing")
 
     header_rules = config.get("headers", [])
     root_headers = next(rule["headers"] for rule in header_rules if rule["source"] == "/")
