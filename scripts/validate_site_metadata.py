@@ -28,7 +28,7 @@ def main() -> None:
         raise SystemExit("JSON-LD graph is missing")
     graph = json.loads(match.group(1))["@graph"]
     software = next(item for item in graph if item["@type"] == "SoftwareApplication")
-    if software["softwareVersion"] != "0.11.1":
+    if software["softwareVersion"] != "0.12.0":
         raise SystemExit("structured data must describe the latest published installer")
     if software["codeRepository"] != "https://github.com/VyomKulshrestha/Heliox-OS":
         raise SystemExit("canonical code repository drifted")
@@ -45,12 +45,14 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "27.921 ms",
-        "32.178 ms p95",
+        "27.229 ms",
+        "29.476 ms p95",
         "59 / 59",
-        "66 ticks",
+        "65 ticks",
         "36k / 5.4k",
-        "software-benchmarks-2026-08-14.json",
+        "software-benchmarks-2026-08-16.json",
+        "14.708 s median",
+        "zero destructive actions",
         "audible TTS",
         "not population-level language accuracy",
     )
@@ -92,8 +94,8 @@ def main() -> None:
     capabilities = json.loads((ROOT / "capabilities.json").read_text(encoding="utf-8"))
     if capabilities["summary"]["action_types"] != 157:
         raise SystemExit("current-source capability catalog is stale")
-    if "separate 156-action release snapshot" not in html:
-        raise SystemExit("homepage does not distinguish current source from v0.11.1")
+    if "157 action types" not in html or "11 actions" not in html:
+        raise SystemExit("homepage does not state current release coverage and verification depth")
     overview = (ROOT / "index.html.md").read_text(encoding="utf-8")
     if "OpenRouter" not in overview or "DeepSeek" not in overview:
         raise SystemExit("agent-readable overview omits current model-provider support")
@@ -142,7 +144,9 @@ def main() -> None:
         "recorded/synthetic EEG research",
         "59/59 regression cases",
         "36,000 training and 5,400 temporal-validation samples",
-        "software-benchmarks-2026-08-14.json",
+        "software-benchmarks-2026-08-16.json",
+        "subscription-planning-codex-2026-08-16.json",
+        "3/3 fixed planning cases",
     )
     for claim in required_proof_claims:
         if claim not in proof_html:
@@ -152,13 +156,13 @@ def main() -> None:
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "27.921",
-        "32.178",
+        "27.229",
+        "29.476",
         "59/59",
-        "66 ticks",
+        "65 ticks",
         "36,000",
         "5,400",
-        "software-benchmarks-2026-08-14.json",
+        "software-benchmarks-2026-08-16.json",
         "Human microphone accuracy is not a release gate",
         "audible quality and device output require a human check",
         "Physical accuracy is not established across cameras",
@@ -191,7 +195,7 @@ def main() -> None:
         "https://www.helioxos.dev/cost.html",
         "https://www.helioxos.dev/proof.html",
     ):
-        if last_modified.get(url) != "2026-08-14":
+        if last_modified.get(url) != "2026-08-16":
             raise SystemExit(f"sitemap lastmod is stale for {url}")
     print(f"Validated canonical metadata, release truth, and {len(urls)} sitemap URLs.")
 

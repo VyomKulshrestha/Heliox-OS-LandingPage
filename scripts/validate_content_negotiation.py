@@ -19,6 +19,7 @@ EXPECTED = {
     "/autonomous-workflows.html": "/autonomous-workflows.md",
     "/plugin-marketplace.html": "/plugin-marketplace.md",
     "/neural-research.html": "/neural-research.md",
+    "/subscription-models.html": "/subscription-models.md",
     "/heliox-vs-windows-copilot.html": "/heliox-vs-windows-copilot.md",
     "/heliox-vs-open-interpreter.html": "/heliox-vs-open-interpreter.md",
     "/heliox-vs-traditional-automation.html": "/heliox-vs-traditional-automation.md",

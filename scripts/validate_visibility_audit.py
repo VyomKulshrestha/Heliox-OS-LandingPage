@@ -12,16 +12,16 @@ def main() -> None:
     pack = json.loads((ROOT / "visibility-prompts.json").read_text(encoding="utf-8"))
     report = json.loads((ROOT / "visibility-report.json").read_text(encoding="utf-8"))
     authority = report.get("authority", {})
-    if authority.get("current_release") != "0.11.1":
+    if authority.get("current_release") != "0.12.0":
         raise SystemExit("visibility report lacks the current release authority")
     if authority.get("canonical_site") != "https://www.helioxos.dev/":
         raise SystemExit("visibility report lacks the canonical website authority")
     prompts = pack["prompts"]
-    if len(prompts) != 35 or len({item["id"] for item in prompts}) != 35:
-        raise SystemExit("visibility prompt pack must contain 35 unique prompts")
+    if len(prompts) != 40 or len({item["id"] for item in prompts}) != 40:
+        raise SystemExit("visibility prompt pack must contain 40 unique prompts")
     benchmark_prompts = [item for item in prompts if item["category"] == "benchmarks"]
-    if len(benchmark_prompts) != 5:
-        raise SystemExit("visibility prompt pack must contain five benchmark prompts")
+    if len(benchmark_prompts) != 6:
+        raise SystemExit("visibility prompt pack must contain six benchmark prompts")
     if report["prompt_count"] != len(prompts) or not report["source_readiness"]["passed"]:
         raise SystemExit("visibility report is stale or source readiness failed")
     sampling = report["assistant_sampling"]

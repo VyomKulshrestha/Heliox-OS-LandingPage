@@ -10,7 +10,7 @@ from scripts.submit_indexnow import HOST, KEY, KEY_LOCATION, build_payload, load
 class IndexNowSubmissionTests(unittest.TestCase):
     def test_sitemap_urls_are_canonical_and_unique(self) -> None:
         urls = load_urls()
-        self.assertEqual(len(urls), 18)
+        self.assertEqual(len(urls), 19)
         self.assertEqual(len(urls), len(set(urls)))
         self.assertTrue(all(url.startswith(f"https://{HOST}/") for url in urls))
 

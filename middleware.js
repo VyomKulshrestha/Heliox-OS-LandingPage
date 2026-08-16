@@ -13,6 +13,7 @@ export const MARKDOWN_ROUTES = new Map([
   ["/autonomous-workflows.html", "/autonomous-workflows.md"],
   ["/plugin-marketplace.html", "/plugin-marketplace.md"],
   ["/neural-research.html", "/neural-research.md"],
+  ["/subscription-models.html", "/subscription-models.md"],
   ["/heliox-vs-windows-copilot.html", "/heliox-vs-windows-copilot.md"],
   ["/heliox-vs-open-interpreter.html", "/heliox-vs-open-interpreter.md"],
   [
@@ -99,6 +100,7 @@ export const config = {
     "/autonomous-workflows.html",
     "/plugin-marketplace.html",
     "/neural-research.html",
+    "/subscription-models.html",
     "/heliox-vs-windows-copilot.html",
     "/heliox-vs-open-interpreter.html",
     "/heliox-vs-traditional-automation.html",
@@ -114,6 +116,7 @@ export const config = {
     "/autonomous-workflows.md",
     "/plugin-marketplace.md",
     "/neural-research.md",
+    "/subscription-models.md",
     "/heliox-vs-windows-copilot.md",
     "/heliox-vs-open-interpreter.md",
     "/heliox-vs-traditional-automation.md",

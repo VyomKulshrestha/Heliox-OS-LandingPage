@@ -2,7 +2,7 @@
 
 > Both accept conversational input, but they solve different problems: Heliox is an open-source execution system for registered desktop actions; Copilot on Windows is Microsoft's assistant with Windows-specific chat, vision, file, web, and settings-help experiences.
 
-Last fact-checked: **2026-08-12**. Product capabilities and availability change; follow the linked first-party sources for current details.
+Last fact-checked: **2026-08-16**. Product capabilities and availability change; follow the linked first-party sources for current details.
 
 ## Side-by-side
 

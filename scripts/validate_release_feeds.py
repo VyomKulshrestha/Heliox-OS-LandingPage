@@ -18,9 +18,9 @@ def main() -> None:
                 raise SystemExit(f"website {name} drifted from product-generated source")
     releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
     feed = json.loads((ROOT / "releases.feed.json").read_text(encoding="utf-8"))
-    if releases["current_source_version"] != "0.11.1":
+    if releases["current_source_version"] != "0.12.0":
         raise SystemExit("current source version drifted")
-    if releases["latest_published_version"] != "0.11.1":
+    if releases["latest_published_version"] != "0.12.0":
         raise SystemExit("latest published version drifted")
     published = [item for item in releases["releases"] if item["status"] == "published"]
     if len(published) != len(feed["items"]):

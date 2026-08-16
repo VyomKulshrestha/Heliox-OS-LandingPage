@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex and Claude subscription model access | Heliox OS</title>
+  <meta name="description" content="Heliox can ask an officially authenticated Codex or Claude Code CLI to produce a text-only plan while keeping credentials, tools, approvals, execution, and verification inside their proper trust boundaries.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.helioxos.dev/subscription-models.html">
+  <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/subscription-models.md">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+  <link rel="stylesheet" href="content-page.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Use your existing AI subscription—without handing Heliox your login.", "description": "Heliox can ask an officially authenticated Codex or Claude Code CLI to produce a text-only plan while keeping credentials, tools, approvals, execution, and verification inside their proper trust boundaries.", "url": "https://www.helioxos.dev/subscription-models.html", "isPartOf": {"@type": "WebSite", "name": "Heliox OS", "url": "https://www.helioxos.dev/"}, "about": {"@type": "SoftwareApplication", "name": "Heliox OS", "operatingSystem": "Windows, macOS, Linux"}}</script>
+</head>
+<body>
+  <nav class="site-nav"><div class="shell nav-inner">
+    <a class="brand" href="/"><span>HELIOX</span> OS</a>
+    <div class="nav-links"><a href="/capabilities.json">Capabilities</a><a href="/proof.md">Evidence</a><a href="https://github.com/VyomKulshrestha/Heliox-OS">GitHub</a><a class="sponsor" href="https://github.com/sponsors/VyomKulshrestha">Sponsor</a></div>
+  </div></nav>
+  <main class="shell">
+    <div class="breadcrumb"><a href="/">Heliox OS</a> / Use cases / Codex and Claude subscription model access</div>
+    <header class="hero">
+      <div class="eyebrow">Codex and Claude subscription model access</div>
+      <h1>Use your existing AI subscription—without handing Heliox your login.</h1>
+      <p class="lede">Heliox can ask an officially authenticated Codex or Claude Code CLI to produce a text-only plan while keeping credentials, tools, approvals, execution, and verification inside their proper trust boundaries.</p>
+      <div class="truth-strip"><span>Official provider CLI</span><span>Selectable provider model</span><span>Bounded usage evidence</span></div>
+    </header>
+    <section class="grid" aria-label="Capability details">
+      <article class="card wide"><div class="status">Released in v0.12.0; provider-dependent</div><h2>What Heliox does</h2><ul><li>Checks provider CLI availability and login status without reading or copying OAuth files.</li><li>Lets the user choose a provider-owned model or keep the official CLI default.</li><li>Runs the CLI as a text-only model helper in a sterile temporary directory with provider tools disabled or rejected.</li><li>Shows Heliox prompt estimates and provider-reported input, cached input, uncached input, and output separately from metered API spend.</li></ul></article>
+      <article class="card"><h2>Typical flow</h2><ol class="steps"><li>Install the official Codex or Claude Code CLI and sign in with the provider.</li><li>Choose Existing AI subscription in Heliox Settings or first-run setup.</li><li>Select an available model or leave the provider default.</li><li>Submit a task; Heliox validates the returned plan and retains every policy, approval, execution, and verification gate.</li></ol></article>
+      <article class="card"><h2>Safety boundary</h2><p>A subscription is model access, not action authority. Heliox does not import provider credentials, rejects provider tool activity, and never lets a model approve or execute its own proposal.</p></article>
+      <article class="card wide limit"><div class="status">Known limits</div><h2>Where this can fail</h2><p>Availability, eligible plans, models, latency, and quotas are provider-owned. The published benchmark covers one Codex CLI account and three fixed planning-only prompts; it does not establish Claude behavior, action execution, or unlimited use.</p></article>
+    </section>
+    <section class="cta"><div><h2>Inspect the evidence</h2><p>Read generated coverage, measured latency, hardware boundaries, and known limitations.</p></div><a href="/proof.md">Open proof center</a></section>
+  </main>
+  <footer><div class="shell footer-inner"><span>Heliox OS · MIT licensed</span><span><a href="/subscription-models.md">Markdown version</a> · <a href="/llms.txt">Agent index</a></span></div></footer>
+</body>
+</html>

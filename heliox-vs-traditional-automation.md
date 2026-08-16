@@ -2,7 +2,7 @@
 
 > Traditional automation is often the right answer. Heliox adds language-driven planning and cross-tool coordination when a fixed script is too rigid, but it also adds model uncertainty that deterministic automation avoids.
 
-Last fact-checked: **2026-08-12**. Product capabilities and availability change; follow the linked first-party sources for current details.
+Last fact-checked: **2026-08-16**. Product capabilities and availability change; follow the linked first-party sources for current details.
 
 ## Side-by-side
 

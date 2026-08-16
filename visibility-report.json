@@ -1,19 +1,19 @@
 {
   "schema_version": 2,
-  "audit_date": "2026-08-14",
+  "audit_date": "2026-08-16",
   "authority": {
-    "current_release": "0.11.1",
+    "current_release": "0.12.0",
     "canonical_site": "https://www.helioxos.dev/",
     "note": "Assistant evaluations below are dated observations, not current product facts. Resolve conflicts against releases.json, capabilities.json, and proof.md."
   },
-  "prompt_count": 35,
+  "prompt_count": 40,
   "source_readiness": {
     "passed": true,
     "checks": [
       {
         "path": "llms.txt",
         "exists": true,
-        "bytes": 7363
+        "bytes": 7451
       },
       {
         "path": "capabilities.json",
@@ -23,17 +23,17 @@
       {
         "path": "proof.md",
         "exists": true,
-        "bytes": 13089
+        "bytes": 15596
       },
       {
         "path": "cost.md",
         "exists": true,
-        "bytes": 2038
+        "bytes": 2305
       },
       {
         "path": "releases.json",
         "exists": true,
-        "bytes": 6750
+        "bytes": 8755
       }
     ]
   },
@@ -93,15 +93,13 @@
         "prompt_id": "release-01",
         "captured_at": "2026-08-12T23:45:30+05:30",
         "status": "completed",
-        "expected_term_coverage": 1.0,
-        "expected_terms_found": [
-          "0.11.1"
-        ],
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
         "forbidden_terms_found": [],
         "citation_count": 2,
         "heliox_citation_count": 2,
         "competitors_shown": [],
-        "needs_human_review": false
+        "needs_human_review": true
       }
     ]
   },

@@ -10,8 +10,8 @@ from generate_use_case_pages import PAGES, ROOT, render_html, render_markdown
 def main() -> int:
     errors: list[str] = []
     slugs = [str(page["slug"]) for page in PAGES]
-    if len(slugs) != 7 or len(set(slugs)) != len(slugs):
-        errors.append("use-case registry must contain seven unique slugs")
+    if len(slugs) != 8 or len(set(slugs)) != len(slugs):
+        errors.append("use-case registry must contain eight unique slugs")
 
     discovery = {
         "llms.txt": (ROOT / "llms.txt").read_text(encoding="utf-8"),

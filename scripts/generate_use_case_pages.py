@@ -129,6 +129,28 @@ PAGES = [
         "limits": "Synthetic and recorded-data results are not evidence of live EEG accuracy, individual calibration, brain control, medical utility, or clinical validation. Physical hardware work remains unverified until tested with participants and an actual device.",
         "status": "Software-verified; no live EEG claim",
     },
+    {
+        "slug": "subscription-models",
+        "eyebrow": "Codex and Claude subscription model access",
+        "title": "Use your existing AI subscription—without handing Heliox your login.",
+        "lede": "Heliox can ask an officially authenticated Codex or Claude Code CLI to produce a text-only plan while keeping credentials, tools, approvals, execution, and verification inside their proper trust boundaries.",
+        "facts": ["Official provider CLI", "Selectable provider model", "Bounded usage evidence"],
+        "does": [
+            "Checks provider CLI availability and login status without reading or copying OAuth files.",
+            "Lets the user choose a provider-owned model or keep the official CLI default.",
+            "Runs the CLI as a text-only model helper in a sterile temporary directory with provider tools disabled or rejected.",
+            "Shows Heliox prompt estimates and provider-reported input, cached input, uncached input, and output separately from metered API spend.",
+        ],
+        "flow": [
+            "Install the official Codex or Claude Code CLI and sign in with the provider.",
+            "Choose Existing AI subscription in Heliox Settings or first-run setup.",
+            "Select an available model or leave the provider default.",
+            "Submit a task; Heliox validates the returned plan and retains every policy, approval, execution, and verification gate.",
+        ],
+        "safety": "A subscription is model access, not action authority. Heliox does not import provider credentials, rejects provider tool activity, and never lets a model approve or execute its own proposal.",
+        "limits": "Availability, eligible plans, models, latency, and quotas are provider-owned. The published benchmark covers one Codex CLI account and three fixed planning-only prompts; it does not establish Claude behavior, action execution, or unlimited use.",
+        "status": "Released in v0.12.0; provider-dependent",
+    },
 ]
 
 
