@@ -4,7 +4,7 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 
 ## Current release
 
-- Version: 0.11.1
+- Version: 0.12.0
 - License: MIT
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
 - Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
@@ -17,21 +17,21 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 
 - Accepts typed natural language, continuous voice input, and opt-in hand gestures.
 - Plans and executes browser, file, application, process, package, Git, system, integration, and workflow actions.
-- Current `main` routes tasks across 21 specialist agents and 157 declared action types. The published v0.11.1 installer is a separate 156-action release snapshot. Runtime availability depends on the operating system, installed dependencies, credentials, and active security policy.
+- v0.12.0 routes tasks across 21 specialist agents and 157 declared action types. Runtime availability still depends on the operating system, installed dependencies, credentials, integrations, and active security policy; 11 actions currently have a separate observed post-condition verifier.
 - Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
-- Current `main` supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs.
+- Supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta APIs, as well as existing Codex and Claude Code subscriptions through their official CLIs. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs. Provider-owned availability, quotas, and terms still apply.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
 
-## What's new in 0.11.1
+## What's new in 0.12.0
 
-- Coordinated continuous voice, interruption, suggestions, browser control, and application control.
-- Bounded experience learning, temporal memory, strategy evolution, and optional JEPA-style prediction.
-- 21 executable specialists with provider coverage for all 156 declared action types.
-- Shared gaze, 3D gesture, and cursor control with temporal false-positive rejection.
-- Guarded BrainFlow synthetic and recorded EEGBCI research workflows without a live brain-control claim.
-- More truthful application launch, browser targeting, approval, cancellation, and final-result behavior.
+- Existing Codex and Claude Code subscription access through official provider CLIs, with model selection and bounded usage evidence.
+- A local MCP bridge for IDE task staging that preserves visible Heliox approvals and daemon authority.
+- Secure Air Handoff for an explicitly selected screenshot, text value, or immutable file snapshot—not unrestricted remote control.
+- Completed credential-vault-backed email, calendar, and allowlisted SSH paths.
+- One live cognitive runtime for narration, interruption, suggestions, autonomous execution, and results.
+- Staged neural-goal selection plus more truthful health, provider, microphone, MCP, and forensic failure handling.
 
-[Read the complete v0.11.1 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.1.md).
+[Read the complete v0.12.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.12.0.md).
 
 ## Safety model
 
@@ -58,10 +58,11 @@ The repository includes a software pipeline for BrainFlow synthetic data, record
 - [Autonomous workflows](https://www.helioxos.dev/autonomous-workflows.md)
 - [Plugin marketplace](https://www.helioxos.dev/plugin-marketplace.md)
 - [Recorded-EEG and neural research](https://www.helioxos.dev/neural-research.md)
+- [Existing AI subscription models](https://www.helioxos.dev/subscription-models.md)
 
 ## Installation
 
-Download the 0.11.1 installer from the GitHub Releases page:
+Download the 0.12.0 installer from the GitHub Releases page:
 
 - Windows: `.exe` or `.msi`
 - macOS Apple Silicon or Intel: `.dmg`
@@ -83,11 +84,12 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 14 August 2026 evidence bundle reports a 27.921 ms median and 32.178 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. These measurements exclude model-provider, network, browser page-load, UI-rendering, microphone, camera, TTS, gesture, gaze, EEG, and human accuracy.
+The 16 August 2026 evidence bundle reports a 27.229 ms median and 29.476 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. Neither bundle establishes universal provider, network, browser page-load, UI, microphone, camera, TTS, gesture, gaze, EEG, or human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
-- [Raw software benchmark bundle](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-14.json)
+- [Raw software benchmark bundle](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json)
+- [Raw subscription-planning evidence](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
 
 ## Authoritative links
 

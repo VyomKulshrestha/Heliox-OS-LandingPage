@@ -12,6 +12,8 @@ Local-first does not mean every configured feature is offline. Network actions, 
 
 Users can configure providers such as Anthropic Claude, OpenAI, Google Gemini, OpenRouter, or Meta. OpenRouter can route a request to the exact catalog model ID the user selects, including current DeepSeek IDs. Prompts and the context needed for a requested task are sent directly from the device to the selected provider. Depending on the feature, that context can include user instructions, extracted screen text, screenshots, files, or action results. Heliox does not proxy those requests through a Heliox-operated server. The provider's privacy, retention, account, routing, and billing terms apply.
 
+Heliox can also invoke an officially authenticated Codex or Claude Code CLI as a text-only planning helper. Heliox checks CLI status but does not read or copy provider OAuth files. Prompt context is still sent to the selected provider under that provider's account, retention, model-access, quota, and privacy terms. Provider tools are disabled or rejected; Heliox retains plan validation, policy, approvals, execution, and verification.
+
 ## Telemetry and local records
 
 The current release contains no first-party analytics or automatic crash-reporting service. Local logs and audit databases exist for inspection and diagnosis and remain on the device unless the user exports or shares them. Operating systems, providers, integrations, registries, and dependencies can have separate telemetry policies outside Heliox's control.

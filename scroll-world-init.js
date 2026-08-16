@@ -10,7 +10,7 @@
                 id: 'awakening',
                 label: 'Awakening',
                 anchors: ['#top'],
-                eyebrow: 'v0.11.1 / ADAPTIVE MULTIMODAL COMPANION',
+                eyebrow: 'v0.12.0 / ADAPTIVE MULTIMODAL COMPANION',
                 title: 'Your computer becomes an intelligent world.',
                 body: 'Heliox is a privacy-first AI system control agent that plans, executes, and verifies complex work across your computer using natural language, voice, vision, and gesture.',
                 accent: '#6deeff',
@@ -31,7 +31,7 @@
                     { value: 'Tier 5', label: 'security' }
                 ],
                 cta: {
-                    primary: { label: 'Download v0.11.1', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.1' },
+                    primary: { label: 'Download v0.12.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.12.0' },
                     secondary: { label: 'Explore source', href: 'https://github.com/VyomKulshrestha/Heliox-OS' }
                 }
             },
@@ -73,17 +73,17 @@
             },
             {
                 id: 'release',
-                label: 'v0.11 Release',
+                label: 'v0.12 Release',
                 anchors: ['#release', '#architecture'],
-                eyebrow: 'HELIOX OS v0.11.1',
-                title: 'The adaptive companion release.',
-                body: 'v0.11 connects continuous companionship, bounded self-learning, multimodal control, neural research, and truthful execution into one release-ready system.',
+                eyebrow: 'HELIOX OS v0.12.0',
+                title: 'Governed intelligence, one runtime.',
+                body: 'v0.12 adds official subscription-backed planning, a local IDE MCP bridge, secure Air Handoff, verified integrations, and staged neural goals without weakening Heliox approvals.',
                 accent: '#c4a4ff',
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
                 clip: 'assets/scroll-world/clip-04.mp4',
                 metrics: [
-                    { target: 156, label: 'release action types' },
+                    { target: 157, label: 'release action types' },
                     { target: 21, label: 'specialist agents' },
                     { value: 'Local-first', label: 'adaptive memory' }
                 ],
@@ -94,8 +94,8 @@
                     { title: 'Neural research mode', body: 'Synthetic and recorded EEG pipelines stay clearly separated from unverified live brain control.' }
                 ],
                 cta: {
-                    primary: { label: 'Get v0.11.1', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.11.1' },
-                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.1.md' }
+                    primary: { label: 'Get v0.12.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.12.0' },
+                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.12.0.md' }
                 }
             },
             {
@@ -234,7 +234,7 @@
                         { label: 'Security', href: 'whitepaper.html' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@HelioxOS' }
                     ],
-                    meta: '© 2026 HELIOX OS / v0.11.1'
+                    meta: '© 2026 HELIOX OS / v0.12.0'
                 }
             }
         ]

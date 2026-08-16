@@ -14,6 +14,7 @@ Heliox OS core is **free and MIT-licensed**. Official installers do not require 
 | --- | --- | --- |
 | Local Ollama model | None | Model download, storage, memory, CPU/GPU time, and electricity |
 | Cloud model provider | None added by Heliox | Provider API charges under current provider pricing |
+| Existing Codex or Claude Code subscription | None added by Heliox | An eligible provider plan, official CLI login, and provider-owned quota |
 | Kokoro or Pocket TTS | None | Optional packages/weights, storage, memory, CPU time, and bandwidth |
 | Operating-system voice | None from Heliox | A compatible platform voice/audio device |
 | Voice, gesture, or gaze | None from Heliox | Compatible microphone or camera |
@@ -24,7 +25,7 @@ Current third-party pricing: [OpenAI](https://openai.com/api/pricing/), [Anthrop
 
 ## Zero-software-cost path
 
-Use the MIT-licensed application, an existing computer, an installed Ollama model, operating-system speech, and no paid integrations. This avoids subscription and API charges but not ordinary electricity, internet, storage, and hardware costs.
+Use the MIT-licensed application, an existing computer, an installed Ollama model, operating-system speech, and no paid integrations. This avoids subscription and API charges but not ordinary electricity, internet, storage, and hardware costs. An existing AI subscription is an optional alternative, not a Heliox requirement and does not expand the provider's quota.
 
 ## Hosted-service promise
 

@@ -16,19 +16,21 @@ const DOCUMENTS = [
   ["Autonomous workflows", "/autonomous-workflows.md", "Durable jobs, bounded parallelism, interruptions, and supervision."],
   ["Plugin marketplace", "/plugin-marketplace.md", "Moderation, package integrity, declared capabilities, and runtime limits."],
   ["Neural research", "/neural-research.md", "Synthetic and recorded EEG without a live brain-control claim."],
+  ["Subscription models", "/subscription-models.md", "Official Codex and Claude Code CLI access, model selection, usage evidence, and authority boundaries."],
 ];
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true };
 
 const BENCHMARK_EVIDENCE = {
-  captured_on: "2026-08-14",
-  source_commit: "dc09070864c68d30a60d1fc4b22bb9944a958be8",
-  source: "https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-14.json",
+  captured_on: "2026-08-16",
+  source_commit: "574effbdc6d8a8b3ca92492b9c871869364dc5d2",
+  source: "https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json",
   proof: `${SITE}/proof.md`,
   claim_boundary: "Local software evidence only; excludes provider, network, browser page-load, UI, microphone, camera, speaker, gaze, gesture, EEG, and human accuracy.",
-  guarded_local_request: { iterations: 100, median_ms: 27.921, p95_ms: 32.178, p99_ms: 39.104, model_calls: 0 },
+  guarded_local_request: { iterations: 100, median_ms: 27.229, p95_ms: 29.476, p99_ms: 30.399, model_calls: 0 },
   deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.026 },
   learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.028 },
+  subscription_planning: { provider: "codex", fixed_cases_passed: 3, fixed_cases_total: 3, median_latency_seconds: 14.708, executed_actions: 0, destructive_actions: 0, source: "https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json", boundary: "One developer-machine account and planning only; no Claude or action-execution claim." },
 };
 
 const TOOLS = [

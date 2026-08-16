@@ -2,7 +2,7 @@
 
 > Heliox OS is an MIT-licensed, local-first desktop agent for Windows, macOS, and Linux. It turns natural-language, voice, gesture, browser, and system requests into validated action plans with permission gates and post-execution verification.
 
-Current public release: 0.11.1. The newer `main` source snapshot declares 157 action types across 21 executable specialists; the published v0.11.1 installer is a separate 156-action snapshot. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. Current `main` supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs; this is not a claim that every catalog model is a separately integrated backend. External providers receive task context directly under their own terms. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
+Current public release: 0.12.0. It declares 157 action types across 21 executable specialists; only 11 actions currently have a separate observed post-condition verifier. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. It supports local Ollama, cloud API providers, and existing Codex or Claude Code subscriptions through official provider CLIs. Heliox does not copy provider OAuth files; provider availability, model access, quotas, data handling, and terms still apply. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
 
 ## Product
 
@@ -10,7 +10,7 @@ Current public release: 0.11.1. The newer `main` source snapshot declares 157 ac
 - [Machine-readable capability catalog](https://www.helioxos.dev/capabilities.json): Generated action types, platform declarations, permission and approval requirements, specialist providers, verifier coverage, and plugin manifests.
 - [Frequently asked questions](https://www.helioxos.dev/faq.md): Direct answers about cost, supported platforms, privacy, models, autonomy, neural research, and safety.
 - [Releases](https://github.com/VyomKulshrestha/Heliox-OS/releases): Official installers and release notes.
-- [v0.11.1 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.11.1.md): Current features, verification snapshot, upgrade guidance, and evidence boundaries.
+- [v0.12.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.12.0.md): Current features, verification snapshot, upgrade guidance, and evidence boundaries.
 - [Generated changelog](https://www.helioxos.dev/changelog.md): Versioned product milestones generated from the daemon's shipped changelog.
 - [Machine-readable releases](https://www.helioxos.dev/releases.json): Current version and structured feature records.
 - [JSON Feed](https://www.helioxos.dev/releases.feed.json): JSON Feed 1.1 release updates.
@@ -25,7 +25,7 @@ Current public release: 0.11.1. The newer `main` source snapshot declares 157 ac
 - [Security overview](https://www.helioxos.dev/whitepaper.html.md): Permission tiers, source-scoped authority, auditing, rollback, and known limits.
 - [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
-- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Thirty-five recurring prompts, including five benchmark-evidence checks, source validation, real-response capture format, and honest pending/evaluated status.
+- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Forty recurring prompts, including six benchmark-evidence checks, source validation, real-response capture format, and honest pending/evaluated status.
 - [Visibility report](https://www.helioxos.dev/visibility-report.json): Current source-readiness and assistant-sampling status.
 - [AI content-use policy](https://www.helioxos.dev/ai-content-policy.md): Search and grounding allowed, training declined, reference use preferred, and the separate MIT source-code boundary.
 
@@ -38,6 +38,7 @@ Current public release: 0.11.1. The newer `main` source snapshot declares 157 ac
 - [Autonomous workflows](https://www.helioxos.dev/autonomous-workflows.md): Durable jobs, bounded parallelism, interruptions, and supervision.
 - [Plugin marketplace](https://www.helioxos.dev/plugin-marketplace.md): Moderated submissions, file-integrity checks, capability declarations, and runtime limits.
 - [Recorded-EEG and neural research](https://www.helioxos.dev/neural-research.md): Synthetic and recorded-data validation without a live brain-control claim.
+- [Existing AI subscription models](https://www.helioxos.dev/subscription-models.md): Official CLI login, model selection, bounded usage evidence, and action-authority boundaries.
 
 ## Developers
 
