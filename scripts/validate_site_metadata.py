@@ -105,6 +105,10 @@ def main() -> None:
         raise SystemExit("stale specialist count remains in homepage source")
     if 'href="proof.html"' not in html:
         raise SystemExit("homepage does not expose the human-readable evidence center")
+    olud_page = "https://olud.ai/tool/vyomkulshrestha-heliox-os.html"
+    olud_badge = "https://olud.ai/badge.php?tool=vyomkulshrestha-heliox-os"
+    if olud_page not in html or olud_badge not in html:
+        raise SystemExit("homepage does not expose the verified olud.ai listing badge")
 
     scroll_init = (ROOT / "scroll-world-init.js").read_text(encoding="utf-8")
     scroll_bootstrap = (ROOT / "scroll-world-bootstrap.js").read_text(encoding="utf-8")
