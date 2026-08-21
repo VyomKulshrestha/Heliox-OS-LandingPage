@@ -17,6 +17,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/posters/clip-01-start.webp',
                 clip: 'assets/scroll-world/enhanced/clip-01-ai-1440p.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-01.mp4',
                 hold: {
                     still: 'assets/scroll-world/enhanced/clip-01-hold-4k.webp',
                     time: 0.504,
@@ -46,6 +47,7 @@
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-02-start.webp',
                 clip: 'assets/scroll-world/clip-02.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-02.mp4',
                 signals: [
                     { title: 'Voice & speech', body: 'Ambient wake word, VAD endpoints, barge-in, and real-time push-free dispatch.' },
                     { title: '30+ hand gestures', body: 'Static poses, motion gestures, air drawing, cursor control, and opt-in gaze fusion.' },
@@ -64,6 +66,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/posters/clip-03-start.webp',
                 clip: 'assets/scroll-world/clip-03.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-03.mp4',
                 signals: [
                     { title: 'Proactive suggestions', body: 'Grounded next actions emerge from the current screen, memory, and verified results.' },
                     { title: 'Execution companion', body: 'Plans can be reviewed, corrected, stopped, or redirected while work is still running.' },
@@ -82,6 +85,7 @@
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
                 clip: 'assets/scroll-world/clip-04.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-04.mp4',
                 metrics: [
                     { target: 157, label: 'release action types' },
                     { target: 21, label: 'specialist agents' },
@@ -109,6 +113,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/posters/clip-05-start.webp',
                 clip: 'assets/scroll-world/clip-05.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-05.mp4',
                 scroll: 2.15,
                 copyStart: 0.62,
                 copyFadeIn: 0.14,
@@ -137,6 +142,7 @@
                 align: 'right',
                 still: 'assets/scroll-world/continuation/posters/clip-06-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-06.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-06.mp4',
                 metrics: [
                     { target: 157, label: 'declared actions on main' },
                     { target: 17, label: 'capability groups' },
@@ -163,6 +169,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/continuation/posters/clip-07-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-07.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-07.mp4',
                 signals: [
                     { title: 'Weather intelligence', body: 'Contextual forecasts become inputs for proactive planning and daily routines.' },
                     { title: 'Media control', body: 'Spotify and audio workflows operate through the same verified action model.' },
@@ -181,6 +188,7 @@
                 align: 'right',
                 still: 'assets/scroll-world/continuation/posters/clip-08-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-08.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-08.mp4',
                 signals: [
                     { title: 'Five-tier permissions', body: 'Risk determines whether work proceeds, simulates, confirms, or stops.' },
                     { title: 'Safety critic + learned risk', body: 'Plans are challenged before execution and compared with bounded local risk history.' },
@@ -203,6 +211,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/continuation/posters/clip-09-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-09.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-09.mp4',
                 signals: [
                     { title: 'Windows', body: 'Download the current release and launch the native desktop experience.' },
                     { title: 'macOS', body: 'Build from source with the same local-first agent and security model.' },
@@ -225,6 +234,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/continuation/posters/clip-10-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-10.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-10.mp4',
                 scroll: 2.2,
                 cta: {
                     primary: { label: 'Download Heliox', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases' },

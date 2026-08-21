@@ -70,6 +70,11 @@
 
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const sections = config.sections;
+        const codecProbe = document.createElement('video');
+        const supportsAv1 = [
+            'video/mp4; codecs="av01.0.08M.08"',
+            'video/mp4; codecs="av01.0.12M.08"'
+        ].some((type) => codecProbe.canPlayType(type) !== '');
         const mediaUrl = (url) => {
             if (!url || !config.mediaVersion) return url;
             return `${url}${url.includes('?') ? '&' : '?'}v=${config.mediaVersion}`;
@@ -95,6 +100,8 @@
         let scrollTicking = false;
         let primed = false;
         let lastVideoTick = 0;
+        let lastObservedScrollY = window.scrollY;
+        let scrollDirection = 1;
 
         root.innerHTML = '';
         root.classList.add('is-mounted');
@@ -129,6 +136,8 @@
             const copy = createElement('section', `hworld-copy hworld-copy--${section.align || (index % 2 ? 'right' : 'left')}`);
             copy.dataset.section = section.id;
             const posterUrl = mediaUrl(section.still);
+            let selectedClip = supportsAv1 && section.clipAv1 ? section.clipAv1 : section.clip;
+            let fallbackAttempted = false;
             const start = runningOffset;
             const end = start + sectionWeights[index];
 
@@ -148,7 +157,7 @@
 
             video.muted = true;
             video.playsInline = true;
-            video.preload = 'metadata';
+            video.preload = 'none';
             video.setAttribute('muted', '');
             video.setAttribute('playsinline', '');
 
@@ -175,20 +184,21 @@
             `;
 
             const counters = Array.from(copy.querySelectorAll('[data-target]'));
+            let sceneState = null;
             const setPosterSource = () => {
                 if (poster.dataset.sourceReady === 'true') return;
                 poster.dataset.sourceReady = 'true';
                 poster.src = posterUrl;
             };
-            const clearPosterSource = () => {
-                if (poster.dataset.sourceReady !== 'true') return;
-                poster.removeAttribute('src');
-                poster.dataset.sourceReady = 'false';
-            };
-            const setVideoSource = () => {
-                if (scene.dataset.sourceReady === 'true' || reducedMotion || !section.clip) return;
+            const setVideoSource = (preload = 'metadata') => {
+                if (sceneState.releaseTimer) {
+                    window.clearTimeout(sceneState.releaseTimer);
+                    sceneState.releaseTimer = null;
+                }
+                video.preload = preload;
+                if (scene.dataset.sourceReady === 'true' || reducedMotion || !selectedClip) return;
                 scene.dataset.sourceReady = 'true';
-                video.src = mediaUrl(section.clip);
+                video.src = mediaUrl(selectedClip);
                 video.load();
             };
             const clearVideoSource = () => {
@@ -199,24 +209,41 @@
                 scene.dataset.sourceReady = 'false';
                 scene.classList.remove('has-video', 'has-metadata');
             };
+            const scheduleVideoRelease = () => {
+                if (scene.dataset.sourceReady !== 'true' || sceneState.releaseTimer) return;
+                sceneState.releaseTimer = window.setTimeout(() => {
+                    sceneState.releaseTimer = null;
+                    clearVideoSource();
+                }, 1400);
+            };
 
             video.addEventListener('loadedmetadata', () => {
                 scene.classList.add('has-metadata');
                 try {
-                    video.currentTime = Math.min(0.01, video.duration || 0.01);
+                    sceneState.current = sceneState.target;
+                    video.currentTime = clamp(sceneState.target, 0.002, 0.995) * video.duration;
                 } catch (error) {
                     scene.classList.remove('has-video');
                 }
             });
             video.addEventListener('seeked', () => scene.classList.add('has-video'));
             video.addEventListener('loadeddata', () => scene.classList.add('has-video'));
-            video.addEventListener('error', () => scene.classList.remove('has-video'));
+            video.addEventListener('error', () => {
+                if (!fallbackAttempted && selectedClip !== section.clip && section.clip) {
+                    fallbackAttempted = true;
+                    selectedClip = section.clip;
+                    video.src = mediaUrl(selectedClip);
+                    video.load();
+                    return;
+                }
+                scene.classList.remove('has-video');
+            });
 
             scene.append(poster, video);
             if (hold) scene.appendChild(hold);
             stage.appendChild(scene);
             copyLayer.appendChild(copy);
-            scenes.push({
+            sceneState = {
                 element: scene,
                 poster,
                 video,
@@ -231,11 +258,13 @@
                 opacity: 0,
                 counterActive: false,
                 counterStart: null,
+                releaseTimer: null,
                 setPosterSource,
-                clearPosterSource,
                 setVideoSource,
-                clearVideoSource
-            });
+                clearVideoSource,
+                scheduleVideoRelease
+            };
+            scenes.push(sceneState);
             (section.anchors || []).forEach((anchor) => {
                 document.querySelectorAll(`a[href="${anchor}"]`).forEach((link) => {
                     link.dataset.worldNavigation = 'true';
@@ -249,6 +278,7 @@
 
         stage.append(atmosphere, vignette);
         root.append(stage, copyLayer, progress, scrollHint, track);
+        scenes.forEach((scene) => scene.setPosterSource());
 
         function jumpTo(index) {
             const scene = scenes[index];
@@ -380,8 +410,8 @@
             scenes.forEach((scene) => updateCounters(scene, now));
             if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
                 lastVideoTick = now;
-                scenes.forEach((scene) => {
-                    if (!scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
+                scenes.forEach((scene, index) => {
+                    if (index !== activeIndex || !scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
                     scene.current += (scene.target - scene.current) * 0.5;
                     const targetTime = clamp(scene.current, 0.002, 0.995) * scene.video.duration;
                     if (Math.abs(scene.video.currentTime - targetTime) > 0.018) {
@@ -398,13 +428,15 @@
 
         function syncMediaSources() {
             scenes.forEach((scene, index) => {
-                const shouldLoad = !document.hidden && Math.abs(index - activeIndex) <= 1;
-                if (shouldLoad) {
-                    scene.setPosterSource();
-                    scene.setVideoSource();
+                const directionalDistance = (index - activeIndex) * scrollDirection;
+                if (document.hidden) {
+                    scene.scheduleVideoRelease();
+                } else if (index === activeIndex) {
+                    scene.setVideoSource('auto');
+                } else if (directionalDistance === 1) {
+                    scene.setVideoSource('metadata');
                 } else {
-                    scene.clearPosterSource();
-                    scene.clearVideoSource();
+                    scene.scheduleVideoRelease();
                 }
             });
         }
@@ -412,14 +444,23 @@
         function primeVideos() {
             if (primed || reducedMotion) return;
             primed = true;
-            scenes.forEach((scene) => {
-                if (!scene.video.src) return;
-                const promise = scene.video.play();
-                if (promise?.then) promise.then(() => scene.video.pause()).catch(() => {});
-            });
+            const scene = scenes[activeIndex];
+            if (!scene?.video.src) return;
+            const promise = scene.video.play();
+            if (promise?.then) promise.then(() => scene.video.pause()).catch(() => {});
         }
 
         window.addEventListener('scroll', () => {
+            const nextScrollY = window.scrollY;
+            const delta = nextScrollY - lastObservedScrollY;
+            if (Math.abs(delta) > 0.5) {
+                const nextDirection = Math.sign(delta);
+                if (nextDirection !== scrollDirection) {
+                    scrollDirection = nextDirection;
+                    syncMediaSources();
+                }
+            }
+            lastObservedScrollY = nextScrollY;
             if (!scrollTicking) {
                 scrollTicking = true;
                 window.requestAnimationFrame(updateFromScroll);
@@ -429,12 +470,10 @@
         window.addEventListener('load', layout);
         window.addEventListener('pointerdown', primeVideos, { once: true, passive: true });
         window.addEventListener('touchstart', primeVideos, { once: true, passive: true });
-        window.addEventListener('pagehide', () => scenes.forEach((scene) => {
-            scene.clearPosterSource();
-            scene.clearVideoSource();
-        }));
+        window.addEventListener('pagehide', () => scenes.forEach((scene) => scene.clearVideoSource()));
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) scenes.forEach((scene) => { scene.current = scene.target; });
+            lastObservedScrollY = window.scrollY;
             syncMediaSources();
         });
 
