@@ -100,8 +100,6 @@
         let scrollTicking = false;
         let primed = false;
         let lastVideoTick = 0;
-        let lastObservedScrollY = window.scrollY;
-        let scrollDirection = 1;
 
         root.innerHTML = '';
         root.classList.add('is-mounted');
@@ -214,7 +212,7 @@
                 sceneState.releaseTimer = window.setTimeout(() => {
                     sceneState.releaseTimer = null;
                     clearVideoSource();
-                }, 1400);
+                }, 350);
             };
 
             video.addEventListener('loadedmetadata', () => {
@@ -411,7 +409,13 @@
             if (!reducedMotion && !document.hidden && now - lastVideoTick >= 1000 / 24) {
                 lastVideoTick = now;
                 scenes.forEach((scene, index) => {
-                    if (index !== activeIndex || !scene.video.duration || scene.video.seeking || scene.opacity < 0.02) return;
+                    if (
+                        index !== activeIndex ||
+                        !scene.video.duration ||
+                        scene.video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA ||
+                        scene.video.seeking ||
+                        scene.opacity < 0.02
+                    ) return;
                     scene.current += (scene.target - scene.current) * 0.5;
                     const targetTime = clamp(scene.current, 0.002, 0.995) * scene.video.duration;
                     if (Math.abs(scene.video.currentTime - targetTime) > 0.018) {
@@ -428,13 +432,10 @@
 
         function syncMediaSources() {
             scenes.forEach((scene, index) => {
-                const directionalDistance = (index - activeIndex) * scrollDirection;
                 if (document.hidden) {
                     scene.scheduleVideoRelease();
                 } else if (index === activeIndex) {
                     scene.setVideoSource('auto');
-                } else if (directionalDistance === 1) {
-                    scene.setVideoSource('metadata');
                 } else {
                     scene.scheduleVideoRelease();
                 }
@@ -451,16 +452,6 @@
         }
 
         window.addEventListener('scroll', () => {
-            const nextScrollY = window.scrollY;
-            const delta = nextScrollY - lastObservedScrollY;
-            if (Math.abs(delta) > 0.5) {
-                const nextDirection = Math.sign(delta);
-                if (nextDirection !== scrollDirection) {
-                    scrollDirection = nextDirection;
-                    syncMediaSources();
-                }
-            }
-            lastObservedScrollY = nextScrollY;
             if (!scrollTicking) {
                 scrollTicking = true;
                 window.requestAnimationFrame(updateFromScroll);
@@ -473,7 +464,6 @@
         window.addEventListener('pagehide', () => scenes.forEach((scene) => scene.clearVideoSource()));
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) scenes.forEach((scene) => { scene.current = scene.target; });
-            lastObservedScrollY = window.scrollY;
             syncMediaSources();
         });
 
