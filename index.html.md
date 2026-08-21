@@ -18,6 +18,7 @@ Heliox OS is an open-source desktop agent that translates user requests into str
 - Accepts typed natural language, continuous voice input, and opt-in hand gestures.
 - Plans and executes browser, file, application, process, package, Git, system, integration, and workflow actions.
 - v0.12.0 routes tasks across 21 specialist agents and 157 declared action types. Runtime availability still depends on the operating system, installed dependencies, credentials, integrations, and active security policy; 11 actions currently have a separate observed post-condition verifier.
+- The [capability explorer](https://www.helioxos.dev/#actions) lets people filter the canonical 157-action catalog by specialist and verification depth; agents can read the same source directly from [capabilities.json](https://www.helioxos.dev/capabilities.json).
 - Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
 - Supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta APIs, as well as existing Codex and Claude Code subscriptions through their official CLIs. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs. Provider-owned availability, quotas, and terms still apply.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
@@ -84,12 +85,13 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 16 August 2026 evidence bundle reports a 27.229 ms median and 29.476 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; concurrent scheduler responsiveness during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. Neither bundle establishes universal provider, network, browser page-load, UI, microphone, camera, TTS, gesture, gaze, EEG, or human accuracy.
+The 21 August 2026 current-main evidence bundle reports a 27.636 ms median and 29.906 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 66 concurrent scheduler heartbeats with a 16.873 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. Neither bundle establishes universal provider, network, browser page-load, UI, microphone, camera, TTS, gesture, gaze, EEG, or human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
-- [Raw software benchmark bundle](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json)
-- [Raw subscription-planning evidence](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
+- [Raw current-main software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-21.json)
+- [Raw v0.12.0 release benchmark snapshot](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json)
+- [Raw subscription-planning evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
 
 ## Authoritative links
 

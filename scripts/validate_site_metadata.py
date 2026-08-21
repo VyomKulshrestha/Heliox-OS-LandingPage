@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main() -> None:
     html = (ROOT / "index.html").read_text(encoding="utf-8")
+    css = (ROOT / "style.css").read_text(encoding="utf-8")
+    if (
+        ".heliox-scroll-world.is-mounted .hworld-copy__actions a" not in css
+        or ".heliox-scroll-world.is-mounted .hworld-footer a" not in css
+        or "pointer-events: auto" not in css
+    ):
+        raise SystemExit("cinematic CTA and footer links must remain interactive")
     if '<link rel="canonical" href="https://www.helioxos.dev/"' not in html:
         raise SystemExit("canonical homepage link is missing")
     verification = re.search(
@@ -45,12 +52,12 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "27.229 ms",
-        "29.476 ms p95",
+        "27.636 ms",
+        "29.906 ms p95",
         "59 / 59",
-        "65 ticks",
+        "66 ticks",
         "36k / 5.4k",
-        "software-benchmarks-2026-08-16.json",
+        "software-benchmarks-2026-08-21.json",
         "14.708 s median",
         "zero destructive actions",
         "audible TTS",
@@ -79,6 +86,16 @@ def main() -> None:
         raise SystemExit(f"structured benchmark dataset is incomplete: {missing}")
     if benchmark_dataset["dateModified"] != software["dateModified"]:
         raise SystemExit("software and benchmark structured-data dates disagree")
+    raw_evidence_prefix = (
+        "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/"
+        "docs/evidence/"
+    )
+    distributions = benchmark_dataset["distribution"]
+    if not distributions or not all(
+        item.get("contentUrl", "").startswith(raw_evidence_prefix)
+        for item in distributions
+    ):
+        raise SystemExit("structured benchmark downloads must resolve to raw JSON")
 
     expected_counters = {
         "157": "157",
@@ -99,6 +116,8 @@ def main() -> None:
     overview = (ROOT / "index.html.md").read_text(encoding="utf-8")
     if "OpenRouter" not in overview or "DeepSeek" not in overview:
         raise SystemExit("agent-readable overview omits current model-provider support")
+    if "capability explorer" not in overview or "capabilities.json" not in overview:
+        raise SystemExit("agent-readable overview omits the capability explorer source")
     if re.search(r'class="[^"]*count-up[^"]*"[^>]*>0\+?<', html):
         raise SystemExit("crawler-visible counters must not render as zero")
     if "<!-- 10 Specialist Agents -->" in html:
@@ -157,12 +176,13 @@ def main() -> None:
     proof_html = (ROOT / "proof.html").read_text(encoding="utf-8")
     required_proof_claims = (
         '<link rel="canonical" href="https://www.helioxos.dev/proof.html">',
+        '"dateModified":"2026-08-21"',
         "11 independent post-condition verifiers",
         "production certificate remains pending",
         "recorded/synthetic EEG research",
         "59/59 regression cases",
         "36,000 training and 5,400 temporal-validation samples",
-        "software-benchmarks-2026-08-16.json",
+        "software-benchmarks-2026-08-21.json",
         "subscription-planning-codex-2026-08-16.json",
         "3/3 fixed planning cases",
     )
@@ -174,13 +194,13 @@ def main() -> None:
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "27.229",
-        "29.476",
+        "27.636",
+        "29.906",
         "59/59",
-        "65 ticks",
+        "66 ticks",
         "36,000",
         "5,400",
-        "software-benchmarks-2026-08-16.json",
+        "software-benchmarks-2026-08-21.json",
         "Human microphone accuracy is not a release gate",
         "audible quality and device output require a human check",
         "Physical accuracy is not established across cameras",
@@ -206,14 +226,17 @@ def main() -> None:
         )
         for node in entries
     }
-    for url in (
-        "https://www.helioxos.dev/",
-        "https://www.helioxos.dev/privacy.html",
-        "https://www.helioxos.dev/heliox-vs-open-interpreter.html",
-        "https://www.helioxos.dev/cost.html",
-        "https://www.helioxos.dev/proof.html",
-    ):
-        if last_modified.get(url) != "2026-08-16":
+    expected_last_modified = {
+        "https://www.helioxos.dev/": "2026-08-21",
+        "https://www.helioxos.dev/privacy.html": "2026-08-16",
+        "https://www.helioxos.dev/heliox-vs-open-interpreter.html": "2026-08-16",
+        "https://www.helioxos.dev/cost.html": "2026-08-16",
+        "https://www.helioxos.dev/proof.html": "2026-08-21",
+        "https://www.helioxos.dev/neural-research.html": "2026-08-21",
+        "https://www.helioxos.dev/ai-visibility.md": "2026-08-21",
+    }
+    for url, expected_date in expected_last_modified.items():
+        if last_modified.get(url) != expected_date:
             raise SystemExit(f"sitemap lastmod is stale for {url}")
     print(f"Validated canonical metadata, release truth, and {len(urls)} sitemap URLs.")
 

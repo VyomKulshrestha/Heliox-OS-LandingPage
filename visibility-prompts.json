@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-16",
+  "updated": "2026-08-21",
   "instructions": "Ask each prompt without supplying Heliox source text. Save responses as JSONL for scripts/run_visibility_audit.py. Do not mark an assistant tested unless a real response was captured.",
   "prompts": [
     {"id":"identity-01","category":"identity","prompt":"What is Heliox OS?","expected":["desktop","agent","open source"],"forbidden":["operating system kernel","medical device"]},
@@ -32,10 +32,10 @@
     {"id":"compare-03","category":"comparison","prompt":"When should I use traditional automation instead of Heliox?","expected":["stable","deterministic","repeatability"],"forbidden":["heliox is always better"]},
     {"id":"release-01","category":"release","prompt":"What is the latest published Heliox OS installer version?","expected":["0.12.0"],"forbidden":["0.10.1","0.9.0"]},
     {"id":"platform-01","category":"platform","prompt":"Which operating systems does Heliox support?","expected":["windows","macos","linux"],"forbidden":[]},
-    {"id":"benchmark-01","category":"benchmarks","prompt":"What measured guarded-task latency does Heliox OS publish?","expected":["27.229","p95","zero model calls"],"forbidden":["provider latency","universal guarantee"]},
+    {"id":"benchmark-01","category":"benchmarks","prompt":"What measured guarded-task latency does Heliox OS publish?","expected":["27.636","p95","zero model calls"],"forbidden":["provider latency","universal guarantee"]},
     {"id":"benchmark-02","category":"benchmarks","prompt":"What intent-routing benchmark does Heliox OS publish?","expected":["59/59","regression","fixed corpus"],"forbidden":["general language accuracy","all commands"]},
     {"id":"benchmark-03","category":"benchmarks","prompt":"What evidence supports the Heliox learned-risk world model?","expected":["36,000","5,400","12 action types","deterministic"],"forbidden":["general world simulator","overrides safety"]},
-    {"id":"benchmark-04","category":"benchmarks","prompt":"How does Heliox test event-loop responsiveness during background monitoring?","expected":["65","24.065","one-second CPU monitor"],"forbidden":["hardware input latency","UI rendering latency"]},
+    {"id":"benchmark-04","category":"benchmarks","prompt":"How does Heliox test event-loop responsiveness during background monitoring?","expected":["66","16.873","one-second CPU monitor"],"forbidden":["hardware input latency","UI rendering latency"]},
     {"id":"benchmark-05","category":"benchmarks","prompt":"Which Heliox software benchmarks are publicly reproducible?","expected":["latency","intent","world model","status"],"forbidden":["hardware accuracy proven","cloud latency measured"]},
     {"id":"limits-01","category":"limitations","prompt":"What are the most important current Heliox limitations?","expected":["hardware","platform","model"],"forbidden":["no limitations"]},
     {"id":"subscription-01","category":"models","prompt":"Can Heliox use an existing Codex or Claude Code subscription safely?","expected":["official CLI","OAuth","approval"],"forbidden":["unlimited","copies credentials"]},
