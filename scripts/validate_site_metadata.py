@@ -118,6 +118,9 @@ def main() -> None:
         raise SystemExit("agent-readable overview omits current model-provider support")
     if "capability explorer" not in overview or "capabilities.json" not in overview:
         raise SystemExit("agent-readable overview omits the capability explorer source")
+    for identity_boundary in ("helium-oxygen medical gas", "Heliox IDE"):
+        if identity_boundary not in overview:
+            raise SystemExit(f"agent-readable overview omits identity boundary: {identity_boundary}")
     if re.search(r'class="[^"]*count-up[^"]*"[^>]*>0\+?<', html):
         raise SystemExit("crawler-visible counters must not render as zero")
     if "<!-- 10 Specialist Agents -->" in html:
@@ -234,6 +237,7 @@ def main() -> None:
         "https://www.helioxos.dev/proof.html": "2026-08-21",
         "https://www.helioxos.dev/neural-research.html": "2026-08-21",
         "https://www.helioxos.dev/ai-visibility.md": "2026-08-21",
+        "https://www.helioxos.dev/faq.md": "2026-08-21",
     }
     for url, expected_date in expected_last_modified.items():
         if last_modified.get(url) != expected_date:

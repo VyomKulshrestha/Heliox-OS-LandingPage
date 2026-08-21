@@ -4,6 +4,10 @@
 
 Heliox OS is an MIT-licensed desktop automation agent. It converts typed, spoken, or gesture input into structured plans, executes supported actions, and verifies results. Despite its name, it is an application-layer agent rather than an operating-system kernel.
 
+## Is Heliox OS related to heliox medical gas or Heliox IDE?
+
+No. Heliox OS is the desktop-agent project published at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. It is unrelated to heliox helium-oxygen medical gas and to other products named Heliox, including Heliox IDE.
+
 ## Is Heliox OS free?
 
 The source code and current releases are available under the MIT license. External model APIs, third-party integrations, network services, or optional hosted products can charge their own fees.

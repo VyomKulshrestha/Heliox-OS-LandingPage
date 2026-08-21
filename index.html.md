@@ -2,6 +2,8 @@
 
 Heliox OS is an open-source desktop agent that translates user requests into structured plans, executes supported computer actions, and verifies their results. It is an application that runs on Windows, macOS, and Linux; it is not an operating-system kernel.
 
+Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. It is unrelated to heliox helium-oxygen medical gas and to other products named Heliox, including Heliox IDE.
+
 ## Current release
 
 - Version: 0.12.0

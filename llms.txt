@@ -4,6 +4,8 @@
 
 Current public release: 0.12.0. It declares 157 action types across 21 executable specialists; only 11 actions currently have a separate observed post-condition verifier. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. It supports local Ollama, cloud API providers, and existing Codex or Claude Code subscriptions through official provider CLIs. Heliox does not copy provider OAuth files; provider availability, model access, quotas, data handling, and terms still apply. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
 
+Name disambiguation: Heliox OS means the desktop-agent project at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. It is unrelated to heliox helium-oxygen medical gas and to other products named Heliox, including Heliox IDE.
+
 ## Product
 
 - [Product overview](https://www.helioxos.dev/index.html.md): Capabilities, installation, architecture, availability, and important limitations.
