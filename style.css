@@ -1776,6 +1776,13 @@ body.scroll-world-active > nav {
     pointer-events: none;
 }
 
+/* Keep the fixed copy layer transparent to scroll gestures while allowing
+   explicit navigation in the currently rendered scene. */
+.heliox-scroll-world.is-mounted .hworld-copy__actions a,
+.heliox-scroll-world.is-mounted .hworld-footer a {
+    pointer-events: auto;
+}
+
 .heliox-scroll-world.is-mounted .hworld-copy {
     top: clamp(6.5rem, 15vh, 9.5rem);
     width: min(32rem, 35vw);
