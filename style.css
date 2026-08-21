@@ -149,6 +149,416 @@ html { scrollbar-color: rgba(0, 225, 255, 0.25) #0e0e12; scrollbar-width: thin; 
     box-shadow: 0 0 12px rgba(0, 225, 255, 0.1);
 }
 
+/* Capability explorer */
+.capability-explorer-launch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    overflow: hidden;
+}
+
+.capability-explorer-launch::after {
+    content: '';
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    right: -8rem;
+    top: -11rem;
+    border-radius: 50%;
+    background: rgba(0, 225, 255, 0.12);
+    filter: blur(45px);
+    pointer-events: none;
+}
+
+.capability-explorer-launch > * {
+    position: relative;
+    z-index: 1;
+}
+
+.capability-explorer-kicker {
+    color: #67efff !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem !important;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.capability-explorer-launch h3 {
+    max-width: 46rem;
+    margin-top: 0.65rem;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.15rem);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+}
+
+.capability-explorer-launch h3 + p {
+    max-width: 44rem;
+    margin-top: 0.8rem;
+    color: rgba(229, 225, 231, 0.67);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.capability-explorer-launch__actions {
+    display: flex;
+    min-width: max-content;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+}
+
+.capability-explorer-launch__actions > a {
+    color: rgba(229, 225, 231, 0.72);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.capability-explorer-launch__actions > .capability-explorer-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid rgba(103, 239, 255, 0.4);
+    border-radius: 0.65rem;
+    background: rgba(0, 225, 255, 0.1);
+    color: #9cf5ff;
+    box-shadow: 0 0 30px rgba(0, 225, 255, 0.08);
+}
+
+.capability-static-label {
+    margin-bottom: -1.25rem;
+    color: rgba(229, 225, 231, 0.45);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.capability-explorer-dialog {
+    width: min(1120px, calc(100vw - 2rem));
+    max-width: none;
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(103, 239, 255, 0.24);
+    border-radius: 1.1rem;
+    background: #080b0e;
+    color: #e9f4f7;
+    box-shadow: 0 28px 110px rgba(0, 0, 0, 0.72), 0 0 70px rgba(0, 225, 255, 0.08);
+}
+
+.capability-explorer-dialog::backdrop {
+    background: rgba(2, 4, 7, 0.84);
+    backdrop-filter: blur(16px) saturate(80%);
+}
+
+.capability-explorer-shell {
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.capability-explorer-header {
+    position: sticky;
+    z-index: 4;
+    top: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.7rem clamp(1.2rem, 4vw, 2.5rem);
+    border-bottom: 1px solid rgba(103, 239, 255, 0.12);
+    background: linear-gradient(180deg, rgba(10, 16, 20, 0.98), rgba(8, 11, 14, 0.94));
+    backdrop-filter: blur(18px);
+}
+
+.capability-explorer-header h2 {
+    margin-top: 0.35rem;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.7rem);
+    font-weight: 650;
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+}
+
+.capability-explorer-header h2 + p {
+    max-width: 48rem;
+    margin-top: 0.8rem;
+    color: rgba(229, 225, 231, 0.62);
+    font-size: 0.83rem;
+    line-height: 1.55;
+}
+
+.capability-explorer-close {
+    display: grid;
+    width: 2.6rem;
+    height: 2.6rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(229, 225, 231, 0.14);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.74);
+}
+
+.capability-explorer-close:hover,
+.capability-explorer-close:focus-visible {
+    border-color: rgba(103, 239, 255, 0.55);
+    color: #9cf5ff;
+}
+
+.capability-explorer-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1.5rem clamp(1.2rem, 4vw, 2.5rem) 0.75rem;
+}
+
+.capability-explorer-filters label {
+    display: grid;
+    gap: 0.55rem;
+    color: rgba(229, 225, 231, 0.55);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.capability-explorer-filters select {
+    width: 100%;
+    border: 1px solid rgba(103, 239, 255, 0.18);
+    border-radius: 0.65rem;
+    background: #10161a;
+    color: #f0f7f8;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.capability-explorer-filters select:focus {
+    border-color: rgba(103, 239, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(103, 239, 255, 0.1);
+}
+
+.capability-explorer-state {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem clamp(1.2rem, 4vw, 2.5rem) 1.35rem;
+    border-bottom: 1px solid rgba(229, 225, 231, 0.08);
+}
+
+.capability-explorer-state p {
+    color: rgba(229, 225, 231, 0.68);
+    font-size: 0.78rem;
+}
+
+.capability-explorer-state nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.55rem 1rem;
+}
+
+.capability-explorer-state a,
+.capability-explorer-error a {
+    color: #82eefb;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    text-decoration: underline;
+    text-decoration-color: rgba(130, 238, 251, 0.28);
+    text-underline-offset: 0.25rem;
+}
+
+.capability-results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    padding: 1.25rem clamp(1.2rem, 4vw, 2.5rem) 2.5rem;
+}
+
+.capability-results[aria-busy='true'] {
+    min-height: 12rem;
+    background: linear-gradient(100deg, transparent 30%, rgba(103, 239, 255, 0.05) 50%, transparent 70%);
+    background-size: 220% 100%;
+    animation: capability-loading 1.4s linear infinite;
+}
+
+@keyframes capability-loading {
+    to { background-position-x: -220%; }
+}
+
+.capability-card {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid rgba(229, 225, 231, 0.09);
+    border-radius: 0.8rem;
+    background: linear-gradient(135deg, rgba(103, 239, 255, 0.035), transparent 45%), rgba(255, 255, 255, 0.025);
+}
+
+.capability-card__header,
+.capability-card__footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.capability-card__header > div {
+    min-width: 0;
+}
+
+.capability-card__id {
+    display: block;
+    overflow: hidden;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.capability-card__family {
+    display: block;
+    margin-top: 0.25rem;
+    color: rgba(229, 225, 231, 0.42);
+    font-size: 0.66rem;
+}
+
+.capability-verification {
+    flex: 0 0 auto;
+    padding: 0.32rem 0.48rem;
+    border: 1px solid;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.capability-verification--independent {
+    border-color: rgba(103, 239, 255, 0.28);
+    background: rgba(103, 239, 255, 0.08);
+    color: #9cf5ff;
+}
+
+.capability-verification--executor {
+    border-color: rgba(211, 164, 255, 0.22);
+    background: rgba(157, 5, 255, 0.07);
+    color: rgba(223, 183, 255, 0.78);
+}
+
+.capability-card__specialists {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.capability-card__specialists > span {
+    margin-right: 0.2rem;
+    color: rgba(229, 225, 231, 0.35);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.capability-card__specialists button {
+    padding: 0.3rem 0.45rem;
+    border: 1px solid rgba(229, 225, 231, 0.1);
+    border-radius: 0.35rem;
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(229, 225, 231, 0.68);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.62rem;
+}
+
+.capability-card__specialists button:hover,
+.capability-card__specialists button:focus-visible {
+    border-color: rgba(103, 239, 255, 0.4);
+    color: #9cf5ff;
+}
+
+.capability-card__footer {
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(229, 225, 231, 0.07);
+    color: rgba(229, 225, 231, 0.38);
+    font-size: 0.62rem;
+}
+
+.capability-card__footer a {
+    color: rgba(103, 239, 255, 0.72);
+}
+
+.capability-explorer-error {
+    margin: 1rem clamp(1.2rem, 4vw, 2.5rem);
+    padding: 1rem;
+    border: 1px solid rgba(255, 184, 108, 0.22);
+    border-radius: 0.65rem;
+    background: rgba(255, 184, 108, 0.06);
+    color: rgba(255, 225, 194, 0.8);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 760px) {
+    .capability-explorer-launch,
+    .capability-explorer-state {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .capability-explorer-launch__actions {
+        min-width: 0;
+    }
+
+    .capability-explorer-filters,
+    .capability-results {
+        grid-template-columns: 1fr;
+    }
+
+    .capability-explorer-state nav {
+        justify-content: flex-start;
+    }
+
+    .capability-card__header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .capability-verification {
+        align-self: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .capability-results[aria-busy='true'] {
+        animation: none;
+    }
+}
+
 /* ── Install Platform Tabs ───────────────────────────────── */
 .platform-tab {
     padding: 0.75rem 1.5rem;
@@ -1513,6 +1923,35 @@ body.scroll-world-active > nav {
     color: rgba(220, 237, 241, 0.62);
     font-size: 0.69rem;
     line-height: 1.38;
+}
+
+/* Keep the capability CTA inside compact laptop viewports. */
+.heliox-scroll-world.is-mounted .hworld-copy[data-section='actions'] h2 {
+    max-width: 18ch;
+    font-size: clamp(2.2rem, 3.3vw, 3.6rem);
+}
+
+.hworld-copy[data-section='actions'] .hworld-manifest {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin-top: 0.65rem;
+}
+
+.hworld-copy[data-section='actions'] .hworld-manifest li {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(218, 244, 249, 0.12);
+}
+
+.hworld-copy[data-section='actions'] .hworld-manifest p {
+    display: none;
+}
+
+.hworld-copy[data-section='actions'] .hworld-copy__actions {
+    margin-top: 0.9rem;
+}
+
+.hworld-copy[data-section='actions'] .hworld-copy__actions a {
+    padding: 0.75rem 1rem;
 }
 
 .hworld-profile {

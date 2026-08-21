@@ -130,7 +130,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=account_tree,arrow_back,arrow_right_alt,auto_awesome,back_hand,bolt,brightness_6,calendar_month,cloud,close,code,computer,content_paste,data_object,desktop_windows,devices,dns,download,extension,fact_check,favorite,fingerprint,folder,forward_to_inbox,front_hand,history,home,hub,info,inventory_2,key,labs,language,laptop,laptop_mac,laptop_windows,mail,manage_search,memory,menu,merge,mic,model_training,monitor_heart,monitoring,music_note,neurology,new_releases,notifications,open_in_new,play_circle,power_settings_new,psychology,record_voice_over,rss_feed,schedule,science,screenshot_monitor,search,settings,shield,speed,stop_circle,terminal,trending_up,verified,visibility,volume_up,web_asset,wifi&amp;display=block" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" /><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=account_tree,arrow_back,arrow_right_alt,auto_awesome,back_hand,bolt,brightness_6,calendar_month,cloud,close,code,computer,content_paste,data_object,desktop_windows,devices,dns,download,extension,fact_check,favorite,fingerprint,folder,forward_to_inbox,front_hand,history,home,hub,info,inventory_2,key,labs,language,laptop,laptop_mac,laptop_windows,mail,manage_search,memory,menu,merge,mic,model_training,monitor_heart,monitoring,music_note,neurology,new_releases,notifications,open_in_new,play_circle,power_settings_new,psychology,record_voice_over,rss_feed,schedule,science,screenshot_monitor,search,settings,shield,speed,stop_circle,terminal,trending_up,verified,visibility,volume_up,web_asset,wifi&amp;display=block" rel="stylesheet" /></noscript>
-    <link rel="stylesheet" href="style.css?v=21" />
+    <link rel="stylesheet" href="style.css?v=23" />
 </head>
 
 <body class="font-body text-on-background selection:bg-primary-container selection:text-on-primary-container">
@@ -680,6 +680,21 @@
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-white"><span class="count-up" data-target="157">157</span> Action Types on Main</h2>
                 <p class="text-on-surface-variant max-w-2xl mx-auto">The v0.12.0 planner schema declares 157 action types with 157/157 provider coverage across 21 executable specialists. Availability still depends on OS, dependencies, credentials, integrations, and security policy; only 11 actions currently have a separate observed post-condition verifier.</p>
             </div>
+            <div class="capability-explorer-launch glass-panel ghost-border" aria-labelledby="capability-explorer-launch-title">
+                <div>
+                    <p class="capability-explorer-kicker">v0.12 capability explorer</p>
+                    <h3 id="capability-explorer-launch-title">Trace every action to its specialist and verification depth.</h3>
+                    <p>Filter the canonical 157-action catalog without treating provider coverage as independent outcome verification.</p>
+                </div>
+                <div class="capability-explorer-launch__actions">
+                    <a class="capability-explorer-primary" href="capabilities.json" data-capability-explorer-open>
+                        Explore all 157
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span>
+                    </a>
+                    <a href="proof.html#capability-coverage">Read the evidence boundary</a>
+                </div>
+            </div>
+            <p class="capability-static-label">Representative action map. The explorer above reads the complete machine-generated catalog.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 <!-- File Operations -->
                 <div class="glass-panel ghost-border p-5 rounded-xl space-y-3">
@@ -1388,6 +1403,57 @@
         </section>
     </main>
 
+    <dialog id="capability-explorer-dialog" class="capability-explorer-dialog" aria-labelledby="capability-explorer-title">
+        <div class="capability-explorer-shell">
+            <header class="capability-explorer-header">
+                <div>
+                    <p class="capability-explorer-kicker">Heliox OS / v0.12.0</p>
+                    <h2 id="capability-explorer-title">Capability explorer</h2>
+                    <p>Provider coverage shows that an action has an executable route. It does not mean the outcome has a separate observed post-condition check.</p>
+                </div>
+                <button type="button" class="capability-explorer-close" data-capability-explorer-close aria-label="Close capability explorer">
+                    <span class="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+            </header>
+
+            <form class="capability-explorer-filters" aria-label="Filter Heliox capabilities">
+                <label>
+                    <span>Specialist</span>
+                    <select id="capability-specialist-filter" name="specialist" disabled>
+                        <option value="all">All 21 specialists</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Verification status</span>
+                    <select id="capability-verification-filter" name="verification" disabled>
+                        <option value="all">All verification states</option>
+                        <option value="independent">Independent post-condition</option>
+                        <option value="executor">Executor result only</option>
+                    </select>
+                </label>
+            </form>
+
+            <div class="capability-explorer-state">
+                <p id="capability-result-count" role="status" aria-live="polite">Open the explorer to load the 157-action catalog.</p>
+                <nav aria-label="Capability evidence links">
+                    <a href="proof.html#capability-coverage">Coverage evidence</a>
+                    <a href="proof.html#verification-depth">Verification limits</a>
+                    <a href="capabilities.json">Machine-readable catalog</a>
+                    <a id="capability-state-link" href="#actions">Link this view</a>
+                </nav>
+            </div>
+
+            <p id="capability-explorer-error" class="capability-explorer-error" hidden>
+                The interactive catalog could not be loaded. <a href="capabilities.json">Open all 157 machine-readable records instead.</a>
+            </p>
+            <div id="capability-results" class="capability-results" aria-busy="false"></div>
+
+            <noscript>
+                <p class="capability-explorer-error">Interactive filters require JavaScript. <a href="capabilities.json">Browse all 157 records in the machine-readable catalog.</a></p>
+            </noscript>
+        </div>
+    </dialog>
+
     <!-- Footer -->
     <footer class="bg-[#0e0e12] w-full py-12 border-t border-[#353439]/20">
         <div class="flex flex-col md:flex-row justify-between items-center px-8 md:px-12 max-w-7xl mx-auto gap-8">
@@ -1421,8 +1487,8 @@
             </div>
         </div>
     </footer>
-    <script defer src="scroll-world-bootstrap.js?v=1"></script>
-    <script defer src="script.js?v=18"></script>
+    <script defer src="scroll-world-bootstrap.js?v=3"></script>
+    <script defer src="script.js?v=20"></script>
 </body>
 
 </html>

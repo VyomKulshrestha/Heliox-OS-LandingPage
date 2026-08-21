@@ -1,4 +1,198 @@
+function initializeCapabilityExplorer() {
+    const dialog = document.getElementById('capability-explorer-dialog');
+    const specialistFilter = document.getElementById('capability-specialist-filter');
+    const verificationFilter = document.getElementById('capability-verification-filter');
+    const results = document.getElementById('capability-results');
+    const resultCount = document.getElementById('capability-result-count');
+    const errorMessage = document.getElementById('capability-explorer-error');
+    const stateLink = document.getElementById('capability-state-link');
+
+    if (!dialog || !specialistFilter || !verificationFilter || !results || !resultCount || !errorMessage || !stateLink) return;
+
+    let actions = [];
+    let loadPromise = null;
+    let returnFocus = null;
+
+    const verificationState = (action) => action.verification?.independent_postcondition ? 'independent' : 'executor';
+
+    const readableName = (value) => value
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+    const createElement = (tagName, className, text) => {
+        const element = document.createElement(tagName);
+        if (className) element.className = className;
+        if (text !== undefined) element.textContent = text;
+        return element;
+    };
+
+    const currentStateUrl = () => {
+        const url = new URL(window.location.href);
+        const specialist = specialistFilter.value;
+        const verification = verificationFilter.value;
+
+        if (specialist === 'all') url.searchParams.delete('specialist');
+        else url.searchParams.set('specialist', specialist);
+
+        if (verification === 'all') url.searchParams.delete('verification');
+        else url.searchParams.set('verification', verification);
+
+        url.hash = 'actions';
+        return url;
+    };
+
+    const renderAction = (action) => {
+        const card = createElement('article', 'capability-card');
+        const header = createElement('div', 'capability-card__header');
+        const identity = createElement('div');
+        const id = createElement('code', 'capability-card__id', action.id);
+        const family = createElement('span', 'capability-card__family', readableName(action.family));
+        const verification = verificationState(action);
+        const verificationLink = createElement(
+            'a',
+            `capability-verification capability-verification--${verification}`,
+            verification === 'independent' ? 'Independent post-condition' : 'Executor result only'
+        );
+
+        verificationLink.href = 'proof.html#verification-depth';
+        verificationLink.title = 'Read what this verification status proves';
+        identity.append(id, family);
+        header.append(identity, verificationLink);
+
+        const specialists = createElement('div', 'capability-card__specialists');
+        specialists.appendChild(createElement('span', '', 'Specialists'));
+        action.providers.forEach((provider) => {
+            const button = createElement('button', '', provider.name);
+            button.type = 'button';
+            button.dataset.specialist = provider.name;
+            button.title = `Filter by ${provider.name}`;
+            specialists.appendChild(button);
+        });
+
+        const footer = createElement('div', 'capability-card__footer');
+        const permission = createElement('span', '', `${readableName(action.permission.name)} permission`);
+        const catalogLink = createElement('a', '', 'Catalog record');
+        catalogLink.href = 'capabilities.json';
+        catalogLink.title = `Inspect ${action.id} in the canonical capability catalog`;
+        footer.append(permission, catalogLink);
+
+        card.append(header, specialists, footer);
+        return card;
+    };
+
+    const render = ({ updateUrl = true } = {}) => {
+        if (!actions.length) return;
+
+        const specialist = specialistFilter.value;
+        const verification = verificationFilter.value;
+        const filtered = actions.filter((action) => {
+            const hasSpecialist = specialist === 'all' || action.providers.some((provider) => provider.name === specialist);
+            const hasVerification = verification === 'all' || verificationState(action) === verification;
+            return hasSpecialist && hasVerification;
+        });
+
+        const representedSpecialists = new Set(filtered.flatMap((action) => action.providers.map((provider) => provider.name)));
+        const independentCount = filtered.filter((action) => verificationState(action) === 'independent').length;
+        const fragment = document.createDocumentFragment();
+        filtered.forEach((action) => fragment.appendChild(renderAction(action)));
+
+        results.replaceChildren(fragment);
+        resultCount.textContent = `${filtered.length} of ${actions.length} actions · ${representedSpecialists.size} specialists represented · ${independentCount} with independent post-condition checks`;
+
+        const url = currentStateUrl();
+        stateLink.href = url.href;
+        stateLink.setAttribute('aria-label', `Link to the current ${filtered.length}-action capability view`);
+        if (updateUrl) window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    };
+
+    const applyUrlState = () => {
+        const parameters = new URL(window.location.href).searchParams;
+        const specialist = parameters.get('specialist');
+        const verification = parameters.get('verification');
+
+        if (specialist && Array.from(specialistFilter.options).some((option) => option.value === specialist)) {
+            specialistFilter.value = specialist;
+        }
+        if (verification === 'independent' || verification === 'executor') {
+            verificationFilter.value = verification;
+        }
+    };
+
+    const loadCapabilities = () => {
+        if (loadPromise) return loadPromise;
+
+        results.setAttribute('aria-busy', 'true');
+        resultCount.textContent = 'Loading the canonical capability catalog…';
+        errorMessage.hidden = true;
+
+        loadPromise = fetch('capabilities.json', { headers: { Accept: 'application/json' } })
+            .then((response) => {
+                if (!response.ok) throw new Error(`Capability catalog returned ${response.status}`);
+                return response.json();
+            })
+            .then((catalog) => {
+                if (!Array.isArray(catalog.actions) || catalog.actions.length !== catalog.summary?.action_types) {
+                    throw new Error('Capability catalog count does not match its declared summary');
+                }
+
+                actions = catalog.actions;
+                const specialists = Array.from(new Set(actions.flatMap((action) => action.providers.map((provider) => provider.name)))).sort();
+                specialists.forEach((specialist) => {
+                    specialistFilter.appendChild(new Option(specialist, specialist));
+                });
+                specialistFilter.disabled = false;
+                verificationFilter.disabled = false;
+                applyUrlState();
+                render({ updateUrl: false });
+            })
+            .catch(() => {
+                errorMessage.hidden = false;
+                resultCount.textContent = 'Interactive catalog unavailable.';
+                loadPromise = null;
+            })
+            .finally(() => results.setAttribute('aria-busy', 'false'));
+
+        return loadPromise;
+    };
+
+    const openExplorer = (trigger) => {
+        returnFocus = trigger instanceof HTMLElement ? trigger : document.activeElement;
+        if (!dialog.open) dialog.showModal();
+        loadCapabilities();
+    };
+
+    document.addEventListener('click', (event) => {
+        const openTrigger = event.target.closest('[data-capability-explorer-open], a[href="#capability-explorer-dialog"]');
+        if (openTrigger) {
+            event.preventDefault();
+            openExplorer(openTrigger);
+            return;
+        }
+
+        if (event.target.closest('[data-capability-explorer-close]')) dialog.close();
+
+        const specialistButton = event.target.closest('[data-specialist]');
+        if (specialistButton && dialog.contains(specialistButton)) {
+            specialistFilter.value = specialistButton.dataset.specialist;
+            render();
+        }
+    });
+
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+        if (returnFocus?.isConnected) returnFocus.focus();
+    });
+    specialistFilter.addEventListener('change', () => render());
+    verificationFilter.addEventListener('change', () => render());
+
+    const parameters = new URL(window.location.href).searchParams;
+    if (parameters.has('specialist') || parameters.has('verification')) openExplorer(null);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    initializeCapabilityExplorer();
     const worldActive = document.body.classList.contains('scroll-world-active');
     const cinematicMain = document.querySelector('body > main');
     if (!worldActive && cinematicMain) {
