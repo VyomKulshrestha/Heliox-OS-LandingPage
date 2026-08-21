@@ -1060,9 +1060,10 @@
                     class="inline-flex w-fit rounded transition-transform hover:scale-105"
                     aria-label="View the Heliox OS listing on olud.ai">
                     <img src="https://olud.ai/badge.php?tool=vyomkulshrestha-heliox-os"
-                        alt="" width="202" height="20" loading="lazy" decoding="async"
-                        onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
-                    <span class="olud-badge-fallback" hidden>OLUD listing &middot; badge unavailable</span>
+                        alt="" width="202" height="20" loading="lazy" decoding="async" hidden
+                        onload="this.hidden=false; this.nextElementSibling.hidden=true;"
+                        onerror="this.hidden=true;" />
+                    <span class="olud-badge-fallback">OLUD listing &middot; badge unavailable</span>
                 </a>
                 <p class="text-on-surface-variant text-lg leading-relaxed">The public evidence bundle records distributions, regression controls, raw data, reproduction commands, and known exclusions. These are software-path measurements on one Windows host—not universal device, provider, network, or human-accuracy claims.</p>
             </div>

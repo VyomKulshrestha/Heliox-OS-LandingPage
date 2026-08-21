@@ -134,8 +134,9 @@ def main() -> None:
     olud_fallback_contract = (
         'aria-label="View the Heliox OS listing on olud.ai"',
         'alt=""',
-        'onerror="this.hidden=true; this.nextElementSibling.hidden=false;"',
-        '<span class="olud-badge-fallback" hidden>OLUD listing &middot; badge unavailable</span>',
+        'onload="this.hidden=false; this.nextElementSibling.hidden=true;"',
+        'onerror="this.hidden=true;"',
+        '<span class="olud-badge-fallback">OLUD listing &middot; badge unavailable</span>',
     )
     if not all(fragment in html for fragment in olud_fallback_contract):
         raise SystemExit("homepage olud.ai badge lacks its accessible local fallback")
