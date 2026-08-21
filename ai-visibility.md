@@ -30,14 +30,14 @@ The machine-readable evaluation is in [`visibility-report.json`](https://www.hel
 
 ## 2026-08-21 follow-up
 
-A second sample captured 41 completed answers across 31 prompts from signed-in ChatGPT and Gemini sessions. The corrected evaluator found:
+A second sample captured 45 completed answers across 35 prompts from signed-in ChatGPT and Gemini sessions. The corrected evaluator found:
 
-- 24 answers with complete expected-term coverage;
-- 28 answers containing at least one citation to the canonical Heliox website or repository;
-- 46 Heliox citations among 72 total citations; and
-- 21 answers flagged for human review because coverage was partial or a forbidden phrase appeared.
+- 26 answers with complete expected-term coverage;
+- 32 answers containing at least one citation to the canonical Heliox website or repository;
+- 53 Heliox citations among 82 total citations; and
+- 23 answers flagged for human review because coverage was partial or a forbidden phrase appeared.
 
-ChatGPT consistently discovered Heliox's identity, current release, cost, privacy, action count, specialist count, and most safety material. Gemini identified the project but did not return citations in this sample. The weakest topic was neural intent: answers either missed the bounded synthetic/recorded EEG work or confused Heliox OS with the medical heliox gas. The canonical neural-research page now answers those questions directly and exposes an FAQ schema, while keeping the boundary explicit: there is no validated live brain-control claim.
+ChatGPT consistently discovered Heliox's identity, current release, cost, privacy, action count, specialist count, and most safety material. Gemini identified the project but did not return citations in this sample. The weakest topic was identity-qualified edge cases: neural questions could be confused with medical heliox gas, and one limitations query resolved to an unrelated Heliox IDE. The canonical neural-research page now answers neural questions directly and exposes an FAQ schema, while keeping the boundary explicit: there is no validated live brain-control claim.
 
 This follow-up demonstrates stronger source discovery in the sampled sessions than the 2026-08-12 baseline. It does not prove a search-ranking increase, broad assistant coverage, or future retrieval behavior; indexing and model refreshes occur on external schedules.
 
