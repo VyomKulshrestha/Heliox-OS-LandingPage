@@ -8,39 +8,26 @@ A monthly repository workflow verifies that the authoritative sources exist and 
 
 ## What requires real sampling
 
-Responses from ChatGPT, Claude, Gemini, Copilot, Perplexity, or another assistant must be captured from a real session or authorized API call. Each JSONL record contains:
+Responses from ChatGPT, Gemini, or another assistant must be captured from a real session or authorized API call. Each raw JSONL record identifies the assistant, prompt, model label shown by the surface, capture time, response status, rendered answer, exposed citations or source labels, and conversation scope. `python scripts/run_visibility_audit.py --responses <capture files>` produces keyword-coverage triage; it does not decide whether an answer is factually correct.
 
-- `assistant`
-- `prompt_id`
-- `response`
-- `captured_at`
-- `citations`
-- `competitors_shown`
+## 21 August 2026 refresh
 
-Run `python scripts/run_visibility_audit.py --responses captures-one.jsonl captures-two.jsonl`. The output records expected-term coverage, forbidden claims, citation coverage, competitors shown, and human-review flags. Keyword scoring is only triage; a human decides whether an answer is correct.
+The complete 40-prompt pack was asked without supplying Heliox source text, using one new conversation per prompt:
 
-## 2026-08-12 baseline
+- **ChatGPT:** 40/40 prompts produced completed answers on the signed-in GPT-5.6 Sol / High surface.
+- **Gemini:** all 40 prompts were run. 39 produced completed answers. The secured-integrations prompt requested access to the unrelated Atlassian-Rovo app; access was declined and the attempt is recorded as incomplete rather than credited as an answer.
+- **Gemini model labels:** 25 captures exposed Gemini 3.6 Flash, one exposed Gemini 3.1 Pro, one exposed only Gemini Pro, and 13 exposed only Gemini Flash. The report does not infer a hidden model version.
 
-Two fresh, signed-in web chats were tested without supplying Heliox source text:
+Both assistants identified **v0.12.0** for the latest-installer prompt. Both also returned the older 16 August benchmark snapshot for guarded-task latency and event-loop responsiveness instead of the current-main 21 August bundle. The source-discovery refresh therefore points the homepage, proof pages, MCP evidence record, agent-readable overview, and sitemap metadata to the dated 21 August evidence while retaining the one-host, software-path exclusions.
 
-- **Gemini:** completed the identity prompt, correctly described Heliox as an open-source desktop agent, separated repository facts from runtime claims, and cited the GitHub repository. It did not cite the canonical website.
-- **ChatGPT:** found and began checking the website and GitHub repository, but did not complete a source-grounded answer within 110 seconds. The timeout is recorded as an incomplete attempt, not a successful mention.
+One Gemini cost answer introduced an older, unrelated Linux project before discussing this Heliox OS repository. That is a single-session ambiguity observation, not a search-ranking statistic. Existing canonical sources already distinguish Heliox OS as a desktop agent, so no broader identity claim was added from that sample alone.
 
-The machine-readable evaluation is in [`visibility-report.json`](https://www.helioxos.dev/visibility-report.json), and the source capture is versioned under `visibility-captures/` in the website repository. These are single-session observations, not market-share or ranking statistics.
+Keyword triage found full expected-term coverage in 22/40 completed ChatGPT answers and 14/39 completed Gemini answers. Human review remains required: negated phrases can trigger forbidden-term matches, omitted keywords do not prove an answer is wrong, and matching keywords do not prove it is right.
 
-## 2026-08-21 follow-up
+ChatGPT exposed URL citations in all 40 completed answers, including Heliox or repository URLs in 37. Gemini rendered source labels but did not expose their destination URLs in the captured DOM, so the machine-readable report conservatively records zero URL citations for Gemini rather than inventing links.
 
-A second sample attempted all 40 prompts in both signed-in ChatGPT and Gemini sessions: 80 assistant responses in total, with 79 completed answers and one incomplete Gemini attempt. The corrected evaluator found:
-
-- 36 answers with complete expected-term coverage;
-- 37 answers containing at least one resolvable citation to the canonical Heliox website or repository;
-- 62 Heliox citations among 94 total resolvable citations; and
-- 49 responses flagged for human review because coverage was partial, a forbidden phrase appeared, or the attempt did not complete.
-
-ChatGPT consistently discovered Heliox's identity, current release, cost, privacy, action count, specialist count, and most safety material. Gemini identified the project, but its captured citation controls did not expose resolvable source URLs, so the evaluator did not count them as citations. The weakest topic was identity-qualified edge cases: neural questions could be confused with medical heliox gas, and one limitations query resolved to an unrelated Heliox IDE. The canonical neural-research page now answers neural questions directly and exposes an FAQ schema, while keeping the boundary explicit: there is no validated live brain-control claim.
-
-This follow-up demonstrates stronger source discovery in the sampled sessions than the 2026-08-12 baseline. It does not prove a search-ranking increase, broad assistant coverage, or future retrieval behavior; indexing and model refreshes occur on external schedules.
+The timestamped raw records are versioned in the [`visibility-captures/2026-08-21*.jsonl`](https://github.com/VyomKulshrestha/Heliox-OS-LandingPage/tree/main/visibility-captures) files. The generated evaluation is [`visibility-report.json`](https://www.helioxos.dev/visibility-report.json).
 
 ## Honesty boundary
 
-No assistant is counted as tested based on the prompt pack alone. Completed answers and timeouts are recorded separately so a slow or failed probe cannot inflate the result.
+These are dated, single-session observations on the model surfaces shown at capture time. They are not market-share, ranking, recommendation-frequency, or universal-answer statistics. Incomplete attempts remain incomplete, source labels are not promoted to URLs, and current product facts resolve against `releases.json`, `capabilities.json`, and `proof.md`.

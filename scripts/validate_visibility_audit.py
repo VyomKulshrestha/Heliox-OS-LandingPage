@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,10 +23,16 @@ def main() -> None:
     benchmark_prompts = [item for item in prompts if item["category"] == "benchmarks"]
     if len(benchmark_prompts) != 6:
         raise SystemExit("visibility prompt pack must contain six benchmark prompts")
-    if report["prompt_count"] != len(prompts) or not report["source_readiness"]["passed"]:
+    if (
+        report["prompt_count"] != len(prompts)
+        or not report["source_readiness"]["passed"]
+    ):
         raise SystemExit("visibility report is stale or source readiness failed")
     sampling = report["assistant_sampling"]
-    if sampling["capture_count"] == 0 and sampling["status"] != "pending-real-responses":
+    if (
+        sampling["capture_count"] == 0
+        and sampling["status"] != "pending-real-responses"
+    ):
         raise SystemExit("empty assistant sampling must remain explicitly pending")
     if sampling["capture_count"] != len(sampling["evaluations"]):
         raise SystemExit("assistant capture count drifted")
@@ -34,7 +41,64 @@ def main() -> None:
         raise SystemExit("completed assistant count drifted")
     if sampling.get("incomplete_count", 0) != sampling["capture_count"] - completed:
         raise SystemExit("incomplete assistant count drifted")
-    print(f"Validated {len(prompts)} visibility prompts and honest sampling status: {sampling['status']}.")
+
+    capture_paths = sorted(
+        (ROOT / "visibility-captures").glob(f"{report['audit_date']}*.jsonl")
+    )
+    if capture_paths:
+        captures = [
+            json.loads(line)
+            for path in capture_paths
+            for line in path.read_text(encoding="utf-8-sig").splitlines()
+            if line.strip()
+        ]
+        if len(captures) != sampling["capture_count"]:
+            raise SystemExit("dated raw captures do not match the generated report")
+        prompt_text = {item["id"]: item["prompt"] for item in prompts}
+        capture_keys = [
+            (
+                item.get("assistant"),
+                item.get("prompt_id"),
+                item.get("status", "completed"),
+            )
+            for item in captures
+        ]
+        if len(capture_keys) != len({key[:2] for key in capture_keys}):
+            raise SystemExit(
+                "dated raw captures contain duplicate assistant/prompt pairs"
+            )
+        for item in captures:
+            prompt_id = item.get("prompt_id")
+            if (
+                prompt_id not in prompt_text
+                or item.get("prompt") != prompt_text[prompt_id]
+            ):
+                raise SystemExit("dated raw capture does not match the prompt pack")
+            if item.get("status", "completed") == "completed" and not item.get(
+                "response"
+            ):
+                raise SystemExit("completed dated raw capture has no response")
+        report_keys = [
+            (
+                item.get("assistant"),
+                item.get("prompt_id"),
+                item.get("status", "completed"),
+            )
+            for item in sampling["evaluations"]
+        ]
+        if Counter(capture_keys) != Counter(report_keys):
+            raise SystemExit(
+                "dated raw capture statuses drifted from the generated report"
+            )
+        if len(captures) >= len(prompts):
+            assistant_counts = Counter(item["assistant"] for item in captures)
+            if any(count != len(prompts) for count in assistant_counts.values()):
+                raise SystemExit(
+                    "full-pack sampling must include every prompt per assistant"
+                )
+    print(
+        f"Validated {len(prompts)} visibility prompts and honest sampling status: {sampling['status']}."
+    )
 
 
 if __name__ == "__main__":
