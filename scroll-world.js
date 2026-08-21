@@ -436,6 +436,8 @@
                     scene.scheduleVideoRelease();
                 } else if (index === activeIndex) {
                     scene.setVideoSource('auto');
+                } else if (index === activeIndex + 1) {
+                    scene.setVideoSource('metadata');
                 } else {
                     scene.scheduleVideoRelease();
                 }

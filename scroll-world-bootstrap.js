@@ -13,7 +13,7 @@
         if (loading) return;
         loading = true;
         window.__helioxExploreRequested = true;
-        loadScript('scroll-world.js?v=34')
+        loadScript('scroll-world.js?v=35')
             .then(() => loadScript('scroll-world-init.js?v=27'))
             .catch(() => {
                 // The animated HTML/CSS fallback remains usable if optional
