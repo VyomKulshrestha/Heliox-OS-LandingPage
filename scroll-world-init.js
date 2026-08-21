@@ -85,7 +85,7 @@
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
                 clip: 'assets/scroll-world/clip-04.mp4',
-                clipAv1: 'assets/scroll-world/optimized-av1/clip-04.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-04-stream.mp4',
                 metrics: [
                     { target: 157, label: 'release action types' },
                     { target: 21, label: 'specialist agents' },
@@ -211,7 +211,7 @@
                 align: 'left',
                 still: 'assets/scroll-world/continuation/posters/clip-09-start.jpg',
                 clip: 'assets/scroll-world/continuation/clip-09.mp4',
-                clipAv1: 'assets/scroll-world/optimized-av1/clip-09.mp4',
+                clipAv1: 'assets/scroll-world/optimized-av1/clip-09-stream.mp4',
                 signals: [
                     { title: 'Windows', body: 'Download the current release and launch the native desktop experience.' },
                     { title: 'macOS', body: 'Build from source with the same local-first agent and security model.' },
