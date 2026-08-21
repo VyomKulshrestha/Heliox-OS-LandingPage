@@ -7,7 +7,7 @@ Current public release: 0.12.0. It declares 157 action types across 21 executabl
 ## Product
 
 - [Product overview](https://www.helioxos.dev/index.html.md): Capabilities, installation, architecture, availability, and important limitations.
-- [Machine-readable capability catalog](https://www.helioxos.dev/capabilities.json): Generated action types, platform declarations, permission and approval requirements, specialist providers, verifier coverage, and plugin manifests.
+- [Machine-readable capability catalog](https://www.helioxos.dev/capabilities.json): Canonical source for the filterable homepage capability explorer, including action types, platform declarations, permission and approval requirements, specialist providers, verifier coverage, and plugin manifests.
 - [Frequently asked questions](https://www.helioxos.dev/faq.md): Direct answers about cost, supported platforms, privacy, models, autonomy, neural research, and safety.
 - [Releases](https://github.com/VyomKulshrestha/Heliox-OS/releases): Official installers and release notes.
 - [v0.12.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.12.0.md): Current features, verification snapshot, upgrade guidance, and evidence boundaries.
@@ -25,8 +25,8 @@ Current public release: 0.12.0. It declares 157 action types across 21 executabl
 - [Security overview](https://www.helioxos.dev/whitepaper.html.md): Permission tiers, source-scoped authority, auditing, rollback, and known limits.
 - [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
-- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Forty recurring prompts, including six benchmark-evidence checks, source validation, real-response capture format, and honest pending/evaluated status.
-- [Visibility report](https://www.helioxos.dev/visibility-report.json): Current source-readiness and assistant-sampling status.
+- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Forty recurring prompts, real ChatGPT and Gemini samples, citation coverage, discovery gaps, and explicit measurement limits.
+- [Visibility report](https://www.helioxos.dev/visibility-report.json): Machine-readable 21 August 2026 source-readiness and assistant-sampling results.
 - [AI content-use policy](https://www.helioxos.dev/ai-content-policy.md): Search and grounding allowed, training declined, reference use preferred, and the separate MIT source-code boundary.
 
 ## Use Cases
@@ -37,7 +37,7 @@ Current public release: 0.12.0. It declares 157 action types across 21 executabl
 - [Gesture and gaze control](https://www.helioxos.dev/gesture-gaze-control.md): On-device visual signals, temporal confirmation, calibration, and physical-camera limits.
 - [Autonomous workflows](https://www.helioxos.dev/autonomous-workflows.md): Durable jobs, bounded parallelism, interruptions, and supervision.
 - [Plugin marketplace](https://www.helioxos.dev/plugin-marketplace.md): Moderated submissions, file-integrity checks, capability declarations, and runtime limits.
-- [Recorded-EEG and neural research](https://www.helioxos.dev/neural-research.md): Synthetic and recorded-data validation without a live brain-control claim.
+- [Heliox OS neural intent research](https://www.helioxos.dev/neural-research.md): BrainFlow synthetic-board and recorded PhysioNet EEGBCI validation; not validated live brain control.
 - [Existing AI subscription models](https://www.helioxos.dev/subscription-models.md): Official CLI login, model selection, bounded usage evidence, and action-authority boundaries.
 
 ## Developers

@@ -114,9 +114,9 @@ PAGES = [
     },
     {
         "slug": "neural-research",
-        "eyebrow": "Recorded-EEG and neural research",
-        "title": "A safe software pipeline—not a live brain-control claim.",
-        "lede": "Heliox includes a bounded neural-input research path for BrainFlow synthetic signals, recorded EEG playback, and the public PhysioNet EEGBCI motor-imagery dataset.",
+        "eyebrow": "Heliox OS neural intent research",
+        "title": "Synthetic and recorded EEG research—not validated live brain control.",
+        "lede": "Heliox OS includes a bounded neural-intent research path for BrainFlow synthetic signals, recorded EEG playback, and the public PhysioNet EEGBCI motor-imagery dataset.",
         "facts": ["Synthetic signals", "Recorded EEG", "Non-neural arming required"],
         "does": [
             "Streams BrainFlow synthetic-board data through the neural ingestion contract.",
@@ -128,6 +128,20 @@ PAGES = [
         "safety": "A neural signal cannot self-arm, widen permissions, or directly control a dangerous physical action. The research path is not a medical device and has no clinical claim.",
         "limits": "Synthetic and recorded-data results are not evidence of live EEG accuracy, individual calibration, brain control, medical utility, or clinical validation. Physical hardware work remains unverified until tested with participants and an actual device.",
         "status": "Software-verified; no live EEG claim",
+        "faq": [
+            {
+                "question": "Can Heliox OS be controlled by the brain today?",
+                "answer": "Not as a validated live product. Heliox OS currently provides software-verified BrainFlow synthetic-board and recorded PhysioNet EEGBCI paths. A real headset, participant calibration, and human validation are still required before any live brain-control claim.",
+            },
+            {
+                "question": "What neural or EEG evidence exists for Heliox OS?",
+                "answer": "The public implementation covers synthetic signal ingestion, recorded EEG replay, and a reproducible motor-imagery CSP/LDA benchmark. These tests validate the software pipeline, not live EEG accuracy or medical utility.",
+            },
+            {
+                "question": "Can a neural signal approve a dangerous Heliox action?",
+                "answer": "No. Neural input can only propose a bounded intent. Independent non-neural arming, Heliox policy checks, and any required user approval remain mandatory.",
+            },
+        ],
     },
     {
         "slug": "subscription-models",
@@ -157,6 +171,12 @@ PAGES = [
 def render_markdown(page: dict[str, object]) -> str:
     bullets = lambda values: "\n".join(f"- {value}" for value in values)
     steps = "\n".join(f"{index}. {value}" for index, value in enumerate(page["flow"], 1))
+    faq = ""
+    if page.get("faq"):
+        faq_items = "\n\n".join(
+            f"### {item['question']}\n\n{item['answer']}" for item in page["faq"]
+        )
+        faq = f"\n\n## Neural intent FAQ\n\n{faq_items}"
     return f"""# {page['title']}
 
 > {page['lede']}
@@ -177,7 +197,7 @@ Status: **{page['status']}**
 
 ## Known limitations
 
-{page['limits']}
+{page['limits']}{faq}
 
 ## Verify the implementation
 
@@ -195,8 +215,7 @@ def render_html(page: dict[str, object]) -> str:
     facts = "".join(f"<span>{esc(value)}</span>" for value in page["facts"])
     does = "".join(f"<li>{esc(value)}</li>" for value in page["does"])
     flow = "".join(f"<li>{esc(value)}</li>" for value in page["flow"])
-    structured = json.dumps(
-        {
+    webpage = {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": page["title"],
@@ -204,9 +223,48 @@ def render_html(page: dict[str, object]) -> str:
             "url": f"{SITE}/{slug}.html",
             "isPartOf": {"@type": "WebSite", "name": "Heliox OS", "url": f"{SITE}/"},
             "about": {"@type": "SoftwareApplication", "name": "Heliox OS", "operatingSystem": "Windows, macOS, Linux"},
-        },
-        ensure_ascii=False,
-    ).replace("</", "<\\/")
+        }
+    structured_data: dict[str, object] = webpage
+    faq_section = ""
+    if page.get("faq"):
+        webpage["about"] = {
+            "@type": "SoftwareApplication",
+            "@id": f"{SITE}/#software",
+            "name": "Heliox OS",
+            "alternateName": "Heliox",
+            "operatingSystem": "Windows, macOS, Linux",
+        }
+        questions = [
+            {
+                "@type": "Question",
+                "name": item["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+            }
+            for item in page["faq"]
+        ]
+        webpage.pop("@context")
+        structured_data = {
+            "@context": "https://schema.org",
+            "@graph": [
+                webpage,
+                {
+                    "@type": "FAQPage",
+                    "@id": f"{SITE}/{slug}.html#faq",
+                    "mainEntity": questions,
+                },
+            ],
+        }
+        faq_html = (
+            '<section class="grid" id="faq" aria-label="Neural intent questions">'
+            + "".join(
+                f'<article class="card wide"><h2>{esc(item["question"])}</h2>'
+                f'<p>{esc(item["answer"])}</p></article>'
+                for item in page["faq"]
+            )
+            + "</section>"
+        )
+        faq_section = f"    {faq_html}\n"
+    structured = json.dumps(structured_data, ensure_ascii=False).replace("</", "<\\/")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -241,7 +299,7 @@ def render_html(page: dict[str, object]) -> str:
       <article class="card"><h2>Safety boundary</h2><p>{esc(page['safety'])}</p></article>
       <article class="card wide limit"><div class="status">Known limits</div><h2>Where this can fail</h2><p>{esc(page['limits'])}</p></article>
     </section>
-    <section class="cta"><div><h2>Inspect the evidence</h2><p>Read generated coverage, measured latency, hardware boundaries, and known limitations.</p></div><a href="/proof.md">Open proof center</a></section>
+{faq_section}    <section class="cta"><div><h2>Inspect the evidence</h2><p>Read generated coverage, measured latency, hardware boundaries, and known limitations.</p></div><a href="/proof.md">Open proof center</a></section>
   </main>
   <footer><div class="shell footer-inner"><span>Heliox OS · MIT licensed</span><span><a href="/{slug}.md">Markdown version</a> · <a href="/llms.txt">Agent index</a></span></div></footer>
 </body>

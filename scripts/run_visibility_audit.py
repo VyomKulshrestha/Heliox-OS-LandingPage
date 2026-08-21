@@ -28,6 +28,15 @@ def load_jsonl(path: Path | None) -> list[dict]:
     ]
 
 
+def citation_url(citation: object) -> str:
+    """Return a URL from either legacy strings or structured capture records."""
+    if isinstance(citation, str):
+        return citation
+    if isinstance(citation, dict):
+        return str(citation.get("url", ""))
+    return ""
+
+
 def evaluate(prompt: dict, capture: dict) -> dict:
     status = str(capture.get("status", "completed"))
     if status != "completed":
@@ -44,7 +53,9 @@ def evaluate(prompt: dict, capture: dict) -> dict:
     normalized = normalize(response)
     expected = [term for term in prompt["expected"] if normalize(term) in normalized]
     forbidden = [term for term in prompt["forbidden"] if normalize(term) in normalized]
-    citations = [str(url) for url in capture.get("citations", [])]
+    citations = [
+        url for citation in capture.get("citations", []) if (url := citation_url(citation))
+    ]
     heliox_citations = [url for url in citations if urlparse(url).netloc in {"www.helioxos.dev", "helioxos.dev", "github.com"}]
     return {
         "assistant": capture["assistant"],
@@ -107,10 +118,20 @@ def audit(captures: list[dict]) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--responses", type=Path, help="JSONL with assistant, prompt_id, response, citations, and competitors_shown")
+    parser.add_argument(
+        "--responses",
+        type=Path,
+        nargs="+",
+        help="One or more JSONL files with assistant, prompt_id, response, citations, and competitors_shown",
+    )
     parser.add_argument("--output", type=Path, default=ROOT / "visibility-report.json")
     args = parser.parse_args()
-    report = audit(load_jsonl(args.responses))
+    captures = [
+        capture
+        for path in (args.responses or [])
+        for capture in load_jsonl(path)
+    ]
+    report = audit(captures)
     args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"Audited {report['prompt_count']} prompts; real response captures: {report['assistant_sampling']['capture_count']}")
 

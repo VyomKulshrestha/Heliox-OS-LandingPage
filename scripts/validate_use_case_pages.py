@@ -44,9 +44,19 @@ def main() -> int:
                 errors.append(f"{name} does not discover {expected}")
 
     neural = (ROOT / "neural-research.md").read_text(encoding="utf-8").lower()
-    for phrase in ("not evidence of live eeg", "not a medical device", "non-neural"):
+    for phrase in (
+        "not evidence of live eeg",
+        "not a medical device",
+        "non-neural",
+        "can heliox os be controlled by the brain today?",
+        "brainflow",
+        "physionet eegbci",
+    ):
         if phrase not in neural:
             errors.append(f"neural evidence boundary missing: {phrase}")
+    neural_html = (ROOT / "neural-research.html").read_text(encoding="utf-8")
+    if '"@type": "FAQPage"' not in neural_html or 'id="faq"' not in neural_html:
+        errors.append("neural research page must expose its evidence boundary as FAQ data")
 
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors), file=sys.stderr)

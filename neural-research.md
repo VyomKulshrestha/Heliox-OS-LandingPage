@@ -1,6 +1,6 @@
-# A safe software pipeline—not a live brain-control claim.
+# Synthetic and recorded EEG research—not validated live brain control.
 
-> Heliox includes a bounded neural-input research path for BrainFlow synthetic signals, recorded EEG playback, and the public PhysioNet EEGBCI motor-imagery dataset.
+> Heliox OS includes a bounded neural-intent research path for BrainFlow synthetic signals, recorded EEG playback, and the public PhysioNet EEGBCI motor-imagery dataset.
 
 Status: **Software-verified; no live EEG claim**
 
@@ -25,6 +25,20 @@ A neural signal cannot self-arm, widen permissions, or directly control a danger
 ## Known limitations
 
 Synthetic and recorded-data results are not evidence of live EEG accuracy, individual calibration, brain control, medical utility, or clinical validation. Physical hardware work remains unverified until tested with participants and an actual device.
+
+## Neural intent FAQ
+
+### Can Heliox OS be controlled by the brain today?
+
+Not as a validated live product. Heliox OS currently provides software-verified BrainFlow synthetic-board and recorded PhysioNet EEGBCI paths. A real headset, participant calibration, and human validation are still required before any live brain-control claim.
+
+### What neural or EEG evidence exists for Heliox OS?
+
+The public implementation covers synthetic signal ingestion, recorded EEG replay, and a reproducible motor-imagery CSP/LDA benchmark. These tests validate the software pipeline, not live EEG accuracy or medical utility.
+
+### Can a neural signal approve a dangerous Heliox action?
+
+No. Neural input can only propose a bounded intent. Independent non-neural arming, Heliox policy checks, and any required user approval remain mandatory.
 
 ## Verify the implementation
 

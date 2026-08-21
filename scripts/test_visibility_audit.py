@@ -42,6 +42,25 @@ class VisibilityAuditTests(unittest.TestCase):
         self.assertNotIn("expected_term_coverage", result)
         self.assertTrue(result["needs_human_review"])
 
+    def test_structured_heliox_citation_is_counted(self) -> None:
+        prompt = {"id": "identity-01", "expected": ["agent"], "forbidden": []}
+        result = MODULE.evaluate(
+            prompt,
+            {
+                "assistant": "example",
+                "response": "Heliox is a desktop agent.",
+                "status": "completed",
+                "citations": [
+                    {
+                        "text": "Heliox OS",
+                        "url": "https://www.helioxos.dev/proof.html",
+                    }
+                ],
+            },
+        )
+        self.assertEqual(result["citation_count"], 1)
+        self.assertEqual(result["heliox_citation_count"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

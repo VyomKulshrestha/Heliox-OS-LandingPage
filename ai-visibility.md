@@ -17,7 +17,7 @@ Responses from ChatGPT, Claude, Gemini, Copilot, Perplexity, or another assistan
 - `citations`
 - `competitors_shown`
 
-Run `python scripts/run_visibility_audit.py --responses captures.jsonl`. The output records expected-term coverage, forbidden claims, citation coverage, competitors shown, and human-review flags. Keyword scoring is only triage; a human decides whether an answer is correct.
+Run `python scripts/run_visibility_audit.py --responses captures-one.jsonl captures-two.jsonl`. The output records expected-term coverage, forbidden claims, citation coverage, competitors shown, and human-review flags. Keyword scoring is only triage; a human decides whether an answer is correct.
 
 ## 2026-08-12 baseline
 
@@ -27,6 +27,19 @@ Two fresh, signed-in web chats were tested without supplying Heliox source text:
 - **ChatGPT:** found and began checking the website and GitHub repository, but did not complete a source-grounded answer within 110 seconds. The timeout is recorded as an incomplete attempt, not a successful mention.
 
 The machine-readable evaluation is in [`visibility-report.json`](https://www.helioxos.dev/visibility-report.json), and the source capture is versioned under `visibility-captures/` in the website repository. These are single-session observations, not market-share or ranking statistics.
+
+## 2026-08-21 follow-up
+
+A second sample captured 41 completed answers across 31 prompts from signed-in ChatGPT and Gemini sessions. The corrected evaluator found:
+
+- 24 answers with complete expected-term coverage;
+- 28 answers containing at least one citation to the canonical Heliox website or repository;
+- 46 Heliox citations among 72 total citations; and
+- 21 answers flagged for human review because coverage was partial or a forbidden phrase appeared.
+
+ChatGPT consistently discovered Heliox's identity, current release, cost, privacy, action count, specialist count, and most safety material. Gemini identified the project but did not return citations in this sample. The weakest topic was neural intent: answers either missed the bounded synthetic/recorded EEG work or confused Heliox OS with the medical heliox gas. The canonical neural-research page now answers those questions directly and exposes an FAQ schema, while keeping the boundary explicit: there is no validated live brain-control claim.
+
+This follow-up demonstrates stronger source discovery in the sampled sessions than the 2026-08-12 baseline. It does not prove a search-ranking increase, broad assistant coverage, or future retrieval behavior; indexing and model refreshes occur on external schedules.
 
 ## Honesty boundary
 
