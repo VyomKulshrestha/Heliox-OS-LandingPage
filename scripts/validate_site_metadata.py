@@ -109,6 +109,17 @@ def main() -> None:
     olud_badge = "https://olud.ai/badge.php?tool=vyomkulshrestha-heliox-os"
     if olud_page not in html or olud_badge not in html:
         raise SystemExit("homepage does not expose the verified olud.ai listing badge")
+    olud_fallback_contract = (
+        'aria-label="View the Heliox OS listing on olud.ai"',
+        'alt=""',
+        'onerror="this.hidden=true; this.nextElementSibling.hidden=false;"',
+        '<span class="olud-badge-fallback" hidden>OLUD listing &middot; badge unavailable</span>',
+    )
+    if not all(fragment in html for fragment in olud_fallback_contract):
+        raise SystemExit("homepage olud.ai badge lacks its accessible local fallback")
+    styles = (ROOT / "style.css").read_text(encoding="utf-8")
+    if ".olud-badge-fallback:not([hidden])" not in styles:
+        raise SystemExit("homepage olud.ai badge fallback styling is missing")
 
     scroll_init = (ROOT / "scroll-world-init.js").read_text(encoding="utf-8")
     scroll_bootstrap = (ROOT / "scroll-world-bootstrap.js").read_text(encoding="utf-8")

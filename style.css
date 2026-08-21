@@ -127,6 +127,25 @@ html { scrollbar-color: rgba(0, 225, 255, 0.25) #0e0e12; scrollbar-width: thin; 
 }
 
 /* ── Action Catalog Badge ────────────────────────────────── */
+.olud-badge-fallback {
+    align-items: center;
+    box-sizing: border-box;
+    height: 20px;
+    min-width: 202px;
+    padding: 0 8px;
+    border: 1px solid rgba(0, 225, 255, 0.35);
+    border-radius: 4px;
+    background: #111217;
+    color: #bcf2ff;
+    font: 500 10px/1 "JetBrains Mono", monospace;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.olud-badge-fallback:not([hidden]) {
+    display: inline-flex;
+}
+
 .action-badge {
     display: inline-flex;
     align-items: center;
