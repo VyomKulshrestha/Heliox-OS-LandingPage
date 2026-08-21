@@ -121,13 +121,16 @@ def main() -> None:
             raise SystemExit(f"cinematic loader omits visitor intent event: {event_name}")
     if 'src="scroll-world.js' in html or 'src="scroll-world-init.js' in html:
         raise SystemExit("cinematic implementation scripts must not block first paint")
-    if 'src="scroll-world-bootstrap.js?v=1"' not in html:
+    if not re.search(r'src="scroll-world-bootstrap\.js(?:\?v=\d+)?"', html):
         raise SystemExit("intent-driven cinematic loader is missing")
     if "heliox-storm-agents" in html or "awakening-scene" in html:
         raise SystemExit("retired storm-sequence artwork remains in the homepage")
     if "Material+Symbols+Outlined:FILL@0..1" not in html or "icon_names=" not in html:
         raise SystemExit("Material Symbols must be restricted to the icons in use")
-    if '<script defer src="scroll-world-bootstrap.js?v=1"></script>' not in html:
+    if not re.search(
+        r'<script defer src="scroll-world-bootstrap\.js(?:\?v=\d+)?"></script>',
+        html,
+    ):
         raise SystemExit("cinematic bootstrap must not block HTML parsing")
     comparison_pages = (
         "heliox-vs-windows-copilot.html",
