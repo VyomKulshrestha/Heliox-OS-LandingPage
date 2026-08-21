@@ -130,7 +130,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=account_tree,arrow_back,arrow_right_alt,auto_awesome,back_hand,bolt,brightness_6,calendar_month,cloud,close,code,computer,content_paste,data_object,desktop_windows,devices,dns,download,extension,fact_check,favorite,fingerprint,folder,forward_to_inbox,front_hand,history,home,hub,info,inventory_2,key,labs,language,laptop,laptop_mac,laptop_windows,mail,manage_search,memory,menu,merge,mic,model_training,monitor_heart,monitoring,music_note,neurology,new_releases,notifications,open_in_new,play_circle,power_settings_new,psychology,record_voice_over,rss_feed,schedule,science,screenshot_monitor,search,settings,shield,speed,stop_circle,terminal,trending_up,verified,visibility,volume_up,web_asset,wifi&amp;display=block" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" /><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0..1&amp;icon_names=account_tree,arrow_back,arrow_right_alt,auto_awesome,back_hand,bolt,brightness_6,calendar_month,cloud,close,code,computer,content_paste,data_object,desktop_windows,devices,dns,download,extension,fact_check,favorite,fingerprint,folder,forward_to_inbox,front_hand,history,home,hub,info,inventory_2,key,labs,language,laptop,laptop_mac,laptop_windows,mail,manage_search,memory,menu,merge,mic,model_training,monitor_heart,monitoring,music_note,neurology,new_releases,notifications,open_in_new,play_circle,power_settings_new,psychology,record_voice_over,rss_feed,schedule,science,screenshot_monitor,search,settings,shield,speed,stop_circle,terminal,trending_up,verified,visibility,volume_up,web_asset,wifi&amp;display=block" rel="stylesheet" /></noscript>
-    <link rel="stylesheet" href="style.css?v=24" />
+    <link rel="stylesheet" href="style.css?v=25" />
 </head>
 
 <body class="font-body text-on-background selection:bg-primary-container selection:text-on-primary-container">
@@ -139,7 +139,44 @@
     <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none"></div>
 
     <!-- ═══════════════ NAVBAR ═══════════════ -->
-    <nav class="fixed top-0 w-full z-50 bg-[#050508]/70 backdrop-blur-xl border-b border-[#353439]/20 shadow-[0_0_20px_rgba(0,225,255,0.05)]">
+    <nav class="heliox-nav" aria-label="Primary navigation">
+        <div class="heliox-nav__inner">
+            <a class="heliox-brand" href="#scroll-world" aria-label="Heliox OS home">
+                <span class="heliox-brand__mark" aria-hidden="true">
+                    <img src="logo.png" alt="" width="597" height="598" />
+                </span>
+                <span class="heliox-brand__wordmark">
+                    <strong>HELIOX OS</strong>
+                    <small>AI SYSTEM CONTROL AGENT</small>
+                </span>
+            </a>
+            <div class="heliox-nav__links">
+                <a class="heliox-nav__link" href="#features">System</a>
+                <a class="heliox-nav__link" href="proof.html">Evidence</a>
+                <a class="heliox-nav__link" href="https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.12.0" target="_blank" rel="noopener noreferrer">Release</a>
+                <a class="heliox-nav__action heliox-nav__action--sponsor" href="https://github.com/sponsors/VyomKulshrestha" target="_blank" rel="noopener noreferrer" aria-label="Sponsor Heliox OS on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.2-4.35-9.54-8.72C.55 8.71 2.2 4.5 6.32 4.08A6.02 6.02 0 0 1 12 7.1a6.02 6.02 0 0 1 5.68-3.02c4.12.42 5.77 4.63 3.86 8.2C19.2 16.65 12 21 12 21Z" /></svg>
+                    <span>Sponsor</span>
+                </a>
+                <a class="heliox-nav__action heliox-nav__action--github" href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank" rel="noopener noreferrer" aria-label="View Heliox OS source on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7A11.6 11.6 0 0 0 8.33 23.3c.58.1.79-.25.79-.56v-2.25c-3.25.7-3.93-1.38-3.93-1.38-.53-1.35-1.3-1.7-1.3-1.7-1.06-.73.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.4-1.27.74-1.56-2.6-.3-5.33-1.3-5.33-5.73 0-1.27.45-2.3 1.2-3.12-.12-.3-.52-1.48.11-3.08 0 0 .98-.31 3.19 1.2A11.1 11.1 0 0 1 12 6.2c.99 0 1.97.13 2.9.39 2.21-1.51 3.18-1.2 3.18-1.2.64 1.6.24 2.78.12 3.08.75.82 1.2 1.85 1.2 3.12 0 4.45-2.74 5.43-5.35 5.72.42.36.8 1.08.8 2.18v3.25c0 .31.2.67.8.56A11.6 11.6 0 0 0 12 .7Z" /></svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+            <button id="primary-mobile-menu-btn" class="heliox-nav__toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-mobile-menu" aria-expanded="false">
+                <svg class="heliox-nav__menu-icon heliox-nav__menu-icon--open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                <svg class="heliox-nav__menu-icon heliox-nav__menu-icon--close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+            </button>
+        </div>
+        <div id="primary-mobile-menu" class="mobile-menu heliox-nav__mobile">
+            <a href="#features">Explore the system</a>
+            <a href="proof.html">Evidence</a>
+            <a href="https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.12.0" target="_blank" rel="noopener noreferrer">Download v0.12.0</a>
+            <a class="heliox-nav__mobile-sponsor" href="https://github.com/sponsors/VyomKulshrestha" target="_blank" rel="noopener noreferrer">Sponsor on GitHub</a>
+            <a class="heliox-nav__mobile-github" href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+        </div>
+    </nav>
+    <nav class="legacy-navigation" aria-hidden="true" hidden>
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <div class="text-2xl font-bold text-[#bcf2ff] flex items-center gap-2 font-headline tracking-tight">
                 <span class="material-symbols-outlined text-[#00e1ff]" style="font-variation-settings: 'FILL' 1;">memory</span>
@@ -1490,8 +1527,8 @@
             </div>
         </div>
     </footer>
-    <script defer src="scroll-world-bootstrap.js?v=3"></script>
-    <script defer src="script.js?v=20"></script>
+    <script defer src="scroll-world-bootstrap.js?v=4"></script>
+    <script defer src="script.js?v=21"></script>
 </body>
 
 </html>

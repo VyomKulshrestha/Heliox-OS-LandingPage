@@ -105,6 +105,7 @@
         root.classList.add('is-mounted');
         root.style.setProperty('--hworld-accent', sections[0].accent);
         document.body.classList.add('scroll-world-active');
+        document.body.classList.remove('scroll-world-loading');
 
         ['main', 'footer'].forEach((selector) => {
             const legacyElement = document.querySelector(`body > ${selector}`);

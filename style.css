@@ -1605,6 +1605,234 @@ body > main #about {
     }
 }
 
+/* Clear, asset-backed navigation for the cinematic experience. */
+.legacy-navigation {
+    display: none !important;
+}
+
+.heliox-nav {
+    position: fixed;
+    z-index: 90;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(109, 238, 255, 0.13);
+    background: linear-gradient(180deg, rgba(2, 7, 11, 0.92), rgba(2, 7, 11, 0.66));
+    box-shadow: 0 14px 50px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(18px) saturate(135%);
+}
+
+.heliox-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 2.5rem, 92rem);
+    min-height: 4.75rem;
+    margin: 0 auto;
+}
+
+.heliox-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: #f4fbff;
+    text-decoration: none;
+}
+
+.heliox-brand__mark {
+    width: 3rem;
+    height: 3rem;
+    overflow: hidden;
+    flex: 0 0 auto;
+    border: 1px solid rgba(109, 238, 255, 0.42);
+    border-radius: 50%;
+    background: #06131a;
+    box-shadow: 0 0 24px rgba(36, 218, 255, 0.2);
+}
+
+.heliox-brand__mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heliox-brand__wordmark {
+    display: grid;
+    gap: 0.18rem;
+}
+
+.heliox-brand__wordmark strong {
+    color: #e8fbff;
+    font: 700 1.05rem/1 'Space Grotesk', sans-serif;
+    letter-spacing: 0.12em;
+}
+
+.heliox-brand__wordmark small {
+    color: rgba(172, 225, 236, 0.72);
+    font: 600 0.55rem/1 'JetBrains Mono', monospace;
+    letter-spacing: 0.16em;
+}
+
+.heliox-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.heliox-nav__link,
+.heliox-nav__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.65rem;
+    border-radius: 0.65rem;
+    font: 650 0.75rem/1 'Space Grotesk', sans-serif;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.heliox-nav__link {
+    padding: 0 0.72rem;
+    color: rgba(233, 248, 252, 0.8);
+}
+
+.heliox-nav__link:hover {
+    color: #fff;
+}
+
+.heliox-nav__action {
+    gap: 0.55rem;
+    margin-left: 0.25rem;
+    padding: 0 1rem;
+    border: 1px solid;
+}
+
+.heliox-nav__action svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: currentColor;
+}
+
+.heliox-nav__action--sponsor {
+    border-color: rgba(255, 116, 181, 0.58);
+    color: #ffb0d4;
+    background: rgba(226, 51, 132, 0.14);
+}
+
+.heliox-nav__action--sponsor:hover {
+    border-color: #ff9dca;
+    color: #fff;
+    background: rgba(226, 51, 132, 0.24);
+    transform: translateY(-1px);
+}
+
+.heliox-nav__action--github {
+    border-color: rgba(109, 238, 255, 0.46);
+    color: #bff6ff;
+    background: rgba(34, 206, 235, 0.12);
+}
+
+.heliox-nav__action--github:hover {
+    border-color: #6deeff;
+    color: #fff;
+    background: rgba(34, 206, 235, 0.2);
+    transform: translateY(-1px);
+}
+
+.heliox-nav__toggle {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(109, 238, 255, 0.34);
+    border-radius: 0.65rem;
+    color: #dffaff;
+    background: rgba(28, 179, 205, 0.1);
+}
+
+.heliox-nav__menu-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+}
+
+.heliox-nav__menu-icon--close,
+.heliox-nav__toggle[aria-expanded="true"] .heliox-nav__menu-icon--open {
+    display: none;
+}
+
+.heliox-nav__toggle[aria-expanded="true"] .heliox-nav__menu-icon--close {
+    display: block;
+}
+
+.heliox-nav__mobile {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0 1.25rem;
+    border-top: 1px solid transparent;
+    background: rgba(2, 8, 12, 0.97);
+}
+
+.heliox-nav__mobile.open {
+    max-height: 32rem;
+    padding-top: 0.8rem;
+    padding-bottom: 1.15rem;
+    border-top-color: rgba(109, 238, 255, 0.16);
+}
+
+.heliox-nav__mobile a {
+    padding: 0.8rem 0.25rem;
+    color: rgba(235, 249, 252, 0.84);
+    font: 650 0.78rem/1 'Space Grotesk', sans-serif;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.heliox-nav__mobile .heliox-nav__mobile-sponsor {
+    color: #ffacd2;
+}
+
+.heliox-nav__mobile .heliox-nav__mobile-github {
+    color: #9af3ff;
+}
+
+@media (max-width: 1040px) {
+    .heliox-nav__links {
+        display: none;
+    }
+
+    .heliox-nav__toggle {
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 560px) {
+    .heliox-nav__inner {
+        width: min(100% - 1.5rem, 92rem);
+        min-height: 4.25rem;
+    }
+
+    .heliox-brand__mark {
+        width: 2.55rem;
+        height: 2.55rem;
+    }
+
+    .heliox-brand__wordmark strong {
+        font-size: 0.92rem;
+    }
+
+    .heliox-brand__wordmark small {
+        font-size: 0.46rem;
+    }
+}
+
 /* Cinematic scroll-world v2: one continuous website, not a prelude to card grids. */
 body.scroll-world-active {
     overflow-x: hidden;
@@ -2810,4 +3038,13 @@ body > main.cinematic-content {
         grid-template-columns: 1fr !important;
         gap: 0 !important;
     }
+}
+
+/* Never let fallback chapters extend the mounted scroll-world. Keep this last. */
+body.scroll-world-loading > main,
+body.scroll-world-loading > footer,
+body.scroll-world-active > main.cinematic-content,
+body.scroll-world-active > main,
+body.scroll-world-active > footer {
+    display: none !important;
 }
