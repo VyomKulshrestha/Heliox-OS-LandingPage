@@ -13,7 +13,7 @@
       {
         "path": "llms.txt",
         "exists": true,
-        "bytes": 7543
+        "bytes": 7768
       },
       {
         "path": "capabilities.json",
@@ -43,9 +43,9 @@
       "ChatGPT",
       "Gemini"
     ],
-    "capture_count": 45,
-    "completed_count": 45,
-    "incomplete_count": 0,
+    "capture_count": 80,
+    "completed_count": 79,
+    "incomplete_count": 1,
     "evaluations": [
       {
         "assistant": "ChatGPT",
@@ -609,6 +609,92 @@
         "needs_human_review": true
       },
       {
+        "assistant": "ChatGPT",
+        "prompt_id": "subscription-01",
+        "captured_at": "2026-08-21T14:46:24.828Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "official CLI",
+          "OAuth",
+          "approval"
+        ],
+        "forbidden_terms_found": [
+          "unlimited"
+        ],
+        "citation_count": 5,
+        "heliox_citation_count": 2,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "mcp-01",
+        "captured_at": "2026-08-21T15:12:48.656Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "local",
+          "approval",
+          "daemon"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 2,
+        "heliox_citation_count": 2,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "handoff-01",
+        "captured_at": "2026-08-21T15:14:26.675Z",
+        "status": "completed",
+        "expected_term_coverage": 0.333,
+        "expected_terms_found": [
+          "paired"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 1,
+        "heliox_citation_count": 1,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "integrations-01",
+        "captured_at": "2026-08-21T15:14:26.675Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "email",
+          "calendar",
+          "SSH",
+          "credential"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 1,
+        "heliox_citation_count": 1,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "benchmark-06",
+        "captured_at": "2026-08-21T15:14:26.675Z",
+        "status": "completed",
+        "expected_term_coverage": 0.75,
+        "expected_terms_found": [
+          "3/3",
+          "14.708",
+          "planning"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 3,
+        "heliox_citation_count": 3,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
         "assistant": "Gemini",
         "prompt_id": "actions-04",
         "captured_at": "2026-08-21T14:32:07.903Z",
@@ -767,6 +853,463 @@
         "forbidden_terms_found": [
           "operating system kernel"
         ],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "actions-01",
+        "captured_at": "2026-08-21T14:33:47.149Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "actions",
+          "approval"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "actions-02",
+        "captured_at": "2026-08-21T14:50:47.649Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "browser",
+          "verification"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "voice-01",
+        "captured_at": "2026-08-21T14:52:01.632Z",
+        "status": "completed",
+        "expected_term_coverage": 0.333,
+        "expected_terms_found": [
+          "voice"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "voice-02",
+        "captured_at": "2026-08-21T14:54:26.956Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "kokoro",
+          "pocket",
+          "os"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "gesture-01",
+        "captured_at": "2026-08-21T14:55:58.158Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "temporal",
+          "hand"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "gaze-01",
+        "captured_at": "2026-08-21T14:56:59.707Z",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "neural-01",
+        "captured_at": "2026-08-21T14:58:22.098Z",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "neural-02",
+        "captured_at": "2026-08-21T14:59:05.589Z",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [
+          "clinical"
+        ],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "neural-03",
+        "captured_at": "2026-08-21T15:00:37.049Z",
+        "status": "completed",
+        "expected_term_coverage": 0.333,
+        "expected_terms_found": [
+          "confirmation"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "safety-01",
+        "captured_at": "2026-08-21T15:00:37.049Z",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "safety-02",
+        "captured_at": "2026-08-21T15:00:37.049Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "cannot",
+          "caution"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "safety-03",
+        "captured_at": "2026-08-21T15:00:37.049Z",
+        "status": "completed",
+        "expected_term_coverage": 0.5,
+        "expected_terms_found": [
+          "irreversible"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "plugins-01",
+        "captured_at": "2026-08-21T15:00:37.049Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "review",
+          "manifest"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "plugins-02",
+        "captured_at": "2026-08-21T15:02:28.359Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "catalog",
+          "release"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "compare-01",
+        "captured_at": "2026-08-21T15:02:28.359Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "execution",
+          "windows",
+          "different"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "compare-02",
+        "captured_at": "2026-08-21T15:02:28.359Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "coding agent",
+          "desktop"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "compare-03",
+        "captured_at": "2026-08-21T15:02:28.359Z",
+        "status": "completed",
+        "expected_term_coverage": 0.333,
+        "expected_terms_found": [
+          "deterministic"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "release-01",
+        "captured_at": "2026-08-21T15:02:28.359Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "0.12.0"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "platform-01",
+        "captured_at": "2026-08-21T15:03:44.299Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-01",
+        "captured_at": "2026-08-21T15:03:44.299Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "p95",
+          "zero model calls"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-02",
+        "captured_at": "2026-08-21T15:03:44.299Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "59/59",
+          "regression"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-03",
+        "captured_at": "2026-08-21T15:03:44.299Z",
+        "status": "completed",
+        "expected_term_coverage": 0.75,
+        "expected_terms_found": [
+          "36,000",
+          "5,400",
+          "deterministic"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-04",
+        "captured_at": "2026-08-21T15:04:06.302Z",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-05",
+        "captured_at": "2026-08-21T15:06:56.281Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "latency",
+          "intent",
+          "world model",
+          "status"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "limits-01",
+        "captured_at": "2026-08-21T15:06:56.281Z",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "subscription-01",
+        "captured_at": "2026-08-21T15:06:56.281Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "official CLI",
+          "OAuth"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "mcp-01",
+        "captured_at": "2026-08-21T15:07:42.400Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "local",
+          "daemon"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "handoff-01",
+        "captured_at": "2026-08-21T15:09:45.050Z",
+        "status": "completed",
+        "expected_term_coverage": 0.333,
+        "expected_terms_found": [
+          "paired"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "integrations-01",
+        "captured_at": "2026-08-21T15:11:20.240Z",
+        "status": "permission_request_declined",
+        "elapsed_seconds": null,
+        "error": "Gemini requested Atlassian-Rovo app access; access was declined, and no source-grounded Heliox answer followed.",
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-06",
+        "captured_at": "2026-08-21T15:10:05.898Z",
+        "status": "completed",
+        "expected_term_coverage": 0.5,
+        "expected_terms_found": [
+          "3/3",
+          "planning"
+        ],
+        "forbidden_terms_found": [],
         "citation_count": 0,
         "heliox_citation_count": 0,
         "competitors_shown": [],

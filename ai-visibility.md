@@ -30,14 +30,14 @@ The machine-readable evaluation is in [`visibility-report.json`](https://www.hel
 
 ## 2026-08-21 follow-up
 
-A second sample captured 45 completed answers across 35 prompts from signed-in ChatGPT and Gemini sessions. The corrected evaluator found:
+A second sample attempted all 40 prompts in both signed-in ChatGPT and Gemini sessions: 80 assistant responses in total, with 79 completed answers and one incomplete Gemini attempt. The corrected evaluator found:
 
-- 26 answers with complete expected-term coverage;
-- 32 answers containing at least one citation to the canonical Heliox website or repository;
-- 53 Heliox citations among 82 total citations; and
-- 23 answers flagged for human review because coverage was partial or a forbidden phrase appeared.
+- 36 answers with complete expected-term coverage;
+- 37 answers containing at least one resolvable citation to the canonical Heliox website or repository;
+- 62 Heliox citations among 94 total resolvable citations; and
+- 49 responses flagged for human review because coverage was partial, a forbidden phrase appeared, or the attempt did not complete.
 
-ChatGPT consistently discovered Heliox's identity, current release, cost, privacy, action count, specialist count, and most safety material. Gemini identified the project but did not return citations in this sample. The weakest topic was identity-qualified edge cases: neural questions could be confused with medical heliox gas, and one limitations query resolved to an unrelated Heliox IDE. The canonical neural-research page now answers neural questions directly and exposes an FAQ schema, while keeping the boundary explicit: there is no validated live brain-control claim.
+ChatGPT consistently discovered Heliox's identity, current release, cost, privacy, action count, specialist count, and most safety material. Gemini identified the project, but its captured citation controls did not expose resolvable source URLs, so the evaluator did not count them as citations. The weakest topic was identity-qualified edge cases: neural questions could be confused with medical heliox gas, and one limitations query resolved to an unrelated Heliox IDE. The canonical neural-research page now answers neural questions directly and exposes an FAQ schema, while keeping the boundary explicit: there is no validated live brain-control claim.
 
 This follow-up demonstrates stronger source discovery in the sampled sessions than the 2026-08-12 baseline. It does not prove a search-ranking increase, broad assistant coverage, or future retrieval behavior; indexing and model refreshes occur on external schedules.
 
