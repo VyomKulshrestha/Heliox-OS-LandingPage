@@ -127,6 +127,7 @@
             const video = createElement('video', 'hworld-video');
             const hold = section.hold ? createElement('img', 'hworld-hold') : null;
             const copy = createElement('section', `hworld-copy hworld-copy--${section.align || (index % 2 ? 'right' : 'left')}`);
+            copy.dataset.section = section.id;
             const posterUrl = mediaUrl(section.still);
             const start = runningOffset;
             const end = start + sectionWeights[index];

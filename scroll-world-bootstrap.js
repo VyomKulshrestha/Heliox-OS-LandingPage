@@ -13,8 +13,8 @@
         if (loading) return;
         loading = true;
         window.__helioxExploreRequested = true;
-        loadScript('scroll-world.js?v=28')
-            .then(() => loadScript('scroll-world-init.js?v=25'))
+        loadScript('scroll-world.js?v=29')
+            .then(() => loadScript('scroll-world-init.js?v=26'))
             .catch(() => {
                 // The animated HTML/CSS fallback remains usable if optional
                 // cinematic media code cannot be loaded.

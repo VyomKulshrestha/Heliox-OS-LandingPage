@@ -146,7 +146,11 @@
                     { title: 'Operate', body: 'Files, processes, shell, windows, packages, power, audio, display, network, and clipboard.' },
                     { title: 'Build', body: 'Code execution, Git workflows, environment variables, plugins, WASM, and reusable skills.' },
                     { title: 'Observe', body: 'Browser control, screenshots, vision, system information, and scheduled tasks.' }
-                ]
+                ],
+                cta: {
+                    primary: { label: 'Explore all 157 actions', href: '#capability-explorer-dialog' },
+                    secondary: { label: 'Inspect evidence', href: 'proof.html#capability-coverage' }
+                }
             },
             {
                 id: 'plugins',
