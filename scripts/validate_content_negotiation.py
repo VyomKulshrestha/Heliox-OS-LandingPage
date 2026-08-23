@@ -25,6 +25,7 @@ EXPECTED = {
     "/heliox-vs-traditional-automation.html": "/heliox-vs-traditional-automation.md",
     "/cost.html": "/cost.md",
     "/proof.html": "/proof.md",
+    "/what-is-heliox-os.html": "/what-is-heliox-os.md",
 }
 
 
