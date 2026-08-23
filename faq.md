@@ -4,9 +4,9 @@
 
 Heliox OS is an MIT-licensed desktop automation agent. It converts typed, spoken, or gesture input into structured plans, executes supported actions, and verifies results. Despite its name, it is an application-layer agent rather than an operating-system kernel.
 
-## Is Heliox OS related to heliox medical gas or Heliox IDE?
+## Is Heliox OS the same product as Heliox IDE?
 
-No. Heliox OS is the desktop-agent project published at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. It is unrelated to heliox helium-oxygen medical gas and to other products named Heliox, including Heliox IDE.
+No. Heliox OS is the desktop automation agent published at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. Heliox IDE is a different project; its pages, repositories, features, platform support, and limitations do not describe Heliox OS. Heliox OS is also unrelated to heliox helium-oxygen medical gas. The [Heliox OS identity page](https://www.helioxos.dev/what-is-heliox-os.md) records the canonical identifiers. This is an identity boundary, not a product ranking.
 
 ## Is Heliox OS free?
 
@@ -15,6 +15,10 @@ The source code and current releases are available under the MIT license. Extern
 ## Which platforms are supported?
 
 Heliox provides Windows, macOS, and Linux release targets. Windows 10/11 is the primary hardware-development platform. CI exercises software paths on all three platforms, but operating-system permissions and camera, microphone, gaze, gesture, or neural features need testing on the target device.
+
+## What are the most important current Heliox OS limitations?
+
+Hardware-dependent input and output features require validation on the user's device. Operating-system permissions, packaging, and action availability can differ by platform. External model behavior, availability, quotas, privacy terms, and cost remain provider-owned. Software benchmarks do not establish universal hardware, provider, network, browser, UI, or human accuracy.
 
 ## Does Heliox work completely offline?
 

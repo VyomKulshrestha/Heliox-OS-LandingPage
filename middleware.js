@@ -22,6 +22,7 @@ export const MARKDOWN_ROUTES = new Map([
   ],
   ["/cost.html", "/cost.md"],
   ["/proof.html", "/proof.md"],
+  ["/what-is-heliox-os.html", "/what-is-heliox-os.md"],
 ]);
 
 export const MARKDOWN_CANONICALS = new Map(
@@ -106,6 +107,7 @@ export const config = {
     "/heliox-vs-traditional-automation.html",
     "/cost.html",
     "/proof.html",
+    "/what-is-heliox-os.html",
     "/index.html.md",
     "/privacy.html.md",
     "/whitepaper.html.md",
@@ -122,5 +124,6 @@ export const config = {
     "/heliox-vs-traditional-automation.md",
     "/cost.md",
     "/proof.md",
+    "/what-is-heliox-os.md",
   ],
 };

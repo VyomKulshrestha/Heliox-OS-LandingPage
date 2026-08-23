@@ -39,6 +39,35 @@ def main() -> None:
         raise SystemExit("structured data must describe the latest published installer")
     if software["codeRepository"] != "https://github.com/VyomKulshrestha/Heliox-OS":
         raise SystemExit("canonical code repository drifted")
+    if software.get("alternateName") != [
+        "Heliox OS desktop agent",
+        "Heliox desktop automation agent",
+    ]:
+        raise SystemExit("structured identity aliases are ambiguous or stale")
+    if software.get("identifier") != software["codeRepository"]:
+        raise SystemExit("structured identity does not use the canonical repository")
+    if software.get("mainEntityOfPage") != (
+        "https://www.helioxos.dev/what-is-heliox-os.html"
+    ):
+        raise SystemExit("structured identity page is not canonical")
+    disambiguation = software.get("disambiguatingDescription", "")
+    if (
+        "helioxos.dev" not in disambiguation
+        or "Heliox IDE" not in disambiguation
+        or "helium-oxygen medical gas" not in disambiguation
+    ):
+        raise SystemExit("structured identity lacks the Heliox IDE boundary")
+    identity_faq = next((item for item in graph if item["@type"] == "FAQPage"), None)
+    faq_questions = {
+        item.get("name") for item in (identity_faq or {}).get("mainEntity", [])
+    }
+    required_identity_questions = {
+        "Is Heliox OS the same product as Heliox IDE?",
+        "Which operating systems does Heliox OS support?",
+        "What are the most important current Heliox OS limitations?",
+    }
+    if not required_identity_questions.issubset(faq_questions):
+        raise SystemExit("homepage schema lacks identity, platform, or limits FAQ signals")
     if "Download v0.9.0" in html or "Heliox-OS_0.9.0_" in html:
         raise SystemExit("website still advertises the superseded installer")
     if "cdn.tailwindcss.com" in html or "tailwind.config =" in html:
@@ -118,9 +147,47 @@ def main() -> None:
         raise SystemExit("agent-readable overview omits current model-provider support")
     if "capability explorer" not in overview or "capabilities.json" not in overview:
         raise SystemExit("agent-readable overview omits the capability explorer source")
-    for identity_boundary in ("helium-oxygen medical gas", "Heliox IDE"):
+    for identity_boundary in (
+        "Heliox IDE",
+        "helium-oxygen medical gas",
+        "what-is-heliox-os.md",
+    ):
         if identity_boundary not in overview:
             raise SystemExit(f"agent-readable overview omits identity boundary: {identity_boundary}")
+    identity_html = (ROOT / "what-is-heliox-os.html").read_text(encoding="utf-8")
+    identity_markdown = (ROOT / "what-is-heliox-os.md").read_text(encoding="utf-8")
+    if (
+        '<link rel="canonical" href="https://www.helioxos.dev/what-is-heliox-os.html">'
+        not in identity_html
+        or 'href="https://www.helioxos.dev/what-is-heliox-os.md"' not in identity_html
+    ):
+        raise SystemExit("Heliox OS identity page lacks canonical HTML/Markdown signals")
+    identity_match = re.search(
+        r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>',
+        identity_html,
+        re.DOTALL,
+    )
+    if not identity_match:
+        raise SystemExit("Heliox OS identity page lacks JSON-LD")
+    identity_graph = json.loads(identity_match.group(1))["@graph"]
+    identity_software = next(
+        item for item in identity_graph if item["@type"] == "SoftwareApplication"
+    )
+    if (
+        identity_software.get("codeRepository") != software["codeRepository"]
+        or "Heliox IDE" not in identity_software.get("disambiguatingDescription", "")
+    ):
+        raise SystemExit("identity-page schema drifted from the canonical Heliox OS entity")
+    faq_markdown = (ROOT / "faq.md").read_text(encoding="utf-8")
+    llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
+    for source_name, source in (
+        ("identity Markdown", identity_markdown),
+        ("FAQ", faq_markdown),
+        ("LLM index", llms),
+    ):
+        for boundary in ("Heliox IDE", "Windows", "macOS", "Linux", "provider"):
+            if boundary not in source:
+                raise SystemExit(f"{source_name} omits identity boundary: {boundary}")
     if re.search(r'class="[^"]*count-up[^"]*"[^>]*>0\+?<', html):
         raise SystemExit("crawler-visible counters must not render as zero")
     if "<!-- 10 Specialist Agents -->" in html:
@@ -231,14 +298,15 @@ def main() -> None:
         for node in entries
     }
     expected_last_modified = {
-        "https://www.helioxos.dev/": "2026-08-21",
+        "https://www.helioxos.dev/": "2026-08-23",
+        "https://www.helioxos.dev/what-is-heliox-os.html": "2026-08-23",
         "https://www.helioxos.dev/privacy.html": "2026-08-16",
         "https://www.helioxos.dev/heliox-vs-open-interpreter.html": "2026-08-16",
         "https://www.helioxos.dev/cost.html": "2026-08-16",
         "https://www.helioxos.dev/proof.html": "2026-08-21",
         "https://www.helioxos.dev/neural-research.html": "2026-08-21",
-        "https://www.helioxos.dev/ai-visibility.md": "2026-08-21",
-        "https://www.helioxos.dev/faq.md": "2026-08-21",
+        "https://www.helioxos.dev/ai-visibility.md": "2026-08-23",
+        "https://www.helioxos.dev/faq.md": "2026-08-23",
     }
     for url, expected_date in expected_last_modified.items():
         if last_modified.get(url) != expected_date:

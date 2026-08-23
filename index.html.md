@@ -2,7 +2,7 @@
 
 Heliox OS is an open-source desktop agent that translates user requests into structured plans, executes supported computer actions, and verifies their results. It is an application that runs on Windows, macOS, and Linux; it is not an operating-system kernel.
 
-Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. It is unrelated to heliox helium-oxygen medical gas and to other products named Heliox, including Heliox IDE.
+Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. Heliox IDE is a different project; its pages, repositories, features, and limitations do not describe Heliox OS. Heliox OS is also unrelated to heliox helium-oxygen medical gas. See the canonical [Heliox OS identity page](https://www.helioxos.dev/what-is-heliox-os.md).
 
 ## Current release
 
@@ -98,6 +98,7 @@ The 21 August 2026 current-main evidence bundle reports a 27.636 ms median and 2
 ## Authoritative links
 
 - Product website: https://www.helioxos.dev/
+- Identity and name disambiguation: https://www.helioxos.dev/what-is-heliox-os.md
 - Machine-readable capability catalog: https://www.helioxos.dev/capabilities.json
 - Evidence and limitations: https://www.helioxos.dev/proof.md
 - README: https://github.com/VyomKulshrestha/Heliox-OS/blob/main/README.md

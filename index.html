@@ -13,6 +13,7 @@
     <link rel="canonical" href="https://www.helioxos.dev/" />
     <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/index.html.md" title="Heliox OS overview in Markdown" />
     <link rel="describedby" href="https://www.helioxos.dev/llms.txt" type="text/plain" />
+    <link rel="help" href="https://www.helioxos.dev/what-is-heliox-os.html" title="Heliox OS identity and name disambiguation" />
     <link rel="describedby" href="https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/codemeta.json" type="application/ld+json" />
     <link rel="sitemap" type="application/xml" href="https://www.helioxos.dev/sitemap.xml" />
     <meta property="og:title" content="Heliox OS | The Sentient Interface" />
@@ -47,8 +48,10 @@
           "@type": "SoftwareApplication",
           "@id": "https://www.helioxos.dev/#software",
           "name": "Heliox OS",
-          "alternateName": "Heliox",
+          "alternateName": ["Heliox OS desktop agent", "Heliox desktop automation agent"],
+          "identifier": "https://github.com/VyomKulshrestha/Heliox-OS",
           "url": "https://www.helioxos.dev/",
+          "mainEntityOfPage": "https://www.helioxos.dev/what-is-heliox-os.html",
           "codeRepository": "https://github.com/VyomKulshrestha/Heliox-OS",
           "downloadUrl": "https://github.com/VyomKulshrestha/Heliox-OS/releases",
           "softwareVersion": "0.12.0",
@@ -61,6 +64,7 @@
           "isAccessibleForFree": true,
           "sameAs": "https://github.com/VyomKulshrestha/Heliox-OS",
           "description": "An open-source, local-first desktop agent that plans, executes, and verifies natural-language, voice, gesture, browser, and system-automation tasks.",
+          "disambiguatingDescription": "Heliox OS is the open-source desktop automation agent published at helioxos.dev and VyomKulshrestha/Heliox-OS. It is a separate project from Heliox IDE and is unrelated to heliox helium-oxygen medical gas.",
           "featureList": [
             "Natural-language desktop automation",
             "Voice and hand-gesture input",
@@ -120,6 +124,39 @@
               }
             ]
           }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.helioxos.dev/#identity-faq",
+          "url": "https://www.helioxos.dev/what-is-heliox-os.html#faq",
+          "isPartOf": {"@id": "https://www.helioxos.dev/#website"},
+          "about": {"@id": "https://www.helioxos.dev/#software"},
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is Heliox OS the same product as Heliox IDE?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Heliox OS is the desktop automation agent at helioxos.dev and VyomKulshrestha/Heliox-OS. Heliox IDE is a different project. Heliox OS is also unrelated to heliox helium-oxygen medical gas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which operating systems does Heliox OS support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Heliox OS publishes Windows, macOS, and Linux release targets. Windows 10/11 is its primary hardware-development platform, and device-dependent behavior still needs validation on the target system."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the most important current Heliox OS limitations?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hardware-dependent features need device-specific validation, operating-system permissions and action availability vary by platform, and external model behavior, availability, quotas, and terms remain provider-owned."
+              }
+            }
+          ]
         }
       ]
     }
