@@ -61,6 +61,31 @@ class VisibilityAuditTests(unittest.TestCase):
         self.assertEqual(result["citation_count"], 1)
         self.assertEqual(result["heliox_citation_count"], 1)
 
+    def test_unrelated_github_citation_is_not_counted_as_heliox(self) -> None:
+        prompt = {"id": "limits-01", "expected": ["hardware"], "forbidden": []}
+        result = MODULE.evaluate(
+            prompt,
+            {
+                "assistant": "example",
+                "response": "Hardware validation remains limited.",
+                "status": "completed",
+                "citations": [
+                    {
+                        "text": "GitHub",
+                        "url": "https://github.com/VyomKulshrestha/VyomKulshrestha",
+                    },
+                    {
+                        "text": "Heliox OS",
+                        "url": "https://github.com/VyomKulshrestha/Heliox-OS/",
+                    },
+                ],
+            },
+        )
+        self.assertEqual(result["citation_count"], 2)
+        self.assertEqual(result["heliox_citation_count"], 1)
+        self.assertEqual(result["noncanonical_citation_count"], 1)
+        self.assertTrue(result["needs_human_review"])
+
 
 if __name__ == "__main__":
     unittest.main()

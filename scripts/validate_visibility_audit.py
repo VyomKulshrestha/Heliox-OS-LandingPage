@@ -23,12 +23,19 @@ def main() -> None:
     benchmark_prompts = [item for item in prompts if item["category"] == "benchmarks"]
     if len(benchmark_prompts) != 6:
         raise SystemExit("visibility prompt pack must contain six benchmark prompts")
+    prompts_by_id = {item["id"]: item for item in prompts}
+    for prompt_id in ("platform-01", "limits-01"):
+        if "Heliox IDE" not in prompts_by_id[prompt_id]["forbidden"]:
+            raise SystemExit(f"{prompt_id} does not flag the known Heliox IDE collision")
     if (
         report["prompt_count"] != len(prompts)
         or not report["source_readiness"]["passed"]
     ):
         raise SystemExit("visibility report is stale or source readiness failed")
     sampling = report["assistant_sampling"]
+    readiness_paths = {item["path"] for item in report["source_readiness"]["checks"]}
+    if "what-is-heliox-os.md" not in readiness_paths:
+        raise SystemExit("visibility report omits the canonical identity surface")
     if (
         sampling["capture_count"] == 0
         and sampling["status"] != "pending-real-responses"

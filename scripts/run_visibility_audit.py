@@ -10,7 +10,14 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-AUTHORITATIVE = ("llms.txt", "capabilities.json", "proof.md", "cost.md", "releases.json")
+AUTHORITATIVE = (
+    "llms.txt",
+    "what-is-heliox-os.md",
+    "capabilities.json",
+    "proof.md",
+    "cost.md",
+    "releases.json",
+)
 
 
 def normalize(text: str) -> str:
@@ -37,6 +44,18 @@ def citation_url(citation: object) -> str:
     return ""
 
 
+def is_heliox_citation(url: str) -> bool:
+    """Count only the canonical site or product repository as Heliox authority."""
+    parsed = urlparse(url)
+    if parsed.netloc in {"www.helioxos.dev", "helioxos.dev"}:
+        return True
+    return parsed.netloc == "github.com" and (
+        parsed.path.rstrip("/").lower()
+        == "/vyomkulshrestha/heliox-os"
+        or parsed.path.lower().startswith("/vyomkulshrestha/heliox-os/")
+    )
+
+
 def evaluate(prompt: dict, capture: dict) -> dict:
     status = str(capture.get("status", "completed"))
     if status != "completed":
@@ -56,7 +75,16 @@ def evaluate(prompt: dict, capture: dict) -> dict:
     citations = [
         url for citation in capture.get("citations", []) if (url := citation_url(citation))
     ]
-    heliox_citations = [url for url in citations if urlparse(url).netloc in {"www.helioxos.dev", "helioxos.dev", "github.com"}]
+    heliox_citations = [url for url in citations if is_heliox_citation(url)]
+    authority_sensitive = prompt["id"] in {
+        "identity-01",
+        "identity-02",
+        "identity-03",
+        "platform-01",
+        "limits-01",
+        "release-01",
+    }
+    citation_authority_gap = bool(citations) and len(heliox_citations) < len(citations)
     return {
         "assistant": capture["assistant"],
         "prompt_id": prompt["id"],
@@ -67,8 +95,13 @@ def evaluate(prompt: dict, capture: dict) -> dict:
         "forbidden_terms_found": forbidden,
         "citation_count": len(citations),
         "heliox_citation_count": len(heliox_citations),
+        "noncanonical_citation_count": len(citations) - len(heliox_citations),
         "competitors_shown": capture.get("competitors_shown", []),
-        "needs_human_review": bool(forbidden) or len(expected) < len(prompt["expected"]),
+        "needs_human_review": (
+            bool(forbidden)
+            or len(expected) < len(prompt["expected"])
+            or (authority_sensitive and citation_authority_gap)
+        ),
     }
 
 
