@@ -34,8 +34,10 @@ if (safety.body.result.structuredContent.permission.tier !== "user_write") throw
 const release = await call("tools/call", { name: "get_latest_release", arguments: {} });
 if (release.body.result.structuredContent.current_version !== "0.12.0") throw new Error("release lookup failed");
 const benchmark = await call("tools/call", { name: "get_benchmark_evidence", arguments: {} });
-if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 27.636) throw new Error("benchmark lookup failed");
+if (benchmark.body.result.structuredContent.source_commit !== "99caf7a1c883759f5b47536bf9d5ec4a39646fde") throw new Error("benchmark source commit drifted");
+if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 26.364) throw new Error("benchmark lookup failed");
 if (benchmark.body.result.structuredContent.event_loop_responsiveness.heartbeat_ticks !== 66) throw new Error("benchmark responsiveness lookup failed");
+if (benchmark.body.result.structuredContent.learned_risk_world_model.median_inference_ms !== 0.032) throw new Error("benchmark world-model inference drifted");
 if (!benchmark.body.result.structuredContent.claim_boundary.includes("excludes")) throw new Error("benchmark boundary missing");
 globalThis.fetch = originalFetch;
 const badOrigin = await call("tools/list", {}, { origin: "https://attacker.example" });

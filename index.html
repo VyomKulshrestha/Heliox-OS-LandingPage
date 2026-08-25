@@ -55,7 +55,7 @@
           "codeRepository": "https://github.com/VyomKulshrestha/Heliox-OS",
           "downloadUrl": "https://github.com/VyomKulshrestha/Heliox-OS/releases",
           "softwareVersion": "0.12.0",
-          "dateModified": "2026-08-21",
+          "dateModified": "2026-08-25",
           "applicationCategory": "UtilitiesApplication",
           "applicationSubCategory": "AI desktop automation agent",
           "operatingSystem": "Windows 10/11, macOS, Linux",
@@ -94,7 +94,7 @@
             "name": "Heliox OS reproducible software benchmark evidence",
             "description": "Reproducible local measurements for guarded task latency, deterministic intent routing, event-loop responsiveness, and the bounded learned-risk model, with explicit hardware and provider exclusions.",
             "url": "https://www.helioxos.dev/proof.html",
-            "dateModified": "2026-08-21",
+            "dateModified": "2026-08-25",
             "license": "https://opensource.org/license/mit",
             "creator": {
               "@type": "Person",
@@ -114,7 +114,7 @@
                 "@type": "DataDownload",
                 "name": "Deterministic software-path benchmarks",
                 "encodingFormat": "application/json",
-                "contentUrl": "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-21.json"
+                "contentUrl": "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-25.json"
               },
               {
                 "@type": "DataDownload",
@@ -752,7 +752,7 @@
         <section id="actions" class="space-y-10">
             <div class="text-center space-y-4">
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-white"><span class="count-up" data-target="157">157</span> Action Types on Main</h2>
-                <p class="text-on-surface-variant max-w-2xl mx-auto">The v0.12.0 planner schema declares 157 action types with 157/157 provider coverage across 21 executable specialists. Availability still depends on OS, dependencies, credentials, integrations, and security policy; only 11 actions currently have a separate observed post-condition verifier.</p>
+                <p class="text-on-surface-variant max-w-2xl mx-auto">The v0.12.0 planner schema declares 157 action types with 157/157 provider coverage across 21 executable specialists. Availability still depends on OS, dependencies, credentials, integrations, and security policy; 18 actions currently have a separate observed post-condition verifier and the other 139 rely on the executor result.</p>
             </div>
             <div class="capability-explorer-launch glass-panel ghost-border" aria-labelledby="capability-explorer-launch-title">
                 <div>
@@ -1142,15 +1142,15 @@
                 <p class="text-on-surface-variant text-lg leading-relaxed">The public evidence bundle records distributions, regression controls, raw data, reproduction commands, and known exclusions. These are software-path measurements on one Windows host—not universal device, provider, network, or human-accuracy claims.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">27.636 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 29.906 ms p95 and zero model calls.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">26.364 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 29.114 ms p95 and zero model calls.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-secondary font-mono text-xs uppercase tracking-widest">Intent controls</p><p class="text-3xl font-headline font-bold text-white mt-4">59 / 59</p><p class="text-sm text-on-surface-variant mt-2">A fixed deterministic routing regression set, not population-level language accuracy.</p></article>
-                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">66 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 16.873 ms maximum gap.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">66 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 17.456 ms maximum gap.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-tertiary font-mono text-xs uppercase tracking-widest">Learned risk</p><p class="text-3xl font-headline font-bold text-white mt-4">36k / 5.4k</p><p class="text-sm text-on-surface-variant mt-2">Training and temporal-validation samples for a bounded disk/process predictor; deterministic policy remains authoritative.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-secondary font-mono text-xs uppercase tracking-widest">Codex CLI planning</p><p class="text-3xl font-headline font-bold text-white mt-4">3 / 3</p><p class="text-sm text-on-surface-variant mt-2">Fixed planning-only cases at 14.708 s median; one account, no action execution, and zero destructive actions.</p></article>
             </div>
             <div class="glass-panel ghost-border rounded-xl p-6 md:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div><p class="text-white font-bold">What these numbers exclude</p><p class="text-sm text-on-surface-variant mt-2 max-w-3xl">Model-provider and network latency, browser page loads, UI rendering, microphone capture, audible TTS, camera, gesture, gaze, live EEG, and human accuracy all require separate evidence.</p></div>
-                <div class="flex flex-wrap gap-3 shrink-0"><a href="proof.html" class="bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg hover:scale-105 transition-all">Read methodology</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-21.json" target="_blank" rel="noopener noreferrer" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Software JSON</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json" target="_blank" rel="noopener noreferrer" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Provider JSON</a></div>
+                <div class="flex flex-wrap gap-3 shrink-0"><a href="proof.html" class="bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg hover:scale-105 transition-all">Read methodology</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-25.json" target="_blank" rel="noopener noreferrer" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Software JSON</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json" target="_blank" rel="noopener noreferrer" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Provider JSON</a></div>
             </div>
         </section>
 
