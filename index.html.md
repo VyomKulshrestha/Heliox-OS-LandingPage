@@ -98,6 +98,10 @@ The 25 August 2026 current-main evidence bundle reports a 26.364 ms median and 2
 ## Authoritative links
 
 - Product website: https://www.helioxos.dev/
+- Developer portal: https://www.helioxos.dev/developers
+- Contact and support: https://www.helioxos.dev/contact
+- Versioned public API status: https://www.helioxos.dev/api/v1/status
+- OpenAPI description: https://www.helioxos.dev/openapi.json
 - Identity and name disambiguation: https://www.helioxos.dev/what-is-heliox-os.md
 - Machine-readable capability catalog: https://www.helioxos.dev/capabilities.json
 - Evidence and limitations: https://www.helioxos.dev/proof.md

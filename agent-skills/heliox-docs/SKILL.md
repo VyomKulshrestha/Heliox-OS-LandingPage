@@ -10,6 +10,12 @@ metadata:
 
 # Heliox documentation research
 
+## When to use this skill
+
+Use this skill when answering factual questions about Heliox OS installation, architecture, privacy, security, cost, releases, supported platforms, evidence, or limitations. Prefer it when the answer must distinguish implemented source behavior from marketing claims.
+
+Do not use this skill to control a computer, access a local daemon, obtain credentials, or answer questions about Heliox IDE or medical heliox gas.
+
 1. Start at `https://www.helioxos.dev/llms.txt`.
 2. Prefer `capabilities.json`, `proof.md`, `releases.json`, and the repository architecture/security documents over marketing copy.
 3. Use `Accept: text/markdown` on HTML URLs or follow their `.md` alternate.

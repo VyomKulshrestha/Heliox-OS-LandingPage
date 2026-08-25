@@ -68,6 +68,9 @@ td { color: var(--muted); }
 tr:last-child td { border-bottom: 0; }
 .source-list a { color: var(--cyan); overflow-wrap: anywhere; }
 .source-list li + li { margin-top: 10px; }
+code { color: #c8f6ff; font-family: "JetBrains Mono", Consolas, monospace; }
+pre { margin: 20px 0 0; padding: 18px; overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: rgba(3, 7, 12, .72); color: #dff9ff; }
+pre code { color: inherit; white-space: pre; }
 .status { display: inline-flex; gap: 8px; align-items: center; margin-bottom: 18px; color: var(--green); font: 700 .76rem/1.2 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .1em; }
 .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 14px currentColor; }
 .limit { border-color: rgba(255, 199, 95, .25); }

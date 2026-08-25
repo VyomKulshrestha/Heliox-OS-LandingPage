@@ -1,4 +1,6 @@
-const PROTOCOLS = ["2026-07-28", "2025-11-25", "2025-06-18"];
+import { attachHeaders, problemResponse, takeRateLimit } from "../lib/public-api.js";
+
+const PROTOCOLS = ["2025-11-25", "2025-06-18", "2026-07-28"];
 const SERVER = { name: "heliox-docs", title: "Heliox OS Documentation", version: "1.0.0" };
 const SITE = "https://www.helioxos.dev";
 
@@ -45,7 +47,18 @@ const TOOLS = [
 
 const json = (value, status = 200) => new Response(JSON.stringify(value), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "access-control-allow-origin": SITE } });
 const result = (id, value) => json({ jsonrpc: "2.0", id, result: value });
-const error = (id, code, message, status = 200) => json({ jsonrpc: "2.0", id: id ?? null, error: { code, message } }, status);
+const error = (id, code, message, status = 200) => json({
+  jsonrpc: "2.0",
+  id: id ?? null,
+  error: {
+    code,
+    message,
+    data: {
+      code: "mcp_request_error",
+      resolution: "Check the MCP request shape and protocol headers at https://www.helioxos.dev/developers#mcp.",
+    },
+  },
+}, status);
 const textResult = (value) => ({ content: [{ type: "text", text: JSON.stringify(value, null, 2) }], structuredContent: value, isError: false });
 
 function validOrigin(request) {
@@ -123,11 +136,59 @@ async function handle(request, payload) {
 export default {
   async fetch(request) {
     if (!validOrigin(request)) return error(null, -32000, "Invalid Origin", 403);
-    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": SITE, "access-control-allow-methods": "GET, POST, OPTIONS", "access-control-allow-headers": "content-type, mcp-protocol-version, mcp-method, mcp-name" } });
-    if (request.method === "GET") return json({ name: SERVER.name, title: SERVER.title, endpoint: `${SITE}/api/mcp`, transport: "streamable-http", protocols: PROTOCOLS, read_only: true, tools: TOOLS.map(({ name, description }) => ({ name, description })) });
-    if (request.method !== "POST") return error(null, -32600, "Use GET or POST", 405);
+    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": SITE, "access-control-allow-methods": "POST, OPTIONS", "access-control-allow-headers": "accept, content-type, mcp-protocol-version" } });
+
+    const rate = takeRateLimit(request);
+    const rateHeaders = { ...rate.headers, "access-control-allow-origin": SITE };
+    if (!rate.allowed) {
+      return attachHeaders(error(null, -32029, "Rate limit exceeded", 429), {
+        ...rateHeaders,
+        "Retry-After": String(rate.reset),
+      });
+    }
+
+    if (request.method === "GET") {
+      return problemResponse({
+        status: 405,
+        code: "mcp_sse_not_available",
+        title: "Standalone SSE stream not available",
+        detail: "This stateless Streamable HTTP server returns JSON-RPC responses to POST requests and does not open a server-initiated SSE stream.",
+        instance: new URL(request.url).pathname,
+        resolution: "Send MCP JSON-RPC messages with POST and Accept: application/json, text/event-stream. Discovery metadata is at /.well-known/mcp.json.",
+        headers: { ...rateHeaders, Allow: "POST, OPTIONS" },
+      });
+    }
+    if (request.method !== "POST") {
+      return problemResponse({
+        status: 405,
+        code: "method_not_allowed",
+        title: "Method not allowed",
+        detail: "The documentation MCP accepts JSON-RPC messages through POST only.",
+        instance: new URL(request.url).pathname,
+        resolution: "Use POST or read /.well-known/mcp.json.",
+        headers: { ...rateHeaders, Allow: "POST, OPTIONS" },
+      });
+    }
+
+    const accept = request.headers.get("accept") || "";
+    if (!accept.includes("application/json") || !accept.includes("text/event-stream")) {
+      return problemResponse({
+        status: 406,
+        code: "invalid_accept_header",
+        title: "MCP Accept header is incomplete",
+        detail: "Streamable HTTP clients must advertise both application/json and text/event-stream.",
+        instance: new URL(request.url).pathname,
+        resolution: "Send Accept: application/json, text/event-stream.",
+        headers: rateHeaders,
+      });
+    }
+
+    const protocolHeader = request.headers.get("mcp-protocol-version");
+    if (protocolHeader && !PROTOCOLS.includes(protocolHeader)) {
+      return attachHeaders(error(null, -32600, `Unsupported MCP protocol version: ${protocolHeader}`, 400), rateHeaders);
+    }
     let payload;
-    try { payload = await request.json(); } catch { return error(null, -32700, "Parse error", 400); }
-    return handle(request, payload);
+    try { payload = await request.json(); } catch { return attachHeaders(error(null, -32700, "Parse error", 400), rateHeaders); }
+    return attachHeaders(await handle(request, payload), rateHeaders);
   },
 };

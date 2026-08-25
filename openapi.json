@@ -2,65 +2,372 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Heliox OS Public Metadata API",
-    "version": "1.0.0",
-    "description": "Read-only public metadata and documentation MCP. No endpoint controls a user's computer or local Heliox daemon."
+    "version": "1.1.0",
+    "description": "Versioned, unauthenticated, read-only product metadata and documentation MCP. No endpoint can access a user's local daemon, credentials, files, or computer-control actions.",
+    "termsOfService": "https://www.helioxos.dev/ai-content-policy.md",
+    "contact": {
+      "name": "Heliox OS project contact",
+      "url": "https://www.helioxos.dev/contact"
+    },
+    "license": {
+      "name": "MIT",
+      "identifier": "MIT"
+    }
+  },
+  "externalDocs": {
+    "description": "Heliox OS developer portal, quickstarts, versioning, errors, rate limits, and safety boundaries",
+    "url": "https://www.helioxos.dev/developers"
   },
   "servers": [{ "url": "https://www.helioxos.dev" }],
+  "tags": [
+    { "name": "Discovery", "description": "Read-only version and service discovery." },
+    { "name": "Metadata", "description": "Generated public product catalogs." },
+    { "name": "MCP", "description": "Read-only Heliox OS documentation tools over MCP Streamable HTTP." }
+  ],
+  "x-versioning": {
+    "strategy": "URL major version for dynamic REST endpoints",
+    "current_major": "v1",
+    "deprecation_notice_days": 90,
+    "deprecation_header": "Deprecation",
+    "sunset_header": "Sunset",
+    "policy": "https://www.helioxos.dev/developers#versioning"
+  },
+  "x-agent-authority-boundary": "Public metadata only; no local daemon or computer control.",
   "paths": {
+    "/api/v1/status": {
+      "get": {
+        "operationId": "getHelioxPublicApiStatus",
+        "summary": "Get Heliox OS public API status and discovery links",
+        "description": "Read-only live sandbox and canonical entry point for agents. No authentication or user data is involved.",
+        "tags": ["Discovery"],
+        "responses": {
+          "200": {
+            "description": "Public API status",
+            "headers": {
+              "API-Version": { "schema": { "type": "string", "const": "1" } },
+              "RateLimit-Policy": { "$ref": "#/components/headers/RateLimitPolicy" },
+              "RateLimit": { "$ref": "#/components/headers/RateLimit" }
+            },
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiStatus" } } }
+          },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "429": { "$ref": "#/components/responses/RateLimited" },
+          "500": { "$ref": "#/components/responses/Problem" }
+        }
+      }
+    },
     "/capabilities.json": {
       "get": {
-        "operationId": "getCapabilities",
-        "summary": "Get generated capability metadata",
+        "operationId": "getHelioxCapabilities",
+        "summary": "Get generated Heliox OS capability metadata",
+        "description": "Returns declared actions with their permission, platform, provider, approval, and verification metadata.",
+        "tags": ["Metadata"],
         "responses": {
           "200": {
             "description": "Capability catalog",
-            "content": { "application/json": { "schema": { "type": "object" } } }
-          }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CapabilityCatalog" } } }
+          },
+          "default": { "$ref": "#/components/responses/Problem" }
         }
       }
     },
     "/releases.json": {
       "get": {
-        "operationId": "getReleases",
-        "summary": "Get structured releases",
+        "operationId": "getHelioxReleases",
+        "summary": "Get structured Heliox OS releases",
+        "description": "Returns current source and published versions plus bounded release records.",
+        "tags": ["Metadata"],
         "responses": {
           "200": {
             "description": "Release catalog",
-            "content": { "application/json": { "schema": { "type": "object" } } }
-          }
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ReleaseCatalog" } } }
+          },
+          "default": { "$ref": "#/components/responses/Problem" }
         }
       }
     },
     "/api/mcp": {
       "get": {
-        "operationId": "getMcpServerCard",
-        "summary": "Get the read-only MCP server card",
-        "responses": { "200": { "description": "MCP endpoint metadata" } }
+        "operationId": "probeHelioxMcpSseStream",
+        "summary": "Probe for a standalone MCP SSE stream",
+        "description": "This stateless server intentionally returns 405 because it does not offer a server-initiated standalone SSE stream. Send JSON-RPC requests with POST.",
+        "tags": ["MCP"],
+        "responses": {
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
       },
       "post": {
-        "operationId": "callDocumentationMcp",
-        "summary": "Send a JSON-RPC request to the read-only documentation MCP",
+        "operationId": "callHelioxDocumentationMcp",
+        "summary": "Call the read-only Heliox OS documentation MCP",
+        "description": "MCP Streamable HTTP endpoint. Send Accept: application/json, text/event-stream. Tools return public documentation and metadata only.",
+        "tags": ["MCP"],
+        "parameters": [
+          {
+            "name": "MCP-Protocol-Version",
+            "in": "header",
+            "required": false,
+            "description": "Negotiated protocol version for requests after initialization.",
+            "schema": { "type": "string", "enum": ["2025-11-25", "2025-06-18", "2026-07-28"] }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
-              "schema": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/JsonRpcRequest" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON-RPC response",
+            "headers": {
+              "RateLimit-Policy": { "$ref": "#/components/headers/RateLimitPolicy" },
+              "RateLimit": { "$ref": "#/components/headers/RateLimit" }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/JsonRpcSuccess" },
+                    { "$ref": "#/components/schemas/JsonRpcError" }
+                  ]
+                }
+              }
+            }
+          },
+          "202": { "description": "JSON-RPC notification accepted with no response body" },
+          "400": {
+            "description": "Malformed JSON-RPC or unsupported protocol version",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/JsonRpcError" } } }
+          },
+          "403": {
+            "description": "Invalid browser Origin",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/JsonRpcError" } } }
+          },
+          "406": {
+            "description": "Accept header does not advertise JSON and SSE",
+            "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "headers": { "Retry-After": { "schema": { "type": "integer", "minimum": 1 } } },
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/JsonRpcError" } } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "headers": {
+      "RateLimitPolicy": {
+        "description": "Quota policy and window for the dynamic public endpoint.",
+        "schema": { "type": "string", "example": "\"public\";q=120;w=60" }
+      },
+      "RateLimit": {
+        "description": "Current remaining quota and reset time.",
+        "schema": { "type": "string", "example": "\"public\";r=119;t=60" }
+      }
+    },
+    "responses": {
+      "Problem": {
+        "description": "Typed API problem",
+        "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } }
+      },
+      "MethodNotAllowed": {
+        "description": "The resource is read-only or does not support this transport method",
+        "headers": { "Allow": { "schema": { "type": "string" } } },
+        "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } }
+      },
+      "RateLimited": {
+        "description": "Rate limit exceeded",
+        "headers": {
+          "Retry-After": { "schema": { "type": "integer", "minimum": 1 } },
+          "RateLimit-Policy": { "$ref": "#/components/headers/RateLimitPolicy" },
+          "RateLimit": { "$ref": "#/components/headers/RateLimit" }
+        },
+        "content": { "application/problem+json": { "schema": { "$ref": "#/components/schemas/ProblemDetails" } } }
+      }
+    },
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["type", "title", "status", "detail", "instance", "code", "resolution"],
+        "properties": {
+          "type": { "type": "string", "format": "uri" },
+          "title": { "type": "string" },
+          "status": { "type": "integer", "minimum": 400, "maximum": 599 },
+          "detail": { "type": "string" },
+          "instance": { "type": "string" },
+          "code": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "resolution": { "type": "string" }
+        }
+      },
+      "ApiStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "api_version", "status", "read_only", "authentication", "rate_limit", "links", "claim_boundary"],
+        "properties": {
+          "name": { "type": "string", "const": "Heliox OS Public Metadata API" },
+          "api_version": { "type": "string", "const": "v1" },
+          "status": { "type": "string", "const": "ok" },
+          "read_only": { "type": "boolean", "const": true },
+          "authentication": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["required", "api_keys_issued"],
+            "properties": {
+              "required": { "type": "boolean", "const": false },
+              "api_keys_issued": { "type": "boolean", "const": false }
+            }
+          },
+          "rate_limit": {
+            "type": "object",
+            "required": ["limit", "window_seconds"],
+            "properties": {
+              "limit": { "type": "integer", "const": 120 },
+              "window_seconds": { "type": "integer", "const": 60 }
+            }
+          },
+          "links": { "$ref": "#/components/schemas/DiscoveryLinks" },
+          "claim_boundary": { "type": "string" }
+        }
+      },
+      "DiscoveryLinks": {
+        "type": "object",
+        "additionalProperties": { "type": "string", "format": "uri" }
+      },
+      "CapabilityCatalog": {
+        "type": "object",
+        "required": ["schema_version", "product", "interpretation", "sources", "summary", "actions", "plugins"],
+        "properties": {
+          "schema_version": { "type": "string" },
+          "product": { "type": "object", "additionalProperties": true },
+          "interpretation": { "type": "object", "additionalProperties": { "type": "string" } },
+          "sources": { "type": "object", "additionalProperties": true },
+          "summary": {
+            "type": "object",
+            "required": ["action_types", "independent_postcondition_verifiers"],
+            "properties": {
+              "action_types": { "type": "integer", "minimum": 1 },
+              "independent_postcondition_verifiers": { "type": "integer", "minimum": 0 },
+              "families": { "type": "object", "additionalProperties": { "type": "integer" } },
+              "permission_tiers": { "type": "object", "additionalProperties": { "type": "integer" } },
+              "plugins": { "type": "integer", "minimum": 0 },
+              "mesh": { "type": "object", "additionalProperties": true }
+            }
+          },
+          "actions": { "type": "array", "items": { "$ref": "#/components/schemas/CapabilityAction" } },
+          "plugins": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+        }
+      },
+      "CapabilityAction": {
+        "type": "object",
+        "required": ["id", "family", "permission", "platform_support", "providers", "verification"],
+        "properties": {
+          "id": { "type": "string" },
+          "family": { "type": "string" },
+          "permission": {
+            "type": "object",
+            "required": ["tier", "name", "approval_required", "snapshot_required", "irreversible"],
+            "properties": {
+              "tier": { "type": "integer" },
+              "name": { "type": "string" },
+              "approval_required": { "type": "boolean" },
+              "snapshot_required": { "type": "boolean" },
+              "irreversible": { "type": "boolean" }
+            }
+          },
+          "platform_support": { "type": "object", "additionalProperties": true },
+          "providers": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+          "verification": {
+            "type": "object",
+            "required": ["method", "independent_postcondition"],
+            "properties": {
+              "method": { "type": "string" },
+              "independent_postcondition": { "type": "boolean" },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      },
+      "ReleaseCatalog": {
+        "type": "object",
+        "required": ["schema_version", "current_version", "current_source_version", "latest_published_version", "generated_from", "releases"],
+        "properties": {
+          "schema_version": { "type": "integer" },
+          "current_version": { "type": "string" },
+          "current_source_version": { "type": "string" },
+          "latest_published_version": { "type": "string" },
+          "generated_from": { "type": "string" },
+          "releases": { "type": "array", "items": { "$ref": "#/components/schemas/ReleaseRecord" } }
+        }
+      },
+      "ReleaseRecord": {
+        "type": "object",
+        "required": ["version", "title", "date", "summary", "features", "status", "source_url"],
+        "properties": {
+          "version": { "type": "string" },
+          "title": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "summary": { "type": "string" },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "description"],
+              "properties": { "name": { "type": "string" }, "description": { "type": "string" } }
+            }
+          },
+          "status": { "type": "string" },
+          "release_url": { "type": ["string", "null"], "format": "uri" },
+          "source_url": { "type": "string", "format": "uri" }
+        }
+      },
+      "JsonRpcRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["jsonrpc", "method"],
+        "properties": {
+          "jsonrpc": { "type": "string", "const": "2.0" },
+          "id": { "type": ["string", "integer", "null"] },
+          "method": { "type": "string", "minLength": 1 },
+          "params": { "type": "object", "additionalProperties": true }
+        }
+      },
+      "JsonRpcSuccess": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["jsonrpc", "id", "result"],
+        "properties": {
+          "jsonrpc": { "type": "string", "const": "2.0" },
+          "id": { "type": ["string", "integer", "null"] },
+          "result": {}
+        }
+      },
+      "JsonRpcError": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["jsonrpc", "id", "error"],
+        "properties": {
+          "jsonrpc": { "type": "string", "const": "2.0" },
+          "id": { "type": ["string", "integer", "null"] },
+          "error": {
+            "type": "object",
+            "required": ["code", "message", "data"],
+            "properties": {
+              "code": { "type": "integer" },
+              "message": { "type": "string" },
+              "data": {
                 "type": "object",
-                "required": ["jsonrpc", "method"],
+                "required": ["code", "resolution"],
                 "properties": {
-                  "jsonrpc": { "const": "2.0" },
-                  "id": {},
-                  "method": { "type": "string" },
-                  "params": { "type": "object" }
+                  "code": { "type": "string" },
+                  "resolution": { "type": "string" }
                 }
               }
             }
           }
-        },
-        "responses": {
-          "200": { "description": "JSON-RPC response" },
-          "202": { "description": "Notification accepted" },
-          "403": { "description": "Invalid browser Origin" }
         }
       }
     }

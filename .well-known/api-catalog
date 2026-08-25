@@ -1,14 +1,19 @@
 {
   "schema_version": 1,
   "name": "Heliox OS public metadata APIs",
-  "description": "Unauthenticated read-only product metadata. No local desktop-control API is public.",
+  "description": "Heliox OS unauthenticated read-only product metadata. No local desktop-control API is public.",
   "openapi": "https://www.helioxos.dev/openapi.json",
+  "developer_portal": "https://www.helioxos.dev/developers",
+  "versioning": { "strategy": "URL major version", "current": "v1", "policy": "https://www.helioxos.dev/developers#versioning" },
+  "errors": { "media_type": "application/problem+json", "standard": "RFC 9457", "documentation": "https://www.helioxos.dev/developers#errors" },
+  "rate_limits": { "documentation": "https://www.helioxos.dev/developers#rate-limits" },
   "apis": [
+    { "name": "Heliox OS API v1 status", "url": "https://www.helioxos.dev/api/v1/status", "media_type": "application/json", "version": "v1" },
     { "name": "Capability catalog", "url": "https://www.helioxos.dev/capabilities.json", "media_type": "application/json" },
     { "name": "Release catalog", "url": "https://www.helioxos.dev/releases.json", "media_type": "application/json" },
     { "name": "Release JSON Feed", "url": "https://www.helioxos.dev/releases.feed.json", "media_type": "application/feed+json" },
     { "name": "Release RSS", "url": "https://www.helioxos.dev/releases.xml", "media_type": "application/rss+xml" },
-    { "name": "Documentation MCP", "url": "https://www.helioxos.dev/api/mcp", "media_type": "application/json", "protocol": "MCP Streamable HTTP" }
+    { "name": "Heliox OS documentation MCP", "url": "https://www.helioxos.dev/api/mcp", "media_type": "application/json", "protocol": "MCP Streamable HTTP 2025-11-25" }
   ],
   "safety": { "read_only": true, "credentials_required": false, "computer_control": false }
 }

@@ -6,6 +6,8 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://www.helioxos.dev/developers</loc><lastmod>2026-08-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.helioxos.dev/contact</loc><lastmod>2026-08-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.helioxos.dev/what-is-heliox-os.html</loc><lastmod>2026-08-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url>
     <loc>https://www.helioxos.dev/privacy.html</loc>

@@ -1,13 +1,15 @@
 {
-  "schema_version": "2026-07-28",
+  "schema_version": "2025-11-25",
+  "protocol_version": "2025-11-25",
   "name": "heliox-docs",
   "title": "Heliox OS Documentation",
   "description": "Read-only public documentation, capability, safety, installation, and release lookup. This server cannot access a user's daemon or control a computer.",
   "endpoint": "https://www.helioxos.dev/api/mcp",
   "transport": "streamable-http",
-  "supported_protocol_versions": ["2026-07-28", "2025-11-25", "2025-06-18"],
+  "supported_protocol_versions": ["2025-11-25", "2025-06-18", "2026-07-28"],
   "authentication": { "required": false },
   "capabilities": { "tools": {} },
   "safety": { "read_only": true, "local_daemon_exposed": false, "user_data_access": false },
-  "documentation": "https://www.helioxos.dev/llms.txt"
+  "documentation": "https://www.helioxos.dev/developers#mcp",
+  "instructions": "Send JSON-RPC messages with POST and Accept: application/json, text/event-stream. This stateless server returns JSON responses and returns HTTP 405 for standalone GET stream requests."
 }

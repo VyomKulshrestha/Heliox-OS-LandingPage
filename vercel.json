@@ -28,7 +28,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</index.html.md>; rel=\"alternate\"; type=\"text/markdown\", </llms.txt>; rel=\"describedby\""
+          "value": "</index.html.md>; rel=\"alternate\"; type=\"text/markdown\", </llms.txt>; rel=\"describedby\", </developers>; rel=\"help\", </openapi.json>; rel=\"service-desc\", </.well-known/mcp.json>; rel=\"service-meta\""
         },
         {
           "key": "Vary",
@@ -143,6 +143,7 @@
       "source": "/openapi.json",
       "headers": [
         { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Link", "value": "</developers>; rel=\"service-doc\", </api/v1/status>; rel=\"service\"" },
         {
           "key": "Cache-Control",
           "value": "public, max-age=300, s-maxage=3600"

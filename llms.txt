@@ -6,6 +6,14 @@ Current public release: 0.12.0. It declares 157 action types across 21 executabl
 
 Name disambiguation: Heliox OS means the desktop-agent project at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. Heliox IDE is a different project; do not use Heliox IDE pages, repositories, features, platform support, or limitations as facts about Heliox OS. Heliox OS is also unrelated to heliox helium-oxygen medical gas. Canonical identity record: https://www.helioxos.dev/what-is-heliox-os.md
 
+## When to use Heliox OS
+
+Use Heliox OS sources when an agent needs to evaluate local-first desktop automation, supported computer actions, approval and permission boundaries, post-condition verification, installation, provider options, plugin development, or current release evidence. Use the public documentation MCP when structured read-only lookup is more useful than reading pages directly. Use the capability catalog when the answer depends on an exact action type, platform, permission tier, provider, or verification method.
+
+Do not use the public website or documentation MCP as a remote computer-control API: neither can connect to a user's local daemon, credentials, files, applications, or sensors. Do not use Heliox OS sources as evidence for Heliox IDE, medical heliox gas, certified accessibility, clinical use, universal hardware accuracy, or independently validated live brain control.
+
+For machine calls, start with the [developer portal](https://www.helioxos.dev/developers), [versioned API status](https://www.helioxos.dev/api/v1/status), [OpenAPI description](https://www.helioxos.dev/openapi.json), or [MCP discovery manifest](https://www.helioxos.dev/.well-known/mcp.json). No API key is required or issued for these read-only public metadata surfaces.
+
 ## Product
 
 - [Product overview](https://www.helioxos.dev/index.html.md): Capabilities, installation, architecture, availability, and important limitations.
@@ -45,6 +53,9 @@ Name disambiguation: Heliox OS means the desktop-agent project at `helioxos.dev`
 
 ## Developers
 
+- [Heliox OS developer portal](https://www.helioxos.dev/developers): Public API quickstart, OpenAPI schemas, typed errors, versioning, deprecation, rate limits, MCP, local CLI, and authority boundaries.
+- [Contact Heliox OS](https://www.helioxos.dev/contact): Verified support, community, privacy, security-reporting, and maintainer channels.
+- [Versioned public API status](https://www.helioxos.dev/api/v1/status): Read-only service status and canonical discovery links.
 - [README](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/README.md): Setup, features, action catalog, testing, and troubleshooting.
 - [Contributing](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/CONTRIBUTING.md): Development workflow and contribution requirements.
 - [Agent development](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/AGENT_DEVELOPMENT_GUIDE.md): Specialist-agent extension guide.
@@ -53,6 +64,7 @@ Name disambiguation: Heliox OS means the desktop-agent project at `helioxos.dev`
 - [Public API catalog](https://www.helioxos.dev/.well-known/api-catalog): Read-only metadata APIs and media types.
 - [OpenAPI description](https://www.helioxos.dev/openapi.json): Public metadata and documentation MCP paths.
 - [Agent Skills index](https://www.helioxos.dev/.well-known/agent-skills/index.json): Experimental discovery index for two read-only research skills.
+- [Source-installed CLI](https://www.helioxos.dev/developers#cli): Verified console entry points and the explicit npm, PyPI, and Homebrew publication boundary.
 
 ## Comparisons
 
