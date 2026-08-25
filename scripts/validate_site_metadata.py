@@ -81,6 +81,7 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
+        "Measured software evidence · 25 August 2026",
         "26.364 ms",
         "29.114 ms p95",
         "59 / 59",
