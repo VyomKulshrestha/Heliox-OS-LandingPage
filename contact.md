@@ -20,4 +20,3 @@ Report vulnerabilities through the [private GitHub security advisory form](https
 - Canonical identity record: [What is Heliox OS?](https://www.helioxos.dev/what-is-heliox-os.md)
 
 Heliox OS is the desktop-agent project at `helioxos.dev`; it is not Heliox IDE and is unrelated to heliox medical gas. This contact page does not provide customer-service guarantees, emergency support, a security SLA, or a hosted remote-control service.
-

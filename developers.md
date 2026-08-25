@@ -35,10 +35,10 @@ Dynamic public endpoints enforce 120 requests per 60 seconds per client and runt
 
 ## MCP
 
-Discovery: [/.well-known/mcp.json](https://www.helioxos.dev/.well-known/mcp.json)  
-Endpoint: `https://www.helioxos.dev/api/mcp`  
-Stable protocol: `2025-11-25`  
-Transport: Streamable HTTP, stateless JSON responses to POST. A standalone GET SSE stream is not offered and therefore returns HTTP 405 as required by the transport specification.
+- Discovery: [/.well-known/mcp.json](https://www.helioxos.dev/.well-known/mcp.json)
+- Endpoint: `https://www.helioxos.dev/api/mcp`
+- Stable protocol: `2025-11-25`
+- Transport: Streamable HTTP, stateless JSON responses to POST. A standalone GET SSE stream is not offered and therefore returns HTTP 405 as required by the transport specification.
 
 ```bash
 curl -sS https://www.helioxos.dev/api/mcp \

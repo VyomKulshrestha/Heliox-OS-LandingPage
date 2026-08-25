@@ -3,7 +3,12 @@ import server from "../api/mcp.js";
 const call = async (method, params = {}, headers = {}) => {
   const request = new Request("https://www.helioxos.dev/api/mcp", {
     method: "POST",
-    headers: { "content-type": "application/json", ...headers },
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json, text/event-stream",
+      "mcp-protocol-version": "2025-11-25",
+      ...headers,
+    },
     body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
   });
   const response = await server.fetch(request);
@@ -11,7 +16,7 @@ const call = async (method, params = {}, headers = {}) => {
 };
 
 const discover = await call("server/discover");
-if (discover.body.result.supportedVersions[0] !== "2026-07-28" || !discover.body.result.instructions.includes("Read-only")) throw new Error("stateless discovery failed");
+if (discover.body.result.supportedVersions[0] !== "2025-11-25" || !discover.body.result.instructions.includes("Read-only")) throw new Error("stateless discovery failed");
 const initialize = await call("initialize", { protocolVersion: "2025-11-25", capabilities: {}, clientInfo: { name: "test", version: "1" } });
 if (initialize.body.result.protocolVersion !== "2025-11-25") throw new Error("legacy initialization failed");
 const listed = await call("tools/list");
@@ -43,5 +48,11 @@ globalThis.fetch = originalFetch;
 const badOrigin = await call("tools/list", {}, { origin: "https://attacker.example" });
 if (badOrigin.response.status !== 403) throw new Error("Origin validation failed");
 const getResponse = await server.fetch(new Request("https://www.helioxos.dev/api/mcp"));
-if (!getResponse.ok || !(await getResponse.json()).read_only) throw new Error("GET server card failed");
-console.log("Validated MCP discovery, six read-only tools, evidence/catalog/release lookups, search, and Origin rejection.");
+if (getResponse.status !== 405 || getResponse.headers.get("allow") !== "POST, OPTIONS") throw new Error("standalone MCP GET must decline SSE with 405");
+if ((await getResponse.json()).code !== "mcp_sse_not_available") throw new Error("MCP GET lacks a typed recovery hint");
+const badAccept = await call("ping", {}, { accept: "application/json" });
+if (badAccept.response.status !== 406 || badAccept.body.code !== "invalid_accept_header") throw new Error("MCP Accept contract is not enforced");
+const badProtocol = await call("ping", {}, { "mcp-protocol-version": "1900-01-01" });
+if (badProtocol.response.status !== 400 || !badProtocol.body.error.data.resolution) throw new Error("unsupported MCP protocol lacks typed recovery");
+if (!listed.response.headers.get("ratelimit-policy") || !listed.response.headers.get("ratelimit")) throw new Error("MCP rate limit headers missing");
+console.log("Validated stable MCP handshake, six read-only tools, transport errors, rate headers, Origin rejection, and evidence lookups.");

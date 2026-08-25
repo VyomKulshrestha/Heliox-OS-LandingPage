@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED = {
     "/": "/index.html.md",
+    "/developers": "/developers.md",
+    "/contact": "/contact.md",
     "/privacy.html": "/privacy.html.md",
     "/whitepaper.html": "/whitepaper.html.md",
     "/voice-control.html": "/voice-control.md",
@@ -50,8 +52,15 @@ def main() -> None:
         raise SystemExit("apex host lacks a permanent redirect to the canonical www host")
 
     middleware = (ROOT / "middleware.js").read_text(encoding="utf-8")
+    route_block = re.search(
+        r"export const MARKDOWN_ROUTES = new Map\(\[(.*?)\]\);",
+        middleware,
+        re.DOTALL,
+    )
+    if not route_block:
+        raise SystemExit("negotiated route map is missing")
     route_pattern = re.compile(r'\[\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,?\s*\]')
-    actual = dict(route_pattern.findall(middleware))
+    actual = dict(route_pattern.findall(route_block.group(1)))
     if actual != EXPECTED:
         raise SystemExit(f"negotiated route map drifted: {actual.keys() ^ EXPECTED.keys()}")
     for source, destination in EXPECTED.items():
@@ -67,6 +76,18 @@ def main() -> None:
         raise SystemExit("Markdown representations lack HTTP canonical links")
     if 'headers.set("X-Robots-Tag", "noindex, follow")' not in middleware:
         raise SystemExit("Vercel deployment aliases are not excluded from indexing")
+    if 'matcher: ["/:path*"]' not in middleware:
+        raise SystemExit("agent-friendly 404 handling does not cover unknown paths")
+    for recovery_contract in (
+        '"Content-Type": "text/markdown; charset=utf-8"',
+        '"Content-Type": "application/problem+json; charset=utf-8"',
+        'code: "resource_not_found"',
+        "/sitemap.xml",
+        "/llms.txt",
+        "/developers",
+    ):
+        if recovery_contract not in middleware:
+            raise SystemExit(f"agent-friendly recovery contract is missing: {recovery_contract}")
 
     header_rules = config.get("headers", [])
     root_headers = next(rule["headers"] for rule in header_rules if rule["source"] == "/")

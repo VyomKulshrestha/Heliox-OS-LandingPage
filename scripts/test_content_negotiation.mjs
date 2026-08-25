@@ -9,14 +9,56 @@ import middleware, {
 } from "../middleware.js";
 
 test("middleware matchers cover every negotiated route", () => {
-  assert.deepEqual(
-    new Set(config.matcher),
-    new Set([
-      "/index.html",
-      ...MARKDOWN_ROUTES.keys(),
-      ...MARKDOWN_CANONICALS.keys(),
-    ]),
+  assert.deepEqual(config.matcher, ["/:path*"]);
+});
+
+test("clean developer and contact routes rewrite to HTML or Markdown", () => {
+  const browserResponse = middleware(
+    new Request("https://www.helioxos.dev/developers", { headers: { accept: "text/html" } }),
   );
+  assert.equal(
+    browserResponse.headers.get("x-middleware-rewrite"),
+    "https://www.helioxos.dev/developers.html",
+  );
+  assert.match(browserResponse.headers.get("link"), /developers\.md/);
+
+  const agentResponse = middleware(
+    new Request("https://www.helioxos.dev/contact", { headers: { accept: "text/markdown" } }),
+  );
+  assert.equal(
+    agentResponse.headers.get("x-middleware-rewrite"),
+    "https://www.helioxos.dev/contact.md",
+  );
+});
+
+test("unknown pages return a recoverable Markdown 404", async () => {
+  const response = middleware(
+    new Request("https://www.helioxos.dev/this-resource-does-not-exist"),
+  );
+  assert.equal(response.status, 404);
+  assert.match(response.headers.get("content-type"), /^text\/markdown/);
+  const body = await response.text();
+  assert.match(body, /Developer portal/);
+  assert.match(body, /llms\.txt/);
+  assert.match(body, /sitemap\.xml/);
+});
+
+test("unknown API routes return RFC 9457 JSON", async () => {
+  const response = middleware(
+    new Request("https://www.helioxos.dev/api/v1/missing"),
+  );
+  assert.equal(response.status, 404);
+  assert.match(response.headers.get("content-type"), /^application\/problem\+json/);
+  const body = await response.json();
+  assert.equal(body.code, "resource_not_found");
+  assert.match(body.resolution, /openapi\.json/);
+});
+
+test("known static assets and API endpoints continue to routing", () => {
+  for (const path of ["/assets/tailwind.generated.css", "/openapi.json", "/api/mcp", "/api/v1/status"]) {
+    const response = middleware(new Request(`https://www.helioxos.dev${path}`));
+    assert.equal(response.headers.get("x-middleware-next"), "1", path);
+  }
 });
 
 test("Accept parsing recognizes usable Markdown media ranges", () => {

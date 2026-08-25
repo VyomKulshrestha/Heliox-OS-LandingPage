@@ -195,6 +195,10 @@ def main() -> None:
         raise SystemExit("stale specialist count remains in homepage source")
     if 'href="proof.html"' not in html:
         raise SystemExit("homepage does not expose the human-readable evidence center")
+    if 'href="/developers"' not in html or "Developers / API" not in html:
+        raise SystemExit("homepage does not expose the Heliox OS developer portal")
+    if 'href="/contact"' not in html:
+        raise SystemExit("homepage does not expose the Heliox OS contact page")
     olud_page = "https://olud.ai/tool/vyomkulshrestha-heliox-os.html"
     olud_badge = "https://olud.ai/badge.php?tool=vyomkulshrestha-heliox-os"
     if olud_page not in html or olud_badge not in html:
@@ -244,6 +248,40 @@ def main() -> None:
     for comparison in comparison_pages:
         if f'href="{comparison}"' not in html:
             raise SystemExit(f"homepage does not link comparison page: {comparison}")
+
+    developer_html = (ROOT / "developers.html").read_text(encoding="utf-8")
+    developer_markdown = (ROOT / "developers.md").read_text(encoding="utf-8")
+    required_developer_contracts = (
+        "Heliox OS Developer Portal | API, OpenAPI and MCP",
+        '<link rel="canonical" href="https://www.helioxos.dev/developers">',
+        'href="https://www.helioxos.dev/developers.md"',
+        'href="https://www.helioxos.dev/openapi.json"',
+        "GET /api/v1/status",
+        "application/problem+json",
+        "120 requests per 60 seconds",
+        "2025-11-25",
+        "does not claim a registry distribution",
+        "#subdirectory=daemon",
+    )
+    for contract in required_developer_contracts:
+        if contract not in developer_html:
+            raise SystemExit(f"developer portal is missing contract: {contract}")
+    if len(developer_markdown) < 2_500:
+        raise SystemExit("agent-readable developer portal is unexpectedly shallow")
+
+    contact_html = (ROOT / "contact.html").read_text(encoding="utf-8")
+    contact_markdown = (ROOT / "contact.md").read_text(encoding="utf-8")
+    for contract in (
+        "Contact Heliox OS | Support, Security and Project Channels",
+        '<link rel="canonical" href="https://www.helioxos.dev/contact">',
+        "private GitHub security advisory form",
+        "vyomkulshrestha2004@gmail.com",
+        "Canonical Heliox OS repository",
+    ):
+        if contract not in contact_html:
+            raise SystemExit(f"contact trust page is missing contract: {contract}")
+    if len(contact_markdown) < 1_200:
+        raise SystemExit("agent-readable contact page must contain at least 500 characters")
 
     proof_html = (ROOT / "proof.html").read_text(encoding="utf-8")
     required_proof_claims = (
@@ -300,6 +338,8 @@ def main() -> None:
     }
     expected_last_modified = {
         "https://www.helioxos.dev/": "2026-08-25",
+        "https://www.helioxos.dev/developers": "2026-08-25",
+        "https://www.helioxos.dev/contact": "2026-08-25",
         "https://www.helioxos.dev/what-is-heliox-os.html": "2026-08-23",
         "https://www.helioxos.dev/privacy.html": "2026-08-16",
         "https://www.helioxos.dev/heliox-vs-open-interpreter.html": "2026-08-16",

@@ -31,6 +31,7 @@ jobs:
           grep -q 'scroll-mt-28' assets/tailwind.generated.css
       - run: npm run test:content-negotiation
       - run: npm run test:mcp
+      - run: npm run test:api
       - run: python -m unittest scripts/test_visibility_audit.py
       - run: python -m unittest scripts/test_submit_indexnow.py
       - name: Validate discovery and content contracts
