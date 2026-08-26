@@ -87,11 +87,11 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 25 August 2026 current-main evidence bundle reports a 26.364 ms median and 29.114 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 66 concurrent scheduler heartbeats with a 17.456 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. Neither bundle establishes universal provider, network, browser page-load, UI, microphone, camera, TTS, gesture, gaze, EEG, or human accuracy.
+The 26 August 2026 current-main evidence bundle reports a 26.769 ms median and 27.705 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 66 concurrent scheduler heartbeats with a 16.299 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. Neither bundle establishes universal provider, network, browser page-load, UI, microphone, camera, TTS, gesture, gaze, EEG, or human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
-- [Raw current-main software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-25.json)
+- [Raw current-main software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-26.json)
 - [Raw v0.12.0 release benchmark snapshot](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json)
 - [Raw subscription-planning evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
 

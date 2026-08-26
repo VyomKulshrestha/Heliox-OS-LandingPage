@@ -24,15 +24,15 @@ const DOCUMENTS = [
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true };
 
 const BENCHMARK_EVIDENCE = {
-  captured_on: "2026-08-25",
-  source_commit: "99caf7a1c883759f5b47536bf9d5ec4a39646fde",
-  source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-25.json",
+  captured_on: "2026-08-26",
+  source_commit: "cfb6ff0670d8f96f57a92a102f38efdc8ed6a0c9",
+  source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-26.json",
   proof: `${SITE}/proof.md`,
   claim_boundary: "Local software evidence only; excludes provider, network, browser page-load, UI, microphone, camera, speaker, gaze, gesture, EEG, and human accuracy.",
-  guarded_local_request: { iterations: 100, median_ms: 26.364, p95_ms: 29.114, p99_ms: 30.91, model_calls: 0 },
-  event_loop_responsiveness: { heartbeat_ticks: 66, heartbeat_median_ms: 15.566, heartbeat_p95_ms: 16.218, heartbeat_max_ms: 17.456 },
-  deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.023 },
-  learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.032 },
+  guarded_local_request: { iterations: 100, median_ms: 26.769, p95_ms: 27.705, p99_ms: 28.074, model_calls: 0 },
+  event_loop_responsiveness: { heartbeat_ticks: 66, heartbeat_median_ms: 15.427, heartbeat_p95_ms: 16.043, heartbeat_max_ms: 16.299 },
+  deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.021 },
+  learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.029 },
   subscription_planning: { provider: "codex", fixed_cases_passed: 3, fixed_cases_total: 3, median_latency_seconds: 14.708, executed_actions: 0, destructive_actions: 0, source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json", boundary: "One developer-machine account and planning only; no Claude or action-execution claim." },
 };
 
