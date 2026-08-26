@@ -39,10 +39,10 @@ if (safety.body.result.structuredContent.permission.tier !== "user_write") throw
 const release = await call("tools/call", { name: "get_latest_release", arguments: {} });
 if (release.body.result.structuredContent.current_version !== "0.12.0") throw new Error("release lookup failed");
 const benchmark = await call("tools/call", { name: "get_benchmark_evidence", arguments: {} });
-if (benchmark.body.result.structuredContent.source_commit !== "cfb6ff0670d8f96f57a92a102f38efdc8ed6a0c9") throw new Error("benchmark source commit drifted");
-if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 26.769) throw new Error("benchmark lookup failed");
-if (benchmark.body.result.structuredContent.event_loop_responsiveness.heartbeat_ticks !== 66) throw new Error("benchmark responsiveness lookup failed");
-if (benchmark.body.result.structuredContent.learned_risk_world_model.median_inference_ms !== 0.029) throw new Error("benchmark world-model inference drifted");
+if (benchmark.body.result.structuredContent.source_commit !== "af36ab1a77b1d031dc948d10754a4a74878e6967") throw new Error("benchmark source commit drifted");
+if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 26.664) throw new Error("benchmark lookup failed");
+if (benchmark.body.result.structuredContent.event_loop_responsiveness.heartbeat_ticks !== 65) throw new Error("benchmark responsiveness lookup failed");
+if (benchmark.body.result.structuredContent.learned_risk_world_model.median_inference_ms !== 0.031) throw new Error("benchmark world-model inference drifted");
 if (!benchmark.body.result.structuredContent.claim_boundary.includes("excludes")) throw new Error("benchmark boundary missing");
 globalThis.fetch = originalFetch;
 const badOrigin = await call("tools/list", {}, { origin: "https://attacker.example" });

@@ -81,13 +81,13 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "Measured software evidence · 26 August 2026",
-        "26.769 ms",
-        "27.705 ms p95",
+        "Measured software evidence · 27 August 2026",
+        "26.664 ms",
+        "30.238 ms p95",
         "59 / 59",
-        "66 ticks",
+        "65 ticks",
         "36k / 5.4k",
-        "software-benchmarks-2026-08-26.json",
+        "software-benchmarks-2026-08-27.json",
         "14.708 s median",
         "zero destructive actions",
         "audible TTS",
@@ -296,13 +296,13 @@ def main() -> None:
     proof_html = (ROOT / "proof.html").read_text(encoding="utf-8")
     required_proof_claims = (
         '<link rel="canonical" href="https://www.helioxos.dev/proof.html">',
-        '"dateModified":"2026-08-26"',
+        '"dateModified":"2026-08-27"',
         "18 independent post-condition verifiers",
         "production certificate remains pending",
         "recorded/synthetic EEG research",
         "59/59 regression cases",
         "36,000 training and 5,400 temporal-validation samples",
-        "software-benchmarks-2026-08-26.json",
+        "software-benchmarks-2026-08-27.json",
         "subscription-planning-codex-2026-08-16.json",
         "3/3 fixed planning cases",
     )
@@ -314,13 +314,13 @@ def main() -> None:
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "26.769",
-        "27.705",
+        "26.664",
+        "30.238",
         "59/59",
-        "66 ticks",
+        "65 ticks",
         "36,000",
         "5,400",
-        "software-benchmarks-2026-08-26.json",
+        "software-benchmarks-2026-08-27.json",
         "Human microphone accuracy is not a release gate",
         "audible quality and device output require a human check",
         "Physical accuracy is not established across cameras",
@@ -347,14 +347,14 @@ def main() -> None:
         for node in entries
     }
     expected_last_modified = {
-        "https://www.helioxos.dev/": "2026-08-26",
+        "https://www.helioxos.dev/": "2026-08-27",
         "https://www.helioxos.dev/developers": "2026-08-25",
         "https://www.helioxos.dev/contact": "2026-08-25",
         "https://www.helioxos.dev/what-is-heliox-os.html": "2026-08-23",
         "https://www.helioxos.dev/privacy.html": "2026-08-16",
         "https://www.helioxos.dev/heliox-vs-open-interpreter.html": "2026-08-16",
         "https://www.helioxos.dev/cost.html": "2026-08-16",
-        "https://www.helioxos.dev/proof.html": "2026-08-26",
+        "https://www.helioxos.dev/proof.html": "2026-08-27",
         "https://www.helioxos.dev/neural-research.html": "2026-08-21",
         "https://www.helioxos.dev/ai-visibility.md": "2026-08-23",
         "https://www.helioxos.dev/faq.md": "2026-08-23",
