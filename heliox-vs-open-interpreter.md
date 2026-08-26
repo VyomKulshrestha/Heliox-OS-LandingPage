@@ -8,7 +8,7 @@ Last fact-checked: **2026-08-16**. Product capabilities and availability change;
 
 | Criterion | Heliox OS | Open Interpreter |
 | --- | --- | --- |
-| Primary role | Published v0.12.0 desktop and browser automation through 157 declared action types and 21 executable specialists; 18 actions currently have a separate observed post-condition verifier and the other 139 rely on the executor result. | A coding agent optimized for low-cost models, harness switching, exec, tools, and editor/client compatibility. |
+| Primary role | Published v0.13.0 desktop and browser automation through 157 declared action types and 21 executable specialists; 18 actions currently have a separate observed post-condition verifier and the other 139 rely on the executor result. | A coding agent optimized for low-cost models, harness switching, exec, tools, and editor/client compatibility. |
 | Execution shape | Typed actions with declared permission tiers, approval requirements, provider ownership, and verification metadata. | Commands inside native sandboxing plus MCP, skills, hooks, permissions, and computer-use QA tools. |
 | Interaction modes | Text, continuous voice, hand gestures, coarse gaze fusion, narration, and bounded proactive suggestions. | The current official README centers its terminal/agent interfaces and computer-use QA skill; this page makes no claim about every external client. |
 | Extensibility | Specialist agents and reviewed plugin marketplace with manifest capabilities and verified package files. | Shared AGENTS.md, .agents/skills, MCP, ACP, Codex exec protocol, and selectable harnesses. |

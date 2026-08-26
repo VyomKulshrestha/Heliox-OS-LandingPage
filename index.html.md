@@ -6,7 +6,7 @@ Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` an
 
 ## Current release
 
-- Version: 0.12.0
+- Version: 0.13.0
 - License: MIT
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
 - Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
@@ -19,22 +19,22 @@ Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` an
 
 - Accepts typed natural language, continuous voice input, and opt-in hand gestures.
 - Plans and executes browser, file, application, process, package, Git, system, integration, and workflow actions.
-- v0.12.0 routes tasks across 21 specialist agents and 157 declared action types. Runtime availability still depends on the operating system, installed dependencies, credentials, integrations, and active security policy; 18 actions currently have a separate observed post-condition verifier and the other 139 rely on the executor result.
+- v0.13.0 routes tasks across 21 specialist agents and 157 declared action types. Runtime availability still depends on the operating system, installed dependencies, credentials, integrations, and active security policy; 18 actions currently have a separate observed post-condition verifier and the other 139 rely on the executor result.
 - The [capability explorer](https://www.helioxos.dev/#actions) lets people filter the canonical 157-action catalog by specialist and verification depth; agents can read the same source directly from [capabilities.json](https://www.helioxos.dev/capabilities.json).
 - Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
 - Supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta APIs, as well as existing Codex and Claude Code subscriptions through their official CLIs. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs. Provider-owned availability, quotas, and terms still apply.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
 
-## What's new in 0.12.0
+## What's new in 0.13.0
 
-- Existing Codex and Claude Code subscription access through official provider CLIs, with model selection and bounded usage evidence.
-- A local MCP bridge for IDE task staging that preserves visible Heliox approvals and daemon authority.
-- Secure Air Handoff for an explicitly selected screenshot, text value, or immutable file snapshot—not unrestricted remote control.
-- Completed credential-vault-backed email, calendar, and allowlisted SSH paths.
-- One live cognitive runtime for narration, interruption, suggestions, autonomous execution, and results.
-- Staged neural-goal selection plus more truthful health, provider, microphone, MCP, and forensic failure handling.
+- Truthful execution contracts that reject false success when an application launch, browser action, or external effect cannot be verified.
+- Transactional live settings that update running services safely without suppressing voice, gaze, gesture, world-model, or supervision features.
+- Authenticated peer collaboration with bounded delegation, replay protection, explicit approvals, and audit evidence.
+- Coordinated multimodal control so camera, gaze, gestures, voice, and cursor modes can coexist without one feature silently disabling another.
+- Bounded model and speech workers that release heavyweight resources and keep interactive services responsive.
+- Fresh reproducible evidence for guarded execution, deterministic intent routing, event-loop responsiveness, and learned-risk inference.
 
-[Read the complete v0.12.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.12.0.md).
+[Read the complete v0.13.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.13.0.md).
 
 ## Safety model
 
@@ -65,7 +65,7 @@ The repository includes a software pipeline for BrainFlow synthetic data, record
 
 ## Installation
 
-Download the 0.12.0 installer from the GitHub Releases page:
+Download the 0.13.0 installer from the GitHub Releases page:
 
 - Windows: `.exe` or `.msi`
 - macOS Apple Silicon or Intel: `.dmg`
@@ -87,13 +87,13 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 27 August 2026 current-main evidence bundle reports a 26.858 ms median and 28.165 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 66 concurrent scheduler heartbeats with a 16.367 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. A real local Kokoro file-synthesis run measured 21.401 seconds cold and 0.138 seconds warm, retained zero Torch/CUDA modules in the parent, and released its worker after the idle window; it does not establish audible quality or universal latency. These bundles do not establish universal provider, network, browser page-load, UI, microphone, camera, gesture, gaze, EEG, or human accuracy.
+The 27 August 2026 v0.13.0 evidence bundle reports a 26.476 ms median and 27.999 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 66 concurrent scheduler heartbeats with a 16.575 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. A real local Kokoro file-synthesis run measured 21.401 seconds cold and 0.138 seconds warm, retained zero Torch/CUDA modules in the parent, and released its worker after the idle window; it does not establish audible quality or universal latency. These bundles do not establish universal provider, network, browser page-load, UI, microphone, camera, gesture, gaze, EEG, or human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
 - [Raw current-main software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-27.json)
 - [Raw local TTS process-isolation evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/local-tts-isolation-2026-08-27.json)
-- [Raw v0.12.0 release benchmark snapshot](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json)
+- [Raw v0.13.0 release benchmark snapshot](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-27.json)
 - [Raw subscription-planning evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
 
 ## Authoritative links

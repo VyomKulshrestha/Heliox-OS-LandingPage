@@ -35,7 +35,7 @@ def main() -> None:
         raise SystemExit("JSON-LD graph is missing")
     graph = json.loads(match.group(1))["@graph"]
     software = next(item for item in graph if item["@type"] == "SoftwareApplication")
-    if software["softwareVersion"] != "0.12.0":
+    if software["softwareVersion"] != "0.13.0":
         raise SystemExit("structured data must describe the latest published installer")
     if software["codeRepository"] != "https://github.com/VyomKulshrestha/Heliox-OS":
         raise SystemExit("canonical code repository drifted")
@@ -82,11 +82,11 @@ def main() -> None:
     required_homepage_evidence = (
         'id="benchmarks"',
         "Measured software evidence · 27 August 2026",
-        "26.858 ms",
-        "28.165 ms p95",
+        "26.476 ms",
+        "27.999 ms p95",
         "59 / 59",
         "66 ticks",
-        "16.367 ms",
+        "16.575 ms",
         "36k / 5.4k",
         "software-benchmarks-2026-08-27.json",
         "14.708 s median",
@@ -316,11 +316,11 @@ def main() -> None:
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "26.858",
-        "28.165",
+        "26.476",
+        "27.999",
         "59/59",
         "66 ticks",
-        "16.367",
+        "16.575",
         "36,000",
         "5,400",
         "software-benchmarks-2026-08-27.json",

@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "audit_date": "2026-08-23",
+  "audit_date": "2026-08-27",
   "authority": {
-    "current_release": "0.12.0",
+    "current_release": "0.13.0",
     "canonical_site": "https://www.helioxos.dev/",
     "note": "Assistant evaluations below are dated observations, not current product facts. Resolve conflicts against releases.json, capabilities.json, and proof.md."
   },
@@ -13,32 +13,32 @@
       {
         "path": "llms.txt",
         "exists": true,
-        "bytes": 8057
+        "bytes": 10072
       },
       {
         "path": "what-is-heliox-os.md",
         "exists": true,
-        "bytes": 1960
+        "bytes": 2025
       },
       {
         "path": "capabilities.json",
         "exists": true,
-        "bytes": 180285
+        "bytes": 180397
       },
       {
         "path": "proof.md",
         "exists": true,
-        "bytes": 15585
+        "bytes": 16258
       },
       {
         "path": "cost.md",
         "exists": true,
-        "bytes": 2305
+        "bytes": 2336
       },
       {
         "path": "releases.json",
         "exists": true,
-        "bytes": 8755
+        "bytes": 11044
       }
     ]
   },

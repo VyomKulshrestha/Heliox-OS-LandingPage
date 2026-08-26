@@ -39,6 +39,12 @@ The 21 August ChatGPT captures exposed a concrete entity collision: `platform-01
 
 These two answers are dated observations, not a ranking or a proof that the source patch caused the change. The focused resample ran against the then-public site before this local disambiguation patch was published or re-indexed. The raw records are in [`visibility-captures/2026-08-23-chatgpt-focus.jsonl`](https://github.com/VyomKulshrestha/Heliox-OS-LandingPage/blob/main/visibility-captures/2026-08-23-chatgpt-focus.jsonl); the generated report now evaluates this two-prompt resample while the 21 August full-pack captures remain preserved.
 
+## 27 August 2026 v0.13.0 source refresh
+
+The canonical homepage, Markdown overview, release feeds, proof center, documentation MCP evidence record, structured data, cinematic release copy, and recurring prompt pack now resolve current release facts to **v0.13.0** and the dated 27 August benchmark bundle. The prompt pack also corrects the independent-verifier expectation to **18** actions and retains **157** declared action types across **21** executable specialists.
+
+This is a source-readiness improvement, not evidence that search engines or external assistants have already re-indexed v0.13.0. The preserved 21 and 23 August captures remain the latest real assistant observations until a new, separately timestamped sampling run is completed after the public deployment has been crawled.
+
 ## Honesty boundary
 
 These are dated, single-session observations on the model surfaces shown at capture time. They are not market-share, ranking, recommendation-frequency, or universal-answer statistics. Incomplete attempts remain incomplete, source labels are not promoted to URLs, and current product facts resolve against `releases.json`, `capabilities.json`, and `proof.md`.

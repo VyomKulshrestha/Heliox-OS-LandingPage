@@ -13,7 +13,7 @@ def main() -> None:
     pack = json.loads((ROOT / "visibility-prompts.json").read_text(encoding="utf-8"))
     report = json.loads((ROOT / "visibility-report.json").read_text(encoding="utf-8"))
     authority = report.get("authority", {})
-    if authority.get("current_release") != "0.12.0":
+    if authority.get("current_release") != "0.13.0":
         raise SystemExit("visibility report lacks the current release authority")
     if authority.get("canonical_site") != "https://www.helioxos.dev/":
         raise SystemExit("visibility report lacks the canonical website authority")

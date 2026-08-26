@@ -8,7 +8,7 @@ Heliox OS is the MIT-licensed desktop automation agent published at [helioxos.de
 - Type: open-source desktop automation agent
 - Website: https://www.helioxos.dev/
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
-- Current public release: 0.12.0
+- Current public release: 0.13.0
 - License: MIT
 - Release targets: Windows, macOS, and Linux
 - Primary hardware-development platform: Windows 10/11

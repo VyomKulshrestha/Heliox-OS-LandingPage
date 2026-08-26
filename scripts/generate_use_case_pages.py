@@ -164,7 +164,7 @@ PAGES = [
         ],
         "safety": "A subscription is model access, not action authority. Heliox does not import provider credentials, rejects provider tool activity, and never lets a model approve or execute its own proposal.",
         "limits": "Availability, eligible plans, models, latency, and quotas are provider-owned. The published benchmark covers one Codex CLI account and three fixed planning-only prompts; it does not establish Claude behavior, action execution, or unlimited use.",
-        "status": "Released in v0.12.0; provider-dependent",
+        "status": "Available in v0.13.0; provider-dependent",
     },
 ]
 

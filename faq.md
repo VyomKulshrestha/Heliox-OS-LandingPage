@@ -26,11 +26,11 @@ It can use local Ollama models and local execution components for supported work
 
 ## Can Heliox use DeepSeek through OpenRouter?
 
-v0.12.0 supports OpenRouter's OpenAI-compatible API and accepts an exact OpenRouter catalog model ID. That lets a user select a currently available DeepSeek model without Heliox hard-coding every catalog entry. Availability, routing, pricing, retention, and model behavior remain governed by OpenRouter and the selected model provider.
+v0.12.0 and later support OpenRouter's OpenAI-compatible API and accept an exact OpenRouter catalog model ID. That lets a user select a currently available DeepSeek model without Heliox hard-coding every catalog entry. Availability, routing, pricing, retention, and model behavior remain governed by OpenRouter and the selected model provider.
 
 ## Can Heliox use my existing Codex or Claude Code subscription?
 
-Yes, in v0.12.0. Install and sign in through the official provider CLI, then select Existing AI subscription in Heliox. Heliox does not copy OAuth files and does not convert the plan into unlimited API access. Models, quotas, availability, and terms remain provider-owned; Heliox retains schema validation, policy, approvals, execution, and verification.
+Yes, in v0.12.0 and later. Install and sign in through the official provider CLI, then select Existing AI subscription in Heliox. Heliox does not copy OAuth files and does not convert the plan into unlimited API access. Models, quotas, availability, and terms remain provider-owned; Heliox retains schema validation, policy, approvals, execution, and verification.
 
 ## Does Heliox collect telemetry?
 

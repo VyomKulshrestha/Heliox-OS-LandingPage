@@ -29,7 +29,7 @@ const originalFetch = globalThis.fetch;
 globalThis.fetch = async (url) => {
   const path = new URL(url).pathname;
   if (path === "/capabilities.json") return Response.json({ actions: [{ action_type: "browser_navigate", permission: { tier: "user_write", approval_required: false }, provider: "web" }] });
-  if (path === "/releases.json") return Response.json({ current_version: "0.12.0", releases: [{ version: "0.12.0", title: "Governed Intelligence and Handoff" }] });
+  if (path === "/releases.json") return Response.json({ current_version: "0.13.0", releases: [{ version: "0.13.0", title: "Verified Autonomy and Runtime Hardening" }] });
   return new Response("not found", { status: 404 });
 };
 const capabilities = await call("tools/call", { name: "list_capabilities", arguments: { query: "browser", limit: 10 } });
@@ -37,12 +37,12 @@ if (capabilities.body.result.structuredContent.actions[0].action_type !== "brows
 const safety = await call("tools/call", { name: "get_action_safety", arguments: { action_type: "browser_navigate" } });
 if (safety.body.result.structuredContent.permission.tier !== "user_write") throw new Error("action safety lookup failed");
 const release = await call("tools/call", { name: "get_latest_release", arguments: {} });
-if (release.body.result.structuredContent.current_version !== "0.12.0") throw new Error("release lookup failed");
+if (release.body.result.structuredContent.current_version !== "0.13.0") throw new Error("release lookup failed");
 const benchmark = await call("tools/call", { name: "get_benchmark_evidence", arguments: {} });
-if (benchmark.body.result.structuredContent.source_commit !== "45de280ea2cf09f3366fbae28df65479a2c5d487") throw new Error("benchmark source commit drifted");
-if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 26.858) throw new Error("benchmark lookup failed");
+if (benchmark.body.result.structuredContent.source_commit !== "00682b5e168b84ff68e921e813a53f9e979c7e14") throw new Error("benchmark source commit drifted");
+if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 26.476) throw new Error("benchmark lookup failed");
 if (benchmark.body.result.structuredContent.event_loop_responsiveness.heartbeat_ticks !== 66) throw new Error("benchmark responsiveness lookup failed");
-if (benchmark.body.result.structuredContent.learned_risk_world_model.median_inference_ms !== 0.033) throw new Error("benchmark world-model inference drifted");
+if (benchmark.body.result.structuredContent.learned_risk_world_model.median_inference_ms !== 0.030) throw new Error("benchmark world-model inference drifted");
 if (benchmark.body.result.structuredContent.local_tts_isolation.parent_heavy_modules !== 0) throw new Error("benchmark TTS isolation evidence drifted");
 if (!benchmark.body.result.structuredContent.claim_boundary.includes("excludes")) throw new Error("benchmark boundary missing");
 globalThis.fetch = originalFetch;
