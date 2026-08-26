@@ -81,7 +81,7 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "Measured software evidence · 25 August 2026",
+        "Measured software evidence · 26 August 2026",
         "26.769 ms",
         "27.705 ms p95",
         "59 / 59",
@@ -96,6 +96,16 @@ def main() -> None:
     for claim in required_homepage_evidence:
         if claim not in html:
             raise SystemExit(f"homepage is missing direct benchmark evidence: {claim}")
+    stale_pipeline_claims = (
+        "continuous ReAct loop",
+        "3D world-model via MediaPipe",
+        "Post-execution verification confirms action success",
+    )
+    if any(claim in html for claim in stale_pipeline_claims):
+        raise SystemExit("homepage restored a stale pipeline or verification claim")
+    cinematic_copy = (ROOT / "scroll-world-init.js").read_text(encoding="utf-8")
+    if "continuous ReAct loop" in cinematic_copy:
+        raise SystemExit("cinematic copy restored the removed ReAct pipeline claim")
     benchmark_dataset = software.get("subjectOf", {})
     if benchmark_dataset.get("@type") != "Dataset":
         raise SystemExit("structured software metadata does not expose benchmark evidence")

@@ -366,7 +366,7 @@
                         <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">front_hand</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-white">30+ Hand Gestures</h3>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">Static poses (Palm, Pinch) and motion gestures (Two-Finger Swipe) with kinematic smoothing, 3D world-model, and optional gaze tracking fusion.</p>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Static poses (Palm, Pinch) and motion gestures (Two-Finger Swipe) with kinematic smoothing, a 3D hand-geometry filter, and optional gaze tracking fusion.</p>
                 </div>
                 <!-- Card 3 -->
                 <div class="glass-panel ghost-border p-8 rounded-xl space-y-5 hover:translate-y-[-8px] transition-all duration-300 group">
@@ -461,7 +461,7 @@
                             <span class="text-lg">🤚</span>
                             <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors">30+ Hand Gestures & Air Drawing</h4>
                         </div>
-                        <p class="text-sm text-on-surface-variant leading-relaxed">Static poses (Palm, Pinch) and motion gestures (Two-Finger Swipe) with kinematic smoothing. Opt-in 3D world-model via MediaPipe HandLandmarker and coarse gaze-tracking fusion.</p>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">Static poses (Palm, Pinch) and motion gestures (Two-Finger Swipe) with kinematic smoothing. Opt-in 3D hand-geometry filtering via MediaPipe HandLandmarker and coarse gaze-tracking fusion; this is separate from the learned-risk world model.</p>
                     </div>
                     <!-- 6 -->
                     <div class="p-5 rounded-xl bg-surface/50 border border-white/5 hover:border-secondary/30 hover:bg-surface-container-highest/60 transition-all space-y-3 group">
@@ -559,9 +559,9 @@
                         <div class="w-8 h-8 rounded-lg bg-tertiary/15 flex items-center justify-center">
                             <span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">speed</span>
                         </div>
-                        <h4 class="font-bold text-white group-hover:text-tertiary transition-colors">ReAct Cost Estimator</h4>
+                        <h4 class="font-bold text-white group-hover:text-tertiary transition-colors">Bounded Confidence</h4>
                     </div>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">Tasks predict aggregate cognitive demand. If executing risks exceeding mental bandwidth, JARVIS pauses.</p>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Attention and stress estimates report capped confidence from recent signal diversity. Heuristics may add caution but never grant authority.</p>
                 </div>
                 <!-- 7 (full width) -->
                 <div class="md:col-span-2 lg:col-span-3 glass-panel ghost-border p-6 rounded-xl space-y-3 hover:border-primary/30 transition-all shimmer-line">
@@ -583,7 +583,7 @@
         <section id="architecture" class="space-y-12">
             <div class="text-center space-y-4">
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Modular Cognitive Architecture</h2>
-                <p class="text-on-surface-variant max-w-3xl mx-auto">A true agentic system running a continuous ReAct loop with a modular multi-agent orchestrator — not a simple command runner.</p>
+                <p class="text-on-surface-variant max-w-3xl mx-auto">A governed plan–execute–verify system with a modular multi-agent orchestrator — not a simple command runner or an exposed chain-of-thought pipeline.</p>
             </div>
             <!-- 7-Step Pipeline -->
             <div class="grid grid-cols-1 md:grid-cols-7 gap-3">
@@ -610,7 +610,7 @@
                 <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-primary/40 transition-all group">
                     <div class="w-8 h-8 rounded-full border border-primary text-primary flex items-center justify-center text-xs font-bold font-headline mx-auto">05</div>
                     <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors">Verifier</h4>
-                    <p class="text-[10px] text-on-surface-variant leading-snug">Post-execution verification confirms action success</p>
+                    <p class="text-[10px] text-on-surface-variant leading-snug">Normalizes executor results; 18 actions also check observed postconditions</p>
                 </div>
                 <div class="glass-panel ghost-border p-4 rounded-xl text-center space-y-2 hover:border-secondary/40 transition-all group">
                     <div class="w-8 h-8 rounded-full border border-secondary text-secondary flex items-center justify-center text-xs font-bold font-headline mx-auto">06</div>
@@ -1121,7 +1121,7 @@
                 <article class="glass-panel ghost-border rounded-xl p-6"><span class="material-symbols-outlined text-primary">verified</span><h3 class="text-lg font-bold text-white mt-4">One governed runtime</h3><p class="text-sm text-on-surface-variant mt-2">Narration, interruption, suggestions, autonomy, health review, and results now share the live production gateway.</p></article>
             </div>
             <div class="glass-panel ghost-border rounded-xl p-6 md:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                <div><p class="text-xs font-mono text-primary tracking-widest uppercase">Current main local validation</p><p class="text-white mt-2">1,754 Python tests passed · 191 frontend tests passed · 26 visual regressions passed · 0 high-severity npm vulnerabilities</p><p class="text-xs text-on-surface-variant mt-2">The live CI link remains authoritative. Physical microphone, camera, gaze, gesture, audible TTS, and live-EEG accuracy remains device-dependent.</p></div>
+                <div><p class="text-xs font-mono text-primary tracking-widest uppercase">Current main local validation</p><p class="text-white mt-2">1,989 Python tests passed · 299 frontend tests passed · 26 visual regressions passed · 0 npm vulnerabilities</p><p class="text-xs text-on-surface-variant mt-2">The live CI link remains authoritative. Physical microphone, camera, gaze, gesture, audible TTS, and live-EEG accuracy remains device-dependent.</p></div>
                 <div class="flex flex-wrap gap-3 shrink-0"><a href="https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.12.0" target="_blank" class="bg-primary-container text-on-primary-fixed px-6 py-3 font-bold rounded-lg hover:scale-105 transition-all">Download v0.12.0</a><a href="https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.12.0.md" target="_blank" class="glass-panel border border-secondary/30 text-secondary px-6 py-3 font-bold rounded-lg hover:bg-secondary/10 transition-all">Release notes</a></div>
             </div>
         </section>
@@ -1130,7 +1130,7 @@
 
         <section id="benchmarks" class="space-y-10 scroll-mt-28">
             <div class="max-w-4xl space-y-4">
-                <p class="text-primary font-mono text-xs tracking-[0.22em] uppercase">Measured software evidence · 25 August 2026</p>
+                <p class="text-primary font-mono text-xs tracking-[0.22em] uppercase">Measured software evidence · 26 August 2026</p>
                 <h2 class="text-4xl md:text-5xl font-headline font-bold text-white">Benchmarks with boundaries.</h2>
                 <a href="https://olud.ai/tool/vyomkulshrestha-heliox-os.html" target="_blank" rel="noopener noreferrer"
                     class="inline-flex w-fit rounded transition-transform hover:scale-105"

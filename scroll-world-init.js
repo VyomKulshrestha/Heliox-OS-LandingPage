@@ -61,7 +61,7 @@
                 anchors: ['#jarvis', '#cognitive'],
                 eyebrow: 'JARVIS COGNITIVE FIELD',
                 title: 'A system that reasons before it acts.',
-                body: 'JARVIS runs a continuous ReAct loop, estimates cognitive load locally, and keeps an execution companion beside every autonomous plan.',
+                body: 'JARVIS keeps continuous awareness, estimates cognitive load locally, and coordinates guarded plan–execute–verify work with an execution companion.',
                 accent: '#b998ff',
                 align: 'left',
                 still: 'assets/scroll-world/posters/clip-03-start.webp',
