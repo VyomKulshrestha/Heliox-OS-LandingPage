@@ -15,7 +15,7 @@ Heliox OS core is **free and MIT-licensed**. Official installers do not require 
 | Local Ollama model | None | Model download, storage, memory, CPU/GPU time, and electricity |
 | Cloud model provider | None added by Heliox | Provider API charges under current provider pricing |
 | Existing Codex or Claude Code subscription | None added by Heliox | An eligible provider plan, official CLI login, and provider-owned quota |
-| Kokoro or Pocket TTS | None | Optional packages/weights, storage, memory, CPU time, and bandwidth |
+| Kokoro or Pocket TTS | None | Optional packages/weights, storage, CPU time, bandwidth, and temporary worker memory during speech |
 | Operating-system voice | None from Heliox | A compatible platform voice/audio device |
 | Voice, gesture, or gaze | None from Heliox | Compatible microphone or camera |
 | Synthetic/recorded EEG | None from Heliox | Computer resources and optional public dataset download |

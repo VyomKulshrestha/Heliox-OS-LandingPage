@@ -87,11 +87,12 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The 27 August 2026 current-main evidence bundle reports a 26.664 ms median and 30.238 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 65 concurrent scheduler heartbeats with a 25.470 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. Neither bundle establishes universal provider, network, browser page-load, UI, microphone, camera, TTS, gesture, gaze, EEG, or human accuracy.
+The 27 August 2026 current-main evidence bundle reports a 26.858 ms median and 28.165 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 66 concurrent scheduler heartbeats with a 16.367 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. A real local Kokoro file-synthesis run measured 21.401 seconds cold and 0.138 seconds warm, retained zero Torch/CUDA modules in the parent, and released its worker after the idle window; it does not establish audible quality or universal latency. These bundles do not establish universal provider, network, browser page-load, UI, microphone, camera, gesture, gaze, EEG, or human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
 - [Raw current-main software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-27.json)
+- [Raw local TTS process-isolation evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/local-tts-isolation-2026-08-27.json)
 - [Raw v0.12.0 release benchmark snapshot](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-16.json)
 - [Raw subscription-planning evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
 

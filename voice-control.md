@@ -10,6 +10,7 @@ Status: **Implemented; hardware-dependent**
 - Routes the command through Heliox's declared action registry and specialist agents.
 - Keeps listening after a completed command when continuous mode remains enabled.
 - Can speak status, interruption prompts, and results through the configured local or operating-system voice.
+- Runs Pocket or Kokoro inference in a bounded worker process that is reused for a short speech burst, then exits so heavy model libraries are not retained by the control daemon.
 
 ## Typical flow
 
@@ -24,7 +25,7 @@ Voice is an input channel, not extra authority. A spoken request cannot elevate 
 
 ## Known limitations
 
-Recognition quality and response time depend on the microphone, room, platform speech service, selected model, and requested action. Physical capture and audible output must be tested on each device.
+Recognition quality and response time depend on the microphone, room, platform speech service, selected model, and requested action. Neural voice cold-start time depends on the host; the worker temporarily uses model memory while active. Physical capture and audible output must be tested on each device.
 
 ## Verify the implementation
 

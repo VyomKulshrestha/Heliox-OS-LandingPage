@@ -25,14 +25,15 @@ const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: 
 
 const BENCHMARK_EVIDENCE = {
   captured_on: "2026-08-27",
-  source_commit: "af36ab1a77b1d031dc948d10754a4a74878e6967",
+  source_commit: "45de280ea2cf09f3366fbae28df65479a2c5d487",
   source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-27.json",
   proof: `${SITE}/proof.md`,
   claim_boundary: "Local software evidence only; excludes provider, network, browser page-load, UI, microphone, camera, speaker, gaze, gesture, EEG, and human accuracy.",
-  guarded_local_request: { iterations: 100, median_ms: 26.664, p95_ms: 30.238, p99_ms: 30.717, model_calls: 0 },
-  event_loop_responsiveness: { heartbeat_ticks: 65, heartbeat_median_ms: 15.585, heartbeat_p95_ms: 16.259, heartbeat_max_ms: 25.47 },
-  deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.02 },
-  learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.031 },
+  guarded_local_request: { iterations: 100, median_ms: 26.858, p95_ms: 28.165, p99_ms: 28.323, model_calls: 0 },
+  event_loop_responsiveness: { heartbeat_ticks: 66, heartbeat_median_ms: 15.497, heartbeat_p95_ms: 15.999, heartbeat_max_ms: 16.367 },
+  deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.022 },
+  learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.033 },
+  local_tts_isolation: { engine: "kokoro_tts", cold_synthesis_seconds: 21.401, warm_synthesis_seconds: 0.138, parent_heavy_modules: 0, idle_release_seconds: 10, source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/local-tts-isolation-2026-08-27.json", boundary: "File synthesis and process lifetime only; no audible-quality or universal-latency claim." },
   subscription_planning: { provider: "codex", fixed_cases_passed: 3, fixed_cases_total: 3, median_latency_seconds: 14.708, executed_actions: 0, destructive_actions: 0, source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json", boundary: "One developer-machine account and planning only; no Claude or action-execution claim." },
 };
 

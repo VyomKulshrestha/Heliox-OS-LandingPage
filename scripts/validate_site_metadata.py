@@ -82,10 +82,11 @@ def main() -> None:
     required_homepage_evidence = (
         'id="benchmarks"',
         "Measured software evidence · 27 August 2026",
-        "26.664 ms",
-        "30.238 ms p95",
+        "26.858 ms",
+        "28.165 ms p95",
         "59 / 59",
-        "65 ticks",
+        "66 ticks",
+        "16.367 ms",
         "36k / 5.4k",
         "software-benchmarks-2026-08-27.json",
         "14.708 s median",
@@ -303,6 +304,7 @@ def main() -> None:
         "59/59 regression cases",
         "36,000 training and 5,400 temporal-validation samples",
         "software-benchmarks-2026-08-27.json",
+        "local-tts-isolation-2026-08-27.json",
         "subscription-planning-codex-2026-08-16.json",
         "3/3 fixed planning cases",
     )
@@ -314,15 +316,17 @@ def main() -> None:
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "26.664",
-        "30.238",
+        "26.858",
+        "28.165",
         "59/59",
-        "65 ticks",
+        "66 ticks",
+        "16.367",
         "36,000",
         "5,400",
         "software-benchmarks-2026-08-27.json",
         "Human microphone accuracy is not a release gate",
-        "audible quality and device output require a human check",
+        "audible quality, device output, and universal latency require separate validation",
+        "zero Torch/CUDA modules retained by the parent",
         "Physical accuracy is not established across cameras",
         "No live headset/human validation has established control accuracy",
     )

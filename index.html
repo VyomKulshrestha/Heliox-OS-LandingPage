@@ -107,7 +107,8 @@
               "Deterministic intent-routing regression coverage",
               "Event-loop responsiveness",
               "Learned-risk model validation and inference latency",
-              "Subscription-backed planning latency and token usage"
+              "Subscription-backed planning latency and token usage",
+              "Process-isolated local TTS synthesis and idle release"
             ],
             "distribution": [
               {
@@ -121,6 +122,12 @@
                 "name": "Codex CLI subscription-planning benchmark",
                 "encodingFormat": "application/json",
                 "contentUrl": "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json"
+              },
+              {
+                "@type": "DataDownload",
+                "name": "Local TTS process-isolation evidence",
+                "encodingFormat": "application/json",
+                "contentUrl": "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/local-tts-isolation-2026-08-27.json"
               }
             ]
           }
@@ -1144,9 +1151,9 @@
                 <p class="text-on-surface-variant text-lg leading-relaxed">The public evidence bundle records distributions, regression controls, raw data, reproduction commands, and known exclusions. These are software-path measurements on one Windows host—not universal device, provider, network, or human-accuracy claims.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">26.664 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 30.238 ms p95 and zero model calls.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Guarded local path</p><p class="text-3xl font-headline font-bold text-white mt-4">26.858 ms</p><p class="text-sm text-on-surface-variant mt-2">Median across 100 ready-daemon CPU-status requests; 28.165 ms p95 and zero model calls.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-secondary font-mono text-xs uppercase tracking-widest">Intent controls</p><p class="text-3xl font-headline font-bold text-white mt-4">59 / 59</p><p class="text-sm text-on-surface-variant mt-2">A fixed deterministic routing regression set, not population-level language accuracy.</p></article>
-                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">65 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 25.470 ms maximum gap.</p></article>
+                <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-primary font-mono text-xs uppercase tracking-widest">Shared-loop health</p><p class="text-3xl font-headline font-bold text-white mt-4">66 ticks</p><p class="text-sm text-on-surface-variant mt-2">Concurrent scheduler heartbeats during a real one-second CPU sample; 16.367 ms maximum gap.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-tertiary font-mono text-xs uppercase tracking-widest">Learned risk</p><p class="text-3xl font-headline font-bold text-white mt-4">36k / 5.4k</p><p class="text-sm text-on-surface-variant mt-2">Training and temporal-validation samples for a bounded disk/process predictor; deterministic policy remains authoritative.</p></article>
                 <article class="glass-panel ghost-border rounded-xl p-6"><p class="text-secondary font-mono text-xs uppercase tracking-widest">Codex CLI planning</p><p class="text-3xl font-headline font-bold text-white mt-4">3 / 3</p><p class="text-sm text-on-surface-variant mt-2">Fixed planning-only cases at 14.708 s median; one account, no action execution, and zero destructive actions.</p></article>
             </div>
