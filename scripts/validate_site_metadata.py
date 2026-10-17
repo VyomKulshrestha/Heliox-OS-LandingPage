@@ -84,7 +84,15 @@ def main() -> None:
         or "helium-oxygen medical gas" not in disambiguation
     ):
         raise SystemExit("structured identity lacks the Heliox IDE boundary")
-    identity_faq = next((item for item in graph if item["@type"] == "FAQPage"), None)
+    # The cinematic homepage makes its legacy main inert. FAQ schema belongs on
+    # the static identity page, whose questions remain accessible after rendering.
+    if any(item["@type"] == "FAQPage" for item in graph):
+        raise SystemExit("homepage must not advertise an inert FAQ as visible content")
+    identity_html = (ROOT / "what-is-heliox-os.html").read_text(encoding="utf-8")
+    identity_graph = json.loads(re.search(
+        r'<script type="application/ld\+json">(.*?)</script>', identity_html, re.S
+    ).group(1))["@graph"]
+    identity_faq = next((item for item in identity_graph if item["@type"] == "FAQPage"), None)
     faq_questions = {
         item.get("name") for item in (identity_faq or {}).get("mainEntity", [])
     }
@@ -94,12 +102,12 @@ def main() -> None:
         "What are the most important current Heliox OS limitations?",
     }
     if not required_identity_questions.issubset(faq_questions):
-        raise SystemExit("homepage schema lacks identity, platform, or limits FAQ signals")
-    visible_text = unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script\b.*?</script>", "", html, flags=re.S)))
+        raise SystemExit("identity-page schema lacks identity, platform, or limits FAQ signals")
+    visible_text = unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script\b.*?</script>", "", identity_html, flags=re.S)))
     for question in identity_faq["mainEntity"]:
         for value in (question["name"], question["acceptedAnswer"]["text"]):
             if value not in visible_text:
-                raise SystemExit("homepage FAQ schema must match visible page content")
+                raise SystemExit("identity-page FAQ schema must match visible page content")
     if "Download v0.9.0" in html or "Heliox-OS_0.9.0_" in html:
         raise SystemExit("website still advertises the superseded installer")
     if "cdn.tailwindcss.com" in html or "tailwind.config =" in html:

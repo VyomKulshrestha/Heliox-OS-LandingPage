@@ -19,6 +19,8 @@ Heliox OS is not Heliox IDE. Heliox IDE pages, repositories, features, platform 
 
 ## Important current limitations
 
+Heliox OS assistance co-adaptation is an opt-in desktop selection study, not a medical treatment. It adjusts presentation within user preferences and cannot authorize or execute actions. Published results cover simulated tuning families only, not proven improvement for real people. See the [co-adaptation evidence](https://www.helioxos.dev/proof.html#coadaptation).
+
 - Camera, microphone, TTS, gesture, gaze, neural, and other hardware-dependent behavior needs validation on the user's device.
 - Operating-system permissions, packaging, installed dependencies, and action availability can differ across Windows, macOS, and Linux.
 - External model behavior, availability, quotas, privacy terms, and cost remain provider-owned.

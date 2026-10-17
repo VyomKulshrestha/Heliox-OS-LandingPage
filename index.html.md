@@ -87,7 +87,7 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 ## Reproducible software evidence
 
-The assistance co-adaptation quick suite passed all three policy agency audits across two simulated tuning families. The adaptive engine does not beat the plain interface for every family. See the [simulation table and protocol](https://www.helioxos.dev/proof.md) and [raw local evidence mirror](https://www.helioxos.dev/benchmarks.json).
+Heliox OS assistance co-adaptation is a desktop-software study, unrelated to heliox medical gas. Its quick suite passed all three policy agency audits across two simulated tuning families. The adaptive engine does not beat the plain interface for every family. See the [simulation table and protocol](https://www.helioxos.dev/proof.md) and [raw local evidence mirror](https://www.helioxos.dev/benchmarks.json).
 
 The 18 October 2026 v0.14.0 evidence bundle reports a 28.727 ms median and 32.192 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 64 concurrent scheduler heartbeats with a 25.061 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. A real local Kokoro file-synthesis run measured 21.401 seconds cold and 0.138 seconds warm, retained zero Torch/CUDA modules in the parent, and released its worker after the idle window; it does not establish audible quality or universal latency. These bundles do not establish universal provider, network, browser page-load, UI, microphone, camera, gesture, gaze, EEG, or human accuracy.
 
