@@ -30,6 +30,44 @@ class PageMetadata(HTMLParser):
         self.tags.append((tag, dict(attrs)))
 
 
+def validate_current_answers(markup: str, markdown: str, evidence: dict, releases: dict) -> None:
+    """Keep concise discovery answers tied to the published source snapshots."""
+    graph = json.loads(re.search(
+        r'<script type="application/ld\+json">(.*?)</script>', markup, re.S
+    ).group(1))["@graph"]
+    faq = next(item for item in graph if item["@type"] == "FAQPage")
+    answers = {item["name"]: item["acceptedAnswer"]["text"] for item in faq["mainEntity"]}
+    release = next(item for item in releases["releases"]
+                   if item["version"] == releases["latest_published_version"])
+    day = lambda value: date.fromisoformat(value).strftime("%d %B %Y").lstrip("0")
+    guarded = evidence["guarded_cpu_request"]
+    steady = guarded["steady_state"]
+    expected = {
+        "What is the latest published Heliox OS installer version?": (
+            f"v{release['version']}", day(release["date"]), release["title"],
+        ),
+        "What measured guarded-task latency does Heliox OS publish?": (
+            day(evidence["captured_on"]), f"{steady['median_ms']:.3f} ms median",
+            f"{steady['p95_ms']:.3f} ms p95", f"{steady['p99_ms']:.3f} ms p99",
+            f"{steady['iterations']} ready-daemon", guarded["environment"]["python"],
+            "zero model calls", "not full-task", "not establish a performance improvement",
+        ),
+        "Does Heliox OS assistance co-adaptation have evidence of improvement for real people?": (
+            "No.", "simulated tuning families only", "not proven improvement for real people",
+            "cannot authorize or execute actions", "software assistance feature",
+        ),
+    }
+    visible = unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script\b.*?</script>", "", markup, flags=re.S)))
+    for question, facts in expected.items():
+        answer = answers.get(question, "")
+        if any(fact not in answer for fact in facts):
+            raise ValueError(f"Current discovery answer has stale or missing evidence: {question}")
+        if question not in visible or answer not in visible or answer not in markdown:
+            raise ValueError(f"Discovery answer must match visible HTML and Markdown: {question}")
+    if release["release_url"] not in markup or release["release_url"] not in markdown:
+        raise ValueError("Current installer answer must link to the published release")
+
+
 def main() -> None:
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     evidence = json.loads((ROOT / "benchmarks.json").read_text(encoding="utf-8"))
@@ -208,6 +246,7 @@ def main() -> None:
             raise SystemExit(f"agent-readable overview omits identity boundary: {identity_boundary}")
     identity_html = (ROOT / "what-is-heliox-os.html").read_text(encoding="utf-8")
     identity_markdown = (ROOT / "what-is-heliox-os.md").read_text(encoding="utf-8")
+    validate_current_answers(identity_html, identity_markdown, evidence, releases)
     if (
         '<link rel="canonical" href="https://www.helioxos.dev/what-is-heliox-os.html">'
         not in identity_html
@@ -268,6 +307,8 @@ def main() -> None:
         raise SystemExit("homepage olud.ai badge fallback styling is missing")
 
     scroll_init = (ROOT / "scroll-world-init.js").read_text(encoding="utf-8")
+    if "href: 'what-is-heliox-os.html'" not in scroll_init or 'href="what-is-heliox-os.html"' not in html:
+        raise SystemExit("identity page must be linked in both static and cinematic content")
     scroll_bootstrap = (ROOT / "scroll-world-bootstrap.js").read_text(encoding="utf-8")
     if "document.addEventListener('DOMContentLoaded'" in scroll_init:
         raise SystemExit("cinematic hydration must not replace the server-rendered LCP on load")

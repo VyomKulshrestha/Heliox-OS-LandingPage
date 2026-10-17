@@ -243,6 +243,8 @@
                 },
                 footer: {
                     links: [
+                        { label: 'About Heliox OS', href: 'what-is-heliox-os.html' },
+                        { label: 'Benchmarks', href: 'proof.html' },
                         { label: 'Documentation', href: 'https://github.com/VyomKulshrestha/Heliox-OS#readme' },
                         { label: 'Privacy', href: 'privacy.html' },
                         { label: 'Security', href: 'whitepaper.html' },
