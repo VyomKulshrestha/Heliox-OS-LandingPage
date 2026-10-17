@@ -39,15 +39,18 @@ def validate_current_answers(markup: str, markdown: str, evidence: dict, release
     answers = {item["name"]: item["acceptedAnswer"]["text"] for item in faq["mainEntity"]}
     release = next(item for item in releases["releases"]
                    if item["version"] == releases["latest_published_version"])
-    day = lambda value: date.fromisoformat(value).strftime("%d %B %Y").lstrip("0")
+    release_date = date.fromisoformat(release["date"]).strftime("%d %B %Y").lstrip("0")
+    capture_date = date.fromisoformat(evidence["captured_on"]).strftime("%d %B %Y").lstrip("0")
     guarded = evidence["guarded_cpu_request"]
     steady = guarded["steady_state"]
+    if guarded["total_model_generate_calls"] != 0:
+        raise ValueError("Discovery answer cannot claim zero model calls for this evidence")
     expected = {
         "What is the latest published Heliox OS installer version?": (
-            f"v{release['version']}", day(release["date"]), release["title"],
+            f"v{release['version']}", release_date, release["title"],
         ),
         "What measured guarded-task latency does Heliox OS publish?": (
-            day(evidence["captured_on"]), f"{steady['median_ms']:.3f} ms median",
+            capture_date, f"{steady['median_ms']:.3f} ms median",
             f"{steady['p95_ms']:.3f} ms p95", f"{steady['p99_ms']:.3f} ms p99",
             f"{steady['iterations']} ready-daemon", guarded["environment"]["python"],
             "zero model calls", "not full-task", "not establish a performance improvement",

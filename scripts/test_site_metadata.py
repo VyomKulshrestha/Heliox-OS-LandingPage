@@ -25,6 +25,11 @@ class CurrentAnswerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "stale or missing"):
             self.check(markup=self.markup.replace(current, "999.999"))
 
+    def test_zero_model_claim_requires_zero_observed_calls(self):
+        self.evidence["guarded_cpu_request"]["total_model_generate_calls"] = 1
+        with self.assertRaisesRegex(ValueError, "cannot claim zero model calls"):
+            self.check()
+
     def test_new_release_requires_answer_refresh(self):
         self.releases["releases"][0]["date"] = "2027-01-01"
         with self.assertRaisesRegex(ValueError, "stale or missing"):
