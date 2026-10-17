@@ -49,6 +49,8 @@ def is_heliox_citation(url: str) -> bool:
     parsed = urlparse(url)
     if parsed.netloc in {"www.helioxos.dev", "helioxos.dev"}:
         return True
+    if parsed.netloc == "raw.githubusercontent.com":
+        return parsed.path.lower().startswith("/vyomkulshrestha/heliox-os/")
     return parsed.netloc == "github.com" and (
         parsed.path.rstrip("/").lower()
         == "/vyomkulshrestha/heliox-os"
@@ -96,6 +98,7 @@ def evaluate(prompt: dict, capture: dict) -> dict:
         "citation_count": len(citations),
         "heliox_citation_count": len(heliox_citations),
         "noncanonical_citation_count": len(citations) - len(heliox_citations),
+        "review": capture.get("review"),
         "competitors_shown": capture.get("competitors_shown", []),
         "needs_human_review": (
             bool(forbidden)

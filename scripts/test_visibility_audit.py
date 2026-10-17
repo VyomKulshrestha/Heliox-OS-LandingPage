@@ -14,6 +14,14 @@ SPEC.loader.exec_module(MODULE)
 
 
 class VisibilityAuditTests(unittest.TestCase):
+    def test_raw_product_sources_are_authoritative_but_other_repos_are_not(self):
+        self.assertTrue(MODULE.is_heliox_citation(
+            "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/proof.md"
+        ))
+        self.assertFalse(MODULE.is_heliox_citation(
+            "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS-other/main/proof.md"
+        ))
+
     def test_hyphenated_expected_term_matches(self) -> None:
         prompt = {"id": "identity-01", "expected": ["open source"], "forbidden": []}
         result = MODULE.evaluate(

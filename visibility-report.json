@@ -18,7 +18,7 @@
       {
         "path": "what-is-heliox-os.md",
         "exists": true,
-        "bytes": 2025
+        "bytes": 2393
       },
       {
         "path": "capabilities.json",
@@ -43,12 +43,100 @@
     ]
   },
   "assistant_sampling": {
-    "status": "pending-real-responses",
-    "assistants": [],
-    "capture_count": 0,
-    "completed_count": 0,
+    "status": "evaluated",
+    "assistants": [
+      "ChatGPT",
+      "Gemini"
+    ],
+    "capture_count": 5,
+    "completed_count": 5,
     "incomplete_count": 0,
-    "evaluations": []
+    "evaluations": [
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "benchmark-01",
+        "captured_at": "2026-10-18",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "28.727",
+          "p95",
+          "zero model calls"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 3,
+        "heliox_citation_count": 3,
+        "noncanonical_citation_count": 0,
+        "review": "Correct current measurements and scope from GitHub. The claim that the website still serves August data is stale relative to the verified live deployment; its retrieved website source has not caught up.",
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "benchmark-07",
+        "captured_at": "2026-10-17T19:25:22Z",
+        "status": "completed",
+        "expected_term_coverage": 0.25,
+        "expected_terms_found": [
+          "simulated"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 3,
+        "heliox_citation_count": 1,
+        "noncanonical_citation_count": 2,
+        "review": "Partial entity discovery: mentions Heliox OS as a possible match and correctly avoids claiming human efficacy, but does not retrieve the published co-adaptation tuning/simulation study. Its discussion of unrelated studies is recorded output, not independently verified research or medical guidance from this audit.",
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "release-01",
+        "captured_at": "2026-10-18",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 1,
+        "heliox_citation_count": 1,
+        "noncanonical_citation_count": 0,
+        "review": "Stale v0.13.0 answer despite the live homepage now serving v0.14.0. Citation excerpt still reflects the older page; this does not establish the cache location or a recrawl ETA.",
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-01",
+        "captured_at": "2026-10-17T19:16:38Z",
+        "status": "completed",
+        "expected_term_coverage": 0.667,
+        "expected_terms_found": [
+          "p95",
+          "zero model calls"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 1,
+        "heliox_citation_count": 1,
+        "noncanonical_citation_count": 0,
+        "review": "Scope exclusions are substantially correct, but values are the superseded August snapshot, not the live October bundle (28.727/32.192 ms).",
+        "competitors_shown": [],
+        "needs_human_review": true
+      },
+      {
+        "assistant": "Gemini",
+        "prompt_id": "benchmark-07",
+        "captured_at": "2026-10-18",
+        "status": "completed",
+        "expected_term_coverage": 0.0,
+        "expected_terms_found": [],
+        "forbidden_terms_found": [],
+        "citation_count": 0,
+        "heliox_citation_count": 0,
+        "noncanonical_citation_count": 0,
+        "review": "Entity-resolution failure: discusses medical gas instead of Heliox OS software. This captured answer is not medical guidance or endorsed clinical evidence. The original short-brand prompt is preserved; a separately labelled source-guided test must not replace this failure.",
+        "competitors_shown": [],
+        "needs_human_review": true
+      }
+    ]
   },
   "interpretation": "Keyword scoring is a triage signal, not a factual judgment. Every flagged or high-impact answer requires human review."
 }
