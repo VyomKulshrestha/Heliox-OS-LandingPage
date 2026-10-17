@@ -10,7 +10,7 @@
                 id: 'awakening',
                 label: 'Awakening',
                 anchors: ['#top'],
-                eyebrow: 'v0.13.0 / VERIFIED AUTONOMY',
+                eyebrow: 'v0.14.0 / VERIFIED AUTONOMY',
                 title: 'Your computer becomes an intelligent world.',
                 body: 'Heliox is a privacy-first AI system control agent that plans, executes, and verifies complex work across your computer using natural language, voice, vision, and gesture.',
                 accent: '#6deeff',
@@ -26,13 +26,13 @@
                 },
                 scroll: 1.9,
                 metrics: [
-                    { target: 157, label: 'action types on main' },
+                    { target: 162, label: 'action types on main' },
                     { target: 30, suffix: '+', label: 'gestures' },
                     { target: 21, label: 'specialist agents' },
                     { value: 'Tier 5', label: 'security' }
                 ],
                 cta: {
-                    primary: { label: 'Download v0.13.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.13.0' },
+                    primary: { label: 'Download v0.14.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.14.0' },
                     secondary: { label: 'Explore source', href: 'https://github.com/VyomKulshrestha/Heliox-OS' }
                 }
             },
@@ -76,18 +76,18 @@
             },
             {
                 id: 'release',
-                label: 'v0.13 Release',
+                label: 'v0.14 Release',
                 anchors: ['#release', '#architecture'],
-                eyebrow: 'HELIOX OS v0.13.0',
+                eyebrow: 'HELIOX OS v0.14.0',
                 title: 'Verified autonomy, bounded at runtime.',
-                body: 'v0.13 adds truthful execution contracts, transactional live settings, authenticated peer collaboration, coordinated multimodal control, bounded model workers, and fresh reproducible evidence.',
+                body: 'v0.14 adds consented assistance co-adaptation, accessibility-grounded desktop control, durable scheduled jobs, tools from your MCP servers, and voice interaction during a task. Permissions and approvals remain explicit.',
                 accent: '#c4a4ff',
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
                 clip: 'assets/scroll-world/clip-04.mp4',
                 clipAv1: 'assets/scroll-world/optimized-av1/clip-04-stream.mp4',
                 metrics: [
-                    { target: 157, label: 'release action types' },
+                    { target: 162, label: 'release action types' },
                     { target: 21, label: 'specialist agents' },
                     { value: 'Local-first', label: 'adaptive memory' }
                 ],
@@ -98,8 +98,8 @@
                     { title: 'Neural research mode', body: 'Synthetic and recorded EEG pipelines stay clearly separated from unverified live brain control.' }
                 ],
                 cta: {
-                    primary: { label: 'Get v0.13.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.13.0' },
-                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.13.0.md' }
+                    primary: { label: 'Get v0.14.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.14.0' },
+                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.14.0.md' }
                 }
             },
             {
@@ -136,7 +136,7 @@
                 label: 'Actions',
                 anchors: ['#actions'],
                 eyebrow: 'THE ACTION LATTICE',
-                title: '157 actions become one command language.',
+                title: '162 actions become one command language.',
                 body: 'The planner schema spans the operating system, browser, code, packages, windows, Git, devices, schedules, and integrations with complete provider coverage.',
                 accent: '#67efff',
                 align: 'right',
@@ -144,9 +144,9 @@
                 clip: 'assets/scroll-world/continuation/clip-06.mp4',
                 clipAv1: 'assets/scroll-world/optimized-av1/clip-06.mp4',
                 metrics: [
-                    { target: 157, label: 'declared actions on main' },
+                    { target: 162, label: 'declared actions on main' },
                     { target: 17, label: 'capability groups' },
-                    { value: '157/157', label: 'provider coverage on main' }
+                    { value: '162/162', label: 'provider coverage on main' }
                 ],
                 signals: [
                     { title: 'Operate', body: 'Files, processes, shell, windows, packages, power, audio, display, network, and clipboard.' },
@@ -154,7 +154,7 @@
                     { title: 'Observe', body: 'Browser control, screenshots, vision, system information, and scheduled tasks.' }
                 ],
                 cta: {
-                    primary: { label: 'Explore all 157 actions', href: '#capability-explorer-dialog' },
+                    primary: { label: 'Explore all 162 actions', href: '#capability-explorer-dialog' },
                     secondary: { label: 'Inspect evidence', href: 'proof.html#capability-coverage' }
                 }
             },
@@ -248,7 +248,7 @@
                         { label: 'Security', href: 'whitepaper.html' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@HelioxOS' }
                     ],
-                    meta: '© 2026 HELIOX OS / v0.13.0'
+                    meta: '© 2026 HELIOX OS / v0.14.0'
                 }
             }
         ]

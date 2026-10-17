@@ -56,6 +56,8 @@ PAGES = [
             "Provides opt-in gesture cursor control and coarse gaze-region input.",
             "Preserves keyboard, pointer, and in-app stop controls when sensor features are enabled.",
             "Allows features to coexist without one sensor silently disabling another.",
+            "Offers an opt-in, consented selection study inside Heliox's own window. Assistance co-adaptation can suggest larger targets, a confirm step, or a clarifying question within the person's explicit preferences.",
+            "Keeps study results labelled as simulated users only until the human study reports; the assistance changes presentation and cannot approve or execute actions.",
         ],
         "flow": ["Choose only the input modes that help.", "Calibrate device-dependent gesture or gaze behavior.", "Keep a non-sensor stop method available.", "Review results in the visible activity history."],
         "safety": "Camera and microphone features are off until enabled, and their signals do not grant action authority. Emergency stop and approval controls remain separate from learned signals.",
@@ -164,7 +166,7 @@ PAGES = [
         ],
         "safety": "A subscription is model access, not action authority. Heliox does not import provider credentials, rejects provider tool activity, and never lets a model approve or execute its own proposal.",
         "limits": "Availability, eligible plans, models, latency, and quotas are provider-owned. The published benchmark covers one Codex CLI account and three fixed planning-only prompts; it does not establish Claude behavior, action execution, or unlimited use.",
-        "status": "Available in v0.13.0; provider-dependent",
+        "status": "Available in v0.14.0; provider-dependent",
     },
 ]
 

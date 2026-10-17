@@ -1,0 +1,93 @@
+{
+  "schema_version": 2,
+  "audit_date": "2026-08-27",
+  "authority": {
+    "current_release": "0.13.0",
+    "canonical_site": "https://www.helioxos.dev/",
+    "note": "Assistant evaluations below are dated observations, not current product facts. Resolve conflicts against releases.json, capabilities.json, and proof.md."
+  },
+  "prompt_count": 40,
+  "source_readiness": {
+    "passed": true,
+    "checks": [
+      {
+        "path": "llms.txt",
+        "exists": true,
+        "bytes": 10072
+      },
+      {
+        "path": "what-is-heliox-os.md",
+        "exists": true,
+        "bytes": 2025
+      },
+      {
+        "path": "capabilities.json",
+        "exists": true,
+        "bytes": 180397
+      },
+      {
+        "path": "proof.md",
+        "exists": true,
+        "bytes": 16258
+      },
+      {
+        "path": "cost.md",
+        "exists": true,
+        "bytes": 2336
+      },
+      {
+        "path": "releases.json",
+        "exists": true,
+        "bytes": 11044
+      }
+    ]
+  },
+  "assistant_sampling": {
+    "status": "evaluated",
+    "assistants": [
+      "ChatGPT"
+    ],
+    "capture_count": 2,
+    "completed_count": 2,
+    "incomplete_count": 0,
+    "evaluations": [
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "platform-01",
+        "captured_at": "2026-08-23T14:32:53.419Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 3,
+        "heliox_citation_count": 3,
+        "noncanonical_citation_count": 0,
+        "competitors_shown": [],
+        "needs_human_review": false
+      },
+      {
+        "assistant": "ChatGPT",
+        "prompt_id": "limits-01",
+        "captured_at": "2026-08-23T14:35:07.441Z",
+        "status": "completed",
+        "expected_term_coverage": 1.0,
+        "expected_terms_found": [
+          "hardware",
+          "platform",
+          "model"
+        ],
+        "forbidden_terms_found": [],
+        "citation_count": 9,
+        "heliox_citation_count": 4,
+        "noncanonical_citation_count": 5,
+        "competitors_shown": [],
+        "needs_human_review": true
+      }
+    ]
+  },
+  "interpretation": "Keyword scoring is a triage signal, not a factual judgment. Every flagged or high-impact answer requires human review."
+}

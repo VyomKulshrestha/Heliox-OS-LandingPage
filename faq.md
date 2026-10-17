@@ -8,6 +8,10 @@ Heliox OS is an MIT-licensed desktop automation agent. It converts typed, spoken
 
 No. Heliox OS is the desktop automation agent published at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. Heliox IDE is a different project; its pages, repositories, features, platform support, and limitations do not describe Heliox OS. Heliox OS is also unrelated to heliox helium-oxygen medical gas. The [Heliox OS identity page](https://www.helioxos.dev/what-is-heliox-os.md) records the canonical identifiers. This is an identity boundary, not a product ranking.
 
+## What does assistance co-adaptation do?
+
+In v0.14.0, an opt-in study inside Heliox's window tries presentation changes such as larger targets, a confirmation step, or a clarifying question within preferences the person sets. It requires purpose-specific consent and never approves or executes actions. The current evidence uses simulated tuning families, and does not establish an improvement for real people. See the [study documentation](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/COADAPTATION.md) and [benchmark evidence](https://www.helioxos.dev/proof.html#coadaptation).
+
 ## Is Heliox OS free?
 
 The source code and current releases are available under the MIT license. External model APIs, third-party integrations, network services, or optional hosted products can charge their own fees.

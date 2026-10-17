@@ -4,14 +4,34 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import date, datetime
+from html import unescape
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+class PageMetadata(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.tags: list[tuple[str, dict]] = []
+
+    def handle_starttag(self, tag, attrs) -> None:
+        self.tags.append((tag, dict(attrs)))
+
+
 def main() -> None:
     html = (ROOT / "index.html").read_text(encoding="utf-8")
+    evidence = json.loads((ROOT / "benchmarks.json").read_text(encoding="utf-8"))
+    releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
+    steady = evidence["guarded_cpu_request"]["steady_state"]
+    loop = evidence["event_loop_responsiveness"]
+    risk = evidence["learned_risk_world_model"]
+    evidence_name = f"software-benchmarks-{evidence['captured_on']}.json"
+    evidence_date = datetime.fromisoformat(evidence["captured_on"]).strftime("%d %B %Y").lstrip("0")
     css = (ROOT / "style.css").read_text(encoding="utf-8")
     if (
         ".heliox-scroll-world.is-mounted .hworld-copy__actions a" not in css
@@ -35,7 +55,7 @@ def main() -> None:
         raise SystemExit("JSON-LD graph is missing")
     graph = json.loads(match.group(1))["@graph"]
     software = next(item for item in graph if item["@type"] == "SoftwareApplication")
-    if software["softwareVersion"] != "0.13.0":
+    if software["softwareVersion"] != releases["latest_published_version"]:
         raise SystemExit("structured data must describe the latest published installer")
     if software["codeRepository"] != "https://github.com/VyomKulshrestha/Heliox-OS":
         raise SystemExit("canonical code repository drifted")
@@ -68,6 +88,11 @@ def main() -> None:
     }
     if not required_identity_questions.issubset(faq_questions):
         raise SystemExit("homepage schema lacks identity, platform, or limits FAQ signals")
+    visible_text = unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script\b.*?</script>", "", html, flags=re.S)))
+    for question in identity_faq["mainEntity"]:
+        for value in (question["name"], question["acceptedAnswer"]["text"]):
+            if value not in visible_text:
+                raise SystemExit("homepage FAQ schema must match visible page content")
     if "Download v0.9.0" in html or "Heliox-OS_0.9.0_" in html:
         raise SystemExit("website still advertises the superseded installer")
     if "cdn.tailwindcss.com" in html or "tailwind.config =" in html:
@@ -81,14 +106,14 @@ def main() -> None:
         raise SystemExit("compiled Tailwind CSS is unexpectedly incomplete")
     required_homepage_evidence = (
         'id="benchmarks"',
-        "Measured software evidence · 27 August 2026",
-        "26.476 ms",
-        "27.999 ms p95",
+        f"Measured software evidence · {evidence_date}",
+        f"{steady['median_ms']:.3f} ms",
+        f"{steady['p95_ms']:.3f} ms p95",
         "59 / 59",
-        "66 ticks",
-        "16.575 ms",
-        "36k / 5.4k",
-        "software-benchmarks-2026-08-27.json",
+        f"{loop['heartbeat_ticks']} ticks",
+        f"{loop['heartbeat_max_ms']:.3f} ms",
+        f"{risk['training_samples'] / 1000:g}k / {risk['validation_samples'] / 1000:g}k",
+        evidence_name,
         "14.708 s median",
         "zero destructive actions",
         "audible TTS",
@@ -139,7 +164,7 @@ def main() -> None:
         raise SystemExit("structured benchmark downloads must resolve to raw JSON")
 
     expected_counters = {
-        "157": "157",
+        "162": "162",
         "30": "30+",
         "21": "21",
     }
@@ -150,9 +175,9 @@ def main() -> None:
                 f"counter {target} must expose its real value without requiring JavaScript"
             )
     capabilities = json.loads((ROOT / "capabilities.json").read_text(encoding="utf-8"))
-    if capabilities["summary"]["action_types"] != 157:
+    if capabilities["summary"]["action_types"] != 162:
         raise SystemExit("current-source capability catalog is stale")
-    if "157 action types" not in html or "18 actions" not in html or "139 rely" not in html:
+    if "162 action types" not in html or "22 actions" not in html or "140 rely" not in html:
         raise SystemExit("homepage does not state current release coverage and verification depth")
     overview = (ROOT / "index.html.md").read_text(encoding="utf-8")
     if "OpenRouter" not in overview or "DeepSeek" not in overview:
@@ -297,13 +322,13 @@ def main() -> None:
     proof_html = (ROOT / "proof.html").read_text(encoding="utf-8")
     required_proof_claims = (
         '<link rel="canonical" href="https://www.helioxos.dev/proof.html">',
-        '"dateModified":"2026-08-27"',
-        "18 independent post-condition verifiers",
+        f'"dateModified":"{evidence["captured_on"]}"',
+        "22 independent post-condition verifiers",
         "production certificate remains pending",
         "recorded/synthetic EEG research",
         "59/59 regression cases",
-        "36,000 training and 5,400 temporal-validation samples",
-        "software-benchmarks-2026-08-27.json",
+        "25,200 training and 5,400 temporal-validation samples",
+        "software-benchmarks-2026-10-18.json",
         "local-tts-isolation-2026-08-27.json",
         "subscription-planning-codex-2026-08-16.json",
         "3/3 fixed planning cases",
@@ -311,23 +336,23 @@ def main() -> None:
     for claim in required_proof_claims:
         if claim not in proof_html:
             raise SystemExit(f"evidence center is missing required claim: {claim}")
-    if "157 declared actions" not in proof_html or "139 rely" not in proof_html:
+    if "162 declared actions" not in proof_html or "140 rely" not in proof_html:
         raise SystemExit("human evidence center has stale current-source action evidence")
 
     proof_markdown = (ROOT / "proof.md").read_text(encoding="utf-8")
     required_markdown_claims = (
-        "26.476",
-        "27.999",
+        f"{steady['median_ms']:.3f}",
+        f"{steady['p95_ms']:.3f}",
         "59/59",
-        "66 ticks",
-        "16.575",
-        "36,000",
+        f"{loop['heartbeat_ticks']} ticks",
+        f"{loop['heartbeat_max_ms']:.3f}",
+        f"{risk['training_samples']:,}",
         "5,400",
-        "software-benchmarks-2026-08-27.json",
+        evidence_name,
         "Human microphone accuracy is not a release gate",
         "audible quality, device output, and universal latency require separate validation",
         "zero Torch/CUDA modules retained by the parent",
-        "Physical accuracy is not established across cameras",
+        "No consented, person-disjoint physical benchmark corpus",
         "No live headset/human validation has established control accuracy",
     )
     for claim in required_markdown_claims:
@@ -350,22 +375,40 @@ def main() -> None:
         )
         for node in entries
     }
-    expected_last_modified = {
-        "https://www.helioxos.dev/": "2026-08-27",
-        "https://www.helioxos.dev/developers": "2026-08-25",
-        "https://www.helioxos.dev/contact": "2026-08-25",
-        "https://www.helioxos.dev/what-is-heliox-os.html": "2026-08-23",
-        "https://www.helioxos.dev/privacy.html": "2026-08-16",
-        "https://www.helioxos.dev/heliox-vs-open-interpreter.html": "2026-08-16",
-        "https://www.helioxos.dev/cost.html": "2026-08-16",
-        "https://www.helioxos.dev/proof.html": "2026-08-27",
-        "https://www.helioxos.dev/neural-research.html": "2026-08-21",
-        "https://www.helioxos.dev/ai-visibility.md": "2026-08-23",
-        "https://www.helioxos.dev/faq.md": "2026-08-23",
-    }
-    for url, expected_date in expected_last_modified.items():
-        if last_modified.get(url) != expected_date:
-            raise SystemExit(f"sitemap lastmod is stale for {url}")
+    titles = set()
+    for url, modified in last_modified.items():
+        parsed = urlsplit(url)
+        if parsed.scheme != "https" or parsed.netloc != "www.helioxos.dev" or parsed.query or parsed.fragment:
+            raise SystemExit(f"sitemap URL is not canonical: {url}")
+        if not modified or date.fromisoformat(modified) > date.today():
+            raise SystemExit(f"sitemap lastmod is invalid: {url}")
+        name = parsed.path.lstrip("/") or "index.html"
+        if not Path(name).suffix:
+            name += ".html"
+        page = ROOT / name
+        if not page.is_file():
+            raise SystemExit(f"sitemap URL has no source file: {url}")
+        if page.suffix != ".html":
+            continue
+        markup = page.read_text(encoding="utf-8")
+        metadata = PageMetadata()
+        metadata.feed(markup)
+        canonicals = [attrs.get("href") for tag, attrs in metadata.tags if tag == "link" and attrs.get("rel") == "canonical"]
+        descriptions = [attrs.get("content", "") for tag, attrs in metadata.tags if tag == "meta" and attrs.get("name") == "description"]
+        robots = [attrs.get("content", "") for tag, attrs in metadata.tags if tag == "meta" and attrs.get("name") == "robots"]
+        title = re.findall(r"<title>(.*?)</title>", markup, re.S | re.I)
+        if canonicals != [url] or len(descriptions) != 1 or not descriptions[0].strip():
+            raise SystemExit(f"canonical or description metadata is missing/duplicated: {url}")
+        if len(title) != 1 or not title[0].strip() or title[0] in titles or not any(tag == "h1" for tag, _ in metadata.tags):
+            raise SystemExit(f"page needs a unique title and a visible h1: {url}")
+        if any("noindex" in value.lower() for value in robots):
+            raise SystemExit(f"sitemap includes a noindex page: {url}")
+        titles.add(title[0])
+        for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', markup, re.S):
+            json.loads(block)
+    for url in ("https://www.helioxos.dev/", "https://www.helioxos.dev/proof.html"):
+        if last_modified.get(url) != evidence["captured_on"]:
+            raise SystemExit(f"evidence page lastmod differs from the benchmark date: {url}")
     print(f"Validated canonical metadata, release truth, and {len(urls)} sitemap URLs.")
 
 

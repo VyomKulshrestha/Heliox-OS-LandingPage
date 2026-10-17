@@ -10,6 +10,8 @@ Status: **Research-grade accessibility support**
 - Provides opt-in gesture cursor control and coarse gaze-region input.
 - Preserves keyboard, pointer, and in-app stop controls when sensor features are enabled.
 - Allows features to coexist without one sensor silently disabling another.
+- Offers an opt-in, consented selection study inside Heliox's own window. Assistance co-adaptation can suggest larger targets, a confirm step, or a clarifying question within the person's explicit preferences.
+- Keeps study results labelled as simulated users only until the human study reports; the assistance changes presentation and cannot approve or execute actions.
 
 ## Typical flow
 

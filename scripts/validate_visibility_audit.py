@@ -13,16 +13,17 @@ def main() -> None:
     pack = json.loads((ROOT / "visibility-prompts.json").read_text(encoding="utf-8"))
     report = json.loads((ROOT / "visibility-report.json").read_text(encoding="utf-8"))
     authority = report.get("authority", {})
-    if authority.get("current_release") != "0.13.0":
+    releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
+    if authority.get("current_release") != releases["latest_published_version"]:
         raise SystemExit("visibility report lacks the current release authority")
     if authority.get("canonical_site") != "https://www.helioxos.dev/":
         raise SystemExit("visibility report lacks the canonical website authority")
     prompts = pack["prompts"]
-    if len(prompts) != 40 or len({item["id"] for item in prompts}) != 40:
-        raise SystemExit("visibility prompt pack must contain 40 unique prompts")
+    if len(prompts) != 42 or len({item["id"] for item in prompts}) != 42:
+        raise SystemExit("visibility prompt pack must contain 42 unique prompts")
     benchmark_prompts = [item for item in prompts if item["category"] == "benchmarks"]
-    if len(benchmark_prompts) != 6:
-        raise SystemExit("visibility prompt pack must contain six benchmark prompts")
+    if len(benchmark_prompts) != 7:
+        raise SystemExit("visibility prompt pack must contain seven benchmark prompts")
     prompts_by_id = {item["id"]: item for item in prompts}
     for prompt_id in ("platform-01", "limits-01"):
         if "Heliox IDE" not in prompts_by_id[prompt_id]["forbidden"]:

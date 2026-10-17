@@ -1,6 +1,16 @@
 # Heliox AI visibility audit
 
-Heliox maintains a public pack of 40 recurring questions in [`visibility-prompts.json`](https://www.helioxos.dev/visibility-prompts.json). The pack checks identity, price, privacy, capabilities, multimodal input, neural claims, safety, plugins, comparisons, releases, platforms, MCP, Air Handoff, secure integrations, subscription-model boundaries, software benchmarks, and limitations.
+## 18 October 2026 source refresh
+
+Current source facts are v0.14.0, 162 declared action types, 21 executable specialists and 22 independent post-condition verifiers. The homepage, proof pages, release feeds, identity page, Markdown overview, LLM index, visibility prompt pack and documentation MCP now use those authorities. The software measurements come from the 18 October bundle, including explicitly labelled in-sample co-adaptation simulation. The older TTS and subscription-planning samples retain their original capture dates.
+
+Run `python scripts/sync_product_evidence.py --product ../cursor-os/pilot` after regenerating product evidence, and use `--check` to verify the mirrored files. Website CI checks the MCP source hash against `benchmarks.json`, visible FAQ content against its schema, page titles, descriptions, canonical URLs, JSON-LD and sitemap dates.
+
+Live checks on 18 October found an HTTP 308 apex redirect, HTTP 200 on the canonical homepage, and crawl access in robots.txt. The public site and retrieved search result still advertised v0.13.0 and 18 verifiers before this update. This is stale published content, not evidence of a robots block. The updated readiness report has **zero new assistant captures**; earlier real observations are preserved under `visibility-captures/` and `visibility-results/`.
+
+Google's [AI search guidance](https://developers.google.com/search/docs/appearance/ai-features) emphasizes crawlable, useful content and structured data consistent with visible text. These local changes prepare those sources; publication and recrawl are still required before search engines can use them. Ranking, traffic and assistant-citation gains have not been measured.
+
+Heliox maintains a public pack of 42 recurring questions in [`visibility-prompts.json`](https://www.helioxos.dev/visibility-prompts.json). The pack checks identity, price, privacy, capabilities, multimodal input, neural claims, safety, plugins, comparisons, releases, platforms, both MCP directions, Air Handoff, secure integrations, subscription-model boundaries, software benchmarks, co-adaptation simulation, and limitations.
 
 ## What runs automatically
 

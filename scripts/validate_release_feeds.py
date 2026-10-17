@@ -18,11 +18,12 @@ def main() -> None:
                 raise SystemExit(f"website {name} drifted from product-generated source")
     releases = json.loads((ROOT / "releases.json").read_text(encoding="utf-8"))
     feed = json.loads((ROOT / "releases.feed.json").read_text(encoding="utf-8"))
-    if releases["current_source_version"] != "0.13.0":
-        raise SystemExit("current source version drifted")
-    if releases["latest_published_version"] != "0.13.0":
-        raise SystemExit("latest published version drifted")
+    capabilities = json.loads((ROOT / "capabilities.json").read_text(encoding="utf-8"))
+    if releases["current_source_version"] != capabilities["product"]["version"]:
+        raise SystemExit("current source version differs from the generated catalog")
     published = [item for item in releases["releases"] if item["status"] == "published"]
+    if not published or releases["latest_published_version"] != published[0]["version"]:
+        raise SystemExit("latest published version differs from release records")
     if len(published) != len(feed["items"]):
         raise SystemExit("published release and feed item counts drifted")
     if len(ET.parse(ROOT / "releases.xml").findall("./channel/item")) != len(feed["items"]):
