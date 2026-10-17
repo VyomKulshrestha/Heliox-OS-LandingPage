@@ -1,5 +1,25 @@
 # Heliox AI visibility audit
 
+## 18 October 2026 Gemini indexing diagnosis
+
+**Gemini discovery is not yet fixed.** Four additional fresh temporary-chat diagnostics still failed to recover the current release and benchmark values. No correct versions, dates, or latency values were supplied in the prompts. The [separate diagnostic record](https://github.com/VyomKulshrestha/Heliox-OS-LandingPage/blob/main/visibility-results/2026-10-18-gemini-index-diagnosis.json) preserves prompts, answer excerpts, fetch checks and Search Console observations; it does not overwrite or inflate the scored prompt-pack report below.
+
+The concrete source-freshness problem is now verified in Google Search Console:
+
+- Homepage last crawl: **10 October**, before the 16 October v0.14.0 release.
+- Evidence page last crawl: **13 October**, before the 18 October benchmark capture.
+- Identity page: **discovered, not indexed**, with no prior crawl recorded. Google's live test nevertheless says **available to Google / can be indexed**.
+- Coverage report dated 12 October: four indexed pages, 19 discovered-but-not-indexed pages and three redirects. These counts are the report's dated snapshot, not a live inventory.
+- A real Google browser search, with personalization disabled, still returned the old v0.13.0 evidence-page snippet. An Exa search also returned the August release/benchmark values. This is not solely a Gemini conversation-history problem.
+
+The existing identity page now provides concise, visible answers for the latest installer release, dated guarded-request distribution, and simulation-only co-adaptation boundary. Its HTML, Markdown and FAQ schema agree; CI validates those answers against `releases.json` and `benchmarks.json`, including an observed-zero-model-call check. Both the static homepage and cinematic footer link to the identity page. The evidence page now leads with the product name, capture date, current distribution and limitations. No benchmark data or release was fabricated or rerun as part of this search fix.
+
+Scrapling **0.4.15**, already installed as a uv tool, independently fetched the identity page, proof page and GitHub README with HTTP 200 and current v0.14.0 / 28.727 ms median / 32.192 ms p95 content. No browser, proxy, credential or new dependency was installed. Its ordinary Google HTTP search encountered a JavaScript/redirect challenge, so actual search-result verification used Chrome rather than counting that response as results. Gemini's claim that the identity URL returned 404 conflicts with these successful fetches and Google's own live test.
+
+The updated **23-URL sitemap was resubmitted successfully**; Search Console shows both submitted and last-read dates of 18 October and status Success. IndexNow also accepted 23 canonical URLs with HTTP 200 after deployment. The individual homepage indexing request failed twice because Google's reCAPTCHA service could not connect; that is **not** recorded as a successful indexing request. No CAPTCHA was bypassed.
+
+Google documents that [recrawling may take days to weeks](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl), repeated requests do not make it faster, and submission does not guarantee indexing. The remaining acceptance test is a new, unhinted Gemini answer that correctly cites the current release and measured benchmark. URL-guided retrieval is tracked separately and cannot establish organic discovery. This follow-up does not claim a ranking or traffic improvement.
+
 ## 18 October 2026 source refresh
 
 Current source facts are v0.14.0, 162 declared action types, 21 executable specialists and 22 independent post-condition verifiers. The homepage, proof pages, release feeds, identity page, Markdown overview, LLM index, visibility prompt pack and documentation MCP now use those authorities. The software measurements come from the 18 October bundle, including explicitly labelled in-sample co-adaptation simulation. The older TTS and subscription-planning samples retain their original capture dates.

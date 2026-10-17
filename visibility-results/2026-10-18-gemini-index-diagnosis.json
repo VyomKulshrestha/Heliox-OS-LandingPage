@@ -1,0 +1,75 @@
+{
+  "audit_date": "2026-10-18",
+  "timezone": "Asia/Kolkata",
+  "time_precision": "date",
+  "scope": "Follow-up diagnosis, not a replacement for the fixed prompt-pack captures",
+  "surface": "Signed-in Chrome, fresh Gemini temporary chat per prompt",
+  "model_label": "Gemini Auto",
+  "hidden_backend_version": null,
+  "answer_values_supplied_in_prompts": false,
+  "search_console": {
+    "property": "helioxos.dev",
+    "coverage_report_last_updated": "2026-10-12",
+    "indexed_pages": 4,
+    "discovered_not_indexed": 19,
+    "redirected_pages": 3,
+    "homepage_last_crawl_displayed": "Oct 10, 2026, 4:12:42 PM",
+    "proof_last_crawl_displayed": "Oct 13, 2026, 7:02:58 PM",
+    "crawl_timestamps_timezone": "UI display, not independently normalized",
+    "identity_page_index_status": "Discovered - currently not indexed; Last crawl N/A",
+    "identity_live_test": "URL is available to Google; Page can be indexed",
+    "identity_live_test_displayed": "Oct 18, 2026, 1:15 AM",
+    "sitemap_before": {"last_read": "2026-10-13", "status": "Success", "discovered_pages": 23},
+    "sitemap_after_resubmission": {"submitted": "2026-10-18", "last_read": "2026-10-18", "status": "Success", "discovered_pages": 23},
+    "homepage_indexing_request": "Two attempts failed: Could not connect to the reCAPTCHA service. No successful priority-indexing submission is claimed."
+  },
+  "public_fetch": {
+    "scrapling_version": "0.4.15",
+    "installation": "Reused existing uv tool; no install or browser download",
+    "fetcher": "scrapling.fetchers.Fetcher.get",
+    "identity": {"url": "https://www.helioxos.dev/what-is-heliox-os.html", "status": 200, "release": "0.14.0", "median_ms": 28.727, "p95_ms": 32.192},
+    "proof": {"url": "https://www.helioxos.dev/proof.html", "status": 200, "current_release_and_metrics_found": true},
+    "github": {"url": "https://github.com/VyomKulshrestha/Heliox-OS", "status": 200, "current_release_and_metrics_found": true},
+    "google_http_search": "HTTP 200 JavaScript/redirect challenge, no result headings; not counted as successful search extraction",
+    "google_browser_search": {
+      "query": "site:helioxos.dev Heliox OS release benchmarks",
+      "personalization": "Try without personalisation selected; UI confirmed results are not personalised",
+      "proof_result_excerpt": "Tests, limitations and release proof. Heliox 0.13.0. Raw v0.13.0 multi-benchmark evidence. Median routing latency was 0.021 ms. maximum gap was 16.575 ms on",
+      "review": "Google itself still displays the old indexed proof page, independently of Gemini."
+    }
+  },
+  "queries": [
+    {
+      "test_id": "combined-unhinted-before-followup",
+      "prompt": "What is the latest published Heliox OS installer version, and what measured guarded-task latency does Heliox OS publish? Cite your sources.",
+      "answer_capture": "Selected verbatim excerpts, not a full transcript",
+      "excerpts": ["The latest published release of Heliox OS is v0.13.0.", "26.476 ms", "27.999 ms"],
+      "exposed_citation_url": "https://github.com/VyomKulshrestha/Heliox-OS",
+      "citation_excerpt": "22 actions have an independent observed post-condition verifier. The other 140 currently rely on the executor result. Guarded fast path. 26.476 ms median, 27.99...",
+      "review": "Stale release and latency. Citation combines updated verification counts with old latency; current live README is different."
+    },
+    {
+      "test_id": "explicit-web-qualified-identity",
+      "prompt": "Search the web for Heliox OS, the desktop automation project by Vyom Kulshrestha. What is its latest published installer release, and what are its latest measured guarded-task median and p95 latencies? State the release publication date and benchmark capture date separately, cite primary sources, and say if you cannot verify a current value.",
+      "answer_capture": "Selected verbatim excerpts, not a full transcript",
+      "excerpts": ["Release Version: v0.13.0", "26.476 ms", "27.999 ms", "Benchmark Capture Date: August 27, 2026", "Verification Status: Fully Verified."],
+      "exposed_citation_urls": ["https://github.com/VyomKulshrestha/Heliox-OS", "https://helioxos.dev/"],
+      "review": "Still stale after deployment. The assistant's Fully Verified label is incorrect, not an audit conclusion."
+    },
+    {
+      "test_id": "identity-url-guided",
+      "prompt": "Read https://www.helioxos.dev/what-is-heliox-os.html . What does that page report as the latest published installer release and the current guarded-task benchmark median and p95? State the dates and whether its assistance co-adaptation evidence involves real people. Cite only sources you actually accessed, and say if the page is inaccessible.",
+      "answer_capture": "Selected verbatim excerpts, not a full transcript",
+      "excerpts": ["inaccessible (returns a 404 / non-existent page error)", "v0.13.0", "Published Date: August 16, 2026", "26.476 ms", "27.999 ms", "Involves Real People? No."],
+      "review": "Gemini's claimed 404 contradicts HTTP, Scrapling, rendered-browser and Google live-test checks. It substituted older sources and confused the release date with older evidence. The no-human answer did not retrieve the actual co-adaptation study; it discussed unrelated EEG/gesture evidence. Not a current-source retrieval pass."
+    },
+    {
+      "test_id": "raw-github-url-guided",
+      "prompt": "Read these primary sources directly: https://github.com/VyomKulshrestha/Heliox-OS/releases/latest and https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/proof.md . Report the latest published installer version and the current guarded CPU-request median and p95, with the benchmark capture date. Distinguish the current snapshot from historical tables. If you cannot access these sources directly, say so and do not substitute old search excerpts.",
+      "answer_capture": "Full rendered response",
+      "response": "I cannot access those specific primary sources directly, and per your instructions, I will not substitute them with search excerpts.",
+      "review": "Honest unavailability, but still not successful discovery or retrieval."
+    }
+  ],
+  "result": "Source fixes published and live-fetch validation passed. Current-fact retrieval in Gemini remains unverified/failed. External recrawl and retrieval are still required."
+}
