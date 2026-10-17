@@ -2,17 +2,17 @@
 
 > This page separates reproducible software evidence, live CI status, developer-run hardware observations, and claims that have not yet been established. It is an evidence index, not a promise that every feature works on every computer.
 
-Evidence snapshot date: **2026-08-27**
+Evidence snapshot date: **2026-10-18**
 
-Product version: **0.13.0**
+Product version: **0.14.0**
 
 ## Capability and routing evidence
 
-- **157** declared action types are generated from `daemon/pilot/actions.py`.
-- **21** executable specialists register providers for all **157** action types.
+- **162** declared action types are generated from `daemon/pilot/actions.py`.
+- **21** executable specialists register providers for all **162** action types.
 - Mesh coverage is **complete**; uncovered action types: **0**.
-- **18** action types have a separate observed post-condition verifier.
-- **139** action types currently rely on the executor result without an independent post-condition check.
+- **22** action types have a separate observed post-condition verifier.
+- **140** action types currently rely on the executor result without an independent post-condition check.
 - **6** plugin manifests are represented in the generated catalog.
 
 Source: [machine-readable capability catalog](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/capabilities.json). Platform declarations describe product targets; host tools, credentials, permissions, hardware, and integrations still determine runtime availability.
@@ -42,7 +42,7 @@ cd daemon
 python ../scripts/generate_benchmark_evidence.py
 ```
 
-Bundle environment: Windows 11, Python 3.12.6. Source commit: `00682b5e168b`.
+Bundle environment: Windows 11, Python 3.13.13. Source commit: `481524e06c84`.
 
 ### Guarded local request latency
 
@@ -50,11 +50,11 @@ Scope: Ready-daemon guarded CPU usage request: local planning, routing, risk ass
 
 | Metric | Ready-cold | Warm steady state |
 | --- | ---: | ---: |
-| Median | — | 26.476 ms |
-| p95 | — | 27.999 ms |
-| p99 | — | 28.887 ms |
-| Minimum | — | 25.167 ms |
-| Maximum | 73.676 ms | 29.391 ms |
+| Median | — | 28.727 ms |
+| p95 | — | 32.192 ms |
+| p99 | — | 33.190 ms |
+| Minimum | — | 24.781 ms |
+| Maximum | 157.363 ms | 33.688 ms |
 
 - The harness executes local planning, routing, risk assessment, execution, post-condition verification, and response shaping.
 - All 100 measured steady-state iterations made **0 model calls**.
@@ -64,31 +64,48 @@ Scope: Ready-daemon guarded CPU usage request: local planning, routing, risk ass
 
 | Real guarded action | Iterations | Median | p95 | p99 |
 | --- | ---: | ---: | ---: | ---: |
-| CPU usage | 50 | 26.556 ms | 29.919 ms | 31.661 ms |
-| Memory usage | 50 | 7.261 ms | 9.356 ms | 9.681 ms |
-| Disk usage | 50 | 6.122 ms | 7.933 ms | 8.620 ms |
-| Comprehensive system information | 50 | 60.922 ms | 78.679 ms | 272.057 ms |
+| CPU usage | 50 | 29.918 ms | 33.366 ms | 34.267 ms |
+| Memory usage | 50 | 3.252 ms | 4.708 ms | 5.113 ms |
+| Disk usage | 50 | 4.344 ms | 7.166 ms | 7.885 ms |
+| Comprehensive system information | 50 | 80.554 ms | 91.730 ms | 92.801 ms |
 
 Each case validates the exact selected action, executes the real read-only host probe, and makes zero model calls.
 
 ### Event-loop responsiveness
 
-During a real one-second CPU monitor sample, a 10 ms asyncio heartbeat produced **66 ticks**, with **15.562 ms median**, **16.454 ms p95**, and **16.575 ms maximum** gaps. This measures scheduler availability—not monitor completion speed—and is affected by Windows timer granularity.
+During a real one-second CPU monitor sample, a 10 ms asyncio heartbeat produced **64 ticks**, with **15.625 ms median**, **16.331 ms p95**, and **25.061 ms maximum** gaps. This measures scheduler availability—not monitor completion speed—and is affected by Windows timer granularity.
 
 ### Deterministic intent dispatch
 
-The curated routing regression set passed **59/59 cases** with **0.022 ms median** dispatch latency. It covers bounded positive intents and ambiguous controls that must fall through to model planning. It is not a population-level language-understanding benchmark, and application routing does not prove an application is installed.
+The curated routing regression set passed **59/59 cases** with **0.086 ms median** dispatch latency. It covers bounded positive intents and ambiguous controls that must fall through to model planning. It is not a population-level language-understanding benchmark, and application routing does not prove an application is installed.
 
 ### Learned-risk world model
 
-The shipped `risk-mlp-v3-calibrated` artifact records **36,000 training** and **5,400 stratified temporal validation samples** across **12 action types**.
+The shipped `risk-mlp-v4-heldout` artifact records **25,200 training** and **5,400 stratified temporal validation samples** across **12 action types**.
 
 | Held-out metric | Learned model | Zero predictor | Improvement |
 | --- | ---: | ---: | ---: |
 | Disk-delta MAE | 0.0000000330 | 0.0000000718 | 54.0154% |
 | Process-delta MAE | 0.0000130251 | 0.0022166655 | 99.4124% |
 
-The audit passed **5/5 direction invariants** and measured **0.030 ms median** inference. These are coarse disk/process predictions. Deterministic safety rules remain authoritative; this is not a general physical-world or user-intent model.
+The audit passed **5/5 direction invariants** and measured **0.027 ms median** inference. These are coarse disk/process predictions. Deterministic safety rules remain authoritative; this is not a general physical-world or user-intent model.
+
+### Assistance co-adaptation: simulated users
+
+**simulated users only; tuning families, in-sample; no claim about people**. Scope: Simulated users of F1, F3 (5 per family, 2 sessions) against policies 1_fixed_assistance_off, 4_uniform_random, 9_engine_full. F1 represents precise mouse users and F3 represents hand-pointer novices in the simulator.
+
+| Family | Policy | Simulated people | Utility per trial | Unintended activations | Acts on ambiguous input | Rule violations |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| F1 | `1_fixed_assistance_off` | 5 | 1.109 | 2.95% | 0 | 0 |
+| F1 | `4_uniform_random` | 5 | 0.617 | 1.96% | 0 | 0 |
+| F1 | `9_engine_full` | 5 | 0.898 | 2.14% | 0 | 0 |
+| F3 | `1_fixed_assistance_off` | 5 | -0.209 | 19.55% | 0 | 0 |
+| F3 | `4_uniform_random` | 5 | 0.008 | 14.73% | 0 | 0 |
+| F3 | `9_engine_full` | 5 | 0.355 | 13.93% | 0 | 0 |
+
+Agency audits passed **3/3 policies**. The adaptive engine does not beat the plain interface for every simulated family. These tuning families share the model's functional forms; this run does not establish held-out generalization or an improvement for real people. No model was promoted by this benchmark. The feature is opt-in and changes presentation only.
+
+Protocol SHA-256: `7f39916e9c762abdcdb62553a1e8deaab175943c77a16324b4614e910d6eab27`. [Study, consent and reproduction details](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/COADAPTATION.md).
 
 ### Subscription-backed planning
 
@@ -119,7 +136,7 @@ A developer-machine run through the official **Codex CLI** passed **3/3 fixed pl
 - None of these software benchmarks measures model-provider, network, browser page-load, UI-rendering, microphone, TTS, camera, gaze, gesture, EEG, or human latency/accuracy.
 - Local snapshots are reproducibility evidence, not universal performance guarantees.
 
-Raw evidence: [`software-benchmarks-2026-08-27.json`](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-08-27.json), [`subscription-planning-codex-2026-08-16.json`](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json), [`local-tts-isolation-2026-08-27.json`](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/local-tts-isolation-2026-08-27.json), and the [historical CPU artifact](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/react-latency-2026-08-12.json).
+Raw evidence: [`software-benchmarks-2026-10-18.json`](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-10-18.json), [`subscription-planning-codex-2026-08-16.json`](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/subscription-planning-codex-2026-08-16.json), [`local-tts-isolation-2026-08-27.json`](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/local-tts-isolation-2026-08-27.json), and the [historical CPU artifact](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/react-latency-2026-08-12.json).
 
 ## Platform and hardware evidence
 
@@ -129,9 +146,10 @@ Raw evidence: [`software-benchmarks-2026-08-27.json`](https://github.com/VyomKul
 | Browser automation | Unit/integration and visual-browser contracts | Site behavior and browser versions vary | Supported through guarded browser actions; no claim of universal website compatibility. |
 | Voice recognition | Configuration, routing, cancellation, and fusion tests | Human microphone accuracy is not a release gate | Hardware test required for the user's microphone, language, noise, and accent. |
 | Pocket/Kokoro/OS TTS | Engine, fallback, cancellation, response, worker isolation, and idle-release tests; real Kokoro WAV synthesis was 21.401 s cold and 0.138 s warm with zero Torch/CUDA modules retained by the parent | Audible output was not assessed in this run and is not continuously reproduced in CI | Local TTS and bounded process isolation are implemented; audible quality, device output, and universal latency require separate validation. |
-| Camera gesture and cursor control | Geometry, temporal verification, calibration, workflow, and false-positive regression tests | Physical accuracy is not established across cameras, lighting, skin tones, backgrounds, or users | Experimental opt-in input; users must retain the stop controls. |
-| Gaze tracking | Model loading, event validation, fusion, and settings tests | Physical gaze accuracy is not a release gate | Coarse on-device region signal, not eye-tracking-grade measurement. |
+| Camera gesture and cursor control | Explainable hand-quality gates, candidate-specific temporal verification, stale-motion reset, calibration, workflow, false-positive regressions, and offline metric arithmetic | No consented, person-disjoint physical benchmark corpus has been run across cameras, lighting, skin tones, backgrounds, or users | Experimental opt-in input; users must retain the stop controls. |
+| Gaze tracking | Model loading, finite geometry, blink/closed-eye, head-turn, eye-agreement, iris-plausibility, temporal-hysteresis, event validation, fusion, and settings tests | Synthetic fixtures validate deterministic behavior, not physical gaze accuracy | Coarse on-device region signal, not eye-tracking-grade measurement. |
 | Neural intent | Synthetic BrainFlow, recorded EEG playback, provenance, calibration, decoder, bounded text-authored task staging, neural selection, autonomous dispatch, gateway, and fault tests | No live headset/human validation has established control accuracy | Research pipeline can select a pre-staged goal and launch the normal guarded autonomous path; it does not decode an unstated task and is not proven live brain control or medical use. |
+| Assistance co-adaptation | Contract, policy-property, agency-audit and simulated-user tests | No human study has reported | Experimental, opt-in, presentation-only assistance research; no claim that it improves selection for people until the pre-registered study reports. |
 | Subscription model access | Official Codex and Claude CLI adapters, login/status checks, selectable models, prompt-budget controls, quota accounting, and provider-tool rejection tests | Provider availability, plan eligibility, and quotas remain provider-owned | Uses the user's existing provider login without copying OAuth credentials; it is not unlimited and does not bypass provider terms. |
 | Snapshots and rollback | Fail-closed policy and backend contract tests | Backend availability and real restoration depend on OS support and privileges | Destructive work is blocked when a required snapshot cannot be created; not every external effect is reversible. |
 
@@ -139,7 +157,7 @@ Neural details and the recorded EEGBCI snapshot are documented in [Neural Intent
 
 ## Known limitations
 
-1. Only 18 of 157 actions currently have an independent post-condition verifier; inspect `verification.independent_postcondition` in the capability catalog.
+1. Only 22 of 162 actions currently have an independent post-condition verifier; inspect `verification.independent_postcondition` in the capability catalog.
 2. CI validates software contracts but cannot establish camera, microphone, speaker, accessibility-permission, EEG, or human-factors accuracy.
 3. Browser pages, third-party APIs, cloud models, and external applications can change independently of Heliox.
 4. Local-first operation does not mean every configured path is offline. Cloud model and integration tasks send necessary context to the selected provider.

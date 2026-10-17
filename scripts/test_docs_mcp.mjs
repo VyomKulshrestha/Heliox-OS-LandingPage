@@ -1,4 +1,8 @@
 import server from "../api/mcp.js";
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+const rawEvidence = readFileSync(new URL("../benchmarks.json", import.meta.url));
+const evidence = JSON.parse(rawEvidence);
 
 const call = async (method, params = {}, headers = {}) => {
   const request = new Request("https://www.helioxos.dev/api/mcp", {
@@ -29,7 +33,7 @@ const originalFetch = globalThis.fetch;
 globalThis.fetch = async (url) => {
   const path = new URL(url).pathname;
   if (path === "/capabilities.json") return Response.json({ actions: [{ action_type: "browser_navigate", permission: { tier: "user_write", approval_required: false }, provider: "web" }] });
-  if (path === "/releases.json") return Response.json({ current_version: "0.13.0", releases: [{ version: "0.13.0", title: "Verified Autonomy and Runtime Hardening" }] });
+  if (path === "/releases.json") return Response.json({ current_version: "0.14.0", releases: [{ version: "0.14.0", title: "Co-Adaptive Assistance and Governed Desktop Agency" }] });
   return new Response("not found", { status: 404 });
 };
 const capabilities = await call("tools/call", { name: "list_capabilities", arguments: { query: "browser", limit: 10 } });
@@ -37,12 +41,20 @@ if (capabilities.body.result.structuredContent.actions[0].action_type !== "brows
 const safety = await call("tools/call", { name: "get_action_safety", arguments: { action_type: "browser_navigate" } });
 if (safety.body.result.structuredContent.permission.tier !== "user_write") throw new Error("action safety lookup failed");
 const release = await call("tools/call", { name: "get_latest_release", arguments: {} });
-if (release.body.result.structuredContent.current_version !== "0.13.0") throw new Error("release lookup failed");
+if (release.body.result.structuredContent.current_version !== "0.14.0") throw new Error("release lookup failed");
 const benchmark = await call("tools/call", { name: "get_benchmark_evidence", arguments: {} });
-if (benchmark.body.result.structuredContent.source_commit !== "00682b5e168b84ff68e921e813a53f9e979c7e14") throw new Error("benchmark source commit drifted");
-if (benchmark.body.result.structuredContent.guarded_local_request.median_ms !== 26.476) throw new Error("benchmark lookup failed");
-if (benchmark.body.result.structuredContent.event_loop_responsiveness.heartbeat_ticks !== 66) throw new Error("benchmark responsiveness lookup failed");
-if (benchmark.body.result.structuredContent.learned_risk_world_model.median_inference_ms !== 0.030) throw new Error("benchmark world-model inference drifted");
+const measured = benchmark.body.result.structuredContent;
+if (measured.source_commit !== evidence.source_commit) throw new Error("benchmark source commit drifted");
+if (measured.source_sha256 !== createHash("sha256").update(rawEvidence.toString("utf8").replace(/\r\n/g, "\n")).digest("hex")) throw new Error("benchmark source hash drifted");
+if (measured.guarded_local_request.median_ms !== evidence.guarded_cpu_request.steady_state.median_ms) throw new Error("benchmark lookup failed");
+if (measured.event_loop_responsiveness.heartbeat_ticks !== evidence.event_loop_responsiveness.heartbeat_ticks) throw new Error("benchmark responsiveness lookup failed");
+if (measured.learned_risk_world_model.median_inference_ms !== evidence.learned_risk_world_model.inference.median_ms) throw new Error("benchmark world-model inference drifted");
+for (const field of ["evidence_kind", "claim_boundary", "in_sample", "split", "promoted_to_runtime", "protocol_sha256"]) {
+  if (measured.coadaptation_simulated_users[field] !== evidence.coadaptation_simulated_users[field]) throw new Error(`simulation evidence drifted: ${field}`);
+}
+for (const [policy, audit] of Object.entries(evidence.coadaptation_simulated_users.agency_audit)) {
+  if (measured.coadaptation_simulated_users.agency_audits[policy] !== audit.passed) throw new Error(`simulation audit drifted: ${policy}`);
+}
 if (benchmark.body.result.structuredContent.local_tts_isolation.parent_heavy_modules !== 0) throw new Error("benchmark TTS isolation evidence drifted");
 if (!benchmark.body.result.structuredContent.claim_boundary.includes("excludes")) throw new Error("benchmark boundary missing");
 globalThis.fetch = originalFetch;

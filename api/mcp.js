@@ -1,3 +1,4 @@
+import BENCHMARK_EVIDENCE from "../lib/benchmark-evidence.js";
 import { attachHeaders, problemResponse, takeRateLimit } from "../lib/public-api.js";
 
 const PROTOCOLS = ["2025-11-25", "2025-06-18", "2026-07-28"];
@@ -23,19 +24,6 @@ const DOCUMENTS = [
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true };
 
-const BENCHMARK_EVIDENCE = {
-  captured_on: "2026-08-27",
-  source_commit: "00682b5e168b84ff68e921e813a53f9e979c7e14",
-  source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-08-27.json",
-  proof: `${SITE}/proof.md`,
-  claim_boundary: "Local software evidence only; excludes provider, network, browser page-load, UI, microphone, camera, speaker, gaze, gesture, EEG, and human accuracy.",
-  guarded_local_request: { iterations: 100, median_ms: 26.476, p95_ms: 27.999, p99_ms: 28.887, model_calls: 0 },
-  event_loop_responsiveness: { heartbeat_ticks: 66, heartbeat_median_ms: 15.562, heartbeat_p95_ms: 16.454, heartbeat_max_ms: 16.575 },
-  deterministic_intent_dispatch: { passed: 59, total: 59, median_ms: 0.022 },
-  learned_risk_world_model: { model_version: "risk-mlp-v3-calibrated", training_samples: 36000, validation_samples: 5400, learned_action_types: 12, median_inference_ms: 0.030 },
-  local_tts_isolation: { engine: "kokoro_tts", cold_synthesis_seconds: 21.401, warm_synthesis_seconds: 0.138, parent_heavy_modules: 0, idle_release_seconds: 10, source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/local-tts-isolation-2026-08-27.json", boundary: "File synthesis and process lifetime only; no audible-quality or universal-latency claim." },
-  subscription_planning: { provider: "codex", fixed_cases_passed: 3, fixed_cases_total: 3, median_latency_seconds: 14.708, executed_actions: 0, destructive_actions: 0, source: "https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json", boundary: "One developer-machine account and planning only; no Claude or action-execution claim." },
-};
 
 const TOOLS = [
   { name: "search_heliox_docs", description: "Search the public Heliox documentation index. Read-only; returns links and summaries, never desktop control.", inputSchema: { type: "object", properties: { query: { type: "string", minLength: 1 } }, required: ["query"], additionalProperties: false }, annotations: READ_ONLY },

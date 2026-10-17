@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "product": {
     "name": "Heliox OS",
-    "version": "0.13.0",
+    "version": "0.14.0",
     "kind": "desktop AI system-control agent",
     "license": "MIT",
     "declared_platforms": [
@@ -19,11 +19,11 @@
   "sources": {
     "action_registry": {
       "path": "daemon/pilot/actions.py",
-      "sha256": "0c3f7da0ef6698bb08671dc55ef99781727690a481f880648b993068a711661b"
+      "sha256": "8137a14cd89b663683461ab2b7ec504d6617406a48b8ddddd88202a68c03c942"
     },
     "postcondition_verifier": {
       "path": "daemon/pilot/agents/verifier.py",
-      "sha256": "97a6dd2adffe0de5e8ddd047a1c8a70e35bc66c84839b6c47505bbd8464da355"
+      "sha256": "8bb9946f7a7e0c29abd2adaa41268f155f2d5ebb532d9d2aacdeff2062b33c8a"
     },
     "plugin_manifests": [
       {
@@ -53,9 +53,9 @@
     ]
   },
   "summary": {
-    "action_types": 157,
+    "action_types": 162,
     "families": {
-      "browser": 23,
+      "browser": 24,
       "calendar": 7,
       "clipboard": 2,
       "code": 5,
@@ -73,10 +73,10 @@
       "process": 3,
       "registry": 2,
       "schedule": 3,
-      "screen": 5,
+      "screen": 6,
       "service": 6,
       "ssh": 2,
-      "system": 19,
+      "system": 22,
       "trigger": 5,
       "user": 2,
       "volume": 3,
@@ -86,16 +86,16 @@
     },
     "permission_tiers": {
       "destructive": 11,
-      "read_only": 53,
-      "system_modify": 35,
+      "read_only": 57,
+      "system_modify": 36,
       "user_write": 58
     },
-    "independent_postcondition_verifiers": 18,
+    "independent_postcondition_verifiers": 22,
     "plugins": 6,
     "mesh": {
       "specialists": 21,
-      "registered_action_types": 157,
-      "available_action_types": 157,
+      "registered_action_types": 162,
+      "available_action_types": 162,
       "coverage_complete": true,
       "uncovered_action_types": []
     }
@@ -1563,6 +1563,39 @@
           "id": "builtin:pilot.agents.system_agent.SystemAgent",
           "name": "SystemAgent",
           "role": "system_agent",
+          "source": "builtin"
+        }
+      ],
+      "verification": {
+        "method": "executor_result_only",
+        "independent_postcondition": false,
+        "note": "No independent post-condition check is currently registered."
+      }
+    },
+    {
+      "id": "request_human_help",
+      "family": "system",
+      "permission": {
+        "tier": 0,
+        "name": "read_only",
+        "approval_required": false,
+        "snapshot_required": false,
+        "irreversible": false
+      },
+      "platform_support": {
+        "platforms": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "basis": "declared_product_target",
+        "note": "Availability can still depend on host tools, permissions, hardware, and configured integrations."
+      },
+      "providers": [
+        {
+          "id": "builtin:pilot.agents.domain_agents.DesktopAutomationAgent",
+          "name": "DesktopAutomationAgent",
+          "role": "desktop_agent",
           "source": "builtin"
         }
       ],
@@ -3834,6 +3867,43 @@
       }
     },
     {
+      "id": "screen_accessibility_snapshot",
+      "family": "screen",
+      "permission": {
+        "tier": 0,
+        "name": "read_only",
+        "approval_required": false,
+        "snapshot_required": false,
+        "irreversible": false
+      },
+      "platform_support": {
+        "platforms": [
+          "windows"
+        ],
+        "basis": "explicit_runtime_guard",
+        "note": "Availability can still depend on host tools, permissions, hardware, and configured integrations."
+      },
+      "providers": [
+        {
+          "id": "builtin:pilot.agents.system_agent.SystemAgent",
+          "name": "SystemAgent",
+          "role": "system_agent",
+          "source": "builtin"
+        },
+        {
+          "id": "builtin:pilot.agents.domain_agents.VisionAgent",
+          "name": "VisionAgent",
+          "role": "vision_agent",
+          "source": "builtin"
+        }
+      ],
+      "verification": {
+        "method": "executor_result_only",
+        "independent_postcondition": false,
+        "note": "No independent post-condition check is currently registered."
+      }
+    },
+    {
       "id": "browser_navigate",
       "family": "browser",
       "permission": {
@@ -3861,9 +3931,9 @@
         }
       ],
       "verification": {
-        "method": "executor_result_only",
-        "independent_postcondition": false,
-        "note": "No independent post-condition check is currently registered."
+        "method": "conditional_exact_url_postcondition",
+        "independent_postcondition": true,
+        "note": "Verifier checks this post-condition only when the live state is unambiguous; other outcomes remain executor-reported."
       }
     },
     {
@@ -3960,9 +4030,9 @@
         }
       ],
       "verification": {
-        "method": "executor_result_only",
-        "independent_postcondition": false,
-        "note": "No independent post-condition check is currently registered."
+        "method": "conditional_field_value_postcondition",
+        "independent_postcondition": true,
+        "note": "Verifier checks this post-condition only when the live state is unambiguous; other outcomes remain executor-reported."
       }
     },
     {
@@ -3993,9 +4063,9 @@
         }
       ],
       "verification": {
-        "method": "executor_result_only",
-        "independent_postcondition": false,
-        "note": "No independent post-condition check is currently registered."
+        "method": "conditional_field_value_postcondition",
+        "independent_postcondition": true,
+        "note": "Verifier checks this post-condition only when the live state is unambiguous; other outcomes remain executor-reported."
       }
     },
     {
@@ -4257,9 +4327,9 @@
         }
       ],
       "verification": {
-        "method": "executor_result_only",
-        "independent_postcondition": false,
-        "note": "No independent post-condition check is currently registered."
+        "method": "conditional_field_value_postcondition",
+        "independent_postcondition": true,
+        "note": "Verifier checks this post-condition only when the live state is unambiguous; other outcomes remain executor-reported."
       }
     },
     {
@@ -4561,6 +4631,39 @@
     },
     {
       "id": "browser_page_info",
+      "family": "browser",
+      "permission": {
+        "tier": 0,
+        "name": "read_only",
+        "approval_required": false,
+        "snapshot_required": false,
+        "irreversible": false
+      },
+      "platform_support": {
+        "platforms": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "basis": "declared_product_target",
+        "note": "Availability can still depend on host tools, permissions, hardware, and configured integrations."
+      },
+      "providers": [
+        {
+          "id": "builtin:pilot.agents.web_agent.WebAgent",
+          "name": "WebAgent",
+          "role": "web_agent",
+          "source": "builtin"
+        }
+      ],
+      "verification": {
+        "method": "executor_result_only",
+        "independent_postcondition": false,
+        "note": "No independent post-condition check is currently registered."
+      }
+    },
+    {
+      "id": "browser_snapshot",
       "family": "browser",
       "permission": {
         "tier": 0,
@@ -5803,6 +5906,72 @@
           "role": "code_agent",
           "source": "builtin"
         },
+        {
+          "id": "builtin:pilot.agents.domain_agents.PluginRuntimeAgent",
+          "name": "PluginRuntimeAgent",
+          "role": "plugin_runtime_agent",
+          "source": "builtin"
+        }
+      ],
+      "verification": {
+        "method": "executor_result_only",
+        "independent_postcondition": false,
+        "note": "No independent post-condition check is currently registered."
+      }
+    },
+    {
+      "id": "mcp_list_tools",
+      "family": "system",
+      "permission": {
+        "tier": 0,
+        "name": "read_only",
+        "approval_required": false,
+        "snapshot_required": false,
+        "irreversible": false
+      },
+      "platform_support": {
+        "platforms": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "basis": "declared_product_target",
+        "note": "Availability can still depend on host tools, permissions, hardware, and configured integrations."
+      },
+      "providers": [
+        {
+          "id": "builtin:pilot.agents.domain_agents.PluginRuntimeAgent",
+          "name": "PluginRuntimeAgent",
+          "role": "plugin_runtime_agent",
+          "source": "builtin"
+        }
+      ],
+      "verification": {
+        "method": "executor_result_only",
+        "independent_postcondition": false,
+        "note": "No independent post-condition check is currently registered."
+      }
+    },
+    {
+      "id": "mcp_call_tool",
+      "family": "system",
+      "permission": {
+        "tier": 2,
+        "name": "system_modify",
+        "approval_required": true,
+        "snapshot_required": false,
+        "irreversible": true
+      },
+      "platform_support": {
+        "platforms": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "basis": "declared_product_target",
+        "note": "Availability can still depend on host tools, permissions, hardware, and configured integrations."
+      },
+      "providers": [
         {
           "id": "builtin:pilot.agents.domain_agents.PluginRuntimeAgent",
           "name": "PluginRuntimeAgent",
