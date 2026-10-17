@@ -50,6 +50,7 @@ const PUBLIC_FILES = new Set([
   "/ai-content-policy.md",
   "/changelog.md",
   "/capabilities.json",
+  "/benchmarks.json",
   "/releases.json",
   "/releases.feed.json",
   "/releases.xml",

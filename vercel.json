@@ -90,6 +90,14 @@
       ]
     },
     {
+      "source": "/benchmarks.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600" },
+        { "key": "Link", "value": "</proof.html>; rel=\"describedby\"" }
+      ]
+    },
+    {
       "source": "/releases.json",
       "headers": [
         { "key": "Content-Type", "value": "application/json; charset=utf-8" },

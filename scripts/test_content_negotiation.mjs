@@ -55,7 +55,7 @@ test("unknown API routes return RFC 9457 JSON", async () => {
 });
 
 test("known static assets and API endpoints continue to routing", () => {
-  for (const path of ["/assets/tailwind.generated.css", "/openapi.json", "/api/mcp", "/api/v1/status"]) {
+  for (const path of ["/assets/tailwind.generated.css", "/openapi.json", "/benchmarks.json", "/api/mcp", "/api/v1/status"]) {
     const response = middleware(new Request(`https://www.helioxos.dev${path}`));
     assert.equal(response.headers.get("x-middleware-next"), "1", path);
   }
