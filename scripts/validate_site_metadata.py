@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
@@ -12,6 +12,13 @@ from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def latest_calendar_date(now: datetime | None = None) -> date:
+    """Date-only sitemap values may originate anywhere, including UTC+14."""
+    return (now or datetime.now(timezone.utc)).astimezone(
+        timezone(timedelta(hours=14))
+    ).date()
 
 
 class PageMetadata(HTMLParser):
@@ -380,7 +387,7 @@ def main() -> None:
         parsed = urlsplit(url)
         if parsed.scheme != "https" or parsed.netloc != "www.helioxos.dev" or parsed.query or parsed.fragment:
             raise SystemExit(f"sitemap URL is not canonical: {url}")
-        if not modified or date.fromisoformat(modified) > date.today():
+        if not modified or date.fromisoformat(modified) > latest_calendar_date():
             raise SystemExit(f"sitemap lastmod is invalid: {url}")
         name = parsed.path.lstrip("/") or "index.html"
         if not Path(name).suffix:
