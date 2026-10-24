@@ -2,7 +2,7 @@
   "schema_version": 2,
   "audit_date": "2026-10-18",
   "authority": {
-    "current_release": "0.14.0",
+    "current_release": "0.15.0",
     "canonical_site": "https://www.helioxos.dev/",
     "note": "Assistant evaluations below are dated observations, not current product facts. Resolve conflicts against releases.json, capabilities.json, and proof.md."
   },

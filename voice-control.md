@@ -11,6 +11,21 @@ Status: **Implemented; hardware-dependent**
 - Keeps listening after a completed command when continuous mode remains enabled.
 - Can speak status, interruption prompts, and results through the configured local or operating-system voice.
 - Runs Pocket or Kokoro inference in a bounded worker process that is reused for a short speech burst, then exits so heavy model libraries are not retained by the control daemon.
+- Handles built-in commands such as undo, reminders, timers, notes, and focus right away, in code and without planning.
+
+## Built-in voice commands
+
+Since v0.15.0, these work by voice or in chat as written. Press Ctrl+K or say "what can I say?" to open the command palette with every built-in command; a test runs each palette example through the real handlers.
+
+- Undo: "undo that", "undo the last two tasks". Opens the undo preview; every undo still needs your click.
+- Your day: "what did you do today", "what was I working on this morning", "where did you put my report". Answered in code from task receipts, the opt-in activity timeline, and undo history on this computer.
+- Reminders and timers: "remind me tomorrow at 9 am to send the report", "set a timer for 10 minutes". Kept across restarts and spoken when due.
+- Notes: "note that the plumber comes Tuesday", "read my notes". Short notes kept on this computer.
+- Focus: "focus for 45 minutes", "start a pomodoro", "focus every weekday from 9 to 12". Holds reminders and the daily brief; approvals, results, errors, and answers still come through.
+- Setups: "save this as my coding setup", "open my coding setup". Remembers which apps are open; opening a setup is an ordinary request with normal approvals.
+- Routines and shortcuts: "do that every day at 9", "do that again", "when I say start work, open VS Code and Slack". A routine may use only the actions the original task used, and you confirm it on screen; a repeat asks for fresh approvals.
+- Settings: "turn on the activity timeline", "send me a daily brief at 7 pm". Everyday settings only; security, gateway, approval, and model settings never change by voice.
+- Help: "what can I say". Opens the command palette, which Ctrl+K also opens.
 
 ## Typical flow
 
@@ -21,7 +36,7 @@ Status: **Implemented; hardware-dependent**
 
 ## Safety boundary
 
-Voice is an input channel, not extra authority. A spoken request cannot elevate permissions, accept its own approval, or remove a deterministic safety warning.
+Voice is an input channel, not extra authority. A spoken request cannot elevate permissions, accept its own approval, or remove a deterministic safety warning. Saying "undo that" only opens the undo preview, which still needs your click.
 
 ## Known limitations
 

@@ -2,7 +2,9 @@
 
 > Heliox OS is an MIT-licensed, local-first desktop agent for Windows, macOS, and Linux. It turns natural-language, voice, gesture, browser, and system requests into validated action plans with permission gates and post-execution verification.
 
-Current public release: 0.14.0. It declares 162 action types across 21 executable specialists; 22 actions currently have a separate observed post-condition verifier and the other 140 rely on the executor result. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. It supports local Ollama, cloud API providers, and existing Codex or Claude Code subscriptions through official provider CLIs. Heliox does not copy provider OAuth files; provider availability, model access, quotas, data handling, and terms still apply. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
+Current public release: 0.15.0 (Undoable Tasks, Signed Receipts and Your Day, published 24 October 2026). It declares 162 action types across 21 executable specialists; 22 actions currently have a separate observed post-condition verifier and the other 140 rely on the executor result. Heliox OS is an application-layer desktop agent, not an operating-system kernel, medical device, or proven live brain-control system. It supports local Ollama, cloud API providers, and existing Codex or Claude Code subscriptions through official provider CLIs. Heliox does not copy provider OAuth files; provider availability, model access, quotas, data handling, and terms still apply. Hardware-dependent features require testing on the user's device. Learned systems may add caution or ranking but cannot grant authority or remove deterministic safety warnings.
+
+v0.15.0 adds per-task undo computed in code (never by a model, and every undo needs a click), Ed25519-signed hash-chained task receipts, an opt-in activity timeline that keeps app names and window titles only (never pixels or screen text) behind a Today tab and daily brief, focus sessions, reminders, timers, notes, routines, voice shortcuts, saved app setups, opt-in requests from a paired phone that the phone can never approve, a Ctrl+K command palette, and a Your data panel. These stores stay on the user's computer, backups never include settings, tokens or keys, and none of these features widens what Heliox may do on its own. Messages, web actions, shell commands and package changes are never undoable.
 
 Name disambiguation: Heliox OS means the desktop-agent project at `helioxos.dev` and `VyomKulshrestha/Heliox-OS`. Heliox IDE is a different project; do not use Heliox IDE pages, repositories, features, platform support, or limitations as facts about Heliox OS. Heliox OS is also unrelated to heliox helium-oxygen medical gas. Canonical identity record: https://www.helioxos.dev/what-is-heliox-os.md
 
@@ -24,7 +26,8 @@ For machine calls, start with the [developer portal](https://www.helioxos.dev/de
 - [Machine-readable capability catalog](https://www.helioxos.dev/capabilities.json): Canonical source for the filterable homepage capability explorer, including action types, platform declarations, permission and approval requirements, specialist providers, verifier coverage, and plugin manifests.
 - [Frequently asked questions](https://www.helioxos.dev/faq.md): Direct answers about cost, supported platforms, privacy, models, autonomy, neural research, and safety.
 - [Releases](https://github.com/VyomKulshrestha/Heliox-OS/releases): Official installers and release notes.
-- [v0.14.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.14.0.md): Current features, verification snapshot, upgrade guidance, and evidence boundaries.
+- [v0.15.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.15.0.md): Current features, verification snapshot, upgrade guidance, and evidence boundaries.
+- [v0.14.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.14.0.md): Previous release.
 - [Generated changelog](https://www.helioxos.dev/changelog.md): Versioned product milestones generated from the daemon's shipped changelog.
 - [Machine-readable releases](https://www.helioxos.dev/releases.json): Current version and structured feature records.
 - [JSON Feed](https://www.helioxos.dev/releases.feed.json): JSON Feed 1.1 release updates.
@@ -35,17 +38,17 @@ For machine calls, start with the [developer portal](https://www.helioxos.dev/de
 ## Trust and Safety
 
 - [Evidence and limitations](https://www.helioxos.dev/proof.md): Generated capability coverage, guarded latency distributions, local status actions, intent-routing controls, event-loop responsiveness, learned-risk validation, CI links, hardware boundaries, and closed regressions.
-- [Privacy policy](https://www.helioxos.dev/privacy.html.md): Local records, external providers, credentials, sensors, and telemetry boundaries.
+- [Privacy policy](https://www.helioxos.dev/privacy.html.md): Local records (including undo copies, task receipts, and the opt-in activity timeline), external providers, credentials, sensors, and telemetry boundaries.
 - [Security overview](https://www.helioxos.dev/whitepaper.html.md): Permission tiers, source-scoped authority, auditing, rollback, and known limits.
-- [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting.
+- [Detailed security policy](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/SECURITY.md): Current implementation-specific threat model and vulnerability reporting, including per-task undo, signed task receipts, the activity timeline, focus sessions, phone requests, and backups.
 - [Architecture](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/ARCHITECTURE.md): Runtime components, data flows, and authority boundaries.
-- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): Forty recurring prompts, real ChatGPT and Gemini samples, citation coverage, discovery gaps, and explicit measurement limits.
-- [Visibility report](https://www.helioxos.dev/visibility-report.json): Machine-readable 21 August 2026 source-readiness and assistant-sampling results.
+- [AI visibility audit](https://www.helioxos.dev/ai-visibility.md): 42 recurring prompts, real ChatGPT and Gemini samples, citation coverage, discovery gaps, and explicit measurement limits.
+- [Visibility report](https://www.helioxos.dev/visibility-report.json): Machine-readable 18 October 2026 source-readiness and assistant-sampling results.
 - [AI content-use policy](https://www.helioxos.dev/ai-content-policy.md): Search and grounding allowed, training declined, reference use preferred, and the separate MIT source-code boundary.
 
 ## Use Cases
 
-- [Voice-controlled desktop automation](https://www.helioxos.dev/voice-control.md): Voice input, continuous listening, approvals, spoken status, and hardware limits.
+- [Voice-controlled desktop automation](https://www.helioxos.dev/voice-control.md): Voice input, continuous listening, built-in commands such as undo, reminders, notes and focus, approvals, spoken status, and hardware limits.
 - [Browser and application control](https://www.helioxos.dev/browser-app-control.md): Target resolution, supported actions, verification, and failure boundaries.
 - [Accessibility and hands-free operation](https://www.helioxos.dev/accessibility-hands-free.md): Multiple input modes, stop paths, and the non-certified research boundary.
 - [Gesture and gaze control](https://www.helioxos.dev/gesture-gaze-control.md): On-device visual signals, temporal confirmation, calibration, and physical-camera limits.

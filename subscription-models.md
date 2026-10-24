@@ -2,7 +2,7 @@
 
 > Heliox can ask an officially authenticated Codex or Claude Code CLI to produce a text-only plan while keeping credentials, tools, approvals, execution, and verification inside their proper trust boundaries.
 
-Status: **Available in v0.14.0; provider-dependent**
+Status: **Available in v0.15.0; provider-dependent**
 
 ## What Heliox does
 

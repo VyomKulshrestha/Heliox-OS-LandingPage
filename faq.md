@@ -10,7 +10,7 @@ No. Heliox OS is the desktop automation agent published at `helioxos.dev` and `V
 
 ## What does Heliox OS assistance co-adaptation do?
 
-Heliox OS assistance co-adaptation is a desktop-software feature, unrelated to heliox medical gas or respiratory therapy. In v0.14.0, an opt-in study inside Heliox OS's window tries presentation changes such as larger targets, a confirmation step, or a clarifying question within preferences the person sets. It requires purpose-specific consent and never approves or executes actions. The current evidence uses simulated tuning families, and does not establish an improvement for real people. See the [study documentation](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/COADAPTATION.md) and [benchmark evidence](https://www.helioxos.dev/proof.html#coadaptation).
+Heliox OS assistance co-adaptation is a desktop-software feature, unrelated to heliox medical gas or respiratory therapy. Since v0.14.0, an opt-in study inside Heliox OS's window tries presentation changes such as larger targets, a confirmation step, or a clarifying question within preferences the person sets. It requires purpose-specific consent and never approves or executes actions. The current evidence uses simulated tuning families, and does not establish an improvement for real people. See the [study documentation](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/COADAPTATION.md) and [benchmark evidence](https://www.helioxos.dev/proof.html#coadaptation).
 
 ## Is Heliox OS free?
 
@@ -54,7 +54,31 @@ Not as a validated live product today. The repository contains synthetic BrainFl
 
 ## Is every action reversible?
 
-No. Snapshots and rollback are used where a supported backend exists, but external messages, browser actions, purchases, deleted remote data, and other irreversible effects may be outside that boundary.
+No. Snapshots and rollback are used where a supported backend exists, and since v0.15.0 per-task undo can put back file, clipboard, environment-variable, volume and brightness changes that Heliox recorded. Emails, web form submissions, remote commands, MCP tool calls, shell commands, package changes and other system changes are never undoable. The approval dialog marks each action Can undo or Can't undo before it runs.
+
+## How does undo work in Heliox OS?
+
+Before Heliox writes, moves, copies or deletes a file, replaces the clipboard, sets an environment variable or changes the volume or brightness, it keeps what it needs to reverse that change. Each finished task shows Undo. The preview lists what will be put back, what you changed since (left alone, never overwritten) and what can never be undone, and Show what changed gives a line-by-line diff of each file. Undo is computed in code, never by a model, needs your click on the preview you saw, and is refused while a task runs. Saying "undo that" only opens the preview. Copies stay on your computer and are pruned after 7 days by default; clipboard text and earlier environment values are kept in memory only.
+
+## What is a signed task receipt?
+
+After every task that ran at least one action, Heliox writes a receipt of the request, each action and its target, whether you approved it, whether it ran and succeeded, and the outcome. Parameters and outputs appear only as SHA-256 hashes. Receipts are signed with an Ed25519 key that belongs to the computer and carry the hash of the previous receipt, so editing or removing one breaks the chain. Anyone can check an exported receipt with `python -m pilot.workflows.task_receipts verify receipt.json`. A receipt describes what happened; it never grants, approves or runs anything. When no signing key can be stored, receipts are written unsigned and say so.
+
+## Does Heliox record what I do on my computer?
+
+Only if you turn on the activity timeline, which is off by default. It records which app and window title were in front and when, never pixels or screen text, and it skips password managers and private or incognito windows. No model sees it: questions such as "what was I working on yesterday afternoon?" are answered in code. Data is deleted after 7 days by default, recording can be paused, and "forget my activity from the last hour" removes that stretch. The daily brief and usage nudges that build on it are also off by default.
+
+## Can my phone run tasks on my computer?
+
+Only if you turn on phone requests for a paired Air Handoff phone; they are off by default. The phone can send a short encrypted, signed request that waits on the computer until you press Run. If you also allow status checks to start right away, only a fixed read-only list (system status, file names and sizes, calendar events and git status) can start without you. The phone receives the short result and can never approve or deny anything.
+
+## What can I say to Heliox OS besides tasks?
+
+Since v0.15.0, Heliox handles built-in commands right away, without planning: "undo that", "what did you do today", "remind me tomorrow at 9 am to send the report", "set a timer for 10 minutes", "note that the plumber comes Tuesday", "focus for 45 minutes", "start a pomodoro", "save this as my coding setup" and "do that every day at 9". Press Ctrl+K or say "what can I say?" to see every built-in command with examples; a test runs each example as written. Focus sessions hold reminders and the daily brief but never hold approvals, results, errors or answers. Only everyday settings such as the activity timeline and the daily brief change by voice; security, gateway, approval and model settings do not. See [voice control](https://www.helioxos.dev/voice-control.md).
+
+## How do I see or delete what Heliox keeps?
+
+Settings → Your data lists each personal store Heliox keeps on the computer (activity timeline, task receipts, undo copies, notes, reminders, voice shortcuts, setups, usage nudges and quiet hours) with its size and a Clear button. Backups go to the Downloads folder and never include settings, the daemon token, API keys, the receipt signing key or undo copies. See the [privacy policy](https://www.helioxos.dev/privacy.html.md).
 
 ## How can I install or contribute?
 

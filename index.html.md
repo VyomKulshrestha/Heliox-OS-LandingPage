@@ -6,7 +6,7 @@ Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` an
 
 ## Current release
 
-- Version: 0.14.0
+- Version: 0.15.0 (Undoable Tasks, Signed Receipts and Your Day, published 24 October 2026)
 - License: MIT
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
 - Downloads: https://github.com/VyomKulshrestha/Heliox-OS/releases
@@ -19,34 +19,40 @@ Name disambiguation: Heliox OS is the desktop-agent project at `helioxos.dev` an
 
 - Accepts typed natural language, continuous voice input, and opt-in hand gestures.
 - Plans and executes browser, file, application, process, package, Git, system, integration, and workflow actions.
-- v0.14.0 routes tasks across 21 specialist agents and 162 declared action types. Runtime availability still depends on the operating system, installed dependencies, credentials, integrations, and active security policy; 22 actions currently have a separate observed post-condition verifier and the other 140 rely on the executor result.
+- v0.15.0 routes tasks across 21 specialist agents and 162 declared action types. Runtime availability still depends on the operating system, installed dependencies, credentials, integrations, and active security policy; 22 actions currently have a separate observed post-condition verifier and the other 140 rely on the executor result.
 - The [capability explorer](https://www.helioxos.dev/#actions) lets people filter the canonical 162-action catalog by specialist and verification depth; agents can read the same source directly from [capabilities.json](https://www.helioxos.dev/capabilities.json).
 - Supports background jobs, durable task recovery, user interruption, post-execution verification, and optional proactive suggestions.
+- Keeps what it needs to undo file, clipboard, environment-variable, volume and brightness changes, and leaves a signed receipt for every task that ran actions.
 - Supports local Ollama plus Gemini, OpenAI, OpenRouter, Claude, and Meta APIs, as well as existing Codex and Claude Code subscriptions through their official CLIs. OpenRouter accepts exact catalog model IDs, including current DeepSeek IDs. Provider-owned availability, quotas, and terms still apply.
 - Provides a reviewed plugin marketplace plus locally discovered plugins subject to signature and capability checks.
 
-## What's new in 0.14.0
+## What's new in 0.15.0
 
-- Accessibility-grounded desktop control with explicit human takeover.
-- Durable autonomous jobs that survive daemon restarts, plus scheduled runs limited to approved actions.
-- Tools from the user's configured MCP servers, with approval for tools that can change state.
-- Voice questions, corrections, and stop requests while a task runs.
-- Fail-closed settings, gateway profiles, and approvals, including visibility requirements for gesture approval.
-- Opt-in assistance co-adaptation inside Heliox's own window. It changes presentation only and requires purpose-specific consent. Its current benchmark uses simulated tuning families; it does not establish better performance for people.
+- Per-task undo. Before Heliox writes, moves, copies or deletes a file, replaces the clipboard, sets an environment variable or changes the volume or brightness, it keeps what it needs to put the change back. Each finished task shows Undo; the preview lists what will be put back, what changed since (left alone, never overwritten) and what can never be undone, and Show what changed gives a line-by-line diff of each file. Undo is computed in code, never by a model, and every undo needs your click.
+- Signed task receipts. Every task that ran actions leaves an Ed25519-signed, hash-chained receipt of what ran, what you approved and what happened; file contents and outputs appear only as hashes. `python -m pilot.workflows.task_receipts verify` checks an exported receipt anywhere. Receipts never grant, approve or run anything.
+- Your day. The opt-in activity timeline records which app and window title were in front, never pixels or screen text, and skips password managers and private windows. The Today tab shows what Heliox ran, where your time went and what can still be undone; an opt-in daily brief and usage nudges build on it. Questions about your day are answered in code; no model sees the timeline.
+- Focus, reminders, notes and timers. "Focus for 45 minutes", "start a pomodoro" and quiet hours hold reminders and the brief while approvals and answers still come through. "Remind me tomorrow at 9 to send the report", "set a timer for 10 minutes" and "note that the plumber comes Tuesday" are handled right away, without planning.
+- Routines, voice shortcuts and setups. "Do that every day at 9" turns a finished task into a routine that may use only the actions that task used, and you confirm it on screen. "When I say start work, open VS Code and Slack" creates a voice shortcut, and "save this as my coding setup" remembers your open apps.
+- Requests from a paired phone. A paired Air Handoff phone can send an encrypted, signed request that waits for Run on the computer; only if you allow it do read-only status checks start at once. The phone can never approve anything.
+- Command palette and Your data. Ctrl+K or "what can I say?" lists every built-in command with examples that a test runs as written. Settings → Your data shows everything Heliox keeps on this computer with a Clear button for each, and backups never include settings, tokens or keys.
 
-[Read the complete v0.14.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.14.0.md).
+The activity timeline, daily brief, usage nudges and phone requests stay off until you turn them on. v0.15.0 builds on v0.14.0's consented assistance co-adaptation study, accessibility-grounded desktop control, durable scheduled jobs, MCP tools and fail-closed approvals.
+
+[Read the complete v0.15.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.15.0.md).
 
 ## Safety model
 
 Heliox combines schema validation, a five-tier permission system, source-scoped authority, confirmation gates, critic review for risky plans, simulations, audit records, and snapshots where supported. Overrides can narrow authority but cannot widen the shipped source policy. Learned risk models can interrupt or add caution; they cannot grant permission or suppress deterministic warnings.
 
-Not every effect is reversible. Browser actions, external services, messages, purchases, process changes, and some operating-system actions can have consequences outside Heliox's rollback boundary. Users should review approval dialogs and keep backups.
+Not every effect is reversible. Browser actions, external services, messages, purchases, process changes, and some operating-system actions can have consequences outside Heliox's rollback boundary. Per-task undo restores only what Heliox recorded, re-checks each item right before restoring it, and never covers effects that leave the computer or system changes such as shell commands or package installs; the approval dialog marks each action Can undo or Can't undo. Users should review approval dialogs and keep backups.
 
 ## Privacy and models
 
 The Python daemon, action execution, local logs, audit stores, preferences, and supported local models run on the user's machine. Heliox does not operate a central prompt or analytics service. When a cloud model or integration is configured, the context required for that task is sent directly to the selected external provider, whose privacy and retention terms apply.
 
 Credentials are stored in Windows Credential Manager, macOS Keychain, or a Secret Service-compatible Linux keyring. Credential operations fail closed if secure storage is unavailable.
+
+Undo copies, task receipts, the opt-in activity timeline, notes, reminders, voice shortcuts, setups, usage nudges and quiet hours stay on the user's computer. Settings → Your data shows each store with a Clear button, and backups never include settings, tokens or keys. See the [privacy policy](https://www.helioxos.dev/privacy.html.md).
 
 ## Neural-input status
 
@@ -65,7 +71,7 @@ The repository includes a software pipeline for BrainFlow synthetic data, record
 
 ## Installation
 
-Download the 0.14.0 installer from the GitHub Releases page:
+Download the 0.15.0 installer from the GitHub Releases page:
 
 - Windows: `.exe` or `.msi`
 - macOS Apple Silicon or Intel: `.dmg`
@@ -89,13 +95,13 @@ Comparison pages are dated, link to first-party sources, and describe practical 
 
 Heliox OS assistance co-adaptation is a desktop-software study, unrelated to heliox medical gas. Its quick suite passed all three policy agency audits across two simulated tuning families. The adaptive engine does not beat the plain interface for every family. See the [simulation table and protocol](https://www.helioxos.dev/proof.md) and [raw local evidence mirror](https://www.helioxos.dev/benchmarks.json).
 
-The 18 October 2026 v0.14.0 evidence bundle reports a 28.727 ms median and 32.192 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 64 concurrent scheduler heartbeats with a 25.061 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. A real local Kokoro file-synthesis run measured 21.401 seconds cold and 0.138 seconds warm, retained zero Torch/CUDA modules in the parent, and released its worker after the idle window; it does not establish audible quality or universal latency. These bundles do not establish universal provider, network, browser page-load, UI, microphone, camera, gesture, gaze, EEG, or human accuracy.
+The 24 October 2026 v0.15.0 evidence bundle reports a 27.183 ms median and 28.257 ms p95 for 100 guarded, non-LLM CPU-status requests; 59/59 curated deterministic-routing cases; 64 concurrent scheduler heartbeats with a 16.237 ms maximum gap during a real one-second CPU monitor; and validation metadata for the bounded learned-risk model. A separate one-account Codex CLI sample passed 3/3 fixed planning-only prompts at 14.708 seconds median with no action execution. A real local Kokoro file-synthesis run measured 21.401 seconds cold and 0.138 seconds warm, retained zero Torch/CUDA modules in the parent, and released its worker after the idle window; it does not establish audible quality or universal latency. These bundles do not establish universal provider, network, browser page-load, UI, microphone, camera, gesture, gaze, EEG, or human accuracy.
 
 - [Human-readable proof center](https://www.helioxos.dev/proof.html)
 - [Detailed Markdown methodology](https://www.helioxos.dev/proof.md)
-- [Raw current-main software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-10-18.json)
+- [Raw v0.15.0 software benchmark bundle](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/software-benchmarks-2026-10-24.json)
 - [Raw local TTS process-isolation evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/local-tts-isolation-2026-08-27.json)
-- [Original v0.14.0 release benchmark snapshot](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-10-16.json)
+- Earlier v0.14.0 snapshots: [18 October 2026](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-10-18.json) and [16 October 2026](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/evidence/software-benchmarks-2026-10-16.json)
 - [Raw subscription-planning evidence](https://raw.githubusercontent.com/VyomKulshrestha/Heliox-OS/main/docs/evidence/subscription-planning-codex-2026-08-16.json)
 
 ## Authoritative links

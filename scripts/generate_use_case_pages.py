@@ -22,9 +22,22 @@ PAGES = [
             "Keeps listening after a completed command when continuous mode remains enabled.",
             "Can speak status, interruption prompts, and results through the configured local or operating-system voice.",
             "Runs Pocket or Kokoro inference in a bounded worker process that is reused for a short speech burst, then exits so heavy model libraries are not retained by the control daemon.",
+            "Handles built-in commands such as undo, reminders, timers, notes, and focus right away, in code and without planning.",
+        ],
+        "commands_intro": "Since v0.15.0, these work by voice or in chat as written. Press Ctrl+K or say \"what can I say?\" to open the command palette with every built-in command; a test runs each palette example through the real handlers.",
+        "commands": [
+            ("Undo", ["undo that", "undo the last two tasks"], "Opens the undo preview; every undo still needs your click."),
+            ("Your day", ["what did you do today", "what was I working on this morning", "where did you put my report"], "Answered in code from task receipts, the opt-in activity timeline, and undo history on this computer."),
+            ("Reminders and timers", ["remind me tomorrow at 9 am to send the report", "set a timer for 10 minutes"], "Kept across restarts and spoken when due."),
+            ("Notes", ["note that the plumber comes Tuesday", "read my notes"], "Short notes kept on this computer."),
+            ("Focus", ["focus for 45 minutes", "start a pomodoro", "focus every weekday from 9 to 12"], "Holds reminders and the daily brief; approvals, results, errors, and answers still come through."),
+            ("Setups", ["save this as my coding setup", "open my coding setup"], "Remembers which apps are open; opening a setup is an ordinary request with normal approvals."),
+            ("Routines and shortcuts", ["do that every day at 9", "do that again", "when I say start work, open VS Code and Slack"], "A routine may use only the actions the original task used, and you confirm it on screen; a repeat asks for fresh approvals."),
+            ("Settings", ["turn on the activity timeline", "send me a daily brief at 7 pm"], "Everyday settings only; security, gateway, approval, and model settings never change by voice."),
+            ("Help", ["what can I say"], "Opens the command palette, which Ctrl+K also opens."),
         ],
         "flow": ["Enable voice and select a microphone.", "Say the wake phrase and a concrete request.", "Review any required approval.", "Hear and read the verified result."],
-        "safety": "Voice is an input channel, not extra authority. A spoken request cannot elevate permissions, accept its own approval, or remove a deterministic safety warning.",
+        "safety": "Voice is an input channel, not extra authority. A spoken request cannot elevate permissions, accept its own approval, or remove a deterministic safety warning. Saying \"undo that\" only opens the undo preview, which still needs your click.",
         "limits": "Recognition quality and response time depend on the microphone, room, platform speech service, selected model, and requested action. Neural voice cold-start time depends on the host; the worker temporarily uses model memory while active. Physical capture and audible output must be tested on each device.",
         "status": "Implemented; hardware-dependent",
     },
@@ -166,7 +179,7 @@ PAGES = [
         ],
         "safety": "A subscription is model access, not action authority. Heliox does not import provider credentials, rejects provider tool activity, and never lets a model approve or execute its own proposal.",
         "limits": "Availability, eligible plans, models, latency, and quotas are provider-owned. The published benchmark covers one Codex CLI account and three fixed planning-only prompts; it does not establish Claude behavior, action execution, or unlimited use.",
-        "status": "Available in v0.14.0; provider-dependent",
+        "status": "Available in v0.15.0; provider-dependent",
     },
 ]
 
@@ -180,6 +193,13 @@ def render_markdown(page: dict[str, object]) -> str:
             f"### {item['question']}\n\n{item['answer']}" for item in page["faq"]
         )
         faq = f"\n\n## Neural intent FAQ\n\n{faq_items}"
+    commands = ""
+    if page.get("commands"):
+        command_items = "\n".join(
+            f"- {group}: " + ", ".join(f'"{example}"' for example in examples) + f". {note}"
+            for group, examples, note in page["commands"]
+        )
+        commands = f"\n\n## Built-in voice commands\n\n{page['commands_intro']}\n\n{command_items}"
     return f"""# {page['title']}
 
 > {page['lede']}
@@ -188,7 +208,7 @@ Status: **{page['status']}**
 
 ## What Heliox does
 
-{bullets(page['does'])}
+{bullets(page['does'])}{commands}
 
 ## Typical flow
 
@@ -218,6 +238,18 @@ def render_html(page: dict[str, object]) -> str:
     facts = "".join(f"<span>{esc(value)}</span>" for value in page["facts"])
     does = "".join(f"<li>{esc(value)}</li>" for value in page["does"])
     flow = "".join(f"<li>{esc(value)}</li>" for value in page["flow"])
+    commands_card = ""
+    if page.get("commands"):
+        command_items = "".join(
+            f"<li><strong>{esc(group)}:</strong> "
+            + ", ".join(f"&ldquo;{esc(example)}&rdquo;" for example in examples)
+            + f". {esc(note)}</li>"
+            for group, examples, note in page["commands"]
+        )
+        commands_card = (
+            '\n      <article class="card wide" id="built-in-commands"><div class="status">Built in since v0.15.0</div>'
+            f'<h2>Built-in voice commands</h2><p>{esc(page["commands_intro"])}</p><ul>{command_items}</ul></article>'
+        )
     webpage = {
             "@context": "https://schema.org",
             "@type": "WebPage",
@@ -297,7 +329,7 @@ def render_html(page: dict[str, object]) -> str:
       <div class="truth-strip">{facts}</div>
     </header>
     <section class="grid" aria-label="Capability details">
-      <article class="card wide"><div class="status">{esc(page['status'])}</div><h2>What Heliox does</h2><ul>{does}</ul></article>
+      <article class="card wide"><div class="status">{esc(page['status'])}</div><h2>What Heliox does</h2><ul>{does}</ul></article>{commands_card}
       <article class="card"><h2>Typical flow</h2><ol class="steps">{flow}</ol></article>
       <article class="card"><h2>Safety boundary</h2><p>{esc(page['safety'])}</p></article>
       <article class="card wide limit"><div class="status">Known limits</div><h2>Where this can fail</h2><p>{esc(page['limits'])}</p></article>

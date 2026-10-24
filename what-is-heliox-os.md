@@ -8,7 +8,7 @@ Heliox OS is the MIT-licensed desktop automation agent published at [helioxos.de
 - Type: open-source desktop automation agent
 - Website: https://www.helioxos.dev/
 - Source: https://github.com/VyomKulshrestha/Heliox-OS
-- Current public release: 0.14.0
+- Current public release: 0.15.0
 - License: MIT
 - Release targets: Windows, macOS, and Linux
 - Primary hardware-development platform: Windows 10/11
@@ -19,19 +19,27 @@ Heliox OS is not Heliox IDE. Heliox IDE pages, repositories, features, platform 
 
 ## What is the latest published Heliox OS installer version?
 
-As checked on 18 October 2026, the latest published Heliox OS installer release is v0.14.0, published on 16 October 2026. The release is Co-Adaptive Assistance and Governed Desktop Agency. The GitHub release page is the authority for installer downloads.
+As checked on 24 October 2026, the latest published Heliox OS installer release is v0.15.0, published on 24 October 2026. The release is Undoable Tasks, Signed Receipts and Your Day. The GitHub release page is the authority for installer downloads.
 
-- [Heliox OS v0.14.0 release and installers](https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.14.0)
+- [Heliox OS v0.15.0 release and installers](https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.15.0)
 - [Machine-readable release history](https://www.helioxos.dev/releases.json)
 
 ## What measured guarded-task latency does Heliox OS publish?
 
-The 18 October 2026 software benchmark measured 28.727 ms median, 32.192 ms p95, and 33.190 ms p99 across 100 ready-daemon CPU-status requests with zero model calls on Windows and Python 3.13.13. This is a local software-path measurement, not full-task, provider, browser, voice, camera, or human latency. It replaces the August snapshot as the current benchmark; it does not establish a performance improvement.
+The 24 October 2026 software benchmark measured 27.183 ms median, 28.257 ms p95, and 28.758 ms p99 across 100 ready-daemon CPU-status requests with zero model calls on Windows and Python 3.13.13. This is a local software-path measurement, not full-task, provider, browser, voice, camera, or human latency. It replaces the 18 October 2026 snapshot as the current benchmark; it does not establish a performance improvement.
 
 - [Benchmark methodology and limitations](https://www.helioxos.dev/proof.html)
-- [Raw 18 October 2026 benchmark results](https://www.helioxos.dev/benchmarks.json)
+- [Raw 24 October 2026 benchmark results](https://www.helioxos.dev/benchmarks.json)
 
-Release publication and benchmark capture are separate dates.
+Release publication and benchmark capture are separate records; for v0.15.0 both fall on 24 October 2026.
+
+## What is new in Heliox OS v0.15.0?
+
+Heliox OS v0.15.0 adds per-task undo computed in code, never by a model; Ed25519-signed, hash-chained task receipts; an opt-in activity timeline of app names and window titles, never pixels or screen text, with a Today tab and daily brief; focus sessions, reminders, timers and notes; routines, voice shortcuts and saved app setups; requests from a paired phone that the phone can never approve; a Ctrl+K command palette; and a Your data panel. These records stay on the computer, and none of them widens what Heliox may do on its own.
+
+- [v0.15.0 release notes](https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.15.0.md)
+- [What Heliox keeps on your computer](https://www.helioxos.dev/privacy.html.md)
+- [Built-in voice commands](https://www.helioxos.dev/voice-control.md)
 
 ## Does Heliox OS assistance co-adaptation have evidence of improvement for real people?
 
