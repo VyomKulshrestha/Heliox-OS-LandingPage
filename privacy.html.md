@@ -1,6 +1,6 @@
 # Heliox OS Privacy Policy
 
-Effective October 24, 2026.
+Effective October 26, 2026.
 
 ## Local-first execution
 
@@ -36,6 +36,23 @@ Since v0.15.0, Heliox keeps the following personal stores on the user's computer
 Undo copies, receipts, and the timeline live in folders that Heliox actions may not read or change. Settings → Your data shows each store with its size and a Clear button, and "forget my activity from the last hour" removes that stretch of the timeline. Backups go to the Downloads folder and never include settings, the daemon token, API keys, the receipt signing key, or undo copies; the timeline is included only when the user ticks it.
 
 Requests from a paired Air Handoff phone are off by default. A request waits on the computer for Run, the phone receives only the task's short encrypted result, and the phone can never approve or deny anything.
+
+## To-dos, habits, clipboard history, and generated passwords
+
+Since v0.16.0, Heliox also keeps the following stores on the user's computer. None of them is sent to a Heliox server. Each appears in Settings → Your data with its size and a Clear button, and each is included in backups.
+
+- To-do list: the things on your list, done or not.
+- Habits: when you logged each habit.
+- Focus history: when each focus session started and ended.
+- Snippets: named text you saved to copy again. Text that looks like a password, key, token or card number is never saved as a snippet.
+- App reminders: reminders that wait for an app or site to come to the front. Heliox compares the front app name and window title with the waiting reminders every ten seconds and records nothing.
+- Focus distractions: the apps or sites you asked to hear about during focus. The window in front is compared with that list and then forgotten; nothing is blocked or recorded.
+
+Clipboard history is off by default. When turned on, it keeps the last 25 pieces of text you copied for up to eight hours, in memory only: it is never written to disk or included in a backup, and a restart or turning it off forgets it. Nothing is kept while a password manager or a private browsing window is in front, and text that looks like a password, API key, token, private key or card number is never kept, saved as a snippet or read aloud. On Windows, Heliox opens the clipboard only after the system reports a change.
+
+A generated password goes to the clipboard and nowhere else. It is not spoken, shown in the reply or chat, written to disk or kept in clipboard history.
+
+Watchers, the computer health check, the file finder and focus heads-ups only read. Watchers look at process, battery, processor and Downloads-folder state, live in memory and give up after a day. The file finder reads folder listings and file dates in your own folders, skips the inside of code repositories and opens nothing.
 
 ## Verification
 

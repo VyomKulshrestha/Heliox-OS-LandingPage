@@ -10,7 +10,7 @@
                 id: 'awakening',
                 label: 'Awakening',
                 anchors: ['#top'],
-                eyebrow: 'v0.15.0 / VERIFIED AUTONOMY',
+                eyebrow: 'v0.16.0 / VERIFIED AUTONOMY',
                 title: 'Your computer becomes an intelligent world.',
                 body: 'Heliox is a privacy-first AI system control agent that plans, executes, and verifies complex work across your computer using natural language, voice, vision, and gesture.',
                 accent: '#6deeff',
@@ -32,7 +32,7 @@
                     { value: 'Tier 5', label: 'security' }
                 ],
                 cta: {
-                    primary: { label: 'Download v0.15.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.15.0' },
+                    primary: { label: 'Download v0.16.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.16.0' },
                     secondary: { label: 'Explore source', href: 'https://github.com/VyomKulshrestha/Heliox-OS' }
                 }
             },
@@ -76,11 +76,11 @@
             },
             {
                 id: 'release',
-                label: 'v0.15 Release',
+                label: 'v0.16 Release',
                 anchors: ['#release', '#architecture'],
-                eyebrow: 'HELIOX OS v0.15.0',
-                title: 'Undoable tasks, signed receipts, and your day.',
-                body: 'v0.15 lets you undo a finished task item by item, signs a receipt for every task that ran actions, and adds an opt-in timeline behind a Today tab. Everything new stays on this computer and none of it widens what Heliox may do on its own.',
+                eyebrow: 'HELIOX OS v0.16.0',
+                title: 'To-dos, watchers, habits, and quick answers.',
+                body: 'v0.16 keeps a to-do list by voice, tells you when an app closes or a download finishes, repeats reminders, tracks habits, and works out sums and world time on the spot. All 91 built-in commands are answered in code, and nothing new can act on its own.',
                 accent: '#c4a4ff',
                 align: 'right',
                 still: 'assets/scroll-world/posters/clip-04-start.webp',
@@ -89,17 +89,17 @@
                 metrics: [
                     { target: 162, label: 'release action types' },
                     { target: 21, label: 'specialist agents' },
-                    { value: 'Local-first', label: 'undo, receipts, timeline' }
+                    { value: '91 / 91', label: 'commands answered in code' }
                 ],
                 signals: [
-                    { title: 'Per-task undo', body: 'Computed in code, never by a model. It leaves your later edits alone, and every undo needs your click.' },
-                    { title: 'Signed receipts', body: 'Each task that ran actions leaves an Ed25519-signed, hash-chained record you can verify anywhere.' },
-                    { title: 'Your day', body: 'An opt-in timeline of app names and window titles, never pixels or screen text, powers the Today tab.' },
-                    { title: 'Focus, reminders, notes', body: 'Focus holds reminders while approvals still come through. Reminders, timers, and notes are handled in code.' }
+                    { title: 'To-do list', body: 'Add, read, and finish items by voice. Open items show in the Today tab and the daily brief.' },
+                    { title: 'Tell me when', body: 'Watch for an app closing, a download finishing, or a full battery. Watchers only look and give up after a day.' },
+                    { title: 'Reminders and habits', body: 'Repeating reminders skip the night, app reminders wait for that app, and habit streaks show in Good morning.' },
+                    { title: 'Quick answers', body: 'Sums, conversions, countdowns, and world time are worked out in code. Generated passwords go to the clipboard only.' }
                 ],
                 cta: {
-                    primary: { label: 'Get v0.15.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.15.0' },
-                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.15.0.md' }
+                    primary: { label: 'Get v0.16.0', href: 'https://github.com/VyomKulshrestha/Heliox-OS/releases/tag/v0.16.0' },
+                    secondary: { label: 'Read release notes', href: 'https://github.com/VyomKulshrestha/Heliox-OS/blob/main/docs/releases/v0.16.0.md' }
                 }
             },
             {
@@ -250,7 +250,7 @@
                         { label: 'Security', href: 'whitepaper.html' },
                         { label: 'YouTube', href: 'https://www.youtube.com/@HelioxOS' }
                     ],
-                    meta: '© 2026 HELIOX OS / v0.15.0'
+                    meta: '© 2026 HELIOX OS / v0.16.0'
                 }
             }
         ]

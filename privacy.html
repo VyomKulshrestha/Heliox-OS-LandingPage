@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Privacy Policy | Heliox OS</title>
-    <meta name="description" content="How Heliox OS handles local data, undo copies, task receipts, the opt-in activity timeline, optional cloud providers, credentials, sensors, logs, and telemetry." />
+    <meta name="description" content="How Heliox OS handles local data, undo copies, task receipts, the opt-in activity timeline, to-dos, habits, clipboard history, cloud providers, credentials, sensors, and telemetry." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.helioxos.dev/privacy.html" />
     <link rel="alternate" type="text/markdown" href="https://www.helioxos.dev/privacy.html.md" title="Heliox OS privacy policy in Markdown" />
@@ -105,7 +105,7 @@
             <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
             
             <h1 class="text-5xl md:text-6xl font-headline font-bold text-white mb-4 tracking-tight drop-shadow-lg relative z-10">Privacy Policy</h1>
-            <p class="text-primary font-mono text-sm tracking-widest uppercase mb-12 relative z-10 opacity-80 border-b border-white/10 pb-6">Effective Date: October 24, 2026</p>
+            <p class="text-primary font-mono text-sm tracking-widest uppercase mb-12 relative z-10 opacity-80 border-b border-white/10 pb-6">Effective Date: October 26, 2026</p>
             
             <div class="space-y-10 text-on-surface-variant text-lg leading-relaxed font-light relative z-10">
                 <section class="space-y-4">
@@ -120,7 +120,7 @@
                 
                 <section class="space-y-4">
                     <h2 class="text-2xl font-headline font-bold text-secondary">3. Hybrid Cloud Mode (Optional)</h2>
-                    <p>Users can configure external model providers such as Anthropic Claude, OpenAI, Google Gemini, OpenRouter, or Meta. OpenRouter can route a request to the exact catalog model ID the user selects, including current DeepSeek IDs. Heliox 0.15.0 can also invoke an officially authenticated Codex or Claude Code CLI as a text-only planning helper without reading or copying provider OAuth files. Prompt context still reaches the selected provider under its account, retention, quota, and privacy terms. When an external provider is selected:</p>
+                    <p>Users can configure external model providers such as Anthropic Claude, OpenAI, Google Gemini, OpenRouter, or Meta. OpenRouter can route a request to the exact catalog model ID the user selects, including current DeepSeek IDs. Heliox 0.16.0 can also invoke an officially authenticated Codex or Claude Code CLI as a text-only planning helper without reading or copying provider OAuth files. Prompt context still reaches the selected provider under its account, retention, quota, and privacy terms. When an external provider is selected:</p>
                     <ul class="list-disc pl-6 space-y-2 text-white/70">
                         <li>Prompts and the context needed for the requested task are sent directly from the device to that provider. Depending on the feature, context can include user instructions, extracted screen text, screenshots, files, or action results.</li>
                         <li>Heliox OS acts purely as a local interface client.</li>
@@ -153,12 +153,28 @@
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl font-headline font-bold text-white">7. Open Source Verifiability</h2>
+                    <h2 class="text-2xl font-headline font-bold text-white">7. To-dos, Habits, Clipboard History, and Generated Passwords</h2>
+                    <p>Since v0.16.0, Heliox also keeps the following stores on the user's computer. None of them is sent to a Heliox server. Each appears in Settings → Your data with its size and a Clear button, and each is included in backups.</p>
+                    <ul class="list-disc pl-6 space-y-2 text-white/70">
+                        <li>To-do list: the things on your list, done or not.</li>
+                        <li>Habits: when you logged each habit.</li>
+                        <li>Focus history: when each focus session started and ended.</li>
+                        <li>Snippets: named text you saved to copy again. Text that looks like a password, key, token or card number is never saved as a snippet.</li>
+                        <li>App reminders: reminders that wait for an app or site to come to the front. Heliox compares the front app name and window title with the waiting reminders every ten seconds and records nothing.</li>
+                        <li>Focus distractions: the apps or sites you asked to hear about during focus. The window in front is compared with that list and then forgotten; nothing is blocked or recorded.</li>
+                    </ul>
+                    <p>Clipboard history is off by default. When turned on, it keeps the last 25 pieces of text you copied for up to eight hours, in memory only: it is never written to disk or included in a backup, and a restart or turning it off forgets it. Nothing is kept while a password manager or a private browsing window is in front, and text that looks like a password, API key, token, private key or card number is never kept, saved as a snippet or read aloud. On Windows, Heliox opens the clipboard only after the system reports a change.</p>
+                    <p>A generated password goes to the clipboard and nowhere else. It is not spoken, shown in the reply or chat, written to disk or kept in clipboard history.</p>
+                    <p>Watchers, the computer health check, the file finder and focus heads-ups only read. Watchers look at process, battery, processor and Downloads-folder state, live in memory and give up after a day. The file finder reads folder listings and file dates in your own folders, skips the inside of code repositories and opens nothing.</p>
+                </section>
+
+                <section class="space-y-4">
+                    <h2 class="text-2xl font-headline font-bold text-white">8. Open Source Verifiability</h2>
                     <p>Because the core engine is open-source, you do not have to trust our words blindly. You can independently verify our data routing and privacy claims by reviewing the underlying Python code and execution nodes directly at our <a href="https://github.com/VyomKulshrestha/Heliox-OS" target="_blank" class="text-primary hover:text-white transition-colors underline decoration-primary/50 underline-offset-4">GitHub Repository</a>.</p>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl font-headline font-bold text-white">8. Contact Information</h2>
+                    <h2 class="text-2xl font-headline font-bold text-white">9. Contact Information</h2>
                     <p>For privacy-related inquiries, open-source feedback, or to discuss our cryptographic protocols, please reach out via email: <button onclick="navigator.clipboard.writeText('vyomkulshrestha2004@gmail.com'); const t = this; const o = t.innerText; t.innerText = 'Copied!'; setTimeout(() => t.innerText = o, 2000);" class="text-secondary hover:text-white transition-colors underline decoration-secondary/50 font-mono">vyo***@gmail.com</button>.</p>
                 </section>
             </div>

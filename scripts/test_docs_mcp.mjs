@@ -33,7 +33,7 @@ const originalFetch = globalThis.fetch;
 globalThis.fetch = async (url) => {
   const path = new URL(url).pathname;
   if (path === "/capabilities.json") return Response.json({ actions: [{ action_type: "browser_navigate", permission: { tier: "user_write", approval_required: false }, provider: "web" }] });
-  if (path === "/releases.json") return Response.json({ current_version: "0.15.0", releases: [{ version: "0.15.0", title: "Undoable Tasks, Signed Receipts and Your Day" }] });
+  if (path === "/releases.json") return Response.json({ current_version: "0.16.0", releases: [{ version: "0.16.0", title: "To-dos, Watchers, Habits and Quick Answers" }] });
   return new Response("not found", { status: 404 });
 };
 const capabilities = await call("tools/call", { name: "list_capabilities", arguments: { query: "browser", limit: 10 } });
@@ -41,7 +41,7 @@ if (capabilities.body.result.structuredContent.actions[0].action_type !== "brows
 const safety = await call("tools/call", { name: "get_action_safety", arguments: { action_type: "browser_navigate" } });
 if (safety.body.result.structuredContent.permission.tier !== "user_write") throw new Error("action safety lookup failed");
 const release = await call("tools/call", { name: "get_latest_release", arguments: {} });
-if (release.body.result.structuredContent.current_version !== "0.15.0") throw new Error("release lookup failed");
+if (release.body.result.structuredContent.current_version !== "0.16.0") throw new Error("release lookup failed");
 const benchmark = await call("tools/call", { name: "get_benchmark_evidence", arguments: {} });
 const measured = benchmark.body.result.structuredContent;
 if (measured.source_commit !== evidence.source_commit) throw new Error("benchmark source commit drifted");

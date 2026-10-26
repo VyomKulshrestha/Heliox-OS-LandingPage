@@ -74,11 +74,31 @@ Only if you turn on phone requests for a paired Air Handoff phone; they are off 
 
 ## What can I say to Heliox OS besides tasks?
 
-Since v0.15.0, Heliox handles built-in commands right away, without planning: "undo that", "what did you do today", "remind me tomorrow at 9 am to send the report", "set a timer for 10 minutes", "note that the plumber comes Tuesday", "focus for 45 minutes", "start a pomodoro", "save this as my coding setup" and "do that every day at 9". Press Ctrl+K or say "what can I say?" to see every built-in command with examples; a test runs each example as written. Focus sessions hold reminders and the daily brief but never hold approvals, results, errors or answers. Only everyday settings such as the activity timeline and the daily brief change by voice; security, gateway, approval and model settings do not. See [voice control](https://www.helioxos.dev/voice-control.md).
+Heliox handles built-in commands right away, without planning: "undo that", "what did you do today", "remind me tomorrow at 9 am to send the report", "set a timer for 10 minutes", "note that the plumber comes Tuesday", "focus for 45 minutes", "save this as my coding setup" and "do that every day at 9". Since v0.16.0 the list also covers "add call the bank to my list", "tell me when Chrome closes", "remind me every hour to stand up", "good morning", "log a workout", "what's 15 percent of 240", "what time is it in Tokyo", "what did I download today" and "why is my computer slow". Press Ctrl+K or say "what can I say?" to see every built-in command with examples. In the 26 October 2026 benchmark all 91 command-guide examples were handled in code, with zero model calls and zero actions executed. Focus sessions hold reminders and the daily brief but never hold approvals, results, errors or answers. Only everyday settings such as the activity timeline, clipboard history and the daily brief change by voice; security, gateway, approval and model settings do not. See [voice control](https://www.helioxos.dev/voice-control.md).
+
+## Can Heliox OS keep a to-do list?
+
+Yes, since v0.16.0. Say "add call the bank to my list", "what's on my list", "mark call the bank as done", "remove call the bank from my list" or "clear finished items". The list is kept on your computer, and open items show in the Today tab, the daily brief and the exported report. "Mark … as done" only answers when you name the list or an open item matches, so "mark this email as done" still goes to the planner. Repeating reminders work the same way: "remind me every hour to stand up" repeats, interval reminders skip 10 PM to 7 AM, and "remind me to submit my timesheet when I open Outlook" waits until that app comes to the front.
+
+## Can Heliox tell me when something happens on my computer?
+
+Yes, since v0.16.0. "Tell me when Chrome closes", "let me know when my download finishes", "tell me when the invoice shows up", "tell me when my battery is full" and "tell me when my computer calms down" each start a watcher. It checks every few seconds, tells you once when it happens and gives up after a day. Watchers only read process, battery, processor and Downloads-folder state; they never close, open or change anything, and a restart forgets them. "What are you watching for" lists them and "stop watching Chrome" ends one.
+
+## Does Heliox keep my clipboard history?
+
+Only if you turn it on ("turn on clipboard history" or Settings → Your data); it is off by default. When on, Heliox remembers the last 25 pieces of text you copied for up to eight hours, in memory only. The history is never written to disk or included in a backup, and a restart or turning it off forgets it. Nothing is kept while a password manager or a private browsing window is in front, and text that looks like a password, API key, token, private key or card number is never kept, saved as a snippet or read aloud. "What did I copy earlier" and "copy the second one back" use it; snippets such as "save that as my signature" are kept on the computer until you clear them.
+
+## Does Heliox store the passwords it generates?
+
+No. "Generate a password" makes one with the operating system's secure random source and puts it on the clipboard and nowhere else. It is not spoken, shown in the reply or chat, written to disk or kept in clipboard history.
+
+## Can Heliox find my files or tell me what I downloaded?
+
+Yes, since v0.16.0. "What did I download today" and "what was the last file I downloaded" list what arrived in your Downloads folder. "Where is my budget spreadsheet" looks through your own folders (Desktop, Documents, Downloads, Pictures, Music, Videos and OneDrive) a few levels deep for at most a few seconds and names the newest matches; it does not search inside code repositories, build output or caches. Heliox reads only folder listings and file dates and opens nothing. "Why is my computer slow", "what's using my memory" and "how much disk space do I have" read the processor, memory, disks and the biggest apps; closing anything is an ordinary request that still asks first.
 
 ## How do I see or delete what Heliox keeps?
 
-Settings → Your data lists each personal store Heliox keeps on the computer (activity timeline, task receipts, undo copies, notes, reminders, voice shortcuts, setups, usage nudges and quiet hours) with its size and a Clear button. Backups go to the Downloads folder and never include settings, the daemon token, API keys, the receipt signing key or undo copies. See the [privacy policy](https://www.helioxos.dev/privacy.html.md).
+Settings → Your data lists each personal store Heliox keeps on the computer (activity timeline, task receipts, undo copies, notes, reminders, voice shortcuts, setups, usage nudges, quiet hours, and since v0.16.0 the to-do list, habits, focus history, snippets, app reminders and focus distractions) with its size and a Clear button. Opt-in clipboard history is kept in memory only and never saved. Backups go to the Downloads folder and never include settings, the daemon token, API keys, the receipt signing key or undo copies. See the [privacy policy](https://www.helioxos.dev/privacy.html.md).
 
 ## How can I install or contribute?
 
